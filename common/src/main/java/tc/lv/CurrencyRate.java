@@ -11,12 +11,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name="CurrencyRates")
 public class CurrencyRate extends BaseEntity {
-	
-
-	private static final long serialVersionUID = 1L;
 
 	@Column(name = "amount")
-	private int amount;
+	private double amount;
 	
 	@Column(name = "fromDate")
 	private Date fromDate;
@@ -28,24 +25,11 @@ public class CurrencyRate extends BaseEntity {
 	@JoinColumn(name="reAgencyId")
 	private RealEstateAgency reAgency;
 
-	public CurrencyRate() {
-		super();
-	}
-
-	public CurrencyRate(User createdBy, Date createdDate, User updatedBy, Date updatedDate, int amount, Date fromDate,
-			Date toDate, RealEstateAgency reAgency) {
-		super(createdBy, createdDate, updatedBy, updatedDate);
-		this.amount = amount;
-		this.fromDate = fromDate;
-		this.toDate = toDate;
-		this.reAgency = reAgency;
-	}
-
-	public int getAmount() {
+	public double getAmount() {
 		return amount;
 	}
 
-	public void setAmount(int amount) {
+	public void setAmount(double amount) {
 		this.amount = amount;
 	}
 
@@ -77,8 +61,11 @@ public class CurrencyRate extends BaseEntity {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + amount;
+		long temp;
+		temp = Double.doubleToLongBits(amount);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + ((fromDate == null) ? 0 : fromDate.hashCode());
+		result = prime * result + ((reAgency == null) ? 0 : reAgency.hashCode());
 		result = prime * result + ((toDate == null) ? 0 : toDate.hashCode());
 		return result;
 	}
@@ -92,12 +79,17 @@ public class CurrencyRate extends BaseEntity {
 		if (getClass() != obj.getClass())
 			return false;
 		CurrencyRate other = (CurrencyRate) obj;
-		if (amount != other.amount)
+		if (Double.doubleToLongBits(amount) != Double.doubleToLongBits(other.amount))
 			return false;
 		if (fromDate == null) {
 			if (other.fromDate != null)
 				return false;
 		} else if (!fromDate.equals(other.fromDate))
+			return false;
+		if (reAgency == null) {
+			if (other.reAgency != null)
+				return false;
+		} else if (!reAgency.equals(other.reAgency))
 			return false;
 		if (toDate == null) {
 			if (other.toDate != null)

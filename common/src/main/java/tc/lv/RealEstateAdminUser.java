@@ -11,8 +11,6 @@ import javax.persistence.Table;
 @Table(name="RealEstateAdminUsers")
 public class RealEstateAdminUser extends User {
 
-	private static final long serialVersionUID = 1L;
-
 	@Column(name = "firstName")
 	private String firstName;
 	
@@ -25,15 +23,6 @@ public class RealEstateAdminUser extends User {
 	@ManyToOne
 	private RealEstateAgency agency;
 	
-
-	public RealEstateAdminUser(User createdBy, Date createdDate, User updatedBy, Date updatedDate, String email,
-			String password, String firstName, String lastName, String phone, RealEstateAgency agency) {
-		super(createdBy, createdDate, updatedBy, updatedDate, email, password);
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.phone = phone;
-		this.agency = agency;
-	}
 
 	public String getFirstName() {
 		return firstName;

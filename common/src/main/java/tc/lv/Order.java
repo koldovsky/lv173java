@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -14,8 +15,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name="Orders")
 public class Order extends BaseEntity {
-	
-	private static final long serialVersionUID = 1L;
 
 	@ManyToOne
 	@JoinColumn(name="customerId")
@@ -24,19 +23,9 @@ public class Order extends BaseEntity {
 	@OneToOne(mappedBy="order")
 	private Installment installment;
 	
-	@OneToMany(mappedBy="order")
+	@OneToMany(mappedBy="order", cascade=CascadeType.ALL)
 	List<Payment> payments = new ArrayList<>();
 
-	public Order() {
-	}
-
-	public Order(User createdBy, Date createdDate, User updatedBy, Date updatedDate, CustomerUser customerUser,
-			Installment installment, List<Payment> payments) {
-		super(createdBy, createdDate, updatedBy, updatedDate);
-		this.customerUser = customerUser;
-		this.installment = installment;
-		this.payments = payments;
-	}
 
 	public CustomerUser getCustomerUser() {
 		return customerUser;

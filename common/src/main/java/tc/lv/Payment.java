@@ -16,7 +16,6 @@ import javax.persistence.Table;
 @Table(name="Payments")
 public class Payment extends BaseEntity {
 
-	private static final long serialVersionUID = 1L;
 
 	@Column(name = "amount")
 	private BigDecimal amount;
@@ -32,18 +31,6 @@ public class Payment extends BaseEntity {
 	@JoinColumn(name="ordereId")
 	private Order order;
 
-	public Payment() {
-		super();
-	}
-
-	public Payment(User createdBy, Date createdDate, User updatedBy, Date updatedDate, BigDecimal amount,
-			CurrencyRate currencyRate, State state, Order order) {
-		super(createdBy, createdDate, updatedBy, updatedDate);
-		this.amount = amount;
-		this.currencyRate = currencyRate;
-		this.state = state;
-		this.order = order;
-	}
 
 	public BigDecimal getAmount() {
 		return amount;

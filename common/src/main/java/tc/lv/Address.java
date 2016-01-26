@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -14,10 +15,6 @@ import javax.persistence.Table;
 @Table(name="Addresses")
 public class Address extends BaseEntity {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	
 	@Column(name="city")
 	private String city;
@@ -31,29 +28,12 @@ public class Address extends BaseEntity {
 	@Column(name="postalCode")
 	private int postalCode; 
 	
-	@OneToMany(mappedBy="address")
+	@OneToMany(mappedBy="address", cascade = CascadeType.ALL)
 	List<CustomerUser> customers = new ArrayList<>();
 	
 	@OneToOne(mappedBy="address")
 	private RealEstateAgency agency;
-	
-	public Address(){
-	}
 
-	public Address(User createdBy, Date createdDate, User updatedBy, Date updatedDate, String city, String region,
-			String country, int postalCode, List<CustomerUser> customers) {
-		super(createdBy, createdDate, updatedBy, updatedDate);
-		this.city = city;
-		this.region = region;
-		this.country = country;
-		this.postalCode = postalCode;
-		this.customers = customers;
-	}
-
-	public void addCustomer(CustomerUser customer){
-		customer.setAddress(this);
-		customers.add(customer);
-	}
 
 	public String getCity() {
 		return city;

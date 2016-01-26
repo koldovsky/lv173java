@@ -15,8 +15,6 @@ import javax.persistence.Table;
 @Table(name="RealEstateAgencies")
 public class RealEstateAgency extends BaseEntity {
 	
-
-	private static final long serialVersionUID = 1L;
 	
 	@Column(name="name")
 	private String name;
@@ -36,21 +34,13 @@ public class RealEstateAgency extends BaseEntity {
 	@OneToOne(cascade=CascadeType.ALL)
 	private RealEstateAgency parent;
 	
-	@OneToMany(mappedBy="agency")
+	@OneToMany(mappedBy="agency", cascade=CascadeType.ALL)
 	private List<RealEstateAdminUser> admins = new ArrayList<>();
 	
-	@OneToMany(mappedBy="reAgency")
+	@OneToMany(mappedBy="reAgency", cascade=CascadeType.ALL)
 	private List<CurrencyRate> currencyRates = new ArrayList<>();
 
-	public void addAdmin(RealEstateAdminUser admin){
-		admin.setAgency(this);
-		admins.add(admin);
-	}
-	
-	public void addCurrencyRate(CurrencyRate rate){
-		rate.setReAgency(this);
-		currencyRates.add(rate);
-	}
+
 	
 	public String getName() {
 		return name;

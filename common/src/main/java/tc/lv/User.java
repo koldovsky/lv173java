@@ -13,8 +13,6 @@ import javax.persistence.OneToOne;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class User extends BaseEntity implements Serializable{
 	
-
-
 	/**
 	 * 
 	 */
@@ -26,21 +24,6 @@ public abstract class User extends BaseEntity implements Serializable{
 	@Column(name = "password")	
 	private String password;
 	
-	@OneToOne(mappedBy="createdBy")
-	private BaseEntity createSmb;
-	
-	@OneToOne(mappedBy="updatedBy")
-	private BaseEntity updateSmb;
-	
-	public User() {
-		super();
-	}
-
-	public User(User createdBy, Date createdDate, User updatedBy, Date updatedDate, String email, String password) {
-		super(createdBy, createdDate, updatedBy, updatedDate);
-		this.email = email;
-		this.password = password;
-	}
 
 	public String getEmail() {
 		return email;

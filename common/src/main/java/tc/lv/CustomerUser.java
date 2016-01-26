@@ -10,10 +10,6 @@ import javax.persistence.Table;
 @Table(name="CustomerUsers")
 public class CustomerUser extends User{
 		
-		/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	
 		@Column(name = "firstName")
 		private String firstName;
@@ -34,18 +30,6 @@ public class CustomerUser extends User{
 		@JoinColumn(name="addressId")
 		private Address address;
 		
-		public CustomerUser() {
-			super();
-		}
-	
-		public CustomerUser(String firstName, String lastName, String phone, String passport, long individualTaxNumber) {
-			super();
-			this.firstName = firstName;
-			this.lastName = lastName;
-			this.phone = phone;
-			this.passport = passport;
-			this.individualTaxNumber = individualTaxNumber;
-		}
 	
 		public String getFirstName() {
 			return firstName;

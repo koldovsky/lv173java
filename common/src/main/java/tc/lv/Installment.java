@@ -27,13 +27,6 @@ public class Installment extends BaseEntity {
 	@JoinColumn(name="orderId")
 	private Order order;
 
-	public Installment(User createdBy, Date createdDate, User updatedBy, Date updatedDate, int amount, Date date,
-			Order order) {
-		super(createdBy, createdDate, updatedBy, updatedDate);
-		this.amount = amount;
-		this.date = date;
-		this.order = order;
-	}
 
 	public int getAmount() {
 		return amount;
