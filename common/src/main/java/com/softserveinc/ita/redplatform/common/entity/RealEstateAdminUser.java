@@ -117,7 +117,7 @@ public class RealEstateAdminUser extends User {
     public final void setAgency(final RealEstateAgency newAgency) {
 	this.agency = newAgency;
     }
-
+/*
     @Override
     public final boolean equals(final Object obj) {
 	if (this == obj) {
@@ -170,6 +170,6 @@ public class RealEstateAdminUser extends User {
 	result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 	result = prime * result + ((phone == null) ? 0 : phone.hashCode());
 	return result;
-    }
+    }*/
 
 }
