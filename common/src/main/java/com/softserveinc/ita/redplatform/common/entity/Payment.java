@@ -1,8 +1,5 @@
 package com.softserveinc.ita.redplatform.common.entity;
 
-import java.math.BigDecimal;
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -12,99 +9,116 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+/**
+ * Class that represents Payment.
+ * 
+ * @author Hryhorii Somyk
+ */
 @Entity
-@Table(name="Payments")
+@Table(name = "Payments")
 public class Payment extends BaseEntity {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -3035724760433561273L;
 
-	@Column(name = "amount")
-	private BigDecimal amount;
-	
-	@OneToOne
-	@JoinColumn(name="currencyRate")
-	private CurrencyRate currencyRate;
-	
-	@Enumerated(EnumType.STRING)
-	private State state;
-	
-	@ManyToOne	
-	@JoinColumn(name="ordereId")
-	private Order order;
+    /**
+     * Column for amount.
+     */
+    @Column(name = "amount")
+    private double amount;
 
+    /**
+     * Column for currencyRate.
+     */
+    @OneToOne
+    @JoinColumn(name = "currencyRate")
+    private CurrencyRate currencyRate;
 
-	public BigDecimal getAmount() {
-		return amount;
-	}
+    /**
+     * Column for state.
+     */
+    @Enumerated(EnumType.STRING)
+    private State state;
 
-	public void setAmount(BigDecimal amount) {
-		this.amount = amount;
-	}
+    /**
+     * Column for orderId.
+     */
+    @ManyToOne
+    @JoinColumn(name = "ordereId")
+    private Order order;
 
-	public CurrencyRate getCurrencyRate() {
-		return currencyRate;
-	}
+    /**
+     * Get amount.
+     * 
+     * @return amount
+     */
+    public final double getAmount() {
+	return amount;
+    }
 
-	public void setCurrencyRate(CurrencyRate currencyRate) {
-		this.currencyRate = currencyRate;
-	}
+    /**
+     * Set amount.
+     * 
+     * @param newAmount to set
+     */
+    public final void setAmount(final double newAmount) {
+	this.amount = newAmount;
+    }
 
-	public State getState() {
-		return state;
-	}
+    /**
+     * Get currencyRate.
+     * 
+     * @return currencyRate
+     */
+    public final CurrencyRate getCurrencyRate() {
+	return currencyRate;
+    }
 
-	public void setState(State state) {
-		this.state = state;
-	}
+    /**
+     * Set currencyRate.
+     * 
+     * @param newCurrencyRate to set
+     */
+    public final void setCurrencyRate(final CurrencyRate newCurrencyRate) {
+	this.currencyRate = newCurrencyRate;
+    }
+    
+    /**
+     * Get state.
+     * 
+     * @return state
+     */
+    public final State getState() {
+	return state;
+    }
+    
+    /**
+     * Set state.
+     * 
+     * @param newState to set
+     */
+    public final void setState(final State newState) {
+	this.state = newState;
+    }
 
-	public Order getOrder() {
-		return order;
-	}
+    /**
+     * Get order.
+     * 
+     * @return order
+     */
+    public final Order getOrder() {
+	return order;
+    }
 
-	public void setOrder(Order order) {
-		this.order = order;
-	}
+    /**
+     * Set order.
+     * 
+     * @param newOrder to set
+     */
+    public final void setOrder(final Order newOrder) {
+	this.order = newOrder;
+    }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((amount == null) ? 0 : amount.hashCode());
-		result = prime * result + ((currencyRate == null) ? 0 : currencyRate.hashCode());
-		result = prime * result + ((order == null) ? 0 : order.hashCode());
-		result = prime * result + ((state == null) ? 0 : state.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Payment other = (Payment) obj;
-		if (amount == null) {
-			if (other.amount != null)
-				return false;
-		} else if (!amount.equals(other.amount))
-			return false;
-		if (currencyRate == null) {
-			if (other.currencyRate != null)
-				return false;
-		} else if (!currencyRate.equals(other.currencyRate))
-			return false;
-		if (order == null) {
-			if (other.order != null)
-				return false;
-		} else if (!order.equals(other.order))
-			return false;
-		if (state != other.state)
-			return false;
-		return true;
-	}
-	
-	
-	
 }
-
