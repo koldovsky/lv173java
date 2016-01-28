@@ -8,98 +8,115 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+/**
+ * Class that represents Currency Rate.
+ *
+ * @author Oleh Khimka
+ */
 @Entity
-@Table(name="CurrencyRates")
+@Table(name = "CurrencyRates")
 public class CurrencyRate extends BaseEntity {
 
-	@Column(name = "amount")
-	private double amount;
-	
-	@Column(name = "fromDate")
-	private Date fromDate;
-	
-	@Column(name = "toDate")
-	private Date toDate;
-	
-	@ManyToOne
-	@JoinColumn(name="reAgencyId")
-	private RealEstateAgency reAgency;
+    /**
+     *
+     */
+    private static final long serialVersionUID = -1119782516427107943L;
 
-	public double getAmount() {
-		return amount;
-	}
+    /**
+     * Column for amount.
+     */
+    @Column(name = "amount")
+    private double amount;
 
-	public void setAmount(double amount) {
-		this.amount = amount;
-	}
+    /**
+     * Column for date since the currency rate is set.
+     */
+    @Column(name = "fromDate")
+    private Date fromDate;
 
-	public Date getFromDate() {
-		return fromDate;
-	}
+    /**
+     * Column for date until the currency rate is set.
+     */
+    @Column(name = "toDate")
+    private Date toDate;
 
-	public void setFromDate(Date fromDate) {
-		this.fromDate = fromDate;
-	}
+    /**
+     * Column for real estate dev agency that have set given currency rates.
+     */
+    @ManyToOne
+    @JoinColumn(name = "reAgencyId")
+    private RealEstateAgency reAgency;
 
-	public Date getToDate() {
-		return toDate;
-	}
+    /**
+     * Get value of column amount.
+     *
+     * @return the amount
+     */
+    public final double getAmount() {
+       return amount;
+    }
 
-	public void setToDate(Date toDate) {
-		this.toDate = toDate;
-	}
-	
-	public RealEstateAgency getReAgency() {
-		return reAgency;
-	}
+    /**
+     * Changes amount value to new amount.
+     *
+     * @param newAmount amount to be set
+     */
+    public final void setAmount(final double newAmount) {
+      this.amount = newAmount;
+    }
 
-	public void setReAgency(RealEstateAgency reAgency) {
-		this.reAgency = reAgency;
-	}
+    /**
+     * Get value of column fromDate.
+     *
+     * @return the date since currency rate is set
+     */
+    public final Date getFromDate() {
+      return fromDate;
+    }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		long temp;
-		temp = Double.doubleToLongBits(amount);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + ((fromDate == null) ? 0 : fromDate.hashCode());
-		result = prime * result + ((reAgency == null) ? 0 : reAgency.hashCode());
-		result = prime * result + ((toDate == null) ? 0 : toDate.hashCode());
-		return result;
-	}
+    /**
+     * Changes fromDate value.
+     *
+     * @param newFromDate  Date since currency rate is set
+     */
+    public final void setFromDate(final Date newFromDate) {
+      this.fromDate = newFromDate;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		CurrencyRate other = (CurrencyRate) obj;
-		if (Double.doubleToLongBits(amount) != Double.doubleToLongBits(other.amount))
-			return false;
-		if (fromDate == null) {
-			if (other.fromDate != null)
-				return false;
-		} else if (!fromDate.equals(other.fromDate))
-			return false;
-		if (reAgency == null) {
-			if (other.reAgency != null)
-				return false;
-		} else if (!reAgency.equals(other.reAgency))
-			return false;
-		if (toDate == null) {
-			if (other.toDate != null)
-				return false;
-		} else if (!toDate.equals(other.toDate))
-			return false;
-		return true;
-	}
-	
-	
+    /**
+     * Get value of column toDate.
+     *
+     * @return the date until currency rate is set
+     */
+    public final Date getToDate() {
+      return toDate;
+    }
 
-	
+    /**
+     * Changes toDate value.
+     *
+     * @param newToDate  Date until currency rate is set
+     */
+    public final void setToDate(final Date newToDate) {
+      this.toDate = newToDate;
+    }
+
+    /**
+     * Get Column for real estate dev agency.
+     *
+     * @return real estate dev agency
+     */
+    public final RealEstateAgency getReAgency() {
+      return reAgency;
+    }
+
+    /**
+     * Changes real estate dev agency.
+     * 
+     * @param newReAgency  new real estate dev agency
+     */
+    public final void setReAgency(final RealEstateAgency newReAgency) {
+      this.reAgency = newReAgency;
+    }
+
 }

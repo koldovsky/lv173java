@@ -13,19 +13,18 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Orders")
+@Table(name = "Orders")
 public class Order extends BaseEntity {
 
 	@ManyToOne
-	@JoinColumn(name="customerId")
+	@JoinColumn(name = "customerId")
 	private CustomerUser customerUser;
-	
-	@OneToOne(mappedBy="order")
-	private Installment installment;
-	
-	@OneToMany(mappedBy="order", cascade=CascadeType.ALL)
-	List<Payment> payments = new ArrayList<>();
 
+	@OneToOne(mappedBy = "order")
+	private Installment installment;
+
+	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+	List<Payment> payments = new ArrayList<>();
 
 	public CustomerUser getCustomerUser() {
 		return customerUser;
@@ -50,8 +49,8 @@ public class Order extends BaseEntity {
 	public void setPayments(List<Payment> payments) {
 		this.payments = payments;
 	}
-	
-	public void addPayment(Payment payment){
+
+	public void addPayment(Payment payment) {
 		payment.setOrder(this);
 		this.payments.add(payment);
 	}
@@ -68,34 +67,38 @@ public class Order extends BaseEntity {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (!super.equals(obj))
+		}
+		if (!super.equals(obj)) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		Order other = (Order) obj;
 		if (customerUser == null) {
-			if (other.customerUser != null)
+			if (other.customerUser != null) {
 				return false;
-		} else if (!customerUser.equals(other.customerUser))
+			}
+		} else if (!customerUser.equals(other.customerUser)) {
 			return false;
+		}
 		if (installment == null) {
-			if (other.installment != null)
+			if (other.installment != null) {
 				return false;
-		} else if (!installment.equals(other.installment))
+			}
+		} else if (!installment.equals(other.installment)) {
 			return false;
+		}
 		if (payments == null) {
-			if (other.payments != null)
+			if (other.payments != null) {
 				return false;
-		} else if (!payments.equals(other.payments))
+			}
+		} else if (!payments.equals(other.payments)) {
 			return false;
+		}
 		return true;
 	}
-	
-	
-	
-	
-
 
 }
