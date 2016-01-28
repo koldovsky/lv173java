@@ -8,82 +8,91 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+/**
+ * Class that represents installment for the order.
+ *
+ * @author Oleh Khimka
+ */
 @Entity
-@Table(name="Installments")
+@Table(name = "Installments")
 public class Installment extends BaseEntity {
 
-	private static final long serialVersionUID = -5028225244571023001L;
+    /**
+    *
+    */
+    private static final long serialVersionUID = -5028225244571023001L;
 
-	@Column(name = "amount")
-	private int amount;
-	
-	@Column(name = "date")
-	private Date date;
-	
-	@OneToOne
-	@JoinColumn(name="orderId")
-	private Order order;
+    /**
+     * Column for amount.
+     */
+    @Column(name = "amount")
+    private double amount;
 
+    /**
+     * Column for date.
+     */
+    @Column(name = "date")
+    private Date date;
 
-	public int getAmount() {
-		return amount;
-	}
+    /**
+     * Column for order.
+     */
+    @OneToOne
+    @JoinColumn(name = "orderId")
+    private Order order;
 
-	public void setAmount(int amount) {
-		this.amount = amount;
-	}
+    /**
+     * Get value of column amount.
+     *
+     * @return the amount
+     */
+    public final double getAmount() {
+      return amount;
+    }
 
-	public Date getDate() {
-		return date;
-	}
+    /**
+     * Changes amount value to new amount.
+     *
+     * @param newAmount amount to be set
+     */
+    public final void setAmount(final double newAmount) {
+      this.amount = newAmount;
+    }
 
-	public void setDate(Date date) {
-		this.date = date;
-	}
+    /**
+     * Get value of column Date.
+     *
+     * @return the Date
+     */
+    public final Date getDate() {
+      return date;
+    }
 
-	public Order getOrder() {
-		return order;
-	}
+    /**
+     * Changes date to new date.
+     *
+     * @param newDate date to be set
+     */
+    public final void setDate(final Date newDate) {
+      this.date = newDate;
+    }
 
-	public void setOrder(Order order) {
-		this.order = order;
-	}
+    /**
+     * Get value of column order.
+     *
+     * @return the order
+     */
+    public final Order getOrder() {
+      return order;
+    }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + amount;
-		result = prime * result + ((date == null) ? 0 : date.hashCode());
-		result = prime * result + ((order == null) ? 0 : order.hashCode());
-		return result;
-	}
+    /**
+     * Changes order to new order.
+     *
+     * @param newOrder order to be set
+     */
+    public final void setOrder(final Order newOrder) {
+      this.order = newOrder;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Installment other = (Installment) obj;
-		if (amount != other.amount)
-			return false;
-		if (date == null) {
-			if (other.date != null)
-				return false;
-		} else if (!date.equals(other.date))
-			return false;
-		if (order == null) {
-			if (other.order != null)
-				return false;
-		} else if (!order.equals(other.order))
-			return false;
-		return true;
-	}
-	
-	
-	
-	
 }
