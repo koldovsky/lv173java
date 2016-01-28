@@ -1,94 +1,176 @@
 package com.softserveinc.ita.redplatform.common.entity;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.OneToMany;
 
+/**
+ * The Class RealEstateAgency.
+ * 
+ * @author Ilona Yavorska
+ */
 @Entity
-@Table(name="RealEstateAgencies")
 public class RealEstateAgency extends BaseEntity {
 	
-	
-	@Column(name="name")
+	/** The name. */
 	private String name;
 	
-	@Column(name="description")
+	/** The description. */
 	private String description;
 	
-	@Column(name="site")
+	/** The site. */
 	private URL site;
 	
-	@Column(name="phone")
+	/** The phone number. */
 	private String phone;
 	
-	@OneToOne(cascade=CascadeType.ALL)
+	/** The address of the office. */
 	private Address address;
 	
-	@OneToOne(cascade=CascadeType.ALL)
-	private RealEstateAgency parent;
+	/** The main office. */
+	private RealEstateAgency mainOffice;
 	
-	@OneToMany(mappedBy="agency", cascade=CascadeType.ALL)
-	private List<RealEstateAdminUser> admins = new ArrayList<>();
+	/** The branches. */
+	private Set<RealEstateAgency> branches;
 	
-	@OneToMany(mappedBy="reAgency", cascade=CascadeType.ALL)
-	private List<CurrencyRate> currencyRates = new ArrayList<>();
-
-
-	
-	public String getName() {
+	/**
+	 * Gets the name.
+	 *
+	 * @return the name
+	 */
+	@Column(nullable = false)
+	public final String getName() {
 		return name;
 	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public URL getSite() {
-		return site;
-	}
-
-	public void setSite(URL site) {
-		this.site = site;
-	}
-
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	public Address getAddress() {
-		return address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
-	}
-
-	public RealEstateAgency getParent() {
-		return parent;
-	}
-
-	public void setParent(RealEstateAgency parent) {
-		this.parent = parent;
+	
+	/**
+	 * Sets the name.
+	 *
+	 * @param newName the new name
+	 */
+	public final void setName(final String newName) {
+		name = newName;
 	}
 	
+	/**
+	 * Gets the description.
+	 *
+	 * @return the description
+	 */
+	public final String getDescription() {
+		return description;
+	}
+	
+	/**
+	 * Sets the description.
+	 *
+	 * @param newDescription the new description
+	 */
+	public final void setDescription(final String newDescription) {
+		description = newDescription;
+	}
+	
+	/**
+	 * Gets the site.
+	 *
+	 * @return the site
+	 */
+	public final URL getSite() {
+		return site;
+	}
+	
+	/**
+	 * Sets the site.
+	 *
+	 * @param newSite the new site
+	 */
+	public final void setSite(final URL newSite) {
+		site = newSite;
+	}
+	
+	/**
+	 * Gets the phone.
+	 *
+	 * @return the phone
+	 */
+	@JoinColumn(nullable = false)
+	public final String getPhone() {
+		return phone;
+	}
+	
+	/**
+	 * Sets the phone.
+	 *
+	 * @param newPhone the new phone
+	 */
+	public final void setPhone(final String newPhone) {
+		phone = newPhone;
+	}
+	
+	/**
+	 * Gets the address.
+	 *
+	 * @return the address
+	 */
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(nullable = false)
+	public final Address getAddress() {
+		return address;
+	}
+	
+	/**
+	 * Sets the address.
+	 *
+	 * @param newAddress the new address
+	 */
+	public final void setAddress(final Address newAddress) {
+		address = newAddress;
+	}
+	
+	/**
+	 * Gets the main office.
+	 *
+	 * @return the main office
+	 */
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "main_office")
+	public final RealEstateAgency getMainOffice() {
+		return mainOffice;
+	}
+	
+	/**
+	 * Sets the main office.
+	 *
+	 * @param newMainOffice the new main office
+	 */
+	public final void setMainOffice(final RealEstateAgency newMainOffice) {
+		mainOffice = newMainOffice;
+	}
+	
+	/**
+	 * Gets the branches.
+	 *
+	 * @return the branches
+	 */
+	@OneToMany(mappedBy = "main_office")
+	public final Set<RealEstateAgency> getBranches() {
+		return branches;
+	}
+	
+	/**
+	 * Sets the branches.
+	 *
+	 * @param newBranches the new branches
+	 */
+	public final void setBranches(final Set<RealEstateAgency> newBranches) {
+		branches = newBranches;
+	}
 	
 }
