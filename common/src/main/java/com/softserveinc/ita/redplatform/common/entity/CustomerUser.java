@@ -64,7 +64,6 @@ public class CustomerUser extends User {
      * Changes firstName value to new newFirstName.
      *
      * @param newFirstName
-     *            amount to be set
      */
     public void setFirstName(String newFirstName) {
 	this.firstName = newFirstName;
@@ -83,7 +82,7 @@ public class CustomerUser extends User {
      * Changes lastName value to newLastName.
      *
      * @param newLastName
-     *            amount to be set
+     * 
      */
     public void setLastName(String newLastName) {
 	this.lastName = newLastName;
@@ -102,7 +101,7 @@ public class CustomerUser extends User {
      * Changes phone value to newPhone.
      *
      * @param newPhone
-     *            amount to be set
+     * 
      */
     public void setPhone(String newPhone) {
 	this.phone = newPhone;
@@ -121,7 +120,7 @@ public class CustomerUser extends User {
      * Changes passport value to newPassport.
      *
      * @param newPassport
-     *            amount to be set
+     * 
      */
     public void setPassport(String newPassport) {
 	this.passport = newPassport;
@@ -140,7 +139,7 @@ public class CustomerUser extends User {
      * Changes individualTaxNumber value to newIndividualTaxNumber.
      *
      * @param newIndividualTaxNumber
-     *            amount to be set
+     * 
      */
     public void setIndividualTaxNumber(long newIndividualTaxNumber) {
 	this.individualTaxNumber = newIndividualTaxNumber;
@@ -159,20 +158,10 @@ public class CustomerUser extends User {
      * Changes address value to newAddress.
      *
      * @param newAddress
-     *            amount to be set
+     * 
      */
     public void setAddress(Address newAddress) {
 	this.address = newAddress;
-    }
-
-    /**
-     * Overriding toString method()
-     *
-     */
-    @Override
-    public String toString() {
-	return "CustomerUser [FirstName=" + firstName + ", LastName=" + lastName + ", phone=" + phone + ", passport="
-		+ passport + ", individualTaxNumber=" + individualTaxNumber + "]";
     }
 
 }
