@@ -6,138 +6,173 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+/**
+ * Class that represents Currency Rate.
+ *
+ * @author Roman Ivaniv
+ */
 @Entity
-@Table(name="CustomerUsers")
-public class CustomerUser extends User{
-		
-	
-		@Column(name = "firstName")
-		private String firstName;
-		
-		@Column(name = "lastName")
-		private String lastName;
-		
-		@Column(name = "phone")
-		private String phone;
-		
-		@Column(name = "passport")
-		private String passport;
-		
-		@Column(name = "individualTaxNumber")
-		private long individualTaxNumber;
-		
-		@ManyToOne
-		@JoinColumn(name="addressId")
-		private Address address;
-		
-	
-		public String getFirstName() {
-			return firstName;
-		}
-	
-		public void setFirstName(String firstName) {
-			this.firstName = firstName;
-		}
-	
-		public String getLastName() {
-			return lastName;
-		}
-	
-		public void setLastName(String lastName) {
-			this.lastName = lastName;
-		}
-	
-		public String getPhone() {
-			return phone;
-		}
-	
-		public void setPhone(String phone) {
-			this.phone = phone;
-		}
-	
-		public String getPassport() {
-			return passport;
-		}
-	
-		public void setPassport(String passport) {
-			this.passport = passport;
-		}
-	
-		public long getIndividualTaxNumber() {
-			return individualTaxNumber;
-		}
-	
-		public void setIndividualTaxNumber(long individualTaxNumber) {
-			this.individualTaxNumber = individualTaxNumber;
-		}
-		
-		public Address getAddress() {
-			return address;
-		}
+@Table(name = "CustomerUsers")
+public class CustomerUser extends User {
+    /**
+     * Column for First name of Customer.
+     */
+    @Column(name = "firstName")
+    private String firstName;
 
-		public void setAddress(Address address) {
-			this.address = address;
-		}
+    /**
+     * Column for Last name of Customer.
+     */
+    @Column(name = "lastName")
+    private String lastName;
 
-		@Override
-		public String toString() {
-			return "CustomerUser [FirstName=" + firstName + ", LastName=" + lastName + ", phone=" + phone + ", passport="
-					+ passport + ", individualTaxNumber=" + individualTaxNumber + "]";
-		}
+    /**
+     * Column for Customer phone.
+     */
+    @Column(name = "phone")
+    private String phone;
 
-		@Override
-		public int hashCode() {
-			final int prime = 31;
-			int result = super.hashCode();
-			result = prime * result + ((address == null) ? 0 : address.hashCode());
-			result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-			result = prime * result + (int) (individualTaxNumber ^ (individualTaxNumber >>> 32));
-			result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
-			result = prime * result + ((passport == null) ? 0 : passport.hashCode());
-			result = prime * result + ((phone == null) ? 0 : phone.hashCode());
-			return result;
-		}
+    /**
+     * Column for Customer passport.
+     */
+    @Column(name = "passport")
+    private String passport;
 
-		@Override
-		public boolean equals(Object obj) {
-			if (this == obj)
-				return true;
-			if (!super.equals(obj))
-				return false;
-			if (getClass() != obj.getClass())
-				return false;
-			CustomerUser other = (CustomerUser) obj;
-			if (address == null) {
-				if (other.address != null)
-					return false;
-			} else if (!address.equals(other.address))
-				return false;
-			if (firstName == null) {
-				if (other.firstName != null)
-					return false;
-			} else if (!firstName.equals(other.firstName))
-				return false;
-			if (individualTaxNumber != other.individualTaxNumber)
-				return false;
-			if (lastName == null) {
-				if (other.lastName != null)
-					return false;
-			} else if (!lastName.equals(other.lastName))
-				return false;
-			if (passport == null) {
-				if (other.passport != null)
-					return false;
-			} else if (!passport.equals(other.passport))
-				return false;
-			if (phone == null) {
-				if (other.phone != null)
-					return false;
-			} else if (!phone.equals(other.phone))
-				return false;
-			return true;
-		}
-		
-		
-		
-		
+    /**
+     * Column for Customer individualTaxNumber.
+     */
+    @Column(name = "individualTaxNumber")
+    private long individualTaxNumber;
+
+    /**
+     * Column Address has Set of peoples.
+     */
+    @ManyToOne
+    @JoinColumn(name = "addressId")
+    private Address address;
+
+    /**
+     * Get value of column firstName.
+     *
+     * @return the firstName
+     */
+    public String getFirstName() {
+	return firstName;
+    }
+
+    /**
+     * Changes firstName value to new newFirstName.
+     *
+     * @param newFirstName
+     *            amount to be set
+     */
+    public void setFirstName(String newFirstName) {
+	this.firstName = newFirstName;
+    }
+
+    /**
+     * Get value of column lastName.
+     *
+     * @return the lastName
+     */
+    public String getLastName() {
+	return lastName;
+    }
+
+    /**
+     * Changes lastName value to newLastName.
+     *
+     * @param newLastName
+     *            amount to be set
+     */
+    public void setLastName(String newLastName) {
+	this.lastName = newLastName;
+    }
+
+    /**
+     * Get value of column phone.
+     *
+     * @return the phone
+     */
+    public String getPhone() {
+	return phone;
+    }
+
+    /**
+     * Changes phone value to newPhone.
+     *
+     * @param newPhone
+     *            amount to be set
+     */
+    public void setPhone(String newPhone) {
+	this.phone = newPhone;
+    }
+
+    /**
+     * Get value of column passport.
+     *
+     * @return the passport
+     */
+    public String getPassport() {
+	return passport;
+    }
+
+    /**
+     * Changes passport value to newPassport.
+     *
+     * @param newPassport
+     *            amount to be set
+     */
+    public void setPassport(String newPassport) {
+	this.passport = newPassport;
+    }
+
+    /**
+     * Get value of column individualTAXNumber.
+     *
+     * @return the individualTaxNumber
+     */
+    public long getIndividualTaxNumber() {
+	return individualTaxNumber;
+    }
+
+    /**
+     * Changes individualTaxNumber value to newIndividualTaxNumber.
+     *
+     * @param newIndividualTaxNumber
+     *            amount to be set
+     */
+    public void setIndividualTaxNumber(long newIndividualTaxNumber) {
+	this.individualTaxNumber = newIndividualTaxNumber;
+    }
+
+    /**
+     * Get value of column address.
+     *
+     * @return the address
+     */
+    public Address getAddress() {
+	return address;
+    }
+
+    /**
+     * Changes address value to newAddress.
+     *
+     * @param newAddress
+     *            amount to be set
+     */
+    public void setAddress(Address newAddress) {
+	this.address = newAddress;
+    }
+
+    /**
+     * Overriding toString method()
+     *
+     */
+    @Override
+    public String toString() {
+	return "CustomerUser [FirstName=" + firstName + ", LastName=" + lastName + ", phone=" + phone + ", passport="
+		+ passport + ", individualTaxNumber=" + individualTaxNumber + "]";
+    }
+
 }
