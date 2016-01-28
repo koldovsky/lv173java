@@ -1,129 +1,122 @@
 package com.softserveinc.ita.redplatform.common.entity;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
 
+/**
+ * The Class Address.
+ * 
+ * @author Ilona Yavorska
+ */
 @Entity
-@Table(name="Addresses")
 public class Address extends BaseEntity {
-
 	
-	@Column(name="city")
-	private String city;
-	
-	@Column(name="region")
-	private String region;
-	
-	@Column(name="country")
+	/** The country. */
 	private String country;
 	
-	@Column(name="postalCode")
-	private int postalCode; 
+	/** The region. */
+	private String region;
 	
-	@OneToMany(mappedBy="address", cascade = CascadeType.ALL)
-	List<CustomerUser> customers = new ArrayList<>();
+	/** The postal code. */
+	private String postalCode;
 	
-	@OneToOne(mappedBy="address")
-	private RealEstateAgency agency;
-
-
-	public String getCity() {
-		return city;
-	}
-	public void setCity(String city) {
-		this.city = city;
-	}
+	/** The locality. */
+	private String locality;
 	
-	public String getRegion() {
-		return region;
-	}
-	public void setRegion(String region) {
-		this.region = region;
-	}
+	/** The additional info. */
+	private String additional;
 	
-	public String getCountry() {
+	/**
+	 * Gets the country.
+	 *
+	 * @return the country
+	 */
+	@Column(nullable = false)
+	public final String getCountry() {
 		return country;
 	}
-	public void setCountry(String country) {
-		this.country = country;
+	
+	/**
+	 * Sets the country.
+	 *
+	 * @param newCountry the new country
+	 */
+	public final void setCountry(final String newCountry) {
+		country = newCountry;
 	}
 	
-	public Integer getPostalCode() {
+	/**
+	 * Gets the region.
+	 *
+	 * @return the region
+	 */
+	public final String getRegion() {
+		return region;
+	}
+	
+	/**
+	 * Sets the region.
+	 *
+	 * @param newRegion the new region
+	 */
+	public final void setRegion(final String newRegion) {
+		region = newRegion;
+	}
+
+	/**
+	 * Gets the postal code.
+	 *
+	 * @return the postal code
+	 */
+	@Column(name = "postal_code", nullable = false)
+	public final String getPostalCode() {
 		return postalCode;
 	}
-	public void setPostalCode(Integer postalCode) {
-		this.postalCode = postalCode;
-	}
-
-	public List<CustomerUser> getCustomers() {
-		return customers;
-	}
-
-	public void setCustomers(List<CustomerUser> customers) {
-		this.customers = customers;
-	}
-
-	public void setPostalCode(int postalCode) {
-		this.postalCode = postalCode;
-	}
-
-
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((city == null) ? 0 : city.hashCode());
-		result = prime * result + ((country == null) ? 0 : country.hashCode());
-		result = prime * result + ((customers == null) ? 0 : customers.hashCode());
-		result = prime * result + postalCode;
-		result = prime * result + ((region == null) ? 0 : region.hashCode());
-		return result;
-	}
-
-
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Address other = (Address) obj;
-		if (city == null) {
-			if (other.city != null)
-				return false;
-		} else if (!city.equals(other.city))
-			return false;
-		if (country == null) {
-			if (other.country != null)
-				return false;
-		} else if (!country.equals(other.country))
-			return false;
-		if (customers == null) {
-			if (other.customers != null)
-				return false;
-		} else if (!customers.equals(other.customers))
-			return false;
-		if (postalCode != other.postalCode)
-			return false;
-		if (region == null) {
-			if (other.region != null)
-				return false;
-		} else if (!region.equals(other.region))
-			return false;
-		return true;
+	
+	/**
+	 * Sets the postal code.
+	 *
+	 * @param newPostalCode the new postal code
+	 */
+	public final void setPostalCode(final String newPostalCode) {
+		postalCode = newPostalCode;
 	}
 	
+	/**
+	 * Gets the locality.
+	 *
+	 * @return the locality
+	 */
+	@Column(nullable = false)
+	public final String getLocality() {
+		return locality;
+	}
 	
+	/**
+	 * Sets the locality.
+	 *
+	 * @param newLocality the new locality
+	 */
+	public final void setLocality(final String newLocality) {
+		locality = newLocality;
+	}
+	
+	/**
+	 * Gets the additional info.
+	 *
+	 * @return the additional
+	 */
+	@Column(nullable = false)
+	public final String getAdditional() {
+		return additional;
+	}
+	
+	/**
+	 * Sets the additional info.
+	 *
+	 * @param newAdditional the new additional
+	 */
+	public final void setAdditional(final String newAdditional) {
+		additional = newAdditional;
+	}
 }
