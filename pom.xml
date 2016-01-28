@@ -12,6 +12,7 @@
     <module>integration</module>
     <module>persistence</module>
     <module>common</module>
+    <module>logging</module>
   </modules>
 
   <build>
