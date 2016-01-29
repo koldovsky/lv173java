@@ -13,8 +13,6 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "RealEstateAdminUsers")
 public class RealEstateAdminUser extends User {
-    
-
     /**
      * Column for first admin`s name.
      */
