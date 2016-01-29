@@ -5,16 +5,16 @@ import javax.persistence.Entity;
 /**
  * The Class User.
  * 
- * @author Ilona Yavorska
+ * @author Ivaniv Roman
  */
 @Entity
 public abstract class User extends BaseEntity {
 
 	/** The email. */
-	protected String email;
+	private String email;
 	
 	/** The password. */
-	protected String password;
+	private String password;
 	
 	/**
 	 * Gets the email.
