@@ -1,6 +1,6 @@
 package com.softserveinc.ita.redplatform.common.entity;
 
-import java.io.Serializable;
+
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToOne;
 
@@ -20,10 +21,10 @@ import javax.persistence.OneToOne;
 public abstract class BaseEntity {
 
     /**
-     * Column for id
+     * Column for id.
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     /**
@@ -42,7 +43,7 @@ public abstract class BaseEntity {
     /**
      * 
      */
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "UpdatedById")
     private User updatedBy;
 
@@ -51,100 +52,95 @@ public abstract class BaseEntity {
      */
     @Column(name = "updatedDate")
     private Date updatedDate;
-    
+
     /**
      * Get value of column createdBy.
      *
      * @return createdBy
      */
-    public User getCreatedBy() {
+    public final User getCreatedBy() {
 	return createdBy;
     }
-    
+
     /**
      * Changes createdBy value to newCreatedBy.
      *
-     * @param newCreatedBy
-     *            
+     * @param newCreatedBy 
      */
-    public void setCreatedBy(User newCreatedBy) {
+    public final void setCreatedBy(final User newCreatedBy) {
 	this.createdBy = newCreatedBy;
     }
-    
+
     /**
      * Get value of column createDate.
      *
      * @return createDate
      */
-    public Date getCreatedDate() {
+    public final Date getCreatedDate() {
 	return createdDate;
     }
-    
+
     /**
      * Changes createdDate value to newCreatedDate.
      *
-     * @param newCreatedDate
-     *            
+     * @param newCreatedDate 
      */
-    public void setCreatedDate(Date newCreatedDate) {
+    public final void setCreatedDate(final Date newCreatedDate) {
 	this.createdDate = newCreatedDate;
     }
-    
+
     /**
      * Get value of column updatedBy.
      *
      * @return the updatedBy
      */
-    public User getUpdatedBy() {
+    public final User getUpdatedBy() {
 	return updatedBy;
     }
-    
+
     /**
      * Changes updatedBy value to newUpdatedBy.
      *
-     * @param newUpdatedBy
-     *            
+     * @param newUpdatedBy 
      */
-    public void setUpdatedBy(User newUpdatedBy) {
+    public final void setUpdatedBy(final User newUpdatedBy) {
 	this.updatedBy = newUpdatedBy;
     }
-    
+
     /**
      * Get value of column updatedDate.
      *
      * @return the updatedDate
      */
-    public Date getUpdatedDate() {
+    public final Date getUpdatedDate() {
 	return updatedDate;
     }
-    
+
     /**
      * Changes updatedDate value to newUpdatedDate.
      *
-     * @param newUpdatedDate
-     *            
+     * @param newUpdatedDate 
      */
-    public void setUpdatedDate(Date newUpdatedDate) {
+    public final void setUpdatedDate(final Date newUpdatedDate) {
 	this.updatedDate = newUpdatedDate;
     }
-   
+
     /**
      * Get value of column Id.
      *
      * @return the Id
      */
-	public long getId() {
-		return id;
-	}
-	
-	/**
+    public final long getId() {
+	return id;
+    }
+
+    /**
      * Changes Id value to newId.
      *
-     * @param newId
-     *            
+     * @param newId 
      */
-	public void setId(long newId) {
-		this.id = newId;
-	}
+    public final void setId(final long newId) {
+	this.id = newId;
+    }
 
 }

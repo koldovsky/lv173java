@@ -56,16 +56,16 @@ public class CustomerUser extends User {
      *
      * @return the firstName
      */
-    public String getFirstName() {
+    public final String getFirstName() {
 	return firstName;
     }
 
     /**
      * Changes firstName value to new newFirstName.
      *
-     * @param newFirstName
+     *  @param newFirstName 
      */
-    public void setFirstName(String newFirstName) {
+    public final void setFirstName(final String newFirstName) {
 	this.firstName = newFirstName;
     }
 
@@ -74,17 +74,16 @@ public class CustomerUser extends User {
      *
      * @return the lastName
      */
-    public String getLastName() {
+    public final String getLastName() {
 	return lastName;
     }
 
     /**
      * Changes lastName value to newLastName.
      *
-     * @param newLastName
-     * 
+     * @param newLastName 
      */
-    public void setLastName(String newLastName) {
+    public final void setLastName(final String newLastName) {
 	this.lastName = newLastName;
     }
 
@@ -93,17 +92,16 @@ public class CustomerUser extends User {
      *
      * @return the phone
      */
-    public String getPhone() {
+    public final String getPhone() {
 	return phone;
     }
 
     /**
      * Changes phone value to newPhone.
      *
-     * @param newPhone
-     * 
+     * @param newPhone 
      */
-    public void setPhone(String newPhone) {
+    public final void setPhone(final String newPhone) {
 	this.phone = newPhone;
     }
 
@@ -112,17 +110,17 @@ public class CustomerUser extends User {
      *
      * @return the passport
      */
-    public String getPassport() {
+    public final String getPassport() {
 	return passport;
     }
 
     /**
      * Changes passport value to newPassport.
      *
-     * @param newPassport
+     * @param newPassport 
      * 
      */
-    public void setPassport(String newPassport) {
+    public final void setPassport(final String newPassport) {
 	this.passport = newPassport;
     }
 
@@ -131,18 +129,17 @@ public class CustomerUser extends User {
      *
      * @return the individualTaxNumber
      */
-    public long getIndividualTaxNumber() {
+    public final long getIndividualTaxNumber() {
 	return individualTaxNumber;
     }
 
     /**
      * Changes individualTaxNumber value to newIndividualTaxNumber.
      *
-     * @param newIndividualTaxNumber
-     * 
+     * @param newIndividualTaxNumb 
      */
-    public void setIndividualTaxNumber(long newIndividualTaxNumber) {
-	this.individualTaxNumber = newIndividualTaxNumber;
+    public final void setIndividualTaxNumber(final long newIndividualTaxNumb) {
+	this.individualTaxNumber = newIndividualTaxNumb;
     }
 
     /**
@@ -150,17 +147,16 @@ public class CustomerUser extends User {
      *
      * @return the address
      */
-    public Address getAddress() {
+    public final Address getAddress() {
 	return address;
     }
 
     /**
      * Changes address value to newAddress.
      *
-     * @param newAddress
-     * 
+     * @param newAddress 
      */
-    public void setAddress(Address newAddress) {
+    public final void setAddress(final Address newAddress) {
 	this.address = newAddress;
     }
 
