@@ -127,5 +127,24 @@ public abstract class BaseEntity {
     public void setUpdatedDate(Date newUpdatedDate) {
 	this.updatedDate = newUpdatedDate;
     }
+   
+    /**
+     * Get value of column Id.
+     *
+     * @return the Id
+     */
+	public long getId() {
+		return id;
+	}
+	
+	/**
+     * Changes Id value to newId.
+     *
+     * @param newId
+     *            
+     */
+	public void setId(long newId) {
+		this.id = newId;
+	}
 
 }
