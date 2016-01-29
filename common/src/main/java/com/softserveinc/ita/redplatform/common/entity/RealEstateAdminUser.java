@@ -6,7 +6,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
- * Class represents Real estate administrators
+ * Class represents Real estate administrators.
  * 
  * @author Oleksiy Bulhakov
  */
