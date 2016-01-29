@@ -13,10 +13,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "RealEstateAdminUsers")
 public class RealEstateAdminUser extends User {
-    /**
-     * Serializable UID.
-     */
-    private static final long serialVersionUID = 6731612338595564614L;
+    
 
     /**
      * Column for first admin`s name.
@@ -111,8 +108,8 @@ public class RealEstateAdminUser extends User {
     /**
      * Changes agency.
      *
-     * @param newAgency
-     *            is phone to be set
+     * @param newAgency 
+     * 
      */
     public final void setAgency(final RealEstateAgency newAgency) {
 	this.agency = newAgency;
