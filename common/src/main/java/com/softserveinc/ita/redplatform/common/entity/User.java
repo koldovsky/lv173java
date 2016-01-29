@@ -1,82 +1,54 @@
 package com.softserveinc.ita.redplatform.common.entity;
 
-import java.io.Serializable;
-import java.sql.Date;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.OneToOne;
 
+/**
+ * The Class User.
+ * 
+ * @author Ilona Yavorska
+ */
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class User extends BaseEntity implements Serializable{
+public abstract class User extends BaseEntity {
+
+	/** The email. */
+	protected String email;
+	
+	/** The password. */
+	protected String password;
 	
 	/**
-	 * 
+	 * Gets the email.
+	 *
+	 * @return the email
 	 */
-	private static final long serialVersionUID = -8534304252661398739L;
-
-	@Column(name = "email")
-	private String email;
-	
-	@Column(name = "password")	
-	private String password;
-	
-
-	public String getEmail() {
+	public final String getEmail() {
 		return email;
 	}
-
-	public void setEmail(String email) {
-		this.email = email;
+	
+	/**
+	 * Sets the email.
+	 *
+	 * @param newEmail the new email
+	 */
+	public final void setEmail(final String newEmail) {
+		email = newEmail;
 	}
 
-	public String getPassword() {
+	/**
+	 * Gets the password.
+	 *
+	 * @return the password
+	 */
+	public final String getPassword() {
 		return password;
 	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	@Override
-	public String toString() {
-		return "AdminUser [email=" + email + ", password=" + password + "]";
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		User other = (User) obj;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (password == null) {
-			if (other.password != null)
-				return false;
-		} else if (!password.equals(other.password))
-			return false;
-		return true;
-	}
 	
-	
-	
+	/**
+	 * Sets the password.
+	 *
+	 * @param newPassword the new password
+	 */
+	public final void setPassword(final String newPassword) {
+		password = newPassword;
+	}	
 }
