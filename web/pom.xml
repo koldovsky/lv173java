@@ -1,55 +1,50 @@
-<?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>com.softserveinc.ita</groupId>
-    <artifactId>redplatform</artifactId>
-    <version>1.0-SNAPSHOT</version>
-  </parent>
-  
-  <groupId>com.softserveinc.ita</groupId>
-  <artifactId>web</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <name>web</name>
-  <url>http://maven.apache.org</url>
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
-  
-  <dependencies>
-   	<!-- business module -->
-	<dependency>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+	http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
 		<groupId>com.softserveinc.ita</groupId>
-		<artifactId>business</artifactId>
+		<artifactId>redplatform</artifactId>
 		<version>1.0-SNAPSHOT</version>
-	</dependency>
+	</parent>
+
+
+	<properties>
+		<jstl.version>1.2</jstl.version>
+	</properties>
+
+	<artifactId>web</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<name>web</name>
+	<packaging>war</packaging>
+
+
+	<dependencies>
+
 		<!-- common module -->
-	<dependency>
-		<groupId>com.softserveinc.ita</groupId>
-		<artifactId>common</artifactId>
-		<version>1.0-SNAPSHOT</version>
-	</dependency>
-		<!-- Spring mvc -->
+		<dependency>
+			<groupId>com.softserveinc.ita</groupId>
+			<artifactId>common</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+
+		<!-- business module -->
+		<dependency>
+			<groupId>com.softserveinc.ita</groupId>
+			<artifactId>business</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 		</dependency>
-		<!-- spring beans -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-beans</artifactId>
-		</dependency>
-		<!-- spring context -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-		</dependency>	
-		<!-- javax servlet-api -->
+
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
-			<version>1.2</version>
+			<version>${jstl.version}</version>
 		</dependency>
-  </dependencies>
+
+	</dependencies>
 </project>
