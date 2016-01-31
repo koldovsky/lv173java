@@ -23,6 +23,11 @@ public class RegistrateAgencyController {
 	return "agencyRegistration";
     }
     
+    /**
+     * register Agency.
+     * 
+     * @return index view.
+     */
     @RequestMapping(value = "registerAgency", method = RequestMethod.POST)
     public final String registerAgency() {
 	System.out.println("in register Agency controller");
