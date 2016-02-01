@@ -2,6 +2,7 @@ package com.softserveinc.ita.redplatform.common.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
  * The Class Address.
@@ -12,18 +13,22 @@ import javax.persistence.Entity;
 public class Address extends BaseEntity {
 	
 	/** The country. */
+	@Column(nullable = false)
 	private String country;
 	
 	/** The region. */
 	private String region;
 	
 	/** The postal code. */
+	@Column(nullable = false)
 	private String postalCode;
 	
 	/** The locality. */
+	@Column(nullable = false)
 	private String locality;
 	
 	/** The additional info. */
+	@Column(nullable = false)
 	private String additional;
 	
 	/**
@@ -31,7 +36,6 @@ public class Address extends BaseEntity {
 	 *
 	 * @return the country
 	 */
-	@Column(nullable = false)
 	public final String getCountry() {
 		return country;
 	}
@@ -68,7 +72,6 @@ public class Address extends BaseEntity {
 	 *
 	 * @return the postal code
 	 */
-	@Column(name = "postal_code", nullable = false)
 	public final String getPostalCode() {
 		return postalCode;
 	}
@@ -87,7 +90,6 @@ public class Address extends BaseEntity {
 	 *
 	 * @return the locality
 	 */
-	@Column(nullable = false)
 	public final String getLocality() {
 		return locality;
 	}
@@ -106,7 +108,6 @@ public class Address extends BaseEntity {
 	 *
 	 * @return the additional
 	 */
-	@Column(nullable = false)
 	public final String getAdditional() {
 		return additional;
 	}
