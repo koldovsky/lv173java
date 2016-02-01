@@ -1,20 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Agency registration</title>
-<link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="resources/bootstrap/css/bootstrap-theme.min.css">
-<script src="//code.jquery.com/jquery-1.9.1.js"></script>
-<script
-	src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
-
-<script
-	src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.2/js/bootstrap.min.js"></script>
-<script src="resources/js/validationREAgency.js"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Agency registration</title>
+	<link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet"
+		href="resources/bootstrap/css/bootstrap-theme.min.css">
+	<script src="//code.jquery.com/jquery-1.9.1.js"></script>
+	<script
+		src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js">
+	</script>
+	
+	<script
+		src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.2/js/bootstrap.min.js">
+	</script>
+	<script src="resources/js/validationREAgency.js"></script>
 
 </head>
 <body>
@@ -91,6 +93,6 @@
 				</form>
 			</div>
 		</div>
-	</div>
+	</div>	<!-- container -->
 </body>
 </html>
