@@ -29,17 +29,17 @@ public class RealEstateAgency extends BaseEntity {
 	/** The site. */
 	private URL site;
 	
-	@Column(nullable = false)
 	/** The phone number. */
+	@Column(nullable = false)
 	private String phone;
 	
+	/** The address of the office. */
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(nullable = false)
-	/** The address of the office. */
 	private Address address;
 	
-	@ManyToOne
 	/** The main office. */
+	@ManyToOne
 	private RealEstateAgency mainOffice;
 	
 	/** The branches. */

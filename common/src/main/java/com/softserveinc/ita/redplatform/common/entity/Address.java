@@ -2,7 +2,6 @@ package com.softserveinc.ita.redplatform.common.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Table;
 
 /**
  * The Class Address.
