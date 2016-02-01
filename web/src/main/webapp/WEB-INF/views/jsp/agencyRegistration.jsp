@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Agency registration</title>
 <link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="resources/bootstrap/css/bootstrap-theme.min.css">
@@ -81,8 +81,7 @@
 							</div>
 
 							<div class="col-sm-6 form-group">
-								<label class="control-label" for="additionalInfo">Additional
-									info</label> <input type="text" name="additionalInfo"
+								<label class="control-label" for="additionalInfo">Address</label> <input type="text" name="additionalInfo"
 									class="form-control" placeholder="Enter Additional Info Here..">
 							</div>
 						</div>
