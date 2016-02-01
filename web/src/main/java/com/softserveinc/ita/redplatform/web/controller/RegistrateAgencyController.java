@@ -18,7 +18,7 @@ public class RegistrateAgencyController {
      * 
      * @return agencyRegistration view.
      */
-    @RequestMapping(value = "registerAgency", method = RequestMethod.GET)
+    @RequestMapping(value = "registerAgency1", method = RequestMethod.GET)
     public final String getPage() {
 	return "agencyRegistration";
     }
@@ -28,7 +28,7 @@ public class RegistrateAgencyController {
      * 
      * @return index view.
      */
-    @RequestMapping(value = "registerAgency", method = RequestMethod.POST)
+    @RequestMapping(value = "registerAgency1", method = RequestMethod.POST)
     public final String registerAgency() {
 	System.out.println("in register Agency controller");
 	return "index";
