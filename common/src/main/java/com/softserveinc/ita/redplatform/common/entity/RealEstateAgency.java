@@ -20,6 +20,7 @@ import javax.persistence.OneToMany;
 public class RealEstateAgency extends BaseEntity {
 	
 	/** The name. */
+	@Column(nullable = false)
 	private String name;
 	
 	/** The description. */
@@ -28,16 +29,21 @@ public class RealEstateAgency extends BaseEntity {
 	/** The site. */
 	private URL site;
 	
+	@Column(nullable = false)
 	/** The phone number. */
 	private String phone;
 	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(nullable = false)
 	/** The address of the office. */
 	private Address address;
 	
+	@ManyToOne
 	/** The main office. */
 	private RealEstateAgency mainOffice;
 	
 	/** The branches. */
+	@OneToMany(mappedBy = "mainOffice")
 	private Set<RealEstateAgency> branches;
 	
 	/**
@@ -45,7 +51,6 @@ public class RealEstateAgency extends BaseEntity {
 	 *
 	 * @return the name
 	 */
-	@Column(nullable = false)
 	public final String getName() {
 		return name;
 	}
@@ -100,7 +105,6 @@ public class RealEstateAgency extends BaseEntity {
 	 *
 	 * @return the phone
 	 */
-	@JoinColumn(nullable = false)
 	public final String getPhone() {
 		return phone;
 	}
@@ -119,8 +123,6 @@ public class RealEstateAgency extends BaseEntity {
 	 *
 	 * @return the address
 	 */
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(nullable = false)
 	public final Address getAddress() {
 		return address;
 	}
@@ -139,8 +141,6 @@ public class RealEstateAgency extends BaseEntity {
 	 *
 	 * @return the main office
 	 */
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "main_office")
 	public final RealEstateAgency getMainOffice() {
 		return mainOffice;
 	}
@@ -159,7 +159,6 @@ public class RealEstateAgency extends BaseEntity {
 	 *
 	 * @return the branches
 	 */
-	@OneToMany(mappedBy = "main_office")
 	public final Set<RealEstateAgency> getBranches() {
 		return branches;
 	}
