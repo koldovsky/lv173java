@@ -21,8 +21,7 @@ public class AgencyRegistrationController {
     @RequestMapping(value = "registerAgency", method = RequestMethod.GET)
     public final String getPage() {
 	return "agencyRegistration";
-    }
-    
+    }    
     /**
      * register Agency.
      * 
