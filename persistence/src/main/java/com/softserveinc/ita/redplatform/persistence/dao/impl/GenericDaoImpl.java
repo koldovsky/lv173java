@@ -18,11 +18,14 @@ import com.softserveinc.ita.redplatform.persistence.dao.GenericDao;
  * @param <E>  Type Of Entity
  *            
  * @param <N>  Id Type
+ * 
+ * @author Oleh Khimka
  *            
  */
 
 @Transactional
-public abstract class GenericDaoImpl<E, N extends Number> implements GenericDao<E, N> {
+public abstract class GenericDaoImpl<E, N extends Number> 
+				implements GenericDao<E, N> {
 
     /**
      * Actual type of arguments.
@@ -41,7 +44,6 @@ public abstract class GenericDaoImpl<E, N extends Number> implements GenericDao<
      * Single public constructor.
      * gets the generic type at runtime.
      * 
-     * @param newEntityClass Entity
      */
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public GenericDaoImpl() {
