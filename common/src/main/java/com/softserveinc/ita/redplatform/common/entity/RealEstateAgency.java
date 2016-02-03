@@ -1,6 +1,5 @@
 package com.softserveinc.ita.redplatform.common.entity;
 
-import java.net.URL;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
