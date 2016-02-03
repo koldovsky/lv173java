@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.softserveinc.ita.redplatform.common.dto.RealEstateAgencyDTO;
 
 
 
@@ -32,11 +31,11 @@ public class AgencyRegistrationController {
      * register Agency.
      * 
      * @return index view.
-     * @param realEstateAgencyDTO realEstateAgencyDTO
+     * @param a a
      */
     @RequestMapping(value = "registerAgency", method = RequestMethod.POST)
     public final String 
-    registerAgency(@RequestBody final RealEstateAgencyDTO realEstateAgencyDTO) {
+    registerAgency(@RequestBody final String a) {
 	       
 	        return "index";
     }
