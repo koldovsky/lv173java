@@ -72,7 +72,6 @@ public abstract class GenericDaoImpl<E, N extends Number>
     public final E update(final E entity) {
 	return entityManager.merge(entity);
     }
-
     @SuppressWarnings("unchecked")
     @Override
     public final List<E> findAll() {

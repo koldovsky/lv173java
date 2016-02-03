@@ -27,7 +27,7 @@ public class RealEstateAgency extends BaseEntity {
 	private String description;
 	
 	/** The site. */
-	private URL site;
+	private String site;
 	
 	/** The phone number. */
 	@Column(nullable = false)
@@ -87,7 +87,7 @@ public class RealEstateAgency extends BaseEntity {
 	 *
 	 * @return the site
 	 */
-	public final URL getSite() {
+	public final String getSite() {
 		return site;
 	}
 	
@@ -96,7 +96,7 @@ public class RealEstateAgency extends BaseEntity {
 	 *
 	 * @param newSite the new site
 	 */
-	public final void setSite(final URL newSite) {
+	public final void setSite(final String newSite) {
 		site = newSite;
 	}
 	
