@@ -19,7 +19,7 @@
 	<packaging>war</packaging>
 
 	<build>
-	<finalName>REDpalform</finalName>
+	<finalName>REDplatform</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
