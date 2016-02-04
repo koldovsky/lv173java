@@ -33,7 +33,7 @@ public class AgencyRegistrationController {
      * @return index view.
      * @param a a
      */
-    @RequestMapping(value = "registerAgency", method = RequestMethod.POST)
+    @RequestMapping(value = "red/registerAgency", method = RequestMethod.POST)
     public final String 
     registerAgency(@RequestBody final String a) {
 	       
