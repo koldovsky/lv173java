@@ -1,6 +1,7 @@
 package com.softserveinc.ita.redplatform.common.mapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.softserveinc.ita.redplatform.common.dto.RealEstateAgencyDTO;
 import com.softserveinc.ita.redplatform.common.entity.RealEstateAgency;
@@ -11,21 +12,29 @@ import com.softserveinc.ita.redplatform.common.entity.RealEstateAgency;
  * @author Oleh Khimka.
  *         
  */
+@Component
 public class RealEstateAgencyMapper 
 			implements GenericMapper<RealEstateAgency, RealEstateAgencyDTO> {
     
+    /**
+     * Address mapper for conversion between DTO and entity.
+     */
     @Autowired
     private AddressMapper addressMapper;
 
     @Override
-    public final RealEstateAgencyDTO toDto(final RealEstateAgency realEstateAgency) {
+    public final RealEstateAgencyDTO toDto(
+	    	final RealEstateAgency realEstateAgency
+	    ) {
 	RealEstateAgencyDTO realEstateAgencyDTO = new RealEstateAgencyDTO();
 	realEstateAgencyDTO.setName(realEstateAgency.getName());
 	realEstateAgencyDTO.setDescription(realEstateAgency.getDescription());
 	realEstateAgencyDTO.setPhone(realEstateAgency.getPhone());
 	realEstateAgencyDTO.setSite(realEstateAgency.getSite());
 	
-	realEstateAgencyDTO.setAddress(addressMapper.toDto(realEstateAgency.getAddress()));
+	realEstateAgencyDTO.setAddress(
+			addressMapper.toDto(realEstateAgency.getAddress())
+		);
 	
 	return realEstateAgencyDTO;
     }
@@ -39,7 +48,9 @@ public class RealEstateAgencyMapper
 	realEstateAgency.setPhone(realEstateAgencyDTO.getPhone());
 	realEstateAgency.setSite(realEstateAgencyDTO.getSite());
 	
-	realEstateAgency.setAddress(addressMapper.toEntity(realEstateAgencyDTO.getAddress()));
+	realEstateAgency.setAddress(
+			addressMapper.toEntity(realEstateAgencyDTO.getAddress())
+		);
 	
 	return realEstateAgency;
     }

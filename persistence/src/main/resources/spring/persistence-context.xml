@@ -10,7 +10,7 @@
     http://www.springframework.org/schema/mvc 
     http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
 
-	<context:component-scan base-package="com.softserveinc.ita.redplatform.persistence" />
+	<context:component-scan base-package="com.softserveinc.ita.redplatform.persistence.dao.impl" />
 
 	<bean id="entityManagerFactoryBean"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
@@ -42,9 +42,9 @@
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/icke" />
+		<property name="url" value="jdbc:mysql://localhost:3306/RealEstateDB" />
 		<property name="username" value="root" />
-		<property name="password" value="password" />
+		<property name="password" value="1111" />
 	</bean>
 
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">

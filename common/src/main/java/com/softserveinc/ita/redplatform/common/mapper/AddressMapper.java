@@ -1,12 +1,23 @@
 package com.softserveinc.ita.redplatform.common.mapper;
 
+import org.springframework.stereotype.Component;
+
 import com.softserveinc.ita.redplatform.common.dto.AddressDTO;
 import com.softserveinc.ita.redplatform.common.entity.Address;
 
+/**
+ * Address mapper for conversion between DTO and entity.
+ * @author oleh
+ *
+ */
+@Component
 public class AddressMapper implements GenericMapper<Address, AddressDTO> {
 
+    /**
+     * convert to DTO.
+     */
     @Override
-    public AddressDTO toDto(Address entity) {
+    public final AddressDTO toDto(final Address entity) {
 	AddressDTO dto = new AddressDTO();
 	
 	dto.setCountry(entity.getCountry());
@@ -18,8 +29,11 @@ public class AddressMapper implements GenericMapper<Address, AddressDTO> {
 	return dto;
     }
 
+    /**
+     * convert to entity.
+     */
     @Override
-    public Address toEntity(AddressDTO dto) {
+    public final Address toEntity(final AddressDTO dto) {
 	Address entity = new Address();
 	
         entity.setCountry(dto.getCountry());

@@ -17,43 +17,7 @@
 		src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.2/js/bootstrap.min.js">
 	</script>
 	<script src="resources/js/agencyRegistration.js"></script>
-<script>
-// When the browser is ready...
-$(document).ready(function() {
-$("#myform").submit(function(event) {
 
-	var address = JSON.stringify({
-		country: $('#country').val(),
-		region: $('#description').val(),
-		postalCode: $('#postalCode').val(),
-		locality: $('#locality').val(),
-		additionalInfo: $('#additionalInfo').val()
-	});
-
-	var data = {
-		agencyName: $('#agencyName').val(),
-		description: $('#description').val(),
-		phoneNumber: $('#phoneNumber').val(),
-		webSite: $('#webSite').val(),
-		address: address
-	};
-	var postData = JSON.stringify(data);
-	
-	 $.ajax({
-           type: "post",
-           url: "registerAgency",
-           data: postData,
-           contentType: "application/json",
-           success: function(responseData, textStatus, jqXHR) {
-               alert("data saved")
-           },
-           error: function(jqXHR, textStatus, errorThrown) {
-               console.log(errorThrown);
-           }
-       })
-});
-});
-</script>
 </head>
 <body>
 	<div class="container">

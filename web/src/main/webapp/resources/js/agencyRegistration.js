@@ -124,5 +124,37 @@ $(document).ready(function() {
 							});
 			
 			
+			$("#myform").submit(function(event) {
+
+				var address = {
+					country: $('#country').val(),
+					region: $('#description').val(),
+					postalCode: $('#postalCode').val(),
+					locality: $('#locality').val(),
+					additionalInfo: $('#additionalInfo').val()
+				};
+
+				var data = {
+					agencyName: $('#agencyName').val(),
+					description: $('#description').val(),
+					phoneNumber: $('#phoneNumber').val(),
+					webSite: $('#webSite').val(),
+					address: address
+				};
+				
+				 $.ajax({
+			           type: "post",
+			           url: "registerAgency",
+			           data:  JSON.stringify(data),
+			           contentType: "application/json",
+			           success: function(responseData, textStatus, jqXHR) {
+			               alert("data saved")
+			           },
+			           error: function(jqXHR, textStatus, errorThrown) {
+			               console.log(errorThrown);
+			           }
+			       })
+			});
+			
 
 	});
