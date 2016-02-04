@@ -1,7 +1,6 @@
 package com.softserveinc.ita.redplatform.common.dto;
 
 
-import com.softserveinc.ita.redplatform.common.entity.Address;
 
 /**
  * Data Transfer Object for RealEstateAgency class.
@@ -23,7 +22,7 @@ public class RealEstateAgencyDTO extends BaseEntityDTO {
 	private String phone;
 	
 	/** The address of the office. */
-	private Address address;
+	private AddressDTO address;
 
 	
 	public final String getName() {
@@ -58,11 +57,11 @@ public class RealEstateAgencyDTO extends BaseEntityDTO {
 	    this.phone = newPhone;
 	}
 
-	public final Address getAddress() {
+	public final AddressDTO getAddress() {
 	    return address;
 	}
 
-	public final void setAddress(final Address newAddress) {
+	public final void setAddress(final AddressDTO newAddress) {
 	    this.address = newAddress;
 	}
 	
