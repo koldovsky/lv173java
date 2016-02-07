@@ -22,6 +22,11 @@ public class AddressDTO {
 	/** The additional info. */
 	private String additional;
 
+	/** default constructor. */
+	public AddressDTO() {
+	    
+	}
+	
 	public final String getCountry() {
 	    return country;
 	}
@@ -61,6 +66,6 @@ public class AddressDTO {
 	public final void setAdditional(final String newAdditional) {
 	    this.additional = newAdditional;
 	}
-	
+
 	
 }

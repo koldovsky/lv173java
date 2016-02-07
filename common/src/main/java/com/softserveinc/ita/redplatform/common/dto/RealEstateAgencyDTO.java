@@ -7,7 +7,7 @@ package com.softserveinc.ita.redplatform.common.dto;
  * @author Oleh Khimka
  *
  */
-public class RealEstateAgencyDTO extends BaseEntityDTO {
+public class RealEstateAgencyDTO {
 
 	/** The name. */
 	private String name;
@@ -24,6 +24,10 @@ public class RealEstateAgencyDTO extends BaseEntityDTO {
 	/** The address of the office. */
 	private AddressDTO address;
 
+	/** The default constructor. */
+	public RealEstateAgencyDTO() {
+	    
+	}
 	
 	public final String getName() {
 	    return name;

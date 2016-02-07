@@ -1,6 +1,6 @@
 // When the browser is ready...
 $(document).ready(function() {
-
+		$("#navMenu").removeClass("navbar-fixed-top");
 			$.validator
 					.addMethod(
 							"regexName",
@@ -33,7 +33,7 @@ $(document).ready(function() {
 			}, "Invalid address");
 
 			// Setup form validation on the #register-form element
-			$("#myform")
+			$("#register-form")
 					.validate(
 							{
 
@@ -122,39 +122,40 @@ $(document).ready(function() {
 								}
 
 							});
-			
-			
-			$("#myform").submit(function(event) {
 
-				var address = {
-					country: $('#country').val(),
-					region: $('#description').val(),
-					postalCode: $('#postalCode').val(),
-					locality: $('#locality').val(),
-					additionalInfo: $('#additionalInfo').val()
-				};
+			$("#register-form").submit(function(event) {
+				alert("in submit");
+							var address = {
+									country: $('#country').val(),
+									region: $('#region').val(),
+									postalCode: $('#postalCode').val(),
+									locality: $('#locality').val(),
+									additional: $('#additionalInfo').val()
+								};
 
-				var data = {
-					agencyName: $('#agencyName').val(),
-					description: $('#description').val(),
-					phoneNumber: $('#phoneNumber').val(),
-					webSite: $('#webSite').val(),
-					address: address
-				};
-				
-				 $.ajax({
-			           type: "post",
-			           url: "registerAgency",
-			           data:  JSON.stringify(data),
-			           contentType: "application/json",
-			           success: function(responseData, textStatus, jqXHR) {
-			               alert("data saved")
-			           },
-			           error: function(jqXHR, textStatus, errorThrown) {
-			               console.log(errorThrown);
-			           }
-			       })
-			});
+								var agency = {
+									name: $('#agencyName').val(),
+									description: $('#description').val(),
+									site: $('#webSite').val(),
+									phone: $('#phoneNumber').val(),
+									address: address
+								};
+								var agency = JSON.stringify(agency);
+								console.log(agency);
+								
+							 $.ajax({
+						           type: "POST",
+						           url: "registerAgency",
+						           contentType: "application/json; charset=utf-8",
+						           data: agency,
+						           success: function(responseData, textStatus, jqXHR) {
+						               alert("data saved")
+						           },
+						           error: function(jqXHR, textStatus, errorThrown) {
+						              alert("error"+" "+errorThrown+" "+textStatus);
+						           }
+						       })
+						});
 			
 
 	});

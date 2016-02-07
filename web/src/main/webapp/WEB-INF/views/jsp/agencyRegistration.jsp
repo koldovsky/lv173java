@@ -8,7 +8,8 @@
 	<link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet"
 		href="resources/bootstrap/css/bootstrap-theme.min.css">
-	<script src="//code.jquery.com/jquery-1.9.1.js"></script>
+	<link rel="stylesheet" href="resources/css/agencyRegistration.css">
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.js"></script>
 	<script
 		src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js">
 	</script>
@@ -17,14 +18,16 @@
 		src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.2/js/bootstrap.min.js">
 	</script>
 	<script src="resources/js/agencyRegistration.js"></script>
+	
 
 </head>
 <body>
+ <jsp:include page = "navbar.jsp"></jsp:include>
 	<div class="container">
 		<h1 class="well">Registration for Real Estate Agency</h1>
-		<div class="col-lg-12 well">
+		<div class="col-lg-12">
 			<div class="row">
-				<form name="myform" id="myform" method="post" action="">
+				<form name="register-form" id="register-form" action="">
 					<div class="col-sm-12">
 
 						<!-- Name of Agency-->
@@ -89,11 +92,15 @@
 							</div>
 						</div>
 					</div>
-
-					<button type="submit" class="btn btn-default">Submit</button>
+					<div class="submitButtonDiv">
+						<button id="submitButton" type="submit" class="btn btn-default">Submit</button>
+					</div>
+					<br>
 				</form>
 			</div>
 		</div>
+		
 	</div>	<!-- container -->
+	<jsp:include page = "footer.jsp"></jsp:include>
 </body>
 </html>

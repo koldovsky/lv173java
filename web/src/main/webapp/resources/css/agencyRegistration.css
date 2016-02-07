@@ -1,0 +1,16 @@
+@CHARSET "UTF-8";
+.submitButtonDiv {
+	text-align:center;
+}
+#submitButton{
+	width: 200px;
+}
+
+
+#register-form .form-group label.error {
+    color: #FB3A3A;
+    display: inline-block;
+    padding: 0;
+    text-align: left;
+    width: 300px;
+}

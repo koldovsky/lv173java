@@ -78,18 +78,11 @@
                </div>
             </div>
          </div>
-         <hr>
-         <!-- Footer -->
-         <footer>
-            <div class="row">
-               <div class="col-lg-12">
-                  <p class="text-center">Copyright &copy; REDplatform 2016</p>
-               </div>
-            </div>
-            <!-- /.row --> 
-         </footer>
+        
+     <jsp:include page = "footer.jsp"></jsp:include>
       </div>
       <!-- /.container -->
+      
       <!-- jQuery -->
       <script src="resources/jquery-2.2.0.min.js"></script>
       <!-- Bootstrap Core JavaScript -->

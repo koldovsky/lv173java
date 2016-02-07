@@ -1,14 +1,14 @@
 package com.softserveinc.ita.redplatform.web.controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import 
+    com.softserveinc.ita.redplatform.business.service.RealEstateAgencyService;
 import com.softserveinc.ita.redplatform.common.dto.RealEstateAgencyDTO;
-import com.softserveinc.ita.redplatform.business.service.RealEstateAgencyService;
 
 
 
@@ -43,9 +43,9 @@ public class AgencyRegistrationController {
      * @param realEstateAgencyDTO realEstateAgencyDTO
      */
     @RequestMapping(value = "registerAgency", method = RequestMethod.POST)
-    public final String 
-    registerAgency(@RequestBody final 
-	    	RealEstateAgencyDTO realEstateAgencyDTO) {
+    public final String registerAgency(
+	    @RequestBody final RealEstateAgencyDTO realEstateAgencyDTO) {
+	
 	realEstateAgencyService.create(realEstateAgencyDTO);
 	return "index";
     }
