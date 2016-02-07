@@ -3,26 +3,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Agency registration</title>
-	<link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet"
-		href="resources/bootstrap/css/bootstrap-theme.min.css">
-	<link rel="stylesheet" href="resources/css/agencyRegistration.css">
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.js"></script>
-	<script
-		src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js">
-	</script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Agency registration</title>
+<link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="resources/bootstrap/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="resources/css/agencyRegistration.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.js"></script>
+<script
+	src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js">
 	
-	<script
-		src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.2/js/bootstrap.min.js">
-	</script>
-	<script src="resources/js/agencyRegistration.js"></script>
+</script>
+
+<script
+	src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.2/js/bootstrap.min.js">
 	
+</script>
+<script src="resources/js/agencyRegistration.js"></script>
+
 
 </head>
 <body>
- <jsp:include page = "navbar.jsp"></jsp:include>
+	<jsp:include page="navbar.jsp"></jsp:include>
 	<div class="container">
 		<h1 class="well">Registration for Real Estate Agency</h1>
 		<div class="col-lg-12">
@@ -40,8 +42,8 @@
 						<!-- Description-->
 						<div class="form-group">
 							<label class="control-label" for="description">Description</label>
-							<textarea name="description" class="form-control" id="description"
-								placeholder="Enter Description Here.." rows="3"></textarea>
+							<textarea name="description" class="form-control"
+								id="description" placeholder="Enter Description Here.." rows="3"></textarea>
 						</div>
 
 						<!-- Phone number-->
@@ -62,13 +64,13 @@
 						<div class="row">
 							<div class="col-sm-6 form-group">
 								<label class="control-label" for="country">Country</label> <input
-									type="text" name="country" id="country" placeholder="Enter Country Here.."
-									class="form-control">
+									type="text" name="country" id="country"
+									placeholder="Enter Country Here.." class="form-control">
 							</div>
 							<div class="col-sm-6 form-group">
 								<label class="control-label" for="region">Region</label> <input
-									type="text" name="region" id="region" placeholder="Enter Region Here.."
-									class="form-control">
+									type="text" name="region" id="region"
+									placeholder="Enter Region Here.." class="form-control">
 							</div>
 
 						</div>
@@ -86,9 +88,9 @@
 							</div>
 
 							<div class="col-sm-6 form-group">
-								<label class="control-label" for="additionalInfo">Address</label> 
-								<input type="text" name="additionalInfo"
-									class="form-control" id="additionalInfo" placeholder="Enter Additional Info Here..">
+								<label class="control-label" for="additionalInfo">Address</label>
+								<input type="text" name="additionalInfo" class="form-control"
+									id="additionalInfo" placeholder="Enter Additional Info Here..">
 							</div>
 						</div>
 					</div>
@@ -99,8 +101,9 @@
 				</form>
 			</div>
 		</div>
-		
-	</div>	<!-- container -->
-	<jsp:include page = "footer.jsp"></jsp:include>
+
+	</div>
+	<!-- container -->
+	<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>
