@@ -32,7 +32,7 @@ public class AgencyRegistrationController {
      * 
      * @return agencyRegistration view.
      */
-    @RequestMapping(value = "registerAgency", method = RequestMethod.GET)
+    @RequestMapping(value = "red/registerAgency", method = RequestMethod.GET)
     public final String getPage() {
 	return "agencyRegistration";
     }    
