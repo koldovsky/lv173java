@@ -7,7 +7,7 @@ import javax.persistence.Column;
  * @author Ivaniv Roman
  *
  */
-public class CustomerUserDTO extends BaseEntityDTO {
+public class CustomerUserDTO {
   /** first name. */
   @Column(name = "firstName")
     private String firstName;

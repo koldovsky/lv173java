@@ -8,8 +8,6 @@ import javax.persistence.PersistenceContext;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
-import org.springframework.transaction.annotation.Transactional;
-
 import com.softserveinc.ita.redplatform.persistence.dao.GenericDao;
 
 /**
@@ -23,14 +21,14 @@ import com.softserveinc.ita.redplatform.persistence.dao.GenericDao;
  *            
  */
 
-@Transactional
+
 public abstract class JPAGenericDao<E, N extends Number> 
 				implements GenericDao<E, N> {
 
     /**
      * Actual type of arguments.
      */
-    private Class<E> entityClass;
+    protected Class<E> entityClass;
 
    
     /**
@@ -38,7 +36,7 @@ public abstract class JPAGenericDao<E, N extends Number>
      * entity instances, and to query over entities.
      */
     @PersistenceContext
-    private EntityManager entityManager;
+    protected EntityManager entityManager;
     
     /**
      * Single public constructor.
@@ -65,7 +63,7 @@ public abstract class JPAGenericDao<E, N extends Number>
 
     @Override
     public final void remove(final E entity) {
-	entityManager.remove(entityManager.merge(entity));
+	entityManager.remove(entity);
     }
 
     @Override

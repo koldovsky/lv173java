@@ -1,6 +1,8 @@
 package com.softserveinc.ita.redplatform.common.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
 /**
  * The Class User.
@@ -8,6 +10,7 @@ import javax.persistence.Entity;
  * @author Ivaniv Roman
  */
 @Entity
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 public abstract class User extends BaseEntity {
 
 	/** The email. */
