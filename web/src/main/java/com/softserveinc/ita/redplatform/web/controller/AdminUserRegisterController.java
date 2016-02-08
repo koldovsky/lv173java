@@ -1,43 +1,41 @@
 package com.softserveinc.ita.redplatform.web.controller;
 
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
-
-
 /**
  * Controller for registration new Real Estate Agency.
  * 
  * @author Bulhakov Alex
- *         
+ * 
  */
 @Controller
-public class SysAdminRegisterController {
-    
+public class AdminUserRegisterController {
+
     /**
-     * sysadminregister page mapping.
+     * adminuserregister page mapping.
      * 
-     * @return sysadminregister view.
+     * @return adminregister view.
      */
-    @RequestMapping(value = "/sysadminregister", method = RequestMethod.GET)
+    @RequestMapping(value = "/adminregister", method = RequestMethod.GET)
     public final String getPage() {
-	return "sysadminregister";
-    }    
+	return "adminregister";
+    }
+
     /**
-     * register System Administrator.
+     * register Admin User.
      * 
      * @return index view.
-     * @param login login
+     * @param login
+     *            login
      */
-    @RequestMapping(value = "sysadminregister", method = RequestMethod.POST)
-    public final String 
-    registerAgency(@RequestBody final String login) {
-	       
-	        return "index";
+    @RequestMapping(value = "/adminregister", method = RequestMethod.POST)
+    public final String adminRegister(@RequestBody final String login) {
+	System.out.println(login);
+
+	return "index";
     }
 
 }

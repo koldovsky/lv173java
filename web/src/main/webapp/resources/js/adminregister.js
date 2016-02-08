@@ -6,10 +6,10 @@ $(document).ready(function() {
 	}, "Invalid email!");
 
 	// Setup form validation on the #register-form element
-	$("#sysadminregisterform").validate({
+	$("#adminregisterform").validate({
 		// Specify the validation rules
 		rules : {
-			sysadminlogin : {
+			adminregister : {
 				required : true,
 				minlength : 6,
 				maxlength : 60,
@@ -17,7 +17,7 @@ $(document).ready(function() {
 			}
 		},
 		messages : {
-			sysadminlogin : {
+			adminregister : {
 				required : "Please enter new system administrator's login",
 				minlength : "Login must be minimum 6 characters long",
 				maxlength : "Login must be maximum 60 characters long"
@@ -25,24 +25,24 @@ $(document).ready(function() {
 		}
 
 	});
-});
-$("#sysadminregisterform").submit(function(event) {
+	$("#adminregisterform").submit(function(event) {
+		alert("in submit");
+		var data = {
+			email : $('#adminregister').val()
+		};
+		var postData = JSON.stringify(data);
 
-	var data = {
-		sysadminlogin : $('#sysadminlogin').val()
-	};
-	var postData = JSON.stringify(data);
-	
-	$.ajax({
-		type : "POST",
-		url : "sysadminregister",
-		data : postData,
-		contentType : "application/json; charset=utf-8",
-		success : function(responseData, textStatus, jqXHR) {
-			alert("New administrator registered!")
-		},
-		error : function(jqXHR, textStatus, errorThrown) {
-			console.log(errorThrown);
-		}
-	})
+		$.ajax({
+			type : "POST",
+			url : "/adminregister",
+			data : postData,
+			contentType : "application/json; charset=utf-8",
+			success : function(responseData, textStatus, jqXHR) {
+				alert("New administrator registered!")
+			},
+			error : function(jqXHR, textStatus, errorThrown) {
+				console.log(errorThrown);
+			}
+		})
+	});
 });
