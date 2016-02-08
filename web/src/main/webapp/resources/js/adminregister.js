@@ -34,7 +34,7 @@ $(document).ready(function() {
 
 		$.ajax({
 			type : "POST",
-			url : "/adminregister",
+			url : "adminregister",
 			data : postData,
 			contentType : "application/json; charset=utf-8",
 			success : function(responseData, textStatus, jqXHR) {

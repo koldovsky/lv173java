@@ -33,7 +33,6 @@ public class AdminUserRegisterController {
      */
     @RequestMapping(value = "/adminregister", method = RequestMethod.POST)
     public final String adminRegister(@RequestBody final String login) {
-	System.out.println(login);
 
 	return "index";
     }
