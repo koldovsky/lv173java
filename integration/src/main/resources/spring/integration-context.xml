@@ -26,8 +26,6 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="ordinaryMessage" class="org.springframework.mail.SimpleMailMessage">
-	<property name="from" value="Real Esate Development Platform"/>
-	</bean>
+	
 
 </beans>

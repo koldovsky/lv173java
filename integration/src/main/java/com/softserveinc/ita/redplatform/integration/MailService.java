@@ -21,14 +21,10 @@ public class MailService {
     private MailSender mailSender;
 
     /**
-     * Get ordinary message bean.
-     */
-    @Autowired
-    private SimpleMailMessage ordinaryMessage;
-
-    /**
      * Message sending with preconstructed FROM field.
      * 
+     * @param from
+     *            From string
      * @param to
      *            Mail recipient e-mail
      * @param subject
@@ -36,22 +32,26 @@ public class MailService {
      * @param body
      *            Main body of a letter
      */
-    public final void sendMessage(final String to, final String subject, 
-	    final String body) {
-	ordinaryMessage.setTo(to);
-	ordinaryMessage.setSubject(subject);
-	ordinaryMessage.setText(body);
+    public final void sendMessage(final String from, final String to, 
+	    final String subject, final String body) {
+	SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+	simpleMailMessage.setFrom(from);
+	simpleMailMessage.setTo(to);
+	simpleMailMessage.setSubject(subject);
+	simpleMailMessage.setText(body);
 
-	mailSender.send(ordinaryMessage);
+	mailSender.send(simpleMailMessage);
     }
-    
+
     /**
      * Send preconstructed email.
-     * @param simpleMessage Simple Message preconstructed by developer
+     * 
+     * @param simpleMessage
+     *            Simple Message preconstructed by developer
      */
     public final void sendMessage(final SimpleMailMessage simpleMessage) {
-	
+
 	mailSender.send(simpleMessage);
     }
-    
+
 }
