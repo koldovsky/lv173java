@@ -26,7 +26,7 @@ public class CustomerUserDTO {
 
   /** individual tax number. */
   @Column(name = "individualTaxNumber")
-    private long individualTaxNumber;
+    private Integer individualTaxNumber;
 
   public String getFirstName() {
     return firstName;
@@ -60,11 +60,11 @@ public class CustomerUserDTO {
     this.passport = passport;
   }
 
-  public long getIndividualTaxNumber() {
+  public Integer getIndividualTaxNumber() {
     return individualTaxNumber;
   }
 
-  public void setIndividualTaxNumber(long individualTaxNumber) {
+  public void setIndividualTaxNumber(Integer individualTaxNumber) {
     this.individualTaxNumber = individualTaxNumber;
   }
     
