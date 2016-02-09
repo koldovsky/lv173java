@@ -1,6 +1,8 @@
 package com.softserveinc.ita.redplatform.persistence.dao;
 
 
+import java.util.List;
+
 import com.softserveinc.ita.redplatform.common.entity.User;
 
 /**
@@ -16,5 +18,11 @@ public interface UserDao extends GenericDao<User, Long> {
      * @return User
      */
     User findUserByEmail(String email);
-
+    
+    /**
+     * find all users.
+     * 
+     * @return List<User>
+     */
+    List<User> findAll();
 }
