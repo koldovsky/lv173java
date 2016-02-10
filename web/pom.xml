@@ -1,123 +1,102 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
-	http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>com.softserveinc.ita</groupId>
-		<artifactId>redplatform</artifactId>
-		<version>1.0-SNAPSHOT</version>
-	</parent>
+	 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+			     http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.softserveinc.ita</groupId>
+    <artifactId>redplatform</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
 
+  <artifactId>web</artifactId>
+  <name>web</name>
+  <packaging>war</packaging>
 
-	<properties>
-		<jstl.version>1.2</jstl.version>
-	</properties>
+  <properties>
+    <jackson.version>2.7.1</jackson.version>
+    <spring-security.version>4.0.3.RELEASE</spring-security.version>
+  </properties>
 
-	<artifactId>web</artifactId>
-	<version>1.0-SNAPSHOT</version>
-	<name>web</name>
-	<packaging>war</packaging>
+  <build>
+    <finalName>REDplatform</finalName>
+    <plugins>
+      <plugin>
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-eclipse-plugin</artifactId>
+	<version>3.3.9</version>
+	<configuration>
+	  <downloadSources>true</downloadSources>
+	  <downloadJavadocs>true</downloadJavadocs>
+	  <wtpversion>2.0</wtpversion>
+	  <wtpContextName>REDplatform</wtpContextName>
+	</configuration>
+      </plugin>
+    </plugins>
+  </build>
 
-	<build>
-	<finalName>REDplatform</finalName>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.3</version>
-				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
-				</configuration>
-			</plugin>
+  <dependencies>
+    <dependency>
+      <groupId>com.softserveinc.ita</groupId>
+      <artifactId>common</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-eclipse-plugin</artifactId>
-				<version>2.9</version>
-				<configuration>
-					<downloadSources>true</downloadSources>
-					<downloadJavadocs>true</downloadJavadocs>
-					<wtpversion>2.0</wtpversion>
-					<wtpContextName>REDplatform</wtpContextName>
-				</configuration>
-			</plugin>
+    <dependency>
+      <groupId>com.softserveinc.ita</groupId>
+      <artifactId>business</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
 
-		</plugins>
-	</build>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webmvc</artifactId>
+    </dependency>
 
-	<dependencies>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>3.1.0</version>
+    </dependency>
 
-		<!-- common module -->
-		<dependency>
-			<groupId>com.softserveinc.ita</groupId>
-			<artifactId>common</artifactId>
-			<version>1.0-SNAPSHOT</version>
-		</dependency>
+    <!-- Need this for json to/from object -->
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
+      <version>${jackson.version}</version>
+    </dependency>
 
-		<!-- business module -->
-		<dependency>
-			<groupId>com.softserveinc.ita</groupId>
-			<artifactId>business</artifactId>
-			<version>1.0-SNAPSHOT</version>
-		</dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>${jackson.version}</version>
+    </dependency>
 
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
-		</dependency>
+    <!-- Spring Security -->
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-web</artifactId>
+      <version>${spring-security.version}</version>
+    </dependency>
 
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>3.1.0</version>
-		</dependency>
-	
-		<!-- Need this for json to/from object -->
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-core</artifactId>
-			<version>2.6.3</version>
-		</dependency>
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-config</artifactId>
+      <version>${spring-security.version}</version>
+    </dependency>
 
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-			<version>2.6.3</version>
-		</dependency>
-		
-		<!-- Spring Security -->
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-web</artifactId>
-			<version>3.2.3.RELEASE</version>
-		</dependency>
+    <!-- Spring Security JSP Taglib -->
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-taglibs</artifactId>
+      <version>${spring-security.version}</version>
+    </dependency>
 
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-config</artifactId>
-			<version>3.2.3.RELEASE</version>
-		</dependency>
+    <!-- jstl for jsp page -->
+    <dependency>
+      <groupId>jstl</groupId>
+      <artifactId>jstl</artifactId>
+      <version>1.2</version>
+    </dependency>
 
-		<!-- Spring Security JSP Taglib -->
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-taglibs</artifactId>
-			<version>3.2.3.RELEASE</version>
-		</dependency>
-
-		<!-- jstl for jsp page -->
-		<dependency>
-			<groupId>jstl</groupId>
-			<artifactId>jstl</artifactId>
-			<version>1.2</version>
-		</dependency>
-
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.30</version>
-		</dependency>
-		
-	</dependencies>
+  </dependencies>
 </project>
