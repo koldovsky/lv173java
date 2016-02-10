@@ -11,10 +11,6 @@ public class AdminUserDTO {
      * The login(and email at the same time) of Admin User.
      */
     private String email;
-    /**
-     * Password of the user.
-     */
-    private String password;
 
     /**
      * Default constructor.
@@ -30,12 +26,5 @@ public class AdminUserDTO {
 	this.email = newEmail;
     }
 
-    public final String getPassword() {
-	return password;
-    }
-
-    public final void setPassword(final String newPassword) {
-	this.password = newPassword;
-    }
 
 }
