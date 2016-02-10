@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.softserveinc.ita</groupId>
@@ -6,6 +6,7 @@
   <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>RealEstateDevelopmentPlatform</name>
+  
   <modules>
     <module>web</module>
     <module>business</module>
@@ -15,65 +16,65 @@
     <module>logging</module>
   </modules>
 
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    
+    <java.version>1.7</java.version>
+  </properties>
+
+  
   <build>
+    
     <plugins>
-<plugin>
-    <groupId>org.apache.tomcat.maven</groupId>
-    <artifactId>tomcat7-maven-plugin</artifactId>
-    <version>2.0</version>
-    <configuration>
-       <url>http://127.0.0.1:8080/manager/text</url>
-       <warFile>/home/shebin/Maven Folder/MavenWeb/target/MavenWeb.war</warFile>
-   <server>TomcatServer</server>
-       <path>/MavenWeb</path>
-   <username>tomcat</username>
-       <password>tomcat</password>
-    </configuration>
-</plugin>
+      
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.3</version>
+        <version>3.5</version>
         <configuration>
-          <source>1.7</source>
-          <target>1.7</target>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
         </configuration>
       </plugin>
+      
       <!--checkstyle -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-checkstyle-plugin</artifactId>
-				<version>2.17</version>
-				<executions>
-					<execution>
-						<id>validate</id>
-						<phase>validate</phase>
-						<configuration>
-							<configLocation>build-tools/checkstyle.xml</configLocation>
-							<encoding>UTF-8</encoding>
-							<consoleOutput>true</consoleOutput>
-							<failsOnError>true</failsOnError>
-							<failOnViolation>true</failOnViolation>
-							<violationSeverity>warning</violationSeverity>
-						</configuration>
-						<goals>
-							<goal>check</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
+      <plugin>
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-checkstyle-plugin</artifactId>
+	<version>2.17</version>
+	<executions>
+	  <execution>
+	    <id>validate</id>
+	    <phase>validate</phase>
+	    <configuration>
+	      <configLocation>build-tools/checkstyle.xml</configLocation>
+	      <encoding>UTF-8</encoding>
+	      <consoleOutput>true</consoleOutput>
+	      <failsOnError>true</failsOnError>
+	      <failOnViolation>true</failOnViolation>
+	      <violationSeverity>warning</violationSeverity>
+	    </configuration>
+	    <goals>
+	      <goal>check</goal>
+	    </goals>
+	  </execution>
+	</executions>
+      </plugin>
+      
     </plugins>
+    
   </build>
+
   <!-- Srping BOM -->
-  	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>org.springframework</groupId>
-				<artifactId>spring-framework-bom</artifactId>
-				<type>pom</type>
-				<version>4.2.2.RELEASE</version>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+	<groupId>org.springframework</groupId>
+	<artifactId>spring-framework-bom</artifactId>
+	<type>pom</type>
+	<version>4.2.4.RELEASE</version>
+	<scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
 </project>

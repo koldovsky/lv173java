@@ -2,65 +2,49 @@
 <project
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>com.softserveinc.ita</groupId>
-		<artifactId>redplatform</artifactId>
-		<version>1.0-SNAPSHOT</version>
-	</parent>
-	<groupId>com.softserveinc.ita</groupId>
-	<artifactId>business</artifactId>
-	<version>1.0-SNAPSHOT</version>
-	<name>business</name>
-	<url>http://maven.apache.org</url>
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
-	<dependencies>
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.softserveinc.ita</groupId>
+    <artifactId>redplatform</artifactId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
 
-		<!-- integration module -->
-		<dependency>
-			<groupId>com.softserveinc.ita</groupId>
-			<artifactId>integration</artifactId>
-			<version>1.0-SNAPSHOT</version>
-		</dependency>
+  <artifactId>business</artifactId>
+  <name>business</name>
 
-		<!-- persistence module -->
-		<dependency>
-			<groupId>com.softserveinc.ita</groupId>
-			<artifactId>persistence</artifactId>
-			<version>1.0-SNAPSHOT</version>
-		</dependency>
+  <dependencies>
+    <dependency>
+      <groupId>com.softserveinc.ita</groupId>
+      <artifactId>integration</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
 
-		<!-- common module -->
-		<dependency>
-			<groupId>com.softserveinc.ita</groupId>
-			<artifactId>common</artifactId>
-			<version>1.0-SNAPSHOT</version>
-		</dependency>
-		<!-- spring beans -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-beans</artifactId>
-		</dependency>
-		<!-- spring context -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-		</dependency>
+    <dependency>
+      <groupId>com.softserveinc.ita</groupId>
+      <artifactId>persistence</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
 
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>3.0-alpha-1</version>
-		</dependency>
+    <dependency>
+      <groupId>com.softserveinc.ita</groupId>
+      <artifactId>common</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
 
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-			<version>3.4</version>
-		</dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-beans</artifactId>
+    </dependency>
 
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+    </dependency>
 
-	</dependencies>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>3.4</version>
+    </dependency>
+  </dependencies>
 </project>
