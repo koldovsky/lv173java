@@ -28,7 +28,7 @@ public abstract class JPAGenericDao<E, N extends Number>
     /**
      * Actual type of arguments.
      */
-    protected Class<E> entityClass;
+    private Class<E> entityClass;
 
    
     /**
@@ -36,7 +36,7 @@ public abstract class JPAGenericDao<E, N extends Number>
      * entity instances, and to query over entities.
      */
     @PersistenceContext
-    protected EntityManager entityManager;
+    private EntityManager entityManager;
     
     /**
      * Single public constructor.
@@ -77,4 +77,21 @@ public abstract class JPAGenericDao<E, N extends Number>
 		.getResultList();
     }
 
+    public final Class<E> getEntityClass() {
+        return entityClass;
+    }
+
+    public final void setEntityClass(final Class<E> newEntityClass) {
+        this.entityClass = newEntityClass;
+    }
+
+    public final EntityManager getEntityManager() {
+        return entityManager;
+    }
+
+    public final void setEntityManager(final EntityManager newEntityManager) {
+        this.entityManager = newEntityManager;
+    }
+    
+    
 }

@@ -39,15 +39,13 @@ public class UserFilter implements Filter {
     public final void doFilter(final ServletRequest req, 
 	    final ServletResponse res, final FilterChain chain)
 	    throws IOException, ServletException {
-	
 	String email = (String) SecurityContextHolder.getContext()
                  .getAuthentication().getPrincipal();
 	User user;
-	try{
+	try {
 	    user = (User) userService.loadUserByEmail(email);
 	    SecurityContext.setCurrentUser(user);
-	}
-	catch(NullPointerException e) {
+	} catch (NullPointerException e) {
 		SecurityContext.setCurrentUser(null);
 	}
 

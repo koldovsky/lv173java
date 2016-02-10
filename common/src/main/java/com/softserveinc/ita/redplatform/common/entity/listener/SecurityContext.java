@@ -33,4 +33,12 @@ public final class SecurityContext {
     public static void setCurrentUser(final User user) {
 	currentUser.set(user);
     }
+    /**
+     * Private Constructor.
+     * 
+     * all members are static.
+     * no need to create
+     * example of the class.
+     */
+    private SecurityContext() { }
 }

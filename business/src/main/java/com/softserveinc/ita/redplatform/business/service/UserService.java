@@ -40,4 +40,12 @@ public class UserService {
 	return userDao.findAll();
     }
     
+    /**
+     * load all users dealing with company.
+     * @param companyName company name
+     * @return List<User>
+     */
+    public final List<User> loadUserByCompany(final String companyName) {
+	return userDao.findUsersByCompany(companyName);
+    }
 }

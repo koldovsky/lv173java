@@ -21,8 +21,14 @@ public interface UserDao extends GenericDao<User, Long> {
     
     /**
      * find all users.
-     * 
      * @return List<User>
      */
     List<User> findAll();
+    
+    /**
+     * find user by company.
+     * @param company user companyName
+     * @return User
+     */
+    List<User> findUsersByCompany(String company);
 }

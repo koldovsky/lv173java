@@ -13,7 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToOne;
 
-import com.softserveinc.ita.redplatform.common.entity.listener.BaseEntityListener;
+import com.softserveinc.ita.redplatform.common.entity
+	.listener.BaseEntityListener;
 
 /**
  * Class that represents Base Entity.

@@ -11,6 +11,7 @@ import com.softserveinc.ita.redplatform.persistence.dao.CustomerUserDao;
  * @author Roman Ivaniv
  */
 @Repository
-public class JPACustomerUserDao extends JPAGenericDao<CustomerUser, Long> implements CustomerUserDao{
+public class JPACustomerUserDao extends JPAGenericDao<CustomerUser, Long>
+	implements CustomerUserDao {
 
 }

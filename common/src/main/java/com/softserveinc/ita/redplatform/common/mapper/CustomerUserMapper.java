@@ -9,30 +9,32 @@ import com.softserveinc.ita.redplatform.common.entity.CustomerUser;
  * @author Ivaniv Roman.
  * 
  */
-public class CustomerUserMapper implements GenericMapper<CustomerUser, CustomerUserDTO> {
+public class CustomerUserMapper implements 
+	GenericMapper<CustomerUser, CustomerUserDTO> {
 
-  @Override
-  public CustomerUserDTO toDto(final CustomerUser customerUser) {
-    CustomerUserDTO customerUserDTO = new CustomerUserDTO();
-    customerUserDTO.setFirstName(customerUser.getFirstName());
-    customerUserDTO.setLastName(customerUser.getLastName());
-    customerUserDTO.setPhone(customerUser.getPhone());
-    customerUserDTO.setPassport(customerUser.getPassport());
-    customerUserDTO.setIndividualTaxNumber(customerUser.getIndividualTaxNumber());
+    @Override
+    public final CustomerUserDTO toDto(final CustomerUser customerUser) {
+	CustomerUserDTO customerUserDTO = new CustomerUserDTO();
+	customerUserDTO.setFirstName(customerUser.getFirstName());
+	customerUserDTO.setLastName(customerUser.getLastName());
+	customerUserDTO.setPhone(customerUser.getPhone());
+	customerUserDTO.setPassport(customerUser.getPassport());
+	customerUserDTO.setIndividualTaxNumber(
+		customerUser.getIndividualTaxNumber());
+	return customerUserDTO;
+    }
 
-    return customerUserDTO;
-  }
+    @Override
+    public final CustomerUser toEntity(final CustomerUserDTO customerUserDTO) {
+	CustomerUser customerUser = new CustomerUser();
+	customerUser.setFirstName(customerUserDTO.getFirstName());
+	customerUser.setLastName(customerUserDTO.getLastName());
+	customerUser.setPhone(customerUserDTO.getPhone());
+	customerUser.setPassport(customerUserDTO.getPassport());
+	customerUser.setIndividualTaxNumber(
+		customerUserDTO.getIndividualTaxNumber());
 
-  @Override
-  public CustomerUser toEntity(final CustomerUserDTO customerUserDTO) {
-    CustomerUser customerUser = new CustomerUser();
-    customerUser.setFirstName(customerUserDTO.getFirstName());
-    customerUser.setLastName(customerUserDTO.getLastName());
-    customerUser.setPhone(customerUserDTO.getPhone());
-    customerUser.setPassport(customerUserDTO.getPassport());
-    customerUser.setIndividualTaxNumber(customerUserDTO.getIndividualTaxNumber());
-
-    return customerUser;
-  }
+	return customerUser;
+    }
 
 }
