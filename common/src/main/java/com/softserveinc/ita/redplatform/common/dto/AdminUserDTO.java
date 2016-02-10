@@ -12,12 +12,6 @@ public class AdminUserDTO {
      */
     private String email;
 
-    /**
-     * Default constructor.
-     */
-    public AdminUserDTO() {
-    }
-
     public final String getEmail() {
 	return email;
     }
