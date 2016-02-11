@@ -46,7 +46,7 @@ public class AdminUserService {
      * @param adminUserDTO the admin user dto
      */
     @Transactional
-    public final void create(final AdminUserDTO adminUserDTO) {
+    public void create(final AdminUserDTO adminUserDTO) {
 	AdminUser adminUser = adminUserMapper.toEntity(adminUserDTO);
 	adminUser.setPassword(passwordGenerator.generatePassword(length));
 	SimpleMailMessage simpleMessage = new SimpleMailMessage();
