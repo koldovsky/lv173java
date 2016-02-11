@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import com.softserveinc.ita.redplatform.common.entity.User;
 import com.softserveinc.ita.redplatform.persistence.dao.UserDao;
 
@@ -38,7 +39,7 @@ public class UserService {
      * 
      * @return List<User>
      */
-    public final List<User> loadAllUsers() {
+    public List<User> loadAllUsers() {
 	return userDao.findAll();
     }
     
@@ -47,7 +48,7 @@ public class UserService {
      * @param companyName company name
      * @return List<User>
      */
-    public final List<User> loadUserByCompany(final String companyName) {
+    public List<User> loadUserByCompany(final String companyName) {
 	return userDao.findUsersByCompany(companyName);
     }
 }
