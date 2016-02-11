@@ -9,11 +9,14 @@
 <title>List of users</title>
 <!-- Custom CSS -->
 <link href="resources/css/users.css" rel="stylesheet">
+<link href="resources/jquerydatatables/css/jquery.dataTables.css"
+	rel="stylesheet">
 </head>
 <body>
 	<jsp:include page="utils/navbar.jsp"></jsp:include>
 	<div class="page">
-		<table id="table" class="display" cellspacing="0" width="100%">
+		<h2 class="text-center">List of Users</h2>
+		<table id="table" class="display" cellspacing="0" width="90%">
 			<thead>
 				<tr>
 					<th>Email</th>
