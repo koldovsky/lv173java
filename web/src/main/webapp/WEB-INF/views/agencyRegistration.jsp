@@ -6,7 +6,7 @@
 <head>
 <jsp:include page="utils/jspheader.jsp" />
 <script
-	src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js">
+	src="resources/jquery.validate.min.js">
 </script>
 <title>Agency registration</title>
 <link rel="stylesheet"
