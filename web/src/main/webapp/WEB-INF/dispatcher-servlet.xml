@@ -13,18 +13,19 @@
 		base-package="com.softserveinc.ita.redplatform.web.controller" />
 
 	<import resource="classpath*:**/spring/*context.xml" />
-	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-	  <property name="locations">
-	    <value>classpath*:**/properties/*properties</value>
-	  </property>
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<value>classpath*:**/properties/*properties</value>
+		</property>
 	</bean>
-	
+
 
 
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix">
-			<value>/WEB-INF/views/jsp/</value>
+			<value>/WEB-INF/views/</value>
 		</property>
 		<property name="suffix">
 			<value>.jsp</value>

@@ -4,11 +4,11 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<jsp:include page="utils/jspheader.jsp"/>
 		<title>List of users</title>
 	</head>
 	<body>
-		<jsp:include page = "navbar.jsp"></jsp:include>
+		<jsp:include page = "utils/navbar.jsp"></jsp:include>
 		<h1>User List</h1>
 		<table>
 			<c:forEach items="${list}" var="item">
@@ -17,6 +17,6 @@
 			</tr>
 			</c:forEach>
 		</table>
-		<jsp:include page = "footer.jsp"></jsp:include>
+		<jsp:include page = "utils/footer.jsp"></jsp:include>
 	</body>
 </html>
