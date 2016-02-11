@@ -36,7 +36,7 @@ public class RealEstateAgencyService {
      * create realEstateAgency.
      * @param realEstateAgencyDTO realEstateAgencyDTO
      */
-    public final void create(final RealEstateAgencyDTO realEstateAgencyDTO) {
+    public void create(final RealEstateAgencyDTO realEstateAgencyDTO) {
 		
 	RealEstateAgency realEstateAgency = realEstateAgencyMapper
 					.toEntity(realEstateAgencyDTO);

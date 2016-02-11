@@ -38,7 +38,7 @@ public class RealEstateAgency extends BaseEntity {
 	private Address address;
 	
 	/** The main office. */
-	@ManyToOne()
+	@ManyToOne
 	private RealEstateAgency mainOffice;
 	
 	/** The branches. */

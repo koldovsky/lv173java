@@ -1,4 +1,4 @@
-package com.softserveinc.ita.redplatform.web.controller;
+package com.softserveinc.ita.redplatform.web.filters;
 
 import java.io.IOException;
 
@@ -8,13 +8,11 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-
 import com.softserveinc.ita.redplatform.business.service.UserService;
-import com.softserveinc.ita.redplatform.common.entity.User;
+
 
 /**
  * Filter that set current user.
@@ -22,8 +20,12 @@ import com.softserveinc.ita.redplatform.common.entity.User;
  * @author oleh
  *
  */
-@WebFilter(filterName = "UserFilter")
 public class UserFilter implements Filter {
+    
+    /**
+     * Logger.
+     */
+    private static final Logger LOGGER = Logger.getLogger(UserFilter.class);
 
     /**
      * userService.
@@ -38,12 +40,7 @@ public class UserFilter implements Filter {
     public final void doFilter(final ServletRequest req, 
 	    final ServletResponse res, final FilterChain chain)
 	    throws IOException, ServletException {
-	String email = (String) SecurityContextHolder.getContext()
-                 .getAuthentication().getPrincipal();
-	User user;
-
 	
-
 	chain.doFilter(req, res);
 
     }
@@ -52,8 +49,8 @@ public class UserFilter implements Filter {
      * init filter.
      */
     @Override
-    public void init(final FilterConfig arg0) throws ServletException {
-	// Do nothing
+    public final void init(final FilterConfig arg0) throws ServletException {
+	LOGGER.info("userFilter init");
     }
 
     /**
