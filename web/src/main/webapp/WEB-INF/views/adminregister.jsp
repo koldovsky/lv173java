@@ -6,7 +6,7 @@
 <jsp:include page="utils/jspheader.jsp" />
 <title>System Administrator registration</title>
 <script
-	src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js">
+	src="resources/jquery.validate.min.js">
 	
 </script>
 <script src="resources/js/adminregister.js"></script>
