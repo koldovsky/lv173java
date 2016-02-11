@@ -52,6 +52,7 @@
 	      <failsOnError>true</failsOnError>
 	      <failOnViolation>true</failOnViolation>
 	      <violationSeverity>warning</violationSeverity>
+              <suppressionsLocation>build-tools/suppressions.xml</suppressionsLocation>
 	    </configuration>
 	    <goals>
 	      <goal>check</goal>
