@@ -22,7 +22,7 @@ $(document).ready(
 
 				$.validator.addMethod("regexCountry", function(value,
 						element) {
-					return /^[a-zA-Z.\-, ]+$/.test(value);
+					return /^[a-zA-Z.\-,\' ]+$/.test(value);
 				}, "Invalid country");
 
 				$.validator.addMethod("regexPostalCode", function(value,
@@ -52,7 +52,7 @@ $(document).ready(
 									description : {
 										required : true,
 										minlength : 4,
-										maxlength : 200,
+										maxlength : 400,
 										regexName : true
 									},
 									phoneNumber : {
@@ -102,7 +102,7 @@ $(document).ready(
 									description : {
 										required : "Please enter description",
 										minlength : "Description must be at least 4 characters long",
-										maxlength : "Description must be maximum 200 characters long"
+										maxlength : "Description must be maximum 400 characters long"
 									},
 									phoneNumber : {
 										required : "Please enter phone number",
@@ -112,19 +112,20 @@ $(document).ready(
 										required : "Please enter country"
 									},
 									region : {
-										required : "Please enter region"
+										required : "Please enter region",
+										regexCountry: "Invalid region"
 									},
 									postalCode : {
 										required : "Please enter postal code"
 									},
 									locality : {
-										required : "Please enter city or village"
+										required : "Please enter city or village",
+										regexCountry : "Invalid city name"
 									},
 									additionalInfo : {
 										required : "Please enter address"
 									}
 									}
-
 								});
 
 			function searchViaAjax() {
@@ -163,8 +164,10 @@ $(document).ready(
 			
 				
 			$("#register-form").submit(function(event) {
-				event.preventDefault();
-				searchViaAjax();
+					event.preventDefault();
+					searchViaAjax();
+				
+				
 			});
 	});
 
