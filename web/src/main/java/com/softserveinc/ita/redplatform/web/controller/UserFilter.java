@@ -15,7 +15,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.softserveinc.ita.redplatform.business.service.UserService;
 import com.softserveinc.ita.redplatform.common.entity.User;
-import com.softserveinc.ita.redplatform.common.entity.listener.SecurityContext;
 
 /**
  * Filter that set current user.
@@ -42,12 +41,6 @@ public class UserFilter implements Filter {
 	String email = (String) SecurityContextHolder.getContext()
                  .getAuthentication().getPrincipal();
 	User user;
-	try {
-	    user = (User) userService.loadUserByEmail(email);
-	    SecurityContext.setCurrentUser(user);
-	} catch (NullPointerException e) {
-		SecurityContext.setCurrentUser(null);
-	}
 
 	
 
@@ -68,7 +61,6 @@ public class UserFilter implements Filter {
      */
     @Override
     public final void destroy() {
-	SecurityContext.setCurrentUser(null);
     }
 
 }

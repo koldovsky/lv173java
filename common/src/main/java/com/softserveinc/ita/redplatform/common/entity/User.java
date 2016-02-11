@@ -30,7 +30,6 @@ public abstract class User extends BaseEntity {
 
     /**
      * Sets the email.
-     *
      * @param newEmail the new email
      */
     public final void setEmail(final String newEmail) {
@@ -55,3 +54,4 @@ public abstract class User extends BaseEntity {
 	password = newPassword;
     }
 }
+

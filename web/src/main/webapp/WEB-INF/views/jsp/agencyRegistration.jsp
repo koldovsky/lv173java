@@ -1,15 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Agency registration</title>
-<link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css">
+
 <link rel="stylesheet"
-	href="resources/bootstrap/css/bootstrap-theme.min.css">
+	href="resources/bootstrap/css/bootstrap-theme.min.css" >
+	<link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="resources/css/agencyRegistration.css">
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.js"></script>
+ <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.js"></script> 
 <script
 	src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js">
 	
@@ -17,7 +18,6 @@
 
 <script
 	src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.2/js/bootstrap.min.js">
-	
 </script>
 <script src="resources/js/agencyRegistration.js"></script>
 
@@ -25,11 +25,18 @@
 </head>
 <body>
 	<jsp:include page="navbar.jsp"></jsp:include>
+	
 	<div class="container">
 		<h1 class="well">Registration for Real Estate Agency</h1>
+		<div id="success" class="alert alert-success container" role="alert">
+		Real estate agency has been added to the list successfully.
+	</div>
+	<div id="error" class="alert alert-danger container" role="alert">
+		Failed to add Real estate agency.
+	</div>
 		<div class="col-lg-12">
 			<div class="row">
-				<form name="register-form" id="register-form" action="">
+				<form name="register-form" id="register-form" method="post" action="">
 					<div class="col-sm-12">
 
 						<!-- Name of Agency-->

@@ -18,7 +18,7 @@ import javax.persistence.Table;
 public class Installment extends BaseEntity {
 
     /**
-    *
+    * Id for serialization.
     */
     private static final long serialVersionUID = -5028225244571023001L;
 

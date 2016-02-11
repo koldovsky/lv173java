@@ -21,7 +21,7 @@ import javax.persistence.Table;
 public class Order extends BaseEntity {
 
     /**
-     * 
+     * ID for sirialization.
      */
     private static final long serialVersionUID = 4135117256506949773L;
 

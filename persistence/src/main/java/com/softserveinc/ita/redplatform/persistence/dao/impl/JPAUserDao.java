@@ -14,7 +14,7 @@ import com.softserveinc.ita.redplatform.persistence.dao.UserDao;
  * @author Hryhorii Somyk
  *
  */
-@Repository
+@Repository("userDao")
 public class JPAUserDao extends JPAGenericDao<User, Long> implements UserDao {
 
 	/**
@@ -85,3 +85,4 @@ public class JPAUserDao extends JPAGenericDao<User, Long> implements UserDao {
 		return list;
 	}
 }
+

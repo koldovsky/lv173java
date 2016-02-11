@@ -20,8 +20,6 @@ import com.softserveinc.ita.redplatform.persistence.dao.GenericDao;
  * @author Oleh Khimka
  *            
  */
-
-
 public abstract class JPAGenericDao<E, N extends Number> 
 				implements GenericDao<E, N> {
 
@@ -92,6 +90,5 @@ public abstract class JPAGenericDao<E, N extends Number>
     public final void setEntityManager(final EntityManager newEntityManager) {
         this.entityManager = newEntityManager;
     }
-    
     
 }

@@ -12,27 +12,17 @@ public final class SecurityContext {
     /**
      * ThreadLocal current user.
      */
-    private static ThreadLocal<User> currentUser = new ThreadLocal<User>();
+    public static final ThreadLocal<User> CURRENT_USER = 
+	    				new ThreadLocal<User>();
 
     /**
-     * get current filter.
-     * @return user
+     * Private Constructor.
+     * 
+     * all members are static.
+     * no need to create
+     * example of the class.
      */
-    public static User getCurrentUser() {
-	User user = currentUser.get();
-	if (user == null) {
-	    throw new IllegalStateException("No user is currently signed in");
-	}
-	return user;
-    }
-    
-    /**
-     * set user.
-     * @param user user
-     */
-    public static void setCurrentUser(final User user) {
-	currentUser.set(user);
-    }
+
     /**
      * Private Constructor.
      * 
@@ -41,4 +31,5 @@ public final class SecurityContext {
      * example of the class.
      */
     private SecurityContext() { }
+
 }

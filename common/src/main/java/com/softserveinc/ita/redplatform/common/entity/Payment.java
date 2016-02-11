@@ -19,7 +19,7 @@ import javax.persistence.Table;
 public class Payment extends BaseEntity {
 
     /**
-     * 
+     * Id for serialization.
      */
     private static final long serialVersionUID = -3035724760433561273L;
 

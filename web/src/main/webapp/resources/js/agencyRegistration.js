@@ -1,41 +1,45 @@
 // When the browser is ready...
-$(document).ready(function() {
-		$("#navMenu").removeClass("navbar-fixed-top");
-			$.validator
-					.addMethod(
-							"regexName",
-							function(value, element) {
-								return /^(?=.*[a-z])[a-zA-Z0-9 ]+[ !.@&,-]?[ a-zA-Z0-9!.@&,-]+$/
-										.test(value);
-							}, "Invalid symbol!");
+$(document).ready(
+			function() {
+				$("#navMenu").removeClass("navbar-fixed-top");
+				$("#success").hide();
+				$("#error").hide();
+				$.validator
+						.addMethod(
+								"regexName",
+								function(value, element) {
+									return /^(?=.*[a-z])[a-zA-Z0-9 ]+[ !.@&,-]?[ a-zA-Z0-9!.@&,-]+$/
+											.test(value);
+								}, "Invalid symbol!");
 
-			$.validator
-					.addMethod(
-							"regexPhoneNumber",
-							function(value, element) {
-								return /^[+]?\d{2}[\s-]?\d{3}[\s-]?\d{2}[\s-]?\d{2}[\s-]?\d{3}/
-										.test(value);
-							}, "Length should be 12 digits!");
+				$.validator
+						.addMethod(
+								"regexPhoneNumber",
+								function(value, element) {
+									return /^[+]?\d{2}[\s-]?\d{3}[\s-]?\d{2}[\s-]?\d{2}[\s-]?\d{3}/
+											.test(value);
+								}, "Length should be 12 digits!");
 
-			$.validator.addMethod("regexCountry", function(value,
-					element) {
-				return /^[a-zA-Z.\-, ]+$/.test(value);
-			}, "Invalid country");
+				$.validator.addMethod("regexCountry", function(value,
+						element) {
+					return /^[a-zA-Z.\-, ]+$/.test(value);
+				}, "Invalid country");
 
-			$.validator.addMethod("regexPostalCode", function(value,
-					element) {
-				return /^(?=.*[0-9])[a-zA-Z0-9]+[ -]?[a-zA-Z0-9]+$/.test(value);
-			}, "Invalid postal code");
-			
-			$.validator.addMethod("regexAdditional", function(value,
-					element) {
-				return /^[a-zA-Z0-9.\-,/ ]+$/.test(value);
-			}, "Invalid address");
+				$.validator.addMethod("regexPostalCode", function(value,
+						element) {
+					return /^(?=.*[0-9])[a-zA-Z0-9]+[ -]?[a-zA-Z0-9]+$/
+							.test(value);
+				}, "Invalid postal code");
 
-			// Setup form validation on the #register-form element
-			$("#register-form")
-					.validate(
-							{
+				$.validator.addMethod("regexAdditional", function(value,
+						element) {
+					return /^[a-zA-Z0-9.\-,/ ]+$/.test(value);
+				}, "Invalid address");
+
+				// Setup form validation on the #register-form element
+				$("#register-form")
+						.validate(
+								{
 
 								// Specify the validation rules
 								rules : {
@@ -75,7 +79,7 @@ $(document).ready(function() {
 										regexPostalCode : true,
 										minlength : 3,
 										maxlength : 10
-										
+
 									},
 									locality : {
 										required : true,
@@ -85,7 +89,7 @@ $(document).ready(function() {
 									additionalInfo : {
 										required : true,
 										minlength : 2,
-										regexAdditional:true												
+										regexAdditional : true
 									}
 
 								},
@@ -117,45 +121,50 @@ $(document).ready(function() {
 										required : "Please enter city or village"
 									},
 									additionalInfo : {
-										required : "Please enter address"											
+										required : "Please enter address"
 									}
-								}
+									}
 
-							});
+								});
 
-			$("#register-form").submit(function(event) {
-				alert("in submit");
-							var address = {
-									country: $('#country').val(),
-									region: $('#region').val(),
-									postalCode: $('#postalCode').val(),
-									locality: $('#locality').val(),
-									additional: $('#additionalInfo').val()
-								};
+			function searchViaAjax() {
+				
+				var address = {
+					country : $('#country').val(),
+					region : $('#region').val(),
+					postalCode : $('#postalCode').val(),
+					locality : $('#locality').val(),
+					additional : $('#additionalInfo').val()
+				};
 
-								var agency = {
-									name: $('#agencyName').val(),
-									description: $('#description').val(),
-									site: $('#webSite').val(),
-									phone: $('#phoneNumber').val(),
-									address: address
-								};
-								var agency = JSON.stringify(agency);
-								console.log(agency);
-								
-							 $.ajax({
-						           type: "POST",
-						           url: "registerAgency",
-						           contentType: "application/json; charset=utf-8",
-						           data: agency,
-						           success: function(responseData, textStatus, jqXHR) {
-						               alert("data saved")
-						           },
-						           error: function(jqXHR, textStatus, errorThrown) {
-						              alert("error"+" "+errorThrown+" "+textStatus);
-						           }
-						       })
-						});
+				var agency = {
+					name : $('#agencyName').val(),
+					description : $('#description').val(),
+					site : $('#webSite').val(),
+					phone : $('#phoneNumber').val(),
+					address : address
+				};
+
+				$.ajax({
+					type : "POST",
+					url : "registerAgency",
+					contentType : "application/json; charset=utf-8",
+					data : JSON.stringify(agency),
+					success : function(responseData, textStatus, jqXHR) {
+						$('#register-form')[0].reset();
+						$("#success").show();
+					},
+					error : function(jqXHR, textStatus, errorThrown) {
+						$("#error").show();
+					}
+				})
+			}
 			
-
+			
+				
+			$("#register-form").submit(function(event) {
+				event.preventDefault();
+				searchViaAjax();
+			});
 	});
+

@@ -7,6 +7,7 @@ package com.softserveinc.ita.redplatform.common.dto;
  *
  */
 public class AddressDTO {
+    
 	/** The country. */
 	private String country;
 	

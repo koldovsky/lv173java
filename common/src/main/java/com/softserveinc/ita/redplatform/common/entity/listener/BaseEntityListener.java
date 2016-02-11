@@ -8,7 +8,7 @@ import javax.persistence.PreUpdate;
 import com.softserveinc.ita.redplatform.common.entity.BaseEntity;
 
 /**
- * Event listener.
+ * Event listener to insert date and user.
  * @author oleh
  *
  */
@@ -16,21 +16,21 @@ public class BaseEntityListener {
 
     /**
      * method that insert to database createdBy and CreatedDate.
-     * @param entity BaseEntity 
+     * @param entity entity
      */
     @PrePersist
     public final void prePersist(final BaseEntity entity) {
-	entity.setCreatedBy(SecurityContext.getCurrentUser());
+	entity.setCreatedBy(SecurityContext.CURRENT_USER.get());
 	entity.setCreatedDate(new Date());
     }
 
     /**
      * method that insert to database updatedBy and updatedDate.
-     * @param entity BaseEntity
+     * @param entity entity
      */
     @PreUpdate
     public final void preUpdate(final BaseEntity entity) {
-	entity.setUpdatedBy(SecurityContext.getCurrentUser());
+	entity.setUpdatedBy(SecurityContext.CURRENT_USER.get());
 	entity.setUpdatedDate(new Date());
     }
 }
