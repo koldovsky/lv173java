@@ -1,10 +1,13 @@
 package com.softserveinc.ita.redplatform.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import 
     com.softserveinc.ita.redplatform.business.service.RealEstateAgencyService;
@@ -32,7 +35,7 @@ public class AgencyRegistrationController {
      * 
      * @return agencyRegistration view.
      */
-    @RequestMapping(value = "red/registerAgency", method = RequestMethod.GET)
+    @RequestMapping(value = "registerAgency", method = RequestMethod.GET)
     public final String getPage() {
 	return "agencyRegistration";
     }    
@@ -43,11 +46,14 @@ public class AgencyRegistrationController {
      * @param realEstateAgencyDTO realEstateAgencyDTO
      */
     @RequestMapping(value = "registerAgency", method = RequestMethod.POST)
-    public final String registerAgency(
+    @ResponseBody
+    public final ResponseEntity<Void> registerAgency(
 	    @RequestBody final RealEstateAgencyDTO realEstateAgencyDTO) {
-	
+
 	realEstateAgencyService.create(realEstateAgencyDTO);
-	return "index";
+	
+	return new ResponseEntity<Void>(HttpStatus.OK);
     }
+    
 
 }

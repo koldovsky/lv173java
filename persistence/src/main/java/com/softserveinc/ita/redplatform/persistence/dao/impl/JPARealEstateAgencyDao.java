@@ -10,7 +10,7 @@ import com.softserveinc.ita.redplatform.persistence.dao.RealEstateAgencyDao;
  * 
  * @author Oleh Khimka
  */
-@Repository
+@Repository("realEstateAgencyDao")
 public class JPARealEstateAgencyDao 
 				extends JPAGenericDao<RealEstateAgency, Long> 
 	implements RealEstateAgencyDao {

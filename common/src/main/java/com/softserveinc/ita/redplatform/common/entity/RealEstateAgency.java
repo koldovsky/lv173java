@@ -34,11 +34,11 @@ public class RealEstateAgency extends BaseEntity {
 	
 	/** The address of the office. */
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(nullable = false)
+	 @JoinColumn(name = "addressId")
 	private Address address;
 	
 	/** The main office. */
-	@ManyToOne
+	@ManyToOne()
 	private RealEstateAgency mainOffice;
 	
 	/** The branches. */

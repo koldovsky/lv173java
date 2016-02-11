@@ -15,6 +15,7 @@ import com.softserveinc.ita.redplatform.persistence.dao.RealEstateAgencyDao;
  *
  */
 @Service
+@Transactional
 public class RealEstateAgencyService {
     
     /** 
@@ -23,18 +24,20 @@ public class RealEstateAgencyService {
     @Autowired
     private RealEstateAgencyDao realEstateAgencyDao;
     
+
     /**
      * realEstateAgencyMapper for conversion between DTO and entity.
      */
     @Autowired
     private RealEstateAgencyMapper realEstateAgencyMapper;
+    
 
     /**
      * create realEstateAgency.
      * @param realEstateAgencyDTO realEstateAgencyDTO
      */
-    @Transactional
-    public final void create(final RealEstateAgencyDTO realEstateAgencyDTO) {
+    public void create(final RealEstateAgencyDTO realEstateAgencyDTO) {
+		
 	RealEstateAgency realEstateAgency = realEstateAgencyMapper
 					.toEntity(realEstateAgencyDTO);
 	realEstateAgencyDao.save(realEstateAgency);
