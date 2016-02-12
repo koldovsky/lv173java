@@ -149,14 +149,16 @@ $(document).ready(
 				$.ajax({
 					type : "POST",
 					url : "registerAgency",
-					contentType : "application/json; charset=utf-8",
+					contentType : "application/json",
 					data : JSON.stringify(agency),
 					success : function(responseData, textStatus, jqXHR) {
 						$('#register-form')[0].reset();
 						$("#success").show();
+						$("#error").hide();
 					},
 					error : function(jqXHR, textStatus, errorThrown) {
 						$("#error").show();
+						$("#success").hide();
 					}
 				})
 			}
@@ -164,9 +166,10 @@ $(document).ready(
 			
 				
 			$("#register-form").submit(function(event) {
-					event.preventDefault();
+				if($("#register-form").valid()==true){
 					searchViaAjax();
-				
+					return false;
+				}
 				
 			});
 	});
