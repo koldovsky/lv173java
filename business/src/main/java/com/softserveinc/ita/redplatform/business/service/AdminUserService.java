@@ -37,9 +37,6 @@ public class AdminUserService {
     @Autowired
     private PasswordGenerator passwordGenerator;
     
-    /** The length of password. */
-    private final int length = 10; 
-    
     /**
      * Creates the.
      *
@@ -48,7 +45,7 @@ public class AdminUserService {
     @Transactional
     public void create(final AdminUserDTO adminUserDTO) {
 	AdminUser adminUser = adminUserMapper.toEntity(adminUserDTO);
-	adminUser.setPassword(passwordGenerator.generatePassword(length));
+	adminUser.setPassword(passwordGenerator.generatePassword());
 	SimpleMailMessage simpleMessage = new SimpleMailMessage();
 	simpleMessage.setFrom("Me");
 	simpleMessage.setTo(adminUser.getEmail());

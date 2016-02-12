@@ -10,9 +10,8 @@ public interface PasswordGenerator {
      * Method returns password.
      * 
      * @return String password
-     * @param length
      *            Describes the length of password
      */
-    String generatePassword(int length);
+    String generatePassword();
 
 }
