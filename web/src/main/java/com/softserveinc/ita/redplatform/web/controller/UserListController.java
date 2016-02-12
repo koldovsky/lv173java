@@ -58,7 +58,7 @@ public class UserListController {
 					.loadUserByCompany(
 							((RealEstateAdminUser) user)
 							.getAgency().getName()));
-			return "user";
+			return "users";
 		}
 		return "index";
 	}
