@@ -11,7 +11,7 @@ import javax.persistence.InheritanceType;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class User extends BaseEntity {
+public class User extends BaseEntity {
 
     /** The email. */
     private String email;

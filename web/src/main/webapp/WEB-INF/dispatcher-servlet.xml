@@ -31,9 +31,17 @@
 			<value>.jsp</value>
 		</property>
 	</bean>
+	
+	<bean id="conversionService"
+	class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<property name="formatters">
+			<set>
+				<ref bean="realEstateAgencyDTOFormatter" />
+			</set>
+		</property>
+	</bean>
+	<mvc:annotation-driven conversion-service="conversionService" />
 
 	<mvc:resources mapping="/resources/**" location="/resources/" />
-
-	<mvc:annotation-driven />
 
 </beans>

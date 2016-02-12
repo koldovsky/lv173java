@@ -27,6 +27,7 @@ public class RealEstateAgencyMapper
 	    			final RealEstateAgency realEstateAgency) {
 	
 	RealEstateAgencyDTO realEstateAgencyDTO = new RealEstateAgencyDTO();
+	realEstateAgencyDTO.setId(realEstateAgency.getId());
 	realEstateAgencyDTO.setName(realEstateAgency.getName());
 	realEstateAgencyDTO.setDescription(realEstateAgency.getDescription());
 	realEstateAgencyDTO.setPhone(realEstateAgency.getPhone());
@@ -44,6 +45,7 @@ public class RealEstateAgencyMapper
 	    	final RealEstateAgencyDTO realEstateAgencyDTO) {
 	
 	RealEstateAgency realEstateAgency = new RealEstateAgency();
+	realEstateAgency.setId(realEstateAgencyDTO.getId());
 	realEstateAgency.setName(realEstateAgencyDTO.getName());
 	realEstateAgency.setDescription(realEstateAgencyDTO.getDescription());
 	realEstateAgency.setPhone(realEstateAgencyDTO.getPhone());
