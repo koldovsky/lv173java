@@ -12,6 +12,9 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class SimplePassGeneratorImpl implements PasswordGenerator {
+	
+	/** The constant PASS_LENGHT. */
+	private static final int PASS_LENGHT = 10;
 
     /**
      * Secure Random instance created as Spring singleton.
@@ -20,9 +23,8 @@ public class SimplePassGeneratorImpl implements PasswordGenerator {
     private SecureRandom secureRandom;
     
     @Override
-    public final String generatePassword(final int length) {
-
-	return RandomStringUtils.random(length, 0, 0, true,
+    public final String generatePassword() {
+	return RandomStringUtils.random(PASS_LENGHT, 0, 0, true,
 		true, null, secureRandom);
     }
 

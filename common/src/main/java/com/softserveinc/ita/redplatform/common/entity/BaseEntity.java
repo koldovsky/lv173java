@@ -4,7 +4,6 @@ package com.softserveinc.ita.redplatform.common.entity;
 import java.util.Date;
 
 import javax.persistence.Column;
-import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,16 +12,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToOne;
 
-import com.softserveinc.ita
-	.redplatform.common.entity.listener.BaseEntityListener;
-
 /**
  * Class that represents Base Entity.
  *
  * @author Roman Ivaniv
  */
 @MappedSuperclass
-@EntityListeners(BaseEntityListener.class)
 public abstract class BaseEntity {
 
   /**
@@ -30,7 +25,7 @@ public abstract class BaseEntity {
   */
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  private long id;
+  private Long id;
 
   /**
    * One to one mapping.
@@ -135,7 +130,7 @@ public abstract class BaseEntity {
   *
   * @return the Id
   */
-  public final long getId() {
+  public final Long getId() {
     return id;
   }
 
@@ -144,7 +139,7 @@ public abstract class BaseEntity {
   *
   * @param newId to be set
   */
-  public final void setId(final long newId) {
+  public final void setId(final Long newId) {
     this.id = newId;
   }
 

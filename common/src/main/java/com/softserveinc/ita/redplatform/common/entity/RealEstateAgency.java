@@ -5,10 +5,9 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  * The Class RealEstateAgency.
@@ -29,12 +28,10 @@ public class RealEstateAgency extends BaseEntity {
 	private String site;
 	
 	/** The phone number. */
-	@Column(nullable = false)
 	private String phone;
 	
 	/** The address of the office. */
-	@OneToOne(cascade = CascadeType.ALL)
-	 @JoinColumn(name = "addressId")
+	@OneToOne(cascade = CascadeType.MERGE)
 	private Address address;
 	
 	/** The main office. */
