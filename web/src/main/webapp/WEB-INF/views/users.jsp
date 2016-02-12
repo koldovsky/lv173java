@@ -19,14 +19,20 @@
 		<table id="table" class="display" cellspacing="0" width="90%">
 			<thead>
 				<tr>
+					<th>Name</th>
 					<th>Email</th>
+					<th>Phone</th>
 					<th>Created Date</th>
+					<th>Company Name</th>
 				</tr>
 			</thead>
 			<c:forEach items="${list}" var="item">
 				<tr>
+					<td>${item.name}</td>
 					<td>${item.email}</td>
+					<td>${item.phone}</td>
 					<td>${item.createdDate}</td>
+					<td>${item.companyName}</td>
 				</tr>
 			</c:forEach>
 		</table>

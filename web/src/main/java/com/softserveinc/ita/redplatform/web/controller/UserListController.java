@@ -33,7 +33,7 @@ public class UserListController {
      */
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public final String getUserList(final ModelMap model) {
-	model.addAttribute("list", userService.loadAllUsers());
+    model.addAttribute("list", userService.loadAllUsers());
 	return "users";
     }
 

@@ -1,13 +1,15 @@
 package com.softserveinc.ita.redplatform.business.service;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
+import com.softserveinc.ita.redplatform.common.dto.UserDTO;
 import com.softserveinc.ita.redplatform.common.entity.User;
+import com.softserveinc.ita.redplatform.common.mapper.UserMapper;
 import com.softserveinc.ita.redplatform.persistence.dao.UserDao;
 
 /**
@@ -24,13 +26,19 @@ public class UserService {
      */
     @Autowired
     private UserDao userDao;
+    
+    /**
+     * UserMapper.
+     */
+    @Autowired
+    private UserMapper userMapper;
 
     /**
      * load user by email.
      * @param email user email
      * @return User
      */
-    public final User loadUserByEmail(final String email) {
+    public User loadUserByEmail(final String email) {
 	return userDao.findUserByEmail(email);
     }
     
@@ -39,8 +47,12 @@ public class UserService {
      * 
      * @return List<User>
      */
-    public List<User> loadAllUsers() {
-	return userDao.findAll();
+    public List<UserDTO> loadAllUsers() {
+    	List<UserDTO> list = new LinkedList<UserDTO>();
+    	for (User user : userDao.findAll()) {
+    		list.add(userMapper.toDto(user));
+    	}
+    	return list;
     }
     
     /**
@@ -48,7 +60,12 @@ public class UserService {
      * @param companyName company name
      * @return List<User>
      */
-    public List<User> loadUserByCompany(final String companyName) {
-	return userDao.findUsersByCompany(companyName);
+    public List<UserDTO> 
+    	loadUserByCompany(final String companyName) {
+    	List<UserDTO> list = new LinkedList<UserDTO>();
+		for (User user :  userDao.findUsersByCompany(companyName)) {
+			list.add(userMapper.toDto(user));
+		}
+		return list;
     }
 }
