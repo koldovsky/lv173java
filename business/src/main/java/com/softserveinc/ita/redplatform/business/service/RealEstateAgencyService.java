@@ -101,7 +101,9 @@ public class RealEstateAgencyService {
     public RealEstateAgencyDTO getById(final long id) {
     	RealEstateAgency agency = realEstateAgencyDao
     			.findById(id);
-    	if (agency==null) return null;
+    	if (agency == null) {
+            return null;
+        }
     	return realEstateAgencyMapper.toDto(agency);
     }
     

@@ -26,8 +26,11 @@ import com.softserveinc.ita.redplatform.common.dto.RealEstateAgencyDTO;
 @Controller
 public class AgencyController {
     
-    
-    public static final Logger LOGGER = Logger.getLogger(AgencyController.class);
+    /**
+     * Logger for Agency Controller class.
+     */
+    public static final Logger LOGGER = Logger.getLogger(
+        AgencyController.class);
     
     /**
      * realEstateAgencyService.
@@ -75,19 +78,21 @@ public class AgencyController {
      * Get agency by id to edit.
      * 
      * @param id id
-     * @return 
+     * @return ResponceEntity EwsponceEntity
      */
-    @RequestMapping(value = "agency/edit/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "agency/edit/{id}", 
+        method = RequestMethod.GET)
     @ResponseBody
-	public final ResponseEntity<RealEstateAgencyDTO> getAgency(@PathVariable("id") final long id) {
+	public final ResponseEntity<RealEstateAgencyDTO> getAgency(
+        @PathVariable("id") final long id) {
 
 	
 		RealEstateAgencyDTO realEstateAgencyDTO = 
 			realEstateAgencyService.getById(id);
             if (realEstateAgencyDTO == null) {
                 LOGGER.info("agency not found");
-                return new ResponseEntity<RealEstateAgencyDTO>
-                (HttpStatus.NOT_FOUND);
+                return new ResponseEntity<RealEstateAgencyDTO>(
+                    HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<RealEstateAgencyDTO>(
         	    realEstateAgencyDTO, 
