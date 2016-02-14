@@ -63,6 +63,6 @@
 			<button  type="submit" class="btn btn-primary col-sm-2 pull-right">Submit</button>
 		</form:form>
 		</div>
-		<script src="resources/bootstrap/js/bootstrap.js"></script>
+		<script src="resources/bootstrap/js/lib/bootstrap/bootstrap.js"></script>
 	</body>
 </html>

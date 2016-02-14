@@ -19,6 +19,6 @@ public class IndexController {
      */
     @RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
     public final String getIndexPage() { 
-	return "index";
+	return "common/index";
     }
 }

@@ -45,7 +45,7 @@ public class AgencyController {
      */
     @RequestMapping(value = "agency/create", method = RequestMethod.GET)
     public final String getRegisterPage() {
-	return "agencyRegister";
+	return "register/agencyRegister";
     }    
     
     /**

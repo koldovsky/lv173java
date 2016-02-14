@@ -3,10 +3,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<jsp:include page="utils/jspheader.jsp" />
+<jsp:include page="../utils/jspheader.jsp" />
 <title>System Administrator registration</title>
 <script
-	src="resources/jquery.validate.min.js">
+	src="resources/js/lib/jquery/jquery.validate.min.js">
 	
 </script>
 <script src="resources/js/adminregister.js"></script>

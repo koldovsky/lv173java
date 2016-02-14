@@ -45,11 +45,11 @@ public class UserListController {
 					.getPrincipal()
 					.toString();
 		if (username.equals("anonymousUser")) {
-			return "login";
+			return "common/login";
 		}
 		User user = userService.loadUserByEmail(username);
 		if (user instanceof CustomerUser) {
-			return "index";
+			return "common/index";
 		} else if (user instanceof AdminUser) {
 			model.addAttribute("list", userService.loadAllUsers());
 			return "users";
@@ -60,7 +60,7 @@ public class UserListController {
 							.getAgency().getName()));
 			return "users";
 		}
-		return "index";
+		return "common/index";
 	}
 
 }

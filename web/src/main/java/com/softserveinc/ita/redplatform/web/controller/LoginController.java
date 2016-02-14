@@ -30,7 +30,7 @@ public class LoginController {
 	    model.addObject("error", "Invalid username or password!");
 	}
 
-	model.setViewName("login");
+	model.setViewName("common/login");
 	return model;
     }
 
@@ -42,7 +42,7 @@ public class LoginController {
     @RequestMapping(value = "/loginfailed", method = RequestMethod.GET)
     public final String loginerror(final Model model) {
 	model.addAttribute("error", "true");
-	return "login";
+	return "common/login";
     }
 
 }

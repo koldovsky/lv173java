@@ -3,14 +3,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<jsp:include page="utils/jspheader.jsp" />
+<jsp:include page="../utils/jspheader.jsp" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>REDplatform Home Page</title>
 <!-- Custom CSS -->
 <link href="resources/css/index.css" rel="stylesheet">
 </head>
 <body>
-	<jsp:include page="utils/navbar.jsp"></jsp:include>
+	<jsp:include page="../utils/navbar.jsp"></jsp:include>
 	<!-- Half Page Image Background Carousel Header -->
 	<header id="myCarousel" class="carousel slide">
 		<!-- Indicators -->
@@ -77,14 +77,10 @@
 			</div>
 		</div>
 
-		<jsp:include page="utils/footer.jsp"></jsp:include>
+		<jsp:include page="../utils/footer.jsp"></jsp:include>
 	</div>
 	<!-- /.container -->
 
-	<!-- jQuery -->
-	<script src="resources/jquery-2.2.0.min.js"></script>
-	<!-- Bootstrap Core JavaScript -->
-	<script src="resources/bootstrap/js/bootstrap.min.js"></script>
 	<!-- index.js -->
 	<script src="resources/js/index.js"></script>
 </body>

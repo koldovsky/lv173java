@@ -30,7 +30,7 @@ public class AdminUserRegisterController {
      */
     @RequestMapping(value = "/adminregister", method = RequestMethod.GET)
     public final String getPage() {
-	return "adminregister";
+	return "register/adminregister";
     }
 
     /**
@@ -45,7 +45,7 @@ public class AdminUserRegisterController {
 	    @RequestBody final AdminUserDTO adminUserDTO) {
 	adminUserService.create(adminUserDTO);
 
-	return "index";
+	return "common/index";
     }
 
 }

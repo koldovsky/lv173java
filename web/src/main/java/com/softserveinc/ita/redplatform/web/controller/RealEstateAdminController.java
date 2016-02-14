@@ -45,7 +45,7 @@ public class RealEstateAdminController {
 	public final String getRegistrationPage(final Model model) {
 		model.addAttribute("redAdmin", new RealEstateAdminUserDTO());
 		initializeAgenciesList(model);
-		return "red-admin-registration";
+		return "register/red-admin-registration";
 	}
 	
 	/**
@@ -71,9 +71,9 @@ public class RealEstateAdminController {
 					@Validated final RealEstateAdminUserDTO admin, 
 					final BindingResult result, final Model model) {
 		if (result.hasErrors()) {
-			return "red-admin-registration";
+			return "register/red-admin-registration";
 		}
 		adminService.register(admin);
-		return "index";
+		return "common/index";
 	}
 }

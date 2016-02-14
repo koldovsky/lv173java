@@ -3,7 +3,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <html>
 <head>
-<jsp:include page="utils/jspheader.jsp"/>
+<jsp:include page="../utils/jspheader.jsp"/>
 <title>Login</title>
 </head>
 <body>
