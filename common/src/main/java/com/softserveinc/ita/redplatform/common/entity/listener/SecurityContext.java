@@ -22,14 +22,6 @@ public final class SecurityContext {
      * no need to create
      * example of the class.
      */
-
-    /**
-     * Private Constructor.
-     * 
-     * all members are static.
-     * no need to create
-     * example of the class.
-     */
     private SecurityContext() { }
 
 }

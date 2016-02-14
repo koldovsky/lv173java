@@ -1,0 +1,22 @@
+<%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<!DOCTYPE html>
+<html>
+<head>
+<jsp:include page="utils/jspheader.jsp" />
+<script
+	src="${pageContext.request.contextPath}/resources/jquery.validate.min.js">
+</script>
+<title>Agency registration</title>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/bootstrap/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/agencyRegistration.css">
+<script src="${pageContext.request.contextPath}/resources/js/agency.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/agencyRegister.js"></script>
+
+</head>
+	<body>
+		<jsp:include page="utils/agency.jsp"></jsp:include>
+	</body>
+</html>

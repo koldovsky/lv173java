@@ -18,6 +18,7 @@ import com.softserveinc.ita.redplatform.persistence.dao.RealEstateAgencyDao;
  *
  */
 @Service
+@Transactional
 public class RealEstateAgencyService {
     
     /** 
@@ -38,12 +39,24 @@ public class RealEstateAgencyService {
      * create realEstateAgency.
      * @param realEstateAgencyDTO realEstateAgencyDTO
      */
-    @Transactional
+   
     public void create(final RealEstateAgencyDTO realEstateAgencyDTO) {
 		
 	RealEstateAgency realEstateAgency = realEstateAgencyMapper
 					.toEntity(realEstateAgencyDTO);
 	realEstateAgencyDao.save(realEstateAgency);
+    }
+    
+    /**
+     * update realEstateAgency.
+     * @param realEstateAgencyDTO realEstateAgencyDTO
+     */
+   
+    public void update(final RealEstateAgencyDTO realEstateAgencyDTO) {
+		
+	RealEstateAgency realEstateAgency = realEstateAgencyMapper
+					.toEntity(realEstateAgencyDTO);
+	realEstateAgencyDao.update(realEstateAgency);
     }
 
     /**
@@ -53,7 +66,6 @@ public class RealEstateAgencyService {
      * @author Ilona Yavorska
      * @return the list of RealEstateAgency entities.
      */
-    @Transactional
     public List<RealEstateAgencyDTO> retrieveAllIdName() {
     	List<RealEstateAgency> agencies = realEstateAgencyDao.findAll();
     	List<RealEstateAgencyDTO> dtos = new ArrayList<>();
@@ -73,10 +85,23 @@ public class RealEstateAgencyService {
      * @param id the id
      * @return the RealEstateAgency entity
      */
-    @Transactional
     public RealEstateAgencyDTO getById(final String id) {
     	RealEstateAgency agency = realEstateAgencyDao
     			.findById(Long.parseLong(id));
+    	return realEstateAgencyMapper.toDto(agency);
+    }
+    
+    /**
+     * Gets the agency by id.
+     *
+     * @author Ilona Yavorska
+     * @param id the id
+     * @return the RealEstateAgency entity
+     */
+    public RealEstateAgencyDTO getById(final long id) {
+    	RealEstateAgency agency = realEstateAgencyDao
+    			.findById(id);
+    	if (agency==null) return null;
     	return realEstateAgencyMapper.toDto(agency);
     }
     

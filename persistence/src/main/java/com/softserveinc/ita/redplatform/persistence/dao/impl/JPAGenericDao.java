@@ -79,10 +79,6 @@ public abstract class JPAGenericDao<E, N extends Number>
         return entityClass;
     }
 
-    public final void setEntityClass(final Class<E> newEntityClass) {
-        this.entityClass = newEntityClass;
-    }
-
     public final EntityManager getEntityManager() {
         return entityManager;
     }

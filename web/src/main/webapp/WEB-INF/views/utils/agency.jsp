@@ -1,22 +1,5 @@
-<%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!DOCTYPE html>
-<html>
-<head>
-<jsp:include page="utils/jspheader.jsp" />
-<script
-	src="resources/jquery.validate.min.js">
-</script>
-<title>Agency registration</title>
-<link rel="stylesheet"
-	href="resources/bootstrap/css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="resources/css/agencyRegistration.css">
-<script src="resources/js/agencyRegistration.js"></script>
-
-</head>
-<body>
-	<jsp:include page="utils/navbar.jsp"></jsp:include>
+	<jsp:include page="navbar.jsp"></jsp:include>
 
 	<div class="container">
 		<h1 class="well">Registration for Real Estate Agency</h1>
@@ -102,6 +85,4 @@
 
 	</div>
 	<!-- container -->
-	<jsp:include page="utils/footer.jsp"></jsp:include>
-</body>
-</html>
+	<jsp:include page="footer.jsp"></jsp:include>
