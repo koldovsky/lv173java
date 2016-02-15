@@ -1,9 +1,13 @@
 package com.softserveinc.ita.redplatform.common.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -51,6 +55,12 @@ public class CustomerUser extends User {
   @JoinColumn(name = "addressId")
   private Address address;
 
+  /**
+   * List of orders.
+   */
+  @OneToMany(mappedBy = "customerUser", cascade = CascadeType.ALL)
+  private List<Order> orders;
+	
   /**
   * Get value of column firstName.
   *
@@ -159,5 +169,24 @@ public class CustomerUser extends User {
   public final void setAddress(final Address newAddress) {
     this.address = newAddress;
   }
+  
+  /**
+  * Get value of orders.
+  *
+  * @return the orders
+  */
+  public final List<Order> getOrders() {
+	return orders;
+  }
 
+  /**
+  * Changes orders value to newOrders.
+  *
+  * @param newOrders  to be set
+  */
+  public final void setOrders(final List<Order> newOrders) {
+	this.orders = newOrders;
+  }
+
+  
 }

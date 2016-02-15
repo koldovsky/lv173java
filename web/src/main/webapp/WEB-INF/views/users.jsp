@@ -9,7 +9,7 @@
 <title>List of users</title>
 <!-- Custom CSS -->
 <link href="resources/css/users.css" rel="stylesheet">
-<link href="resources/css/lib/jquery.dataTables.css"
+<link href="resources/css/lib/dataTables/jquery.dataTables.css"
 	rel="stylesheet">
 </head>
 <body>
@@ -39,7 +39,7 @@
 	</div>
 	<jsp:include page="utils/footer.jsp"></jsp:include>
 	<!-- jQuery dataTables -->
-	<script src="resources/js/lib/jquery.dataTables.js"></script>
+	<script src="resources/js/lib/jquery/jquery.dataTables.js"></script>
 	<!-- users.js -->
 	<script src="resources/js/users.js"></script>
 </body>

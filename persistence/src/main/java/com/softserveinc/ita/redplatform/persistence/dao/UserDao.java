@@ -21,13 +21,6 @@ public interface UserDao extends GenericDao<User, Long> {
 	User findUserByEmail(String email);
 
 	/**
-	 * find all users.
-	 * 
-	 * @return List<User>
-	 */
-	List<User> findAll();
-
-	/**
 	 * find user by company.
 	 * 
 	 * @param company

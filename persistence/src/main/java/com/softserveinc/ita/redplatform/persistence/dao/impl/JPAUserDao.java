@@ -1,6 +1,5 @@
 package com.softserveinc.ita.redplatform.persistence.dao.impl;
 
-import java.util.LinkedList;
 import java.util.List;
 import org.springframework.stereotype.Repository;
 import com.softserveinc.ita.redplatform.common.entity.CustomerUser;
@@ -22,7 +21,7 @@ public class JPAUserDao extends JPAGenericDao<User, Long> implements UserDao {
 	 */
 	@Override
 	public final User findUserByEmail(final String email) {
-		return (User) super.getEntityManager()
+		return (User) getEntityManager()
 				.createQuery("from "
 						+ User.class.getName()
 						+ " as user where user.email=:email")
@@ -39,7 +38,7 @@ public class JPAUserDao extends JPAGenericDao<User, Long> implements UserDao {
 	@Override
 	@SuppressWarnings("unchecked")
 	public final List<User> findAdminsByCompany(final String companyName) {
-		return (List<User>) super.getEntityManager()
+		return (List<User>) getEntityManager()
 				.createQuery("from " + RealEstateAdminUser.class.getName()
 						+ " as user where user.id in (select redadmin.id from "
 						+ RealEstateAdminUser.class.getName()
@@ -58,7 +57,7 @@ public class JPAUserDao extends JPAGenericDao<User, Long> implements UserDao {
 	@Override
 	@SuppressWarnings("unchecked")
 	public final List<User> findCustomersByCompany(final String companyName) {
-		return (List<User>) super.getEntityManager()
+		return (List<User>) getEntityManager()
 				.createQuery("from " + CustomerUser.class.getName()
 						+ " as user where user.createdBy.id in"
 						+ " ( select redadmin.id from "
@@ -75,14 +74,29 @@ public class JPAUserDao extends JPAGenericDao<User, Long> implements UserDao {
 	 *            company name
 	 * @return List<User>
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public final List<User> findUsersByCompany(final String companyName) {
-		List<User> list = new LinkedList<User>();
-		List<User> users = findCustomersByCompany(companyName);
-		List<User> admins = findAdminsByCompany(companyName);
-		list.addAll(admins);
-		list.addAll(users);
-		return list;
+		return (List<User>) getEntityManager()
+				.createQuery("select user from "
+						+ User.class.getName()
+						+ " as user where user.id in ("
+						+ " select customer.id from "
+						+ CustomerUser.class.getName()
+						+ " as customer inner join"
+						+ " customer.orders as order"
+						+ " where order.createdBy.id in"
+						+ " ( select admin.id from "
+						+ RealEstateAdminUser.class.getName()
+						+ " as admin inner join admin.agency"
+						+ " as agency where agency.name=:companyName))"
+						+ " or user.id in ("
+						+ " select admin.id from "
+						+ RealEstateAdminUser.class.getName()
+						+ " as admin inner join admin.agency"
+						+ " as agency where agency.name=:companyName )")
+				.setParameter("companyName", companyName)
+				.getResultList();
 	}
 }
 

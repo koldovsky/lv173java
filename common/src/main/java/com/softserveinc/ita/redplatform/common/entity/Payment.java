@@ -46,7 +46,7 @@ public class Payment extends BaseEntity {
      * Column for orderId.
      */
     @ManyToOne
-    @JoinColumn(name = "ordereId")
+    @JoinColumn(name = "orderId")
     private Order order;
 
     /**

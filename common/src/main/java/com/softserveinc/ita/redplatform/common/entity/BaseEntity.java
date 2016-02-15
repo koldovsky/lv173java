@@ -37,14 +37,14 @@ public abstract class BaseEntity {
   /**
   * Column for create Date information.
   */
-  @Column(name = "createDate")
+  @Column(name = "createdDate")
   private Date createdDate;
 
   /**
   * Many to one mapping.
   */
   @ManyToOne
-  @JoinColumn(name = "UpdatedById")
+  @JoinColumn(name = "updatedById")
   private User updatedBy;
 
   /**

@@ -1,6 +1,5 @@
 package com.softserveinc.ita.redplatform.common.entity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -21,7 +20,7 @@ import javax.persistence.Table;
 public class Order extends BaseEntity {
 
     /**
-     * ID for sirialization.
+     * ID for serialization.
      */
     private static final long serialVersionUID = 4135117256506949773L;
 
@@ -42,7 +41,7 @@ public class Order extends BaseEntity {
      * List of payments.
      */
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-    private List<Payment> payments = new ArrayList<>();
+    private List<Payment> payments;
 
     /**
      * Get customerUser.
