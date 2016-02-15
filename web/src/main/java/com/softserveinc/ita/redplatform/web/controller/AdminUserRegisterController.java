@@ -43,7 +43,7 @@ public class AdminUserRegisterController {
     @RequestMapping(value = "/adminregister", method = RequestMethod.POST)
     public final String adminRegister(
 	    @RequestBody final AdminUserDTO adminUserDTO) {
-	adminUserService.create(adminUserDTO);
+	adminUserService.register(adminUserDTO);
 
 	return "common/index";
     }
