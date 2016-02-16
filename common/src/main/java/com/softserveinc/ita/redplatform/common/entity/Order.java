@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -34,8 +33,8 @@ public class Order extends BaseEntity {
     /**
      * Column for installment.
      */
-    @OneToOne(mappedBy = "order")
-    private Installment installment;
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    private List<Installment> installments;
 
     /**
      * List of payments.
@@ -66,17 +65,16 @@ public class Order extends BaseEntity {
      * 
      * @return installment
      */
-    public final Installment getInstallment() {
-	return installment;
+    public final List<Installment> getInstallment() {
+	return installments;
     }
 
     /**
-     * Set Installment value.
-     * 
-     * @param newInstallment to set
+     * Set Installments value.
+     * @param newInstallments to set
      */
-    public final void setInstallment(final Installment newInstallment) {
-	this.installment = newInstallment;
+    public final void setInstallment(final List<Installment> newInstallments) {
+	this.installments = newInstallments;
     }
 
     /**
