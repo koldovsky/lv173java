@@ -5,8 +5,7 @@
 <head>
 <jsp:include page="../utils/jspheader.jsp" />
 <title>System Administrator registration</title>
-<script
-	src="resources/js/lib/jquery/jquery.validate.min.js">
+<script src="resources/js/lib/jquery/jquery.validate.min.js">
 	
 </script>
 <script src="resources/js/adminregister.js"></script>
@@ -15,6 +14,13 @@
 <body>
 	<div class="container">
 		<h1 class="well">New System Administrator Registration</h1>
+
+		<div id="error" class="alert alert-danger container" role="alert">
+			Failed to add new System Administrator.</div>
+		<div id="error_if_exists" class="alert alert-danger container"
+			role="alert">This System Administrator already exists!</div>
+		<div id="success" class="alert alert-success container" role="alert">
+			System Administrator has been registered successfully.</div>
 		<div class="col-lg-12 well">
 			<form name="adminregisterform" id="adminregisterform" action="">
 				<div class="row">

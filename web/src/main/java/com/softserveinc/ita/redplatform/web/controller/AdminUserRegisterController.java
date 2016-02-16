@@ -1,6 +1,8 @@
 package com.softserveinc.ita.redplatform.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,11 +43,16 @@ public class AdminUserRegisterController {
      *            DTO
      */
     @RequestMapping(value = "/adminregister", method = RequestMethod.POST)
-    public final String adminRegister(
-	    @RequestBody final AdminUserDTO adminUserDTO) {
-	adminUserService.create(adminUserDTO);
+    public final ResponseEntity<AdminUserDTO>
+	    adminRegister(@RequestBody final AdminUserDTO adminUserDTO) {
+	if (adminUserService.checkIfExists(adminUserDTO)) {
+	    return new ResponseEntity<AdminUserDTO>(adminUserDTO,
+		    HttpStatus.OK);
+	} else {
+	    adminUserService.register(adminUserDTO);
+	    return new ResponseEntity<AdminUserDTO>(HttpStatus.CREATED);
+	}
 
-	return "common/index";
     }
 
 }

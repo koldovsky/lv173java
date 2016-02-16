@@ -11,10 +11,11 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.softserveinc.ita.redplatform.common.entity.AdminUser;
-import com.softserveinc.ita.redplatform.persistence.dao.impl.JPAAdminUserDao;
+import com.softserveinc.ita.redplatform.common.entity.RealEstateAdminUser;
 
 /**
  * Implementation of UserDetailsService.
@@ -22,68 +23,78 @@ import com.softserveinc.ita.redplatform.persistence.dao.impl.JPAAdminUserDao;
  * @author Ivaniv Roman
  *
  */
-@Repository
+@Service("UserDetailsServiceImplementation")
 public class UserDetailsServiceImplementation implements UserDetailsService {
 
-	/**
-	 * Using JPAAdminUserDao object.
-	 */
-	private  JPAAdminUserDao jpaUserDao;
-	
-     @Override
-	public final UserDetails loadUserByUsername(final String username) 
-			throws UsernameNotFoundException {
-		
-		HashSet<String> set = new HashSet<String>();
-		AdminUser user = (AdminUser) jpaUserDao.findUserByEmail(username);
-		if (user instanceof AdminUser) {
-			set.add(new String("ROLE_USER"));
-			set.add(new String("ROLE_ADMIN"));
-			set.add(new String("ROLE_REDADMIN"));
-		} else {
-			set.add(new String("ROLE_USER"));
-		}
-		List<GrantedAuthority> authorities = buildUserAuthority(set);
-		return buildUserForAuthentication(user, authorities);
-		
+    /**
+     * Using UserService object.
+     */
+    private UserService userService;
+
+    @Transactional(readOnly = true)
+    @Override
+    public final UserDetails loadUserByUsername(final String username)
+	    throws UsernameNotFoundException {
+
+	HashSet<String> set = new HashSet<String>();
+	com.softserveinc.ita.redplatform.common.entity.User user = 
+		userService.loadUserByEmail(username);
+	if (user instanceof AdminUser) {
+	    set.add(new String("ROLE_USER"));
+	    set.add(new String("ROLE_ADMIN"));
+	    set.add(new String("ROLE_REDADMIN"));
+	} else if (user instanceof RealEstateAdminUser) {
+	    set.add(new String("ROLE_USER"));
+	    set.add(new String("ROLE_REDADMIN"));
+	} else {
+	    set.add(new String("ROLE_USER"));
 	}
+	List<GrantedAuthority> authorities = buildUserAuthority(set);
+	return buildUserForAuthentication(user, authorities);
+
+    }
 
     /**
      * 
-     * @param user Receiving user object
-     * @param authorities Receiving list of user authorities 
-     * @return returning user object 
+     * @param user
+     *            Receiving user object
+     * @param authorities
+     *            Receiving list of user authorities
+     * @return returning user object
      */
-	private User buildUserForAuthentication(final AdminUser user, 
-			final List<GrantedAuthority> authorities) {
-		return new User(user.getEmail(), user.getPassword(), true, 
-				true, true, true, authorities);
-	}
+    private User buildUserForAuthentication(
+	    final com.softserveinc.ita.redplatform.common.entity.User user,
+	    final List<GrantedAuthority> authorities) {
+	
+	return new User(user.getEmail(), user.getPassword(), 
+		true, true, true, true, authorities);
+    }
 
-	/**
-	 * 
-	 * @param userRoles receiving
-	 * @return Returning list of authorities
-	 */
-	private List<GrantedAuthority> buildUserAuthority(final 
-			Set<String> userRoles) {
-		
-		Set<GrantedAuthority> setAuths = new HashSet<GrantedAuthority>();
-		// Build user's authorities
-		for (String userRole : userRoles) {
-			setAuths.add(new SimpleGrantedAuthority(userRole));
-		}
-		List<GrantedAuthority> result = new 
-				ArrayList<GrantedAuthority>(setAuths);
-		
-		return result;
-	}
+    /**
+     * 
+     * @param userRoles
+     *            receiving
+     * @return Returning list of authorities
+     */
+    private List<GrantedAuthority> buildUserAuthority(
+	    final Set<String> userRoles) {
 
-	public final JPAAdminUserDao getJpaUserDao() {
-		return jpaUserDao;
+	Set<GrantedAuthority> setAuths = new HashSet<GrantedAuthority>();
+	// Build user's authorities
+	for (String userRole : userRoles) {
+	    setAuths.add(new SimpleGrantedAuthority(userRole));
 	}
+	List<GrantedAuthority> result = new ArrayList<GrantedAuthority>(setAuths);
 
-	public final void setJPAAdminUserDao(final JPAAdminUserDao newJpaUserDao) {
-		this.jpaUserDao = newJpaUserDao;
-	}
+	return result;
+    }
+
+    public final UserService getUserService() {
+	return userService;
+    }
+
+    public final void setUserService(final UserService newUserService) {
+	this.userService = newUserService;
+    }
+
 }
