@@ -31,7 +31,7 @@ public class UserService {
     /**
      * UserMapper.
      */
-//    @Autowired
+    @Autowired
     private UserMapper userMapper;
 
     /**
