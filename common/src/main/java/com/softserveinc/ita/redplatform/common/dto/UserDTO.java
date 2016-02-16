@@ -12,11 +12,6 @@ import java.util.Date;
 public class UserDTO {
 	
 	/**
-	 * companyName.
-	 */
-	private String companyName;
-	
-	/**
 	 * email.
 	 */
 	private String email;
@@ -66,14 +61,6 @@ public class UserDTO {
 
 	public final void setCreatedDate(final Date newCreatedDate) {
 		this.createdDate = newCreatedDate;
-	}
-
-	public final String getCompanyName() {
-		return companyName;
-	}
-
-	public final void setCompanyName(final String newCompanyName) {
-		this.companyName = newCompanyName;
 	}
 
 }

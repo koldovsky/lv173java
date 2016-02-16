@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 
 import com.softserveinc.ita.redplatform.common.dto.UserDTO;
@@ -47,7 +48,8 @@ public class UserService {
      * 
      * @return List<User>
      */
-    public List<UserDTO> loadAllUsers() {
+    @Secured("ROLE_ADMIN")
+	public List<UserDTO> loadAllUsers() {
     	List<UserDTO> list = new LinkedList<UserDTO>();
     	for (User user : userDao.findAll()) {
     		list.add(userMapper.toDto(user));
@@ -60,6 +62,7 @@ public class UserService {
      * @param companyName company name
      * @return List<User>
      */
+    @Secured("ROLE_REDADMIN")
     public List<UserDTO> 
     	loadUserByCompany(final String companyName) {
     	List<UserDTO> list = new LinkedList<UserDTO>();

@@ -1,17 +1,15 @@
 package com.softserveinc.ita.redplatform.web.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.softserveinc.ita.redplatform.business.service.UserService;
-import com.softserveinc.ita.redplatform.common.entity.AdminUser;
-import com.softserveinc.ita.redplatform.common.entity.CustomerUser;
-import com.softserveinc.ita.redplatform.common.entity.RealEstateAdminUser;
-import com.softserveinc.ita.redplatform.common.entity.User;
+import com.softserveinc.ita.redplatform.common.dto.UserDTO;
 
 /**
  * Controller for users page.
@@ -30,37 +28,24 @@ public class UserListController {
 	private UserService userService;
 
 	/**
-	 * Users page mapping.
+	 * Returns User list.
 	 * 
-	 * @param model
-	 *            represents ModelMap
+	 * @return users list
+	 */
+	@RequestMapping(value = "/user", method = RequestMethod.GET)
+	@ResponseBody
+	public final List<UserDTO> getUserList() {
+		return userService.loadAllUsers();
+	}
+
+	/**
+	 * Users page mapping.
 	 * 
 	 * @return users page
 	 */
 	@RequestMapping(value = "/users", method = RequestMethod.GET)
-	public final String getUserList(final ModelMap model) {
-		String username = SecurityContextHolder
-					.getContext()
-					.getAuthentication()
-					.getPrincipal()
-					.toString();
-		if (username.equals("anonymousUser")) {
-			return "common/login";
-		}
-		User user = userService.loadUserByEmail(username);
-		if (user instanceof CustomerUser) {
-			return "common/index";
-		} else if (user instanceof AdminUser) {
-			model.addAttribute("list", userService.loadAllUsers());
-			return "users";
-		} else if (user instanceof RealEstateAdminUser) {
-			model.addAttribute("lsit", userService
-					.loadUserByCompany(
-							((RealEstateAdminUser) user)
-							.getAgency().getName()));
-			return "users";
-		}
-		return "common/index";
+	public final String getUsersPage() {
+		return "users";
 	}
 
 }

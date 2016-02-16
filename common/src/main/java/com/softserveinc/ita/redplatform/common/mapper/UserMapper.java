@@ -25,42 +25,29 @@ public class UserMapper implements GenericMapper<User, UserDTO> {
 	public final UserDTO toDto(final User entity) {
 
 		UserDTO userDTO = new UserDTO();
+		userDTO.setEmail(entity.getEmail());
+		userDTO.setCreatedDate(entity.getCreatedDate());
 		if (entity instanceof AdminUser) {
 			userDTO.setName("admin");
-			userDTO.setCreatedDate(entity.getCreatedDate());
-			userDTO.setEmail(entity.getEmail());
 			userDTO.setPhone("none");
-			userDTO.setCompanyName("SYSTEM");
-			return userDTO;
-		} else if (entity instanceof RealEstateAdminUser) {
-			userDTO.setName(
-					((RealEstateAdminUser) entity).getFirstName() + " "
-			+ ((RealEstateAdminUser) entity).getLastName());
-			userDTO.setCreatedDate(entity.getCreatedDate());
-			userDTO.setEmail(entity.getEmail());
-			userDTO.setPhone(((RealEstateAdminUser) entity).getPhone());
-			userDTO.setCompanyName(((RealEstateAdminUser) entity)
-					.getAgency().getName());
 			return userDTO;
 		} else if (entity instanceof CustomerUser) {
-			userDTO.setName(
-					((CustomerUser) entity).getFirstName() + " "
-			+ ((CustomerUser) entity).getLastName());
-			userDTO.setCreatedDate(entity.getCreatedDate());
-			userDTO.setEmail(entity.getEmail());
+			userDTO.setName(((CustomerUser) entity).getFirstName() 
+					+ " " + ((CustomerUser) entity).getLastName());
 			userDTO.setPhone(((CustomerUser) entity).getPhone());
-			RealEstateAdminUser creator = 
-					(RealEstateAdminUser) entity.getCreatedBy();
-			userDTO.setCompanyName(creator.getAgency().getName());
+			return userDTO;
+		} else if (entity instanceof RealEstateAdminUser) {
+			userDTO.setName(((RealEstateAdminUser) entity).getFirstName() 
+					+ " " + ((RealEstateAdminUser) entity).getLastName());
+			userDTO.setPhone(((RealEstateAdminUser) entity).getPhone());
 			return userDTO;
 		}
-
 		return null;
 	}
 
 	@Override
 	public final User toEntity(final UserDTO dto) {
-		return new CustomerUser();
+		return null;
 	}
 
 }

@@ -11,6 +11,7 @@
 <link href="resources/css/users.css" rel="stylesheet">
 <link href="resources/css/lib/dataTables/jquery.dataTables.css"
 	rel="stylesheet">
+<script src="resources/js/users.js"></script>
 </head>
 <body>
 	<jsp:include page="utils/navbar.jsp"></jsp:include>
@@ -23,24 +24,13 @@
 					<th>Email</th>
 					<th>Phone</th>
 					<th>Created Date</th>
-					<th>Company Name</th>
 				</tr>
 			</thead>
-			<c:forEach items="${list}" var="item">
-				<tr>
-					<td>${item.name}</td>
-					<td>${item.email}</td>
-					<td>${item.phone}</td>
-					<td>${item.createdDate}</td>
-					<td>${item.companyName}</td>
-				</tr>
-			</c:forEach>
 		</table>
 	</div>
 	<jsp:include page="utils/footer.jsp"></jsp:include>
 	<!-- jQuery dataTables -->
 	<script src="resources/js/lib/jquery/jquery.dataTables.js"></script>
 	<!-- users.js -->
-	<script src="resources/js/users.js"></script>
 </body>
 </html>
