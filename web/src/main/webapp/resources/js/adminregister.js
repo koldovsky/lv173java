@@ -1,5 +1,8 @@
 // When the browser is ready...
 $(document).ready(function() {
+	$("#error").hide();
+	$("#error_if_exists").hide();
+	$("#success").hide();
 
 	$.validator.addMethod("regexMail", function(value, element) {
 		return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value);
@@ -26,23 +29,35 @@ $(document).ready(function() {
 
 	});
 	$("#adminregisterform").submit(function(event) {
-		alert("in submit");
-		var data = {
-			email : $('#adminregister').val()
-		};
-		var postData = JSON.stringify(data);
+		if ($("#adminregisterform").valid() == true) {
 
-		$.ajax({
-			type : "POST",
-			url : "adminregister",
-			data : postData,
-			contentType : "application/json; charset=utf-8",
-			success : function(responseData, textStatus, jqXHR) {
-				alert("New administrator registered!")
-			},
-			error : function(jqXHR, textStatus, errorThrown) {
-				console.log(errorThrown);
-			}
-		})
+			var data = {
+				email : $('#adminregister').val()
+			};
+			var postData = JSON.stringify(data);
+
+			$.ajax({
+				type : "POST",
+				url : "adminregister",
+				data : postData,
+				contentType : "application/json; charset=utf-8",
+				success : function(responseData, textStatus, jqXHR) {
+					$("#error_if_exists").hide();
+					$("#error").hide();
+					$("#success").hide();
+					if (JSON.stringify(responseData) == postData) {
+						$("#error_if_exists").show();
+					} else {
+						$("#success").show();
+					}
+					$("#adminregisterform")[0].reset();
+				},
+				error : function(jqXHR, textStatus, errorThrown) {
+					$("#error").show();
+				}
+				
+			})
+			return false;
+		}
 	});
 });
