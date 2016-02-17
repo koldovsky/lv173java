@@ -10,8 +10,14 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
+import 
+org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
 import com.softserveinc.ita.redplatform.business.service.UserService;
+import com.softserveinc.ita.redplatform.common.entity.User;
+import com.softserveinc.ita.redplatform.common.entity.listener.SecurityContext;
 
 
 /**
@@ -30,7 +36,6 @@ public class UserFilter implements Filter {
     /**
      * userService.
      */
-    @Autowired
     private UserService userService;
 
     /**
@@ -39,7 +44,18 @@ public class UserFilter implements Filter {
     @Override
     public final void doFilter(final ServletRequest req, 
 	    final ServletResponse res, final FilterChain chain)
-	    throws IOException, ServletException {
+		    	throws IOException, ServletException {
+	
+	LOGGER.info("in filter");
+	
+	Authentication auth = SecurityContextHolder.getContext()
+					.getAuthentication();
+	if (!(auth instanceof AnonymousAuthenticationToken)) {
+	         String userName =  auth.getName();
+	         User user = (User) userService.loadUserByEmail(userName);
+	 	 SecurityContext.CURRENT_USER.set(user);
+	 	 LOGGER.info("Current User - " + user.getEmail());
+	}
 	
 	chain.doFilter(req, res);
 
@@ -58,6 +74,14 @@ public class UserFilter implements Filter {
      */
     @Override
     public final void destroy() {
+    }
+    
+    public final UserService getUserService() {
+        return userService;
+    }
+
+    public final void setUserService(final UserService newUserService) {
+        this.userService = newUserService;
     }
 
 }

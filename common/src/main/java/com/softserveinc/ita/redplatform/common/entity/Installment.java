@@ -5,7 +5,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -37,7 +37,7 @@ public class Installment extends BaseEntity {
     /**
      * Column for order.
      */
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "orderId")
     private Order order;
 
