@@ -10,8 +10,14 @@ $(document).ready(function() {
 		    {"data" : "name"},
 			{"data" : "email"},
 			{"data" : "phone"}, 
-			{"data" : "createdDate"}
+			{"data" : "createdDate",
+			"render" : function(data,type,row){
+					var rowValue = row["createdDate"];
+					return new Date(data).toLocaleString();
+				}
+			}
 		]
+		
 
 	});
 	
