@@ -16,21 +16,21 @@
 					<div class="col-sm-12">
 
 						<!-- Name of Agency-->
-						<div class="form-group">
+						<div class="form-group required">
 							<label class="control-label" for="agencyName">Name of
 								Agency</label> <input type="text" class="form-control" name="agencyName"
 								id="agencyName" placeholder="Enter Name of Agency Here..">
 						</div>
 
 						<!-- Description-->
-						<div class="form-group">
+						<div class="form-group required">
 							<label class="control-label" for="description">Description</label>
 							<textarea name="description" class="form-control"
 								id="description" placeholder="Enter Description Here.." rows="3"></textarea>
 						</div>
 
 						<!-- Phone number-->
-						<div class="form-group">
+						<div class="form-group required">
 							<label class="control-label" for="phoneNumber">Phone
 								Number</label> <input type="text" name="phoneNumber" id="phoneNumber"
 								class="form-control" placeholder="Enter Phone Number Here..">
@@ -45,12 +45,12 @@
 
 						<!-- Address-->
 						<div class="row">
-							<div class="col-sm-6 form-group">
+							<div class="col-sm-6 form-group required">
 								<label class="control-label" for="country">Country</label> <input
 									type="text" name="country" id="country"
 									placeholder="Enter Country Here.." class="form-control">
 							</div>
-							<div class="col-sm-6 form-group">
+							<div class="col-sm-6 form-group required">
 								<label class="control-label" for="region">Region</label> <input
 									type="text" name="region" id="region"
 									placeholder="Enter Region Here.." class="form-control">
@@ -58,19 +58,19 @@
 
 						</div>
 						<div class="row">
-							<div class="col-sm-3 form-group">
+							<div class="col-sm-3 form-group required">
 								<label class="control-label" for="postalCode">Postal
 									Code</label> <input type="text" name="postalCode" class="form-control"
 									id="postalCode" placeholder="Enter Postal Code Here..">
 							</div>
 
-							<div class="col-sm-3 form-group">
+							<div class="col-sm-3 form-group required">
 								<label class="control-label" for="locality">City or
 									Village</label> <input type="text" name="locality" class="form-control"
 									id="locality" placeholder="Enter City or Village Here..">
 							</div>
 
-							<div class="col-sm-6 form-group">
+							<div class="col-sm-6 form-group required">
 								<label class="control-label" for="additionalInfo">Address</label>
 								<input type="text" name="additionalInfo" class="form-control"
 									id="additionalInfo" placeholder="Enter Additional Info Here..">
