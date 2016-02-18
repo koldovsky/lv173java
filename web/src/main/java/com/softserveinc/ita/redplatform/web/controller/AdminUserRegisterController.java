@@ -1,7 +1,6 @@
 package com.softserveinc.ita.redplatform.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -43,14 +42,14 @@ public class AdminUserRegisterController {
      *            DTO
      */
     @RequestMapping(value = "/adminregister", method = RequestMethod.POST)
-    public final ResponseEntity<AdminUserDTO>
+    public final ResponseEntity<String>
 	    adminRegister(@RequestBody final AdminUserDTO adminUserDTO) {
 	if (adminUserService.checkIfExists(adminUserDTO)) {
-	    return new ResponseEntity<AdminUserDTO>(adminUserDTO,
-		    HttpStatus.OK);
+	    return ResponseEntity.badRequest()
+		    .body("This System Administrator already exists!");
 	} else {
 	    adminUserService.register(adminUserDTO);
-	    return new ResponseEntity<AdminUserDTO>(HttpStatus.CREATED);
+	    return ResponseEntity.ok(null);
 	}
 
     }

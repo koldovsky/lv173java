@@ -23,11 +23,11 @@ public interface UserDao extends GenericDao<User, Long> {
 	/**
 	 * find user by company.
 	 * 
-	 * @param company
-	 *            user companyName
+	 * @param email
+	 *            company admin email
 	 * @return User
 	 */
-	List<User> findUsersByCompany(String company);
+	List<User> findCompanyUsersByCompanyAdmin(String email);
 
 	/**
 	 * find admin by company.

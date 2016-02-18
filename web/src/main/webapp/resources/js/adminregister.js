@@ -1,8 +1,10 @@
 // When the browser is ready...
 $(document).ready(function() {
-	$("#error").hide();
-	$("#error_if_exists").hide();
-	$("#success").hide();
+	var hideMessages = function(){
+		$("#error").hide();
+		$("#success").hide();
+	}
+	hideMessages();
 
 	$.validator.addMethod("regexMail", function(value, element) {
 		return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value);
@@ -30,6 +32,7 @@ $(document).ready(function() {
 	});
 	$("#adminregisterform").submit(function(event) {
 		if ($("#adminregisterform").valid() == true) {
+			hideMessages();
 
 			var data = {
 				email : $('#adminregister').val()
@@ -42,18 +45,19 @@ $(document).ready(function() {
 				data : postData,
 				contentType : "application/json; charset=utf-8",
 				success : function(responseData, textStatus, jqXHR) {
-					$("#error_if_exists").hide();
-					$("#error").hide();
-					$("#success").hide();
-					if (JSON.stringify(responseData) == postData) {
-						$("#error_if_exists").show();
-					} else {
 						$("#success").show();
-					}
+					
 					$("#adminregisterform")[0].reset();
 				},
 				error : function(jqXHR, textStatus, errorThrown) {
+					$("#error").text("Failed to add new System Administrator.");
+					if(jqXHR.status == 400) {
+						if(jqXHR.responseText != ""){
+							$("#error").text(jqXHR.responseText);
+						}
+					} 
 					$("#error").show();
+					
 				}
 				
 			})

@@ -22,7 +22,8 @@
 			<ul class="nav navbar-nav">
 				<li><a href="/REDplatform/">Home page</a></li>
 				<li><a href="#">Contact</a></li>
-				<li><a href="/REDplatform//login">Login</a></li>
+				<li><a href="/REDplatform/login">Login</a></li>
+				<li><a href="/REDplatform/login?logout">Logout</a></li>
 			</ul>
 		</div>
 		<!-- /.navbar-collapse -->

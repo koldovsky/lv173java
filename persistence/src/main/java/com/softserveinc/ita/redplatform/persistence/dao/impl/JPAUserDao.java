@@ -74,13 +74,12 @@ public class JPAUserDao extends JPAGenericDao<User, Long> implements UserDao {
 	/**
 	 * method find all users dealing with company.
 	 * 
-	 * @param companyName
-	 *            company name
+	 * @param email
 	 * @return List<User>
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public final List<User> findUsersByCompany(final String companyName) {
+	public final List<User> findCompanyUsersByCompanyAdmin(final String email) {
 		return (List<User>) getEntityManager()
 				.createQuery("select user from "
 						+ User.class.getName()
@@ -93,13 +92,19 @@ public class JPAUserDao extends JPAGenericDao<User, Long> implements UserDao {
 						+ " ( select admin.id from "
 						+ RealEstateAdminUser.class.getName()
 						+ " as admin inner join admin.agency"
-						+ " as agency where agency.name=:companyName))"
+						+ " as agency where agency ="
+						+ " (select adminuser.agency from "
+						+ RealEstateAdminUser.class.getName()
+						+ " as adminuser where adminuser.email =:email )))"
 						+ " or user.id in ("
 						+ " select admin.id from "
 						+ RealEstateAdminUser.class.getName()
 						+ " as admin inner join admin.agency"
-						+ " as agency where agency.name=:companyName )")
-				.setParameter("companyName", companyName)
+						+ " as agency where agency ="
+						+ " (select adminuser.agency from "
+						+ RealEstateAdminUser.class.getName()
+						+ " as adminuser where adminuser.email =:email ) )")
+				.setParameter("email", email)
 				.getResultList();
 	}
 }

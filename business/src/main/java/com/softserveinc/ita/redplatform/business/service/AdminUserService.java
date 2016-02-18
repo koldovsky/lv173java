@@ -9,6 +9,7 @@ import com.softserveinc.ita.redplatform.common.entity.User;
 import com.softserveinc.ita.redplatform.common.mapper.AdminUserMapper;
 import com.softserveinc.ita.redplatform.persistence.dao.AdminUserDao;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.security.access.annotation.Secured;
 
 /**
  * Admin User Service.
@@ -16,6 +17,7 @@ import org.springframework.mail.SimpleMailMessage;
  * @author Bulhakov Alex
  */
 @Service
+@Secured("ROLE_REDADMIN")
 public class AdminUserService extends AbstractUserService {
 
     /** The admin user dao. */
