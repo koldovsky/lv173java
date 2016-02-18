@@ -6,11 +6,11 @@
 <head>
 <jsp:include page="utils/jspheader.jsp" />
 <script
-	src="${pageContext.request.contextPath}/resources/jquery.validate.min.js">
+	src="${pageContext.request.contextPath}/resources/js/lib/jquery/jquery.validate.min.js">
 </script>
 <title>Agency registration</title>
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/lib/bootstrap-theme.min.css">
+	href="${pageContext.request.contextPath}/resources/css/lib/bootstrap/bootstrap-theme.min.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/agencyRegistration.css">
 <script src="${pageContext.request.contextPath}/resources/js/agency.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/agencyEdit.js"></script>

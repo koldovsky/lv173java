@@ -1,46 +1,82 @@
 // When the browser is ready...
-$(document).ready(
-			function() {
-				$("#navMenu").removeClass("navbar-fixed-top");
-				$("#success").hide();
-				$("#error").hide();
-				$.validator
-						.addMethod(
-								"regexName",
-								function(value, element) {
-									return /^(?=.*[a-z])[a-zA-Z0-9 ]+[ !.@&,-]?[ a-zA-Z0-9!.@&,-]+$/
-											.test(value);
-								}, "Invalid symbol!");
+$(document)
+.ready(
+		function() {
+			$('#navMenu').removeClass('navbar-fixed-top');
+			$('#success').hide();
+			$('#error').hide();
 
-				$.validator
-						.addMethod(
-								"regexPhoneNumber",
-								function(value, element) {
-									return /^[+]?\d{2}[\s-]?\d{3}[\s-]?\d{2}[\s-]?\d{2}[\s-]?\d{3}/
-											.test(value);
-								}, "Length should be 12 digits!");
+			$.validator
+				.addMethod(
+					'regexName',
+					function(value, element) {
+						return /^(?=.*[а-яА-Яa-zA-Z])[а-яА-Яa-zA-Z0-9 ]+[ !.@&,-]?[ a-zA-Z0-9!.@&,-]+$/
+								.test(value);
+					}, 'Invalid symbol!');
 
-				$.validator.addMethod("regexCountry", function(value,
-						element) {
-					return /^[a-zA-Z.\-,\' ]+$/.test(value);
-				}, "Invalid country");
+			$.validator
+				.addMethod(
+					'regexPhoneNumber',
+					function(value, element) {
+						return /^[+]?\d{2}[\s-]?\d{3}[\s-]?\d{2}[\s-]?\d{2}[\s-]?\d{3}/
+								.test(value);
+			}, 'Length should be 12 digits!');
 
-				$.validator.addMethod("regexPostalCode", function(value,
-						element) {
-					return /^(?=.*[0-9])[a-zA-Z0-9]+[ -]?[a-zA-Z0-9]+$/
-							.test(value);
-				}, "Invalid postal code");
+			$.validator
+				.addMethod(
+					'regexCountry', 
+					function(value,	element) {
+						return /^[а-яА-Яa-zA-Z.\-,\' ]+$/.test(value);
+					}, 'Invalid country');
 
-				$.validator.addMethod("regexAdditional", function(value,
-						element) {
-					return /^[a-zA-Z0-9.\-,/ ]+$/.test(value);
-				}, "Invalid address");
+			$.validator
+				.addMethod(
+						'regexPostalCode',
+						function(value, element) {
+							return /^(?=.*[0-9])[а-яА-Яa-zA-Z0-9]+[ -]?[а-яА-Яa-zA-Z0-9]+$/
+									.test(value);
+						}, 'Invalid postal code');
 
-				// Setup form validation on the #register-form element
-				$("#register-form")
-						.validate(
-								{
+			$.validator
+				.addMethod(
+						'regexAdditional', 
+						function(value,	element) {
+							return /^[а-яА-Яa-zA-Z0-9.\-,/ ]+$/.test(value);
+						}, 'Invalid address');
 
+			$.validator
+				.addMethod(
+					'uniqueCompanyName', 
+					function(value, element) {
+		
+						var isValidName = false;
+		
+						$.ajax({
+									type : 'POST',
+									url : 'checkUnique',
+								    async: false,
+									data : {
+										name : $('#agencyName').val()
+									}
+						})
+						.done(function(responseData, textStatus, jqXHR) {
+							if (responseData == 'true') {
+								isValidName = false;
+							} else if (responseData == 'false') {
+								isValidName = true;
+							}
+									
+						})
+						.fail( function(jqXHR, textStatus, errorThrown) {
+							alert(textStatus + ' ' + errorThrown);
+						});
+						return isValidName;
+					}, 'Such agency already exists');
+
+			// Setup form validation on the #register-form element
+			$('#register-form')
+					.validate(
+							{
 								// Specify the validation rules
 								rules : {
 									agencyName : {
@@ -95,47 +131,44 @@ $(document).ready(
 								},
 								messages : {
 									agencyName : {
-										required : "Please enter name of the agency",
-										minlength : "Name must be minimum 3 characters long",
-										maxlength : "Name must be maximum 100 characters long"
+										required : 'Please enter name of the agency',
+										minlength : 'Name must be minimum 3 characters long',
+										maxlength : 'Name must be maximum 100 characters long'
 									},
 									description : {
-										required : "Please enter description",
-										minlength : "Description must be at least 4 characters long",
-										maxlength : "Description must be maximum 400 characters long"
+										required : 'Please enter description',
+										minlength : 'Description must be at least 4 characters long',
+										maxlength : 'Description must be maximum 400 characters long'
 									},
 									phoneNumber : {
-										required : "Please enter phone number",
-										minlength : "Your phone number must be at least 4 characters long"
+										required : 'Please enter phone number',
+										minlength : 'Your phone number must be at least 4 characters long'
 									},
 									country : {
-										required : "Please enter country"
+										required : 'Please enter country'
 									},
 									region : {
-										required : "Please enter region",
-										regexCountry: "Invalid region"
+										required : 'Please enter region',
+										regexCountry : 'Invalid region'
 									},
 									postalCode : {
-										required : "Please enter postal code"
+										required : 'Please enter postal code'
 									},
 									locality : {
-										required : "Please enter city or village",
-										regexCountry : "Invalid city name"
+										required : 'Please enter city or village',
+										regexCountry : 'Invalid city name'
 									},
 									additionalInfo : {
-										required : "Please enter address"
+										required : 'Please enter address'
 									}
-									}
-								});
+								}
+							});
 
-		
-				
-			$("#register-form").submit(function(event) {
-				if($("#register-form").valid()==true){
+			$('#register-form').submit(function(event) {
+				if ($('#register-form').valid() === true) {
 					createOrEdit();
 					return false;
 				}
-				
-			});
-	});
 
+			});
+		});

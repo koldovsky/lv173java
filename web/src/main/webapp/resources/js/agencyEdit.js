@@ -1,8 +1,9 @@
 $(document).ready(
 		function() {
+			$('#title').html("Edit Real Estate Agency");
 			$.ajax({
 				type : "GET",
-				url : "edit/1",
+				url : "edit",
 				dataType : 'json',
 				success : function(responseData, textStatus, jqXHR) {
 					$('#agencyName').val(responseData.name);
@@ -18,9 +19,11 @@ $(document).ready(
 					
 					$('#agencyID').val(responseData.id);
 			
-				},
+				},	
 				error : function(jqXHR, textStatus, errorThrown) {
-					alert("Error to load agency");
+					if (jqXHR.status == 404) {
+						$("#error").html('Agency is not found');						
+					} 
 					$("#error").show();
 					$("#success").hide();
 				}
@@ -38,6 +41,7 @@ function createOrEdit() {
 				};
 
 				var agency = {
+					id:	$('#agencyID').val(),
 					name : $('#agencyName').val(),
 					description : $('#description').val(),
 					site : $('#webSite').val(),
@@ -47,14 +51,11 @@ function createOrEdit() {
 
 				$.ajax({
 					type : "PUT",
-					url : "edit/"+$('#agencyID').val(),
+					url : 'edit',
 					contentType : "application/json",
 					data : JSON.stringify(agency),
-					dataType : 'json',
-					success : function(responseData, textStatus, jqXHR) {
-						alert("OK");
-						console.log("SUCCESS: ", responseData);
-						$('#register-form')[0].reset();
+					success : function(responseData, textStatus, jqXHR) {	
+						$("#success").html(responseData);
 						$("#success").show();
 						$("#error").hide();
 					},
