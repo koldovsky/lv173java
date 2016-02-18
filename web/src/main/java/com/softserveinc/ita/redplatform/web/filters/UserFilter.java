@@ -46,8 +46,6 @@ public class UserFilter implements Filter {
 	    final ServletResponse res, final FilterChain chain)
 		    	throws IOException, ServletException {
 	
-	LOGGER.info("in filter");
-	
 	Authentication auth = SecurityContextHolder.getContext()
 					.getAuthentication();
 	if (!(auth instanceof AnonymousAuthenticationToken)) {

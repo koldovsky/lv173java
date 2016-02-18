@@ -18,7 +18,7 @@ import javax.persistence.OneToOne;
 public class RealEstateAgency extends BaseEntity {
 	
 	/** The name. */
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 	private String name;
 	
 	/** The description. */

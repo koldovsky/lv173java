@@ -107,4 +107,21 @@ public class RealEstateAgencyService {
     	return realEstateAgencyMapper.toDto(agency);
     }
     
+    /**
+     * Check if agency exists.
+     *
+     * @author Oleh Khimka
+     * @param name name
+     * @return boolean
+     */
+    public boolean exist(final String name) {
+    	if (realEstateAgencyDao.findAgencyByName(name) == null) {
+    	    return false;
+    	}
+    	    
+    	return true;
+    }
+    
+    
+    
 }
