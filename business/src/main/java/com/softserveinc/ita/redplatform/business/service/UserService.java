@@ -64,9 +64,9 @@ public class UserService {
      */
     @Secured("ROLE_REDADMIN")
     public List<UserDTO> 
-    	loadUserByCompanyAdmin(final String email) {
+    	loadUsersByCompanyAdmin(final String email) {
     	List<UserDTO> list = new LinkedList<UserDTO>();
-		for (User user :  userDao.findAdminsByCompany(email)) {
+		for (User user :  userDao.findCompanyUsersByCompanyAdmin(email)) {
 			list.add(userMapper.toDto(user));
 		}
 		return list;
