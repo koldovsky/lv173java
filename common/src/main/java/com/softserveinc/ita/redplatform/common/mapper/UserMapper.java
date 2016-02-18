@@ -30,24 +30,21 @@ public class UserMapper implements GenericMapper<User, UserDTO> {
 		if (entity instanceof AdminUser) {
 			userDTO.setName("admin");
 			userDTO.setPhone("none");
-			return userDTO;
 		} else if (entity instanceof CustomerUser) {
 			userDTO.setName(((CustomerUser) entity).getFirstName() 
 					+ " " + ((CustomerUser) entity).getLastName());
 			userDTO.setPhone(((CustomerUser) entity).getPhone());
-			return userDTO;
 		} else if (entity instanceof RealEstateAdminUser) {
 			userDTO.setName(((RealEstateAdminUser) entity).getFirstName() 
 					+ " " + ((RealEstateAdminUser) entity).getLastName());
 			userDTO.setPhone(((RealEstateAdminUser) entity).getPhone());
-			return userDTO;
 		}
-		return null;
+		return userDTO;
 	}
 
 	@Override
 	public final User toEntity(final UserDTO dto) {
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 }
