@@ -2,11 +2,13 @@
 	<jsp:include page="navbar.jsp"></jsp:include>
 
 	<div class="container">
-		<h1 class="well">Registration for Real Estate Agency</h1>
-		<div id="success" class="alert alert-success container" role="alert">
+	
+		<h1 id="title" class="well">Registration for Real Estate Agency</h1>
+		
+		<div id="success" class="alert alert-success" role="alert">
 			Real estate agency has been added to the list successfully.</div>
-		<div id="error" class="alert alert-danger container" role="alert">
-			Failed to add Real estate agency.</div>
+		<div id="error" class="alert alert-danger" role="alert">Failed to add agency</div>
+		
 		<div class="col-lg-12">
 			<div class="row">
 				<form name="register-form" id="register-form" method="post"
