@@ -31,10 +31,14 @@
 	<beans:bean id="userFilter" class="com.softserveinc.ita.redplatform.web.filters.UserFilter">
 		<beans:property name="userService" ref="userService"></beans:property>
 	</beans:bean>
-
+	
+	<beans:bean id="bcryptEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+ 
+	
 	<!-- Select users and user_roles from database -->
 	<authentication-manager>
 		<authentication-provider user-service-ref="UserDetailsServiceImplementation">
+		 <password-encoder ref="bcryptEncoder"/>
 		</authentication-provider>
 	</authentication-manager>
 	
