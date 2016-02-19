@@ -1,6 +1,5 @@
 package com.softserveinc.ita.redplatform.common.entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -35,7 +34,7 @@ public class RealEstateAdminUser extends User {
     /**
      * Many to One connection to Real Estate Agencies.
      */
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne
     private RealEstateAgency agency;
 
     /**
@@ -107,8 +106,7 @@ public class RealEstateAdminUser extends User {
     /**
      * Changes agency.
      *
-     * @param newAgency 
-     * 
+     * @param newAgency the new agency
      */
     public final void setAgency(final RealEstateAgency newAgency) {
 	this.agency = newAgency;
