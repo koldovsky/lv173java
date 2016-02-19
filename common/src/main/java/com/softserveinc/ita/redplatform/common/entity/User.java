@@ -1,5 +1,6 @@
 package com.softserveinc.ita.redplatform.common.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -14,6 +15,7 @@ import javax.persistence.InheritanceType;
 public class User extends BaseEntity {
 
     /** The email. */
+    @Column(unique = true)
     private String email;
 
     /** The password. */
