@@ -1,11 +1,17 @@
 $(document).ready(
 		function() {
+			
+			var href = $(location).attr("href");
+			var id = href.substr(href.lastIndexOf('/') + 1);
+			
 			$('#title').html("Edit Real Estate Agency");
+			
 			$.ajax({
 				type : "GET",
-				url : "edit",
+				url : "api/agency/"+id,
 				dataType : 'json',
 				success : function(responseData, textStatus, jqXHR) {
+					alert("ok")
 					$('#agencyName').val(responseData.name);
 					$('#description').val(responseData.description);
 					$('#webSite').val(responseData.site);
@@ -21,6 +27,8 @@ $(document).ready(
 			
 				},	
 				error : function(jqXHR, textStatus, errorThrown) {
+					console.log(jqXHR)
+					console.log(textStatus+ errorThrown)
 					if (jqXHR.status == 404) {
 						$("#error").html('Agency is not found');						
 					} 

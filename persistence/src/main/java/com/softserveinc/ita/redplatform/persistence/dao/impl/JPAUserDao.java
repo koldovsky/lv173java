@@ -26,10 +26,7 @@ public class JPAUserDao extends JPAGenericDao<User, Long> implements UserDao {
 						+ User.class.getName()
 						+ " as user where user.email=:email")
 				.setParameter("email", email).getResultList();
-		if (list.isEmpty()) {
-		    return null;
-		}
-		return (User) list.get(0);
+		return getSingleResult(list);
 	}
 
 	/**

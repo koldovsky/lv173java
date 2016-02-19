@@ -10,9 +10,17 @@ $(document)
 				.addMethod(
 					'regexName',
 					function(value, element) {
-						return /^(?=.*[а-яА-Яa-zA-Z])[а-яА-Яa-zA-Z0-9 ]+[ !.@&,-]?[ a-zA-Z0-9!.@&,-]+$/
+						return /^(?=.*[а-яА-Яіa-zA-Z])[а-яА-Яіa-zA-Z0-9 ]+[ !.@&,-]?[ a-zA-Z0-9!.@&,-]+$/
 								.test(value);
 					}, 'Invalid symbol!');
+			
+			$.validator
+			.addMethod(
+				'regexDescription',
+				function(value, element) {
+					return /^(?=.*[a-zA-Z])[a-zA-Z0-9 ]+[ !.@&,-]?[ a-zA-Z0-9!.@&,-]+$/
+							.test(value);
+				}, 'Invalid symbol!');
 
 			$.validator
 				.addMethod(
@@ -26,14 +34,21 @@ $(document)
 				.addMethod(
 					'regexCountry', 
 					function(value,	element) {
-						return /^[а-яА-Яa-zA-Z.\-,\' ]+$/.test(value);
+						return /^[a-zA-Z.\-,\' ]+$/.test(value);
 					}, 'Invalid country');
+			
+			$.validator
+			.addMethod(
+				'regexRegion', 
+				function(value,	element) {
+					return /[a-zA-Z.\-,\' ]*/.test(value);
+				}, 'Invalid region');
 
 			$.validator
 				.addMethod(
 						'regexPostalCode',
 						function(value, element) {
-							return /^(?=.*[0-9])[а-яА-Яa-zA-Z0-9]+[ -]?[а-яА-Яa-zA-Z0-9]+$/
+							return /^(?=.*[0-9])[a-zA-Z0-9]+[ -]?[a-zA-Z0-9]+$/
 									.test(value);
 						}, 'Invalid postal code');
 
@@ -41,7 +56,7 @@ $(document)
 				.addMethod(
 						'regexAdditional', 
 						function(value,	element) {
-							return /^[а-яА-Яa-zA-Z0-9.\-,/ ]+$/.test(value);
+							return /^[a-zA-Z0-9.\-,/ ]+$/.test(value);
 						}, 'Invalid address');
 
 			$.validator
@@ -106,8 +121,7 @@ $(document)
 										minlength : 2
 									},
 									region : {
-										required : true,
-										regexCountry : true,
+										regexRegion : true,
 										minlength : 2
 									},
 									postalCode : {
@@ -142,14 +156,14 @@ $(document)
 									},
 									phoneNumber : {
 										required : 'Please enter phone number',
-										minlength : 'Your phone number must be at least 4 characters long'
+										minlength : 'Your phone number must be at least 8 characters long'
 									},
 									country : {
 										required : 'Please enter country'
 									},
 									region : {
 										required : 'Please enter region',
-										regexCountry : 'Invalid region'
+										regexRegion : 'Invalid region'
 									},
 									postalCode : {
 										required : 'Please enter postal code'

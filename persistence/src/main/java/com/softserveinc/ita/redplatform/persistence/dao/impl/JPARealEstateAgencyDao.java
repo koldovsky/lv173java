@@ -23,11 +23,8 @@ public class JPARealEstateAgencyDao
 		.createQuery("from " + RealEstateAgency.class.getName()
 			+ " as agency where agency.name=:name")
 		.setParameter("name", name).getResultList();
-	if (agencies.isEmpty()) {
-	    return null;
-	} else {
-	    return (RealEstateAgency) agencies.get(0);
-	}
+	return getSingleResult(agencies);
     }
 
+  
 }

@@ -115,11 +115,7 @@ public class RealEstateAgencyService {
      * @return boolean
      */
     public boolean exist(final String name) {
-    	if (realEstateAgencyDao.findAgencyByName(name) == null) {
-    	    return false;
-    	}
-    	    
-    	return true;
+	return realEstateAgencyDao.findAgencyByName(name) != null;
     }
     
     

@@ -30,5 +30,3 @@
 	</div>
 	<!-- /.container -->
 </nav>
-<script src="resources/js/cookies.js">
-</script>

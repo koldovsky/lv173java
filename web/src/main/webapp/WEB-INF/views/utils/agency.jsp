@@ -50,7 +50,7 @@
 									type="text" name="country" id="country"
 									placeholder="Enter Country Here.." class="form-control">
 							</div>
-							<div class="col-sm-6 form-group required">
+							<div class="col-sm-6 form-group">
 								<label class="control-label" for="region">Region</label> <input
 									type="text" name="region" id="region"
 									placeholder="Enter Region Here.." class="form-control">
@@ -65,9 +65,8 @@
 							</div>
 
 							<div class="col-sm-3 form-group required">
-								<label class="control-label" for="locality">City or
-									Village</label> <input type="text" name="locality" class="form-control"
-									id="locality" placeholder="Enter City or Village Here..">
+								<label class="control-label" for="locality">Locality</label> <input type="text" name="locality" class="form-control"
+									id="locality" placeholder="Enter City Here..">
 							</div>
 
 							<div class="col-sm-6 form-group required">
