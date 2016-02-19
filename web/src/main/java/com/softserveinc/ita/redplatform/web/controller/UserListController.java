@@ -51,14 +51,14 @@ public class UserListController {
 				.getContext()
 				.getAuthentication()
 				.getAuthorities()
-				.contains(new SimpleGrantedAuthority("ROLE_REDADMIN"))) {
-			return userService.loadUsersByCompanyAdmin(
-					SecurityContextHolder
-					.getContext()
-					.getAuthentication()
-					.getName());
+				.contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
+			return userService.loadAllUsers();
 		}
-		return userService.loadAllUsers();
+		return userService.loadUsersByCompanyAdmin(
+				SecurityContextHolder
+				.getContext()
+				.getAuthentication()
+				.getName());
 					
 	}
 
