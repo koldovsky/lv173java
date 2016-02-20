@@ -4,7 +4,7 @@
 <html>
 <head>
 <jsp:include page="../utils/jspheader.jsp"/>
-<link href="../../../resources/css/login.css" rel="stylesheet">
+<link href="resources/css/login.css" rel="stylesheet">
 <title>Login</title>
 </head>
 <body>
