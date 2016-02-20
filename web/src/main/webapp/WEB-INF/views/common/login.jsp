@@ -1,85 +1,45 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-
-<meta charset="utf-8">
-<title>Login Form</title>
-
-<!-- CSS -->
-
-<link rel="stylesheet"
-	href="resources/css/lib/bootstrap/bootstrap.min.css">
-<link rel="stylesheet" href="resources/css/lib/form-elements.css">
-<link rel="stylesheet" href="resources/css/lib/style.css">
-
+<jsp:include page="../utils/jspheader.jsp"/>
+<link href="../../../resources/css/login.css" rel="stylesheet">
+<title>Login</title>
 </head>
-
 <body>
 
-	<!-- Top content -->
-	<div class="top-content">
-
-		<div class="inner-bg">
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-8 col-sm-offset-2 text">
-						<h1>Login</h1>
+	<div class="container" style="margin-top: 140px;">
+		<div class="row">
+			<div class="col-md-4 col-md-offset-4">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">Please sign in</h3>
 					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-6 col-sm-offset-3 form-box">
-						<div class="form-top">
-							<div class="form-top-left">
-								<h3>Please Login</h3>
-								<p>Enter your email and password to log on:</p>
-							</div>
-							<div class="form-top-right">
-								<i class="fa fa-lock"></i>
-							</div>
-						</div>
-						
-						
-						<div class="form-bottom">
+					<div class="panel-body">
 						<c:if test="${not empty error}">
 							<div class="alert alert-danger">
 								<div class="error">${error}</div>
 							</div>
 						</c:if>
-							<form role="form" name="loginform"
-								action="<c:url value="/j_spring_security_check"></c:url>"
-								method="post" class="login-form">
+						<form name="loginform" action="<c:url value="/j_spring_security_check"></c:url>"
+							method="post">
+							<fieldset>
 								<div class="form-group">
-									<label class="sr-only" for="form-username">Email</label> <input
-										type="text" name="email" placeholder="Email..."
-										class="form-username form-control" id="form-username">
+									<input class="form-control" name='email' type="text">
 								</div>
 								<div class="form-group">
-									<label class="sr-only" for="form-password">Password</label> <input
-										type="password" name="password" placeholder="Password..."
-										class="form-password form-control" id="form-password">
+									<input class="form-control" name='password' type="password">
 								</div>
-								<button type="submit" class="btn">Sign in!</button>
-							</form>
-							
-						</div>
+								<input class="btn btn-lg btn-success btn-block" type="submit"
+									value="Login">
+							</fieldset>
+							<input type="hidden" name="${_csrf.parameterName}"
+								value="${_csrf.token}" />
+						</form>
 					</div>
 				</div>
 			</div>
 		</div>
-
 	</div>
-
-
-	<!-- Javascript -->
-	<script src="resources/js/login/jquery-1.11.1.min.js"></script>
-	<script src="resources/js/login/bootstrap.min.js"></script>
-	<script src="resources/js/login/jquery.backstretch.min.js"></script>
-	<script src="resources/js/login/scripts.js"></script>
-
 </body>
-
-</html>

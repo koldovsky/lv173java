@@ -1,8 +1,13 @@
 package com.softserveinc.ita.redplatform.web.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.
+         SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,6 +60,22 @@ public class LoginController {
     public final String loginerror(final Model model) {
 	model.addAttribute("error", "true");
 	return "common/login";
+    }
+    /**
+     * 
+     * @param request request
+     * @param response response
+     * @return login page.
+     */
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public final String logoutPage(final HttpServletRequest request, 
+	    final HttpServletResponse response) {
+        Authentication auth = SecurityContextHolder.getContext()
+        	.getAuthentication();
+        if (auth != null) {    
+            new SecurityContextLogoutHandler().logout(request, response, auth);
+        }
+        return "redirect:/login";
     }
 
 }
