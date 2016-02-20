@@ -2,6 +2,7 @@ package com.softserveinc.ita.redplatform.business.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.softserveinc.ita.redplatform.common.dto.RealEstateAdminUserDTO;
 import com.softserveinc.ita.redplatform.common.entity.RealEstateAdminUser;
@@ -45,5 +46,16 @@ public class RealEstateAdminUserService extends AbstractUserService {
     protected void doSave(final User user) {
 	RealEstateAdminUser admin = (RealEstateAdminUser) user;
 	dao.save(admin);
+    }
+    
+    /**
+     * Load user by email.
+     *
+     * @param email the email
+     * @return the user
+     */
+    @Transactional
+    public User loadUserByEmail(final String email) {
+	return dao.findUserByEmail(email);
     }
 }

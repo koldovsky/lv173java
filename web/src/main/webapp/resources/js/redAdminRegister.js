@@ -1,31 +1,41 @@
 $(document).ready(function() {
-	$("#error").hide();
-	$("#success").hide();
+	$('#error').hide();
+	$('#success').hide();
 	
 	$.validator.addMethod('fieldRequired', 
 			$.validator.methods.required, 'Field is required.');
-	$.validator.addMethod('emailCustom', function(value, element) {
-			return /^[A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,}$/i.test(value);
-				}, 'Email should be valid.');
 	$.validator.addClassRules('data', { fieldRequired: true });
 	
+	$.validator.addMethod('mailCustom', function(value, element) {
+			return /^[A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,}$/i.test(value);
+				}, 'Email should be valid.');
+	
 	$.validator.addMethod('nameCustom', function(value, element) {
-			return /^[A-Z ,.-]+$/i.test(value);
+			return /^[A-Z][A-Z ,.-]{0,}$/i.test(value);
 	}, 'Name should be correct.');
 	$.validator.addClassRules('name', { nameCustom: true });
 	
 	var $form = $('#red-admin-register');
 	$form.validate({
 				rules: {
-					'email-adr': {
-						emailCustom: true
-						},
+					mail: {
+						mailCustom: true,
+						remote: {
+							url: 'checkmail',
+							type: 'GET'
+						}
+					},
 					phone: {
 						digits: true
 					}
 				},
 				messages: {
-					digits: 'Only digits are allowed.'
+					mail: {
+						remote: 'This email is already taken.'
+					},
+					phone: {
+						digits: 'Only digits are allowed.'
+					}
 				}
 			});
 	
@@ -34,7 +44,7 @@ $(document).ready(function() {
 		if ($form.valid() == true) {
 			
 			var info = {
-					email: $('#email-adr').val(),
+					email: $('#mail').val(),
 					firstName: $('#first-name').val(),
 					lastName: $('#last-name').val(),
 					phone: $('#phone').val(),
