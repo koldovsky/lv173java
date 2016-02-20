@@ -82,6 +82,36 @@
     <version>4.0.3.RELEASE</version>
     <scope>import</scope>
       </dependency>
+    <dependency>
+      <groupId>com.softserveinc.ita</groupId>
+      <artifactId>common</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>com.softserveinc.ita</groupId>
+      <artifactId>business</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>com.softserveinc.ita</groupId>
+      <artifactId>persistence</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>com.softserveinc.ita</groupId>
+      <artifactId>integration</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>com.softserveinc.ita</groupId>
+      <artifactId>logging</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    
     </dependencies>
   </dependencyManagement>
 
