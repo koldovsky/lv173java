@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import 
@@ -46,11 +45,9 @@ public class AgencyRestController {
      * @return ResponseEntity ResponseEntity
      */
     @RequestMapping(value = "/api/agency/{id}", method = RequestMethod.GET)
-    @ResponseBody
     public final ResponseEntity<RealEstateAgencyDTO>
 	    getAgency(@PathVariable("id") final long id) {
 
-	LOGGER.info("in get agency ajax");
 	RealEstateAgencyDTO realEstateAgencyDTO = 
 		realEstateAgencyService.getById(id);
 	if (realEstateAgencyDTO == null) {
@@ -65,7 +62,7 @@ public class AgencyRestController {
     
 
     /**
-     * Update agency.
+     * Update agency by id.
      * 
      * @return status.
      * @param id
@@ -74,15 +71,14 @@ public class AgencyRestController {
      *            realEstateAgencyDTO
      */
     @RequestMapping(value = "/api/agency/{id}", method = RequestMethod.PUT)
-    @ResponseBody
-    public final ResponseEntity<String> updateAgency(
+    public final ResponseEntity<RealEstateAgencyDTO> updateAgency(
 	    @PathVariable("id") final long id,
 	    @RequestBody final RealEstateAgencyDTO realEstateAgencyDTO) {
 
 	realEstateAgencyService.update(realEstateAgencyDTO);
 
-	return new ResponseEntity<String>(
-		"Agency has been edited successfully", 
+	return new ResponseEntity<RealEstateAgencyDTO>(
+		realEstateAgencyDTO, 
 		HttpStatus.OK);
     }
 }

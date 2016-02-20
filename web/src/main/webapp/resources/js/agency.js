@@ -178,11 +178,4 @@ $(document)
 								}
 							});
 
-			$('#register-form').submit(function(event) {
-				if ($('#register-form').valid() === true) {
-					createOrEdit();
-					return false;
-				}
-
-			});
 		});

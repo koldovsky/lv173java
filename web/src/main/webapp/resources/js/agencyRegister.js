@@ -7,9 +7,17 @@ $(document).ready(function() {
         	uniqueCompanyName : true
         });
     });
+    
+	$('#register-form').submit(function(event) {
+		if ($('#register-form').valid() === true) {
+			createAgency();
+			return false;
+		}
+
+	});
 });
 
-function createOrEdit() {
+function createAgency() {
 
 	var address = {
 		country : $('#country').val(),
@@ -29,7 +37,7 @@ function createOrEdit() {
 
 	$.ajax({
 		type : "POST",
-		url : "create",
+		url : "agency",
 		contentType : "application/json",
 		data : JSON.stringify(agency),
 		success : function(responseData, textStatus, jqXHR) {
