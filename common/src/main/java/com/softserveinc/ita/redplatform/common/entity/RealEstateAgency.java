@@ -31,7 +31,7 @@ public class RealEstateAgency extends BaseEntity {
 	private String phone;
 	
 	/** The address of the office. */
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	private Address address;
 	
 	/** The main office. */
