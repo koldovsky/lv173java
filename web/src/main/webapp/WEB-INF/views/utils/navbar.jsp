@@ -1,6 +1,8 @@
-
+<!-- Navbar JS -->
+<script src="${pageContext.request.contextPath}/resources/js/common/navbar.js"></script>
 <!-- Navigation -->
-<nav id="navMenu" class="navbar navbar-default navbar-fixed-top" role="navigation">
+<nav id="navMenu" class="navbar navbar-default navbar-fixed-top"
+	role="navigation">
 	<div class="container">
 		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header">
