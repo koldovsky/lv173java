@@ -1,14 +1,14 @@
 // When the browser is ready...
 $(document).ready(function() {
 	var hideMessages = function(){
-		$("#error").hide();
-		$("#success").hide();
+		$('#error').hide();
+		$('#success').hide();
 	}
 	hideMessages();
 
-	$.validator.addMethod("regexMail", function(value, element) {
+	$.validator.addMethod('regexMail', function(value, element) {
 		return /^[A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,}$/i.test(value);
-	}, "The e-mail should be valid!");
+	}, 'The e-mail should be valid!');
 
 	// Setup form validation on the #register-form element
 	$('#adminregisterform').validate({
@@ -29,16 +29,16 @@ $(document).ready(function() {
 		},
 		messages : {
 			mail : {
-				required : "Please enter new system administrator's login",
-				minlength : "Login must be minimum 6 characters long",
-				maxlength : "Login must be maximum 60 characters long",
-				remote: "This email already taken!"	
+				required : 'Please enter new system administrator\'s login',
+				minlength : 'Login must be minimum 6 characters long',
+				maxlength : 'Login must be maximum 60 characters long',
+				remote: 'This email already taken!'	
 			}
 		}
 
 	});
-	$("#adminregisterform").submit(function(event) {
-		if ($("#adminregisterform").valid()) {
+	$('#adminregisterform').submit(function(event) {
+		if ($('#adminregisterform').valid()) {
 			hideMessages();
 
 			var data = {
@@ -47,17 +47,17 @@ $(document).ready(function() {
 			var postData = JSON.stringify(data);
 
 			$.ajax({
-				type : "POST",
-				url : "adminregister",
+				type : 'POST',
+				url : 'adminregister',
 				data : postData,
-				contentType : "application/json; charset=utf-8",
+				contentType : 'application/json; charset=utf-8',
 				success : function(responseData, textStatus, jqXHR) {
-						$("#success").show();
-						$("#adminregisterform")[0].reset();
+						$('#success').show();
+						$('#adminregisterform')[0].reset();
 				},
 				error : function(jqXHR, textStatus, errorThrown) {
-					$("#error").text("Failed to add new System Administrator.");
-					$("#error").show();
+					$('#error').text('Failed to add new System Administrator.');
+					$('#error').show();
 					
 				}
 				
