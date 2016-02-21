@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,8 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>REDplatform Home Page</title>
 <!-- Custom CSS -->
-<link href="resources/css/index.css" rel="stylesheet">
-<link href="resources/css/autorization.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/index.css" rel="stylesheet">
+
 </head>
 <body>
 	<jsp:include page="../utils/navbar.jsp"></jsp:include>
@@ -77,23 +77,12 @@
 				</div>
 			</div>
 		</div>
-		<div id="autorization">
-			<sec:authorize access="isAnonymous()">
-					<form action="/REDplatform/login">
-    					<input class="btn btn-success" type="submit" value="Login">
-					</form>
-			</sec:authorize>
-			<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_REDADMIN', 'ROLE_USER')">
-				<form action="/REDplatform/logout">
-    					<input class="btn btn-danger" type="submit" value="Logout">
-				</form>
-			</sec:authorize>
-		</div>
+		
 		<jsp:include page="../utils/footer.jsp"></jsp:include>
 	</div>
 	<!-- /.container -->
 
 	<!-- index.js -->
-	<script src="resources/js/index.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/index.js"></script>
 </body>
 </html>
