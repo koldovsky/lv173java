@@ -1,0 +1,9 @@
+#autorization {
+	float:right;
+	position: absolute;
+    top: 0;
+    right: 0;
+    margin-top:8px;
+    margin-right:10px;
+    z-index:9999;
+}
