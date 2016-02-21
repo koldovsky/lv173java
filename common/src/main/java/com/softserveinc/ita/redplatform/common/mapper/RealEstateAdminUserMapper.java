@@ -4,7 +4,6 @@ import org.springframework.stereotype.Component;
 
 import com.softserveinc.ita.redplatform.common.dto.RealEstateAdminUserDTO;
 import com.softserveinc.ita.redplatform.common.entity.RealEstateAdminUser;
-import com.softserveinc.ita.redplatform.common.entity.RealEstateAgency;
 
 /**
  * The class RealEstateAdminUserMapper.
@@ -35,9 +34,6 @@ implements GenericMapper<RealEstateAdminUser, RealEstateAdminUserDTO> {
 	admin.setLastName(dto.getLastName());
 	admin.setEmail(dto.getEmail());
 	admin.setPhone(dto.getPhone());
-	RealEstateAgency agency = new RealEstateAgency();
-	agency.setId(dto.getAgencyId());
-	admin.setAgency(agency);
 	return admin;
     }
 }

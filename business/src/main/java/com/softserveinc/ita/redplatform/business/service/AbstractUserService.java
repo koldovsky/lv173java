@@ -1,13 +1,14 @@
 package com.softserveinc.ita.redplatform.business.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.softserveinc.ita.redplatform.business.accessory.PasswordGenerator;
 import com.softserveinc.ita.redplatform.common.entity.User;
 import com.softserveinc.ita.redplatform.integration.MailService;
-import org.springframework.mail.SimpleMailMessage;
+import com.softserveinc.ita.redplatform.persistence.dao.GenericDao;
 
 /**
  * The Class AbstractUserService.
@@ -41,7 +42,7 @@ public abstract class AbstractUserService {
 	notifyUserWithMail(user, rawPassword);
 	String encodedPassword = passEncoder.encode(rawPassword);
 	user.setPassword(encodedPassword);
-	doSave(user);
+	doGetDao().save(user);
     }
 
     /**
@@ -82,22 +83,15 @@ public abstract class AbstractUserService {
      */
     private void setContentAndPassword(final SimpleMailMessage message, 
 	    final User user, final String password) {
-	String notification = (new StringBuilder())
-		.append("Hi and welcome to the REDplatform! ")
-		.append("You can find your credentials below: \n")
-		.append("Username: ")
-		.append(user.getEmail())
-		.append("\nPassword: ")
-		.append(password)
-		.toString();
-	message.setText(notification);
-	
+	String notification = "Welcome to the REDplatform! "
+		+ "You can find your credentials below:\nUsername: %s\nPassword: %s";
+	message.setText(String.format(notification, user.getEmail(), password));
     }
-	
+    
     /**
-     * Save user in the database.
-     * 
-     * @param user the user
-     **/
-    protected abstract void doSave(final User user);
+     * Get dao.
+     *
+     * @return the dao
+     */
+    protected abstract GenericDao doGetDao();
 }

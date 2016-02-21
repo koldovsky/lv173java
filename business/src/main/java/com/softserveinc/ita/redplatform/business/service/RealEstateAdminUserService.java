@@ -8,6 +8,7 @@ import com.softserveinc.ita.redplatform.common.dto.RealEstateAdminUserDTO;
 import com.softserveinc.ita.redplatform.common.entity.RealEstateAdminUser;
 import com.softserveinc.ita.redplatform.common.entity.User;
 import com.softserveinc.ita.redplatform.common.mapper.RealEstateAdminUserMapper;
+import com.softserveinc.ita.redplatform.persistence.dao.GenericDao;
 import com.softserveinc.ita.redplatform.persistence.dao.RealEstateAdminUserDao;
 import com.softserveinc.ita.redplatform.persistence.dao.RealEstateAgencyDao;
 
@@ -35,14 +36,13 @@ public class RealEstateAdminUserService extends AbstractUserService {
     @Override
     protected User doGetUserEntity(final Object dto) {
 	RealEstateAdminUser admin = mapper.toEntity((RealEstateAdminUserDTO) dto);
-	Long agencyId = admin.getAgency().getId();
-	admin.setAgency(agencyDao.findById(agencyId));
+	admin.setAgency(agencyDao
+		.findById(((RealEstateAdminUserDTO) dto).getAgencyId()));
 	return admin;
     }
-
+    
     @Override
-    protected void doSave(final User user) {
-	RealEstateAdminUser admin = (RealEstateAdminUser) user;
-	dao.save(admin);
+    protected GenericDao<RealEstateAdminUser, Long> doGetDao() {
+	return dao;
     }
 }

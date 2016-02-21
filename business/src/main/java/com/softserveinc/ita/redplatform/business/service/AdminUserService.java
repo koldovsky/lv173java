@@ -1,6 +1,7 @@
 package com.softserveinc.ita.redplatform.business.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 
 import com.softserveinc.ita.redplatform.common.dto.AdminUserDTO;
@@ -8,8 +9,7 @@ import com.softserveinc.ita.redplatform.common.entity.AdminUser;
 import com.softserveinc.ita.redplatform.common.entity.User;
 import com.softserveinc.ita.redplatform.common.mapper.AdminUserMapper;
 import com.softserveinc.ita.redplatform.persistence.dao.AdminUserDao;
-
-import org.springframework.security.access.annotation.Secured;
+import com.softserveinc.ita.redplatform.persistence.dao.GenericDao;
 
 /**
  * Admin User Service.
@@ -29,13 +29,13 @@ public class AdminUserService extends AbstractUserService {
     private AdminUserMapper mapper;
 
     @Override
-    protected void doSave(final User user) {
-	dao.save((AdminUser) user);
-    }
-
-    @Override
     protected User doGetUserEntity(final Object dto) {
 	return mapper.toEntity((AdminUserDTO) dto);
+    }
+    
+    @Override
+    protected GenericDao<AdminUser, Long> doGetDao() {
+	return dao;
     }
 
     /**
