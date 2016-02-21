@@ -17,7 +17,7 @@ import com.softserveinc.ita.redplatform.persistence.dao.GenericDao;
  * @author Bulhakov Alex
  */
 @Service
-@Secured("ROLE_REDADMIN")
+@Secured("ROLE_ADMIN")
 public class AdminUserService extends AbstractUserService {
 
     /** The admin user dao. */

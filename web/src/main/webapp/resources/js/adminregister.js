@@ -7,35 +7,42 @@ $(document).ready(function() {
 	hideMessages();
 
 	$.validator.addMethod("regexMail", function(value, element) {
-		return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value);
-	}, "Invalid email!");
+		return /^[A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,}$/i.test(value);
+	}, "The e-mail should be valid!");
 
 	// Setup form validation on the #register-form element
-	$("#adminregisterform").validate({
+	$('#adminregisterform').validate({
+		errorClass: 'text-danger',
 		// Specify the validation rules
 		rules : {
-			adminregister : {
+			
+			mail : {
 				required : true,
 				minlength : 6,
 				maxlength : 60,
-				regexMail : true
+				regexMail : true,
+				remote: {
+					url: 'checkmail',
+					type: 'GET'
+				}
 			}
 		},
 		messages : {
-			adminregister : {
+			mail : {
 				required : "Please enter new system administrator's login",
 				minlength : "Login must be minimum 6 characters long",
-				maxlength : "Login must be maximum 60 characters long"
+				maxlength : "Login must be maximum 60 characters long",
+				remote: "This email already taken!"	
 			}
 		}
 
 	});
 	$("#adminregisterform").submit(function(event) {
-		if ($("#adminregisterform").valid() == true) {
+		if ($("#adminregisterform").valid()) {
 			hideMessages();
 
 			var data = {
-				email : $('#adminregister').val()
+				email : $('#mail').val()
 			};
 			var postData = JSON.stringify(data);
 
@@ -46,16 +53,10 @@ $(document).ready(function() {
 				contentType : "application/json; charset=utf-8",
 				success : function(responseData, textStatus, jqXHR) {
 						$("#success").show();
-					
-					$("#adminregisterform")[0].reset();
+						$("#adminregisterform")[0].reset();
 				},
 				error : function(jqXHR, textStatus, errorThrown) {
 					$("#error").text("Failed to add new System Administrator.");
-					if(jqXHR.status == 400) {
-						if(jqXHR.responseText != ""){
-							$("#error").text(jqXHR.responseText);
-						}
-					} 
 					$("#error").show();
 					
 				}
