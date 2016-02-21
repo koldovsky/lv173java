@@ -83,7 +83,7 @@
     					<input class="btn btn-success" type="submit" value="Login">
 					</form>
 			</sec:authorize>
-			<sec:authorize access="hasRole('ROLE_ADMIN')">
+			<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_REDADMIN', 'ROLE_USER')">
 				<form action="/REDplatform/logout">
     					<input class="btn btn-danger" type="submit" value="Logout">
 				</form>
