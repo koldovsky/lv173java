@@ -67,6 +67,7 @@ public abstract class AbstractUserService {
 	SimpleMailMessage simpleMessage = new SimpleMailMessage();
 	simpleMessage.setFrom("REDplatform");
 	simpleMessage.setTo(recipient.getEmail());
+	simpleMessage.setSubject("Registration");
 	setContentAndPassword(simpleMessage, recipient, password);
 	mailService.sendMessage(simpleMessage);
     }
