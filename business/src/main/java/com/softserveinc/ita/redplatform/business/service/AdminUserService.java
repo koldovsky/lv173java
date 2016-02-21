@@ -32,20 +32,10 @@ public class AdminUserService extends AbstractUserService {
     protected User doGetUserEntity(final Object dto) {
 	return mapper.toEntity((AdminUserDTO) dto);
     }
-    
+
     @Override
     protected GenericDao<AdminUser, Long> doGetDao() {
 	return dao;
     }
 
-    /**
-     * Check if exists.
-     *
-     * @param adminUserDTO
-     *            the admin user dto
-     * @return true, if successful
-     */
-    public boolean checkIfExists(final AdminUserDTO adminUserDTO) {
-	return null != dao.findUserByEmail(adminUserDTO.getEmail());
-    }
 }

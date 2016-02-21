@@ -42,16 +42,10 @@ public class AdminUserRegisterController {
      *            DTO
      */
     @RequestMapping(value = "/adminregister", method = RequestMethod.POST)
-    public final ResponseEntity<String>
+    public final ResponseEntity<AdminUserDTO>
 	    adminRegister(@RequestBody final AdminUserDTO adminUserDTO) {
-	if (adminUserService.checkIfExists(adminUserDTO)) {
-	    return ResponseEntity.badRequest()
-		    .body("This System Administrator already exists!");
-	} else {
-	    adminUserService.register(adminUserDTO);
-	    return ResponseEntity.ok(null);
-	}
-
+	adminUserService.register(adminUserDTO);
+	return ResponseEntity.ok(adminUserDTO);
     }
 
 }
