@@ -3,6 +3,7 @@ package com.softserveinc.ita.redplatform.persistence.dao;
 import java.util.List;
 
 import com.softserveinc.ita.redplatform.common.entity.User;
+import com.softserveinc.ita.redplatform.common.predicate.DataTablePredicate;
 
 /**
  * DAO implementation for User.
@@ -44,4 +45,24 @@ public interface UserDao extends GenericDao<User, Long> {
 	 * @return User
 	 */
 	List<User> findCustomersByCompany(String companyName);
+
+	/**
+	 * find all users usning predicates.
+	 * 
+	 * @param predicate prediacte
+	 * @return User
+	 */
+	List<User> findAll(DataTablePredicate predicate);
+	
+	/**
+	 * count all users.
+	 * @return count
+	 */
+	long countAll();
+	/**
+	 * count all users with predicate.
+	 * @param predicate predicate
+	 * @return count
+	 */
+	long countAll(DataTablePredicate predicate);
 }

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import com.softserveinc.ita.redplatform.common.entity.CustomerUser;
 import com.softserveinc.ita.redplatform.common.entity.RealEstateAdminUser;
 import com.softserveinc.ita.redplatform.common.entity.User;
+import com.softserveinc.ita.redplatform.common.predicate.DataTablePredicate;
 import com.softserveinc.ita.redplatform.persistence.dao.UserDao;
 
 /**
@@ -104,5 +105,68 @@ public class JPAUserDao extends JPAGenericDao<User, Long> implements UserDao {
 				.setParameter("email", email)
 				.getResultList();
 	}
+	/**
+	 * @param predicate predicate.
+	 * @return User
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public final List<User> findAll(final DataTablePredicate predicate) {
+		String orderField;
+		if (predicate.getColumn() == 0) {
+			orderField = "user.firstName, user.lastName";
+		} else if (predicate.getColumn() == 1) {
+			orderField = "user.email";
+		} else if (predicate.getColumn() == 2) {
+			orderField = "user.phone";
+		} else {
+			orderField = "user.createdDate";
+		}
+		return (List<User>) getEntityManager()
+				.createQuery("select user from "
+						+ User.class.getName()
+						+ " as user where user.email like :search"
+						+ " or user.createdDate like :search"
+						+ " or user.phone like :search"
+						+ " or user.lastName like :search"
+						+ " or user.firstName like :search"
+						+ " order by " + orderField + " "
+						+ predicate.getOrder())
+				.setParameter("search", predicate.getSearch() + "%")
+				.setFirstResult(predicate.getStart())
+				.setMaxResults(predicate.getLength())
+				.getResultList();
+
+	}
+	
+	/**
+	 * Count all Users.
+	 * @return count of users
+	 */
+	public final long countAll() {
+		return (long) getEntityManager()
+				.createQuery("select count(*) from "
+						+ User.class.getName())
+				.getSingleResult();
+	}
+	
+	/**
+	 * Count all Users with predicate.
+	 * @param predicate predicate
+	 * @return count of users
+	 */
+	public final long countAll(final DataTablePredicate predicate) {
+		return (long) getEntityManager()
+				.createQuery("select count(*) from "
+						+ User.class.getName()
+						+ " as user where user.email like :search"
+						+ " or user.createdDate like :search"
+						+ " or user.phone like :search"
+						+ " or user.lastName like :search"
+						+ " or user.firstName like :search")
+				.setParameter("search", predicate.getSearch() + "%")
+				.getSingleResult();
+	}
+	
 }
 

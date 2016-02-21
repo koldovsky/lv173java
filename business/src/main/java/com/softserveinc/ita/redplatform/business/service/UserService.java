@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.softserveinc.ita.redplatform.common.dto.UserDTO;
 import com.softserveinc.ita.redplatform.common.entity.User;
 import com.softserveinc.ita.redplatform.common.mapper.UserMapper;
+import com.softserveinc.ita.redplatform.common.predicate.DataTablePredicate;
 import com.softserveinc.ita.redplatform.persistence.dao.UserDao;
 
 /**
@@ -45,13 +46,13 @@ public class UserService {
     
     /**
      * load all users.
-     * 
+     * @param predicate predicate
      * @return List<User>
      */
     @Secured("ROLE_ADMIN")
-	public List<UserDTO> loadAllUsers() {
+	public List<UserDTO> loadAllUsers(final DataTablePredicate predicate) {
     	List<UserDTO> list = new LinkedList<UserDTO>();
-    	for (User user : userDao.findAll()) {
+    	for (User user : userDao.findAll(predicate)) {
     		list.add(userMapper.toDto(user));
     	}
     	return list;
@@ -80,5 +81,23 @@ public class UserService {
      */
     public boolean isEmailAvailable(final String email) {
 	return userDao.findUserByEmail(email) == null;
+    }
+    
+    /**
+     * count all users.
+     * @return count
+     */
+    public long countAll() {
+    	return userDao.countAll();
+    }
+    
+    /**
+     * count all users with predicate.
+     * @param predicate 
+     * @return count.
+     */
+    public long countAll(final DataTablePredicate predicate) {
+		return userDao.countAll(predicate);
+    	
     }
 }
