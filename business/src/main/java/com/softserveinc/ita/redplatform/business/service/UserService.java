@@ -71,4 +71,14 @@ public class UserService {
 		}
 		return list;
     }
+    
+    /**
+     * Checks if email is available.
+     *
+     * @param email the email
+     * @return true, if email is available
+     */
+    public boolean isEmailAvailable(final String email) {
+	return userDao.findUserByEmail(email) == null;
+    }
 }

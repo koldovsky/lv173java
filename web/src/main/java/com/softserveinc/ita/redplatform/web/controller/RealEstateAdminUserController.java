@@ -10,8 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.softserveinc.ita.redplatform.business.service
 		.RealEstateAdminUserService;
@@ -35,8 +33,7 @@ public class RealEstateAdminUserController {
     /** The agency service. */
     @Autowired
     private RealEstateAgencyService agencyService;
-  
-
+    
     /**
      * Gets the registration page.
      *
@@ -63,21 +60,5 @@ public class RealEstateAdminUserController {
 	    @RequestBody final RealEstateAdminUserDTO dto) {
 	adminService.register(dto);
 	return new ResponseEntity<>(HttpStatus.CREATED);
-    }
-
-    /**
-     * Check email availability.
-     * 
-     * @param mail the mail
-     * @return true, if email is available
-     */
-    @RequestMapping(value = "/checkmail", method = RequestMethod.GET)
-    @ResponseBody
-    public final String checkEmailAvailability(
-	    @RequestParam final String mail) {
-	System.out.println(mail);
-	Boolean isAvailable = adminService
-		.loadUserByEmail(mail) == null;
-	return isAvailable.toString();
     }
 }
