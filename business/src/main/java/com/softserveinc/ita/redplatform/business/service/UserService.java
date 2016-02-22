@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 
 import com.softserveinc.ita.redplatform.common.dto.UserDTO;
@@ -49,7 +48,6 @@ public class UserService {
      * @param predicate predicate
      * @return List<User>
      */
-    @Secured("ROLE_ADMIN")
 	public List<UserDTO> loadAllUsers(final DataTablePredicate predicate) {
     	List<UserDTO> list = new LinkedList<UserDTO>();
     	for (User user : userDao.findAll(predicate)) {
@@ -61,13 +59,15 @@ public class UserService {
     /**
      * load all users dealing with company.
      * @param email company admin email
+     * @param predicate predicate
      * @return List<User>
      */
-    @Secured("ROLE_REDADMIN")
     public List<UserDTO> 
-    	loadUsersByCompanyAdmin(final String email) {
+    	loadUsersByCompanyAdmin(final String email, 
+    			final DataTablePredicate predicate) {
     	List<UserDTO> list = new LinkedList<UserDTO>();
-		for (User user :  userDao.findCompanyUsersByCompanyAdmin(email)) {
+		for (User user :  userDao.findCompanyUsersByCompanyAdmin(email, 
+				predicate)) {
 			list.add(userMapper.toDto(user));
 		}
 		return list;
@@ -98,6 +98,26 @@ public class UserService {
      */
     public long countAll(final DataTablePredicate predicate) {
 		return userDao.countAll(predicate);
+    	
+    }
+    /**
+     * count all users.
+     * @param email Admin email
+     * @return count
+     */
+    public long countAllCompanyUsers(final String email) {
+    	return userDao.countAllCompanyUsers(email);
+    }
+    
+    /**
+     * count all users with predicate.
+     * @param email Admin email
+     * @param predicate 
+     * @return count.
+     */
+    public long countAllCompanyUsers(final String email, 
+    		final DataTablePredicate predicate) {
+		return userDao.countAllCompanyUsers(email, predicate);
     	
     }
 }

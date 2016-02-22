@@ -26,9 +26,11 @@ public interface UserDao extends GenericDao<User, Long> {
 	 * 
 	 * @param email
 	 *            company admin email
+	 * @param predicate predicate
 	 * @return User
 	 */
-	List<User> findCompanyUsersByCompanyAdmin(String email);
+	List<User> findCompanyUsersByCompanyAdmin(String email, 
+			DataTablePredicate predicate);
 
 	/**
 	 * find admin by company.
@@ -65,4 +67,18 @@ public interface UserDao extends GenericDao<User, Long> {
 	 * @return count
 	 */
 	long countAll(DataTablePredicate predicate);
+	
+	/**
+	 * count all company users.
+	 * @param email Admin email
+	 * @return count
+	 */
+	long countAllCompanyUsers(String email);
+	/**
+	 * count all company users with predicate.
+	 * @param email Admin email
+	 * @param predicate predicate
+	 * @return count
+	 */
+	long countAllCompanyUsers(String email, DataTablePredicate predicate);
 }

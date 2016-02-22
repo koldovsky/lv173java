@@ -77,7 +77,19 @@ public class JPAUserDao extends JPAGenericDao<User, Long> implements UserDao {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public final List<User> findCompanyUsersByCompanyAdmin(final String email) {
+	public final List<User> findCompanyUsersByCompanyAdmin(final String email, 
+			final DataTablePredicate predicate) {
+		String orderField;
+		if (predicate.getColumn() == 0) {
+			orderField = "user.firstName " 
+					+ predicate.getOrder() + ", user.lastName";
+		} else if (predicate.getColumn() == 1) {
+			orderField = "user.email";
+		} else if (predicate.getColumn() == 2) {
+			orderField = "user.phone";
+		} else {
+			orderField = "user.createdDate";
+		}
 		return (List<User>) getEntityManager()
 				.createQuery("select user from "
 						+ User.class.getName()
@@ -94,6 +106,11 @@ public class JPAUserDao extends JPAGenericDao<User, Long> implements UserDao {
 						+ " (select adminuser.agency from "
 						+ RealEstateAdminUser.class.getName()
 						+ " as adminuser where adminuser.email =:email )))"
+						+ " and ( user.email like :search"
+						+ " or user.createdDate like :search"
+						+ " or user.phone like :search"
+						+ " or user.lastName like :search"
+						+ " or user.firstName like :search )"
 						+ " or user.id in ("
 						+ " select admin.id from "
 						+ RealEstateAdminUser.class.getName()
@@ -101,8 +118,18 @@ public class JPAUserDao extends JPAGenericDao<User, Long> implements UserDao {
 						+ " as agency where agency ="
 						+ " (select adminuser.agency from "
 						+ RealEstateAdminUser.class.getName()
-						+ " as adminuser where adminuser.email =:email ) )")
+						+ " as adminuser where adminuser.email =:email ))"
+						+ " and ( user.email like :search"
+						+ " or user.createdDate like :search"
+						+ " or user.phone like :search"
+						+ " or user.lastName like :search"
+						+ " or user.firstName like :search )"
+						+ " order by " + orderField
+						+ " " + predicate.getOrder())
 				.setParameter("email", email)
+				.setParameter("search", predicate.getSearch() + "%")
+				.setFirstResult(predicate.getStart())
+				.setMaxResults(predicate.getLength())
 				.getResultList();
 	}
 	/**
@@ -114,7 +141,8 @@ public class JPAUserDao extends JPAGenericDao<User, Long> implements UserDao {
 	public final List<User> findAll(final DataTablePredicate predicate) {
 		String orderField;
 		if (predicate.getColumn() == 0) {
-			orderField = "user.firstName, user.lastName";
+			orderField = "user.firstName " 
+					+ predicate.getOrder() + ", user.lastName";
 		} else if (predicate.getColumn() == 1) {
 			orderField = "user.email";
 		} else if (predicate.getColumn() == 2) {
@@ -130,8 +158,8 @@ public class JPAUserDao extends JPAGenericDao<User, Long> implements UserDao {
 						+ " or user.phone like :search"
 						+ " or user.lastName like :search"
 						+ " or user.firstName like :search"
-						+ " order by " + orderField + " "
-						+ predicate.getOrder())
+						+ " order by " + orderField
+						+ " " + predicate.getOrder())
 				.setParameter("search", predicate.getSearch() + "%")
 				.setFirstResult(predicate.getStart())
 				.setMaxResults(predicate.getLength())
@@ -167,6 +195,88 @@ public class JPAUserDao extends JPAGenericDao<User, Long> implements UserDao {
 				.setParameter("search", predicate.getSearch() + "%")
 				.getSingleResult();
 	}
+	
+	/**
+	 * Count all Users.
+	 * @param email company admin email
+	 * @return count of users
+	 */
+	public final long countAllCompanyUsers(final String email) {
+		return (long) getEntityManager()
+				.createQuery("select count(*) from "
+						+ User.class.getName()
+						+ " as user where user.id in ("
+						+ " select customer.id from "
+						+ CustomerUser.class.getName()
+						+ " as customer inner join"
+						+ " customer.orders as order"
+						+ " where order.createdBy.id in"
+						+ " ( select admin.id from "
+						+ RealEstateAdminUser.class.getName()
+						+ " as admin inner join admin.agency"
+						+ " as agency where agency ="
+						+ " (select adminuser.agency from "
+						+ RealEstateAdminUser.class.getName()
+						+ " as adminuser where adminuser.email =:email )))"
+						+ " or user.id in ("
+						+ " select admin.id from "
+						+ RealEstateAdminUser.class.getName()
+						+ " as admin inner join admin.agency"
+						+ " as agency where agency ="
+						+ " (select adminuser.agency from "
+						+ RealEstateAdminUser.class.getName()
+						+ " as adminuser where adminuser.email =:email ))")
+				.setParameter("email", email)
+				.getSingleResult();
+	}
+	
+	/**
+	 * Count all Users.
+	 * @param email company admin email
+	 * @param predicate predicate
+	 * @return count of users
+	 */
+	public final long countAllCompanyUsers(final String email, 
+			final DataTablePredicate predicate) {
+		return (long) getEntityManager()
+				.createQuery("select count(*) from "
+						+ User.class.getName()
+						+ " as user where user.id in ("
+						+ " select customer.id from "
+						+ CustomerUser.class.getName()
+						+ " as customer inner join"
+						+ " customer.orders as order"
+						+ " where order.createdBy.id in"
+						+ " ( select admin.id from "
+						+ RealEstateAdminUser.class.getName()
+						+ " as admin inner join admin.agency"
+						+ " as agency where agency ="
+						+ " (select adminuser.agency from "
+						+ RealEstateAdminUser.class.getName()
+						+ " as adminuser where adminuser.email =:email )))"
+						+ " and ( user.email like :search"
+						+ " or user.createdDate like :search"
+						+ " or user.phone like :search"
+						+ " or user.lastName like :search"
+						+ " or user.firstName like :search )"
+						+ " or user.id in ("
+						+ " select admin.id from "
+						+ RealEstateAdminUser.class.getName()
+						+ " as admin inner join admin.agency"
+						+ " as agency where agency ="
+						+ " (select adminuser.agency from "
+						+ RealEstateAdminUser.class.getName()
+						+ " as adminuser where adminuser.email =:email ))"
+						+ " and ( user.email like :search"
+						+ " or user.createdDate like :search"
+						+ " or user.phone like :search"
+						+ " or user.lastName like :search"
+						+ " or user.firstName like :search )")
+				.setParameter("email", email)
+				.setParameter("search", predicate.getSearch() + "%")
+				.getSingleResult();
+	}
+	
 	
 }
 

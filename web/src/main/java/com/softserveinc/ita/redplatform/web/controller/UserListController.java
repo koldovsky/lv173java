@@ -53,7 +53,7 @@ public class UserListController {
 	 * @param order order type
 	 * @return users list
 	 */
-	@RequestMapping(value = "/api/user", 
+	@RequestMapping(value = "/user", 
 			method = RequestMethod.GET)
 	@ResponseBody
 	public final ResponseEntity<DataTableResponse<UserDTO>> 
@@ -68,11 +68,28 @@ public class UserListController {
 		DataTablePredicate predicate = new DataTablePredicate(draw,
 				start, length, column, order, search);
 		DataTableResponse<UserDTO> dtResp = new DataTableResponse<UserDTO>();
-		dtResp.setTotalDisplayRecords(userService.countAll(predicate));
-		dtResp.setTotalRecords(userService.countAll());
-		dtResp.setData(userService.loadAllUsers(predicate));
+		if (!SecurityContextHolder
+				.getContext()
+				.getAuthentication()
+				.getAuthorities()
+				.contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
+			String email = SecurityContextHolder
+					.getContext()
+					.getAuthentication()
+					.getName();
+			dtResp.setTotalDisplayRecords(userService.
+					countAllCompanyUsers(email, predicate));
+			dtResp.setTotalRecords(userService.countAllCompanyUsers(email));
+			dtResp.setData(userService
+					.loadUsersByCompanyAdmin(email, predicate));
+		} else {
+			dtResp.setTotalRecords(userService.countAll());
+			dtResp.setTotalDisplayRecords(userService.countAll(predicate));
+			dtResp.setData(userService.loadAllUsers(predicate));
+		}
 		return new ResponseEntity<DataTableResponse<UserDTO>>(dtResp,
 				HttpStatus.OK);
+		
 	}
 
 	/**
