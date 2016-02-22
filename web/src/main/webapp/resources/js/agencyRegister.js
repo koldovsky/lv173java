@@ -1,15 +1,9 @@
 $(document).ready(function() {
 	$('#register-form').validate();
 
-
-    $('#agencyName').each(function () {
-        $(this).rules('add', {
-        	uniqueCompanyName : true
-        });
-    });
     
 	$('#register-form').submit(function(event) {
-		if ($('#register-form').valid() === true) {
+		if ($('#register-form').valid()) {
 			createAgency();
 			return false;
 		}

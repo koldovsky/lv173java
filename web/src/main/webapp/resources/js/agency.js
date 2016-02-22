@@ -6,88 +6,51 @@ $(document)
 			$('#success').hide();
 			$('#error').hide();
 
-			$.validator
-				.addMethod(
-					'regexName',
-					function(value, element) {
-						return /^(?=.*[а-яА-Яіa-zA-Z])[а-яА-Яіa-zA-Z0-9 ]+[ !.@&,-]?[ a-zA-Z0-9!.@&,-]+$/
-								.test(value);
-					}, 'Invalid symbol!');
+			$.validator.addMethod(
+				'regexName',
+				function(value, element) {
+					return /^(?=.*[a-zA-Z])[a-zA-Z0-9 ]+[ !.@&,-]{0,2}[ a-zA-Z0-9!.@&,-]+$/
+							.test(value);
+				}, 'Invalid symbol!');
 			
-			$.validator
-			.addMethod(
+			$.validator.addMethod(
 				'regexDescription',
 				function(value, element) {
-					return /^(?=.*[a-zA-Z])[a-zA-Z0-9 ]+[ !.@&,-]?[ a-zA-Z0-9!.@&,-]+$/
+					return /^(?=.*[a-zA-Z])[a-zA-Z0-9]+[ !.@&,-]?[ a-zA-Z0-9!.@&,-]+$/
 							.test(value);
 				}, 'Invalid symbol!');
 
-			$.validator
-				.addMethod(
-					'regexPhoneNumber',
-					function(value, element) {
-						return /^[+]?\d{2}[\s-]?\d{3}[\s-]?\d{2}[\s-]?\d{2}[\s-]?\d{3}/
-								.test(value);
-			}, 'Length should be 12 digits!');
+			$.validator.addMethod(
+				'regexPhoneNumber',
+				function(value, element) {
+					return /^[+]?\d{2}[\s-(]?\d{3}[\s-)]?[\s-]?\d{1}[\s-]?\d{1}[\s-]?\d{1}[\s-]?\d{1}[\s-]?\d{1}[\s-]?\d{1}[\s-]?\d{1,3}$/
+							.test(value);
+			}, 'Invalid phone number!');
 
-			$.validator
-				.addMethod(
-					'regexCountry', 
-					function(value,	element) {
-						return /^[a-zA-Z.\-,\' ]+$/.test(value);
-					}, 'Invalid country');
+			$.validator.addMethod(
+				'regexCountry', 
+				function(value,	element) {
+					return /^[a-zA-Z.\-,\' ]+$/.test(value);
+				}, 'Invalid country');
 			
-			$.validator
-			.addMethod(
+			$.validator.addMethod(
 				'regexRegion', 
 				function(value,	element) {
 					return /[a-zA-Z.\-,\' ]*/.test(value);
 				}, 'Invalid region');
 
-			$.validator
-				.addMethod(
-						'regexPostalCode',
-						function(value, element) {
-							return /^(?=.*[0-9])[a-zA-Z0-9]+[ -]?[a-zA-Z0-9]+$/
-									.test(value);
-						}, 'Invalid postal code');
+			$.validator.addMethod(
+				'regexPostalCode',
+				function(value, element) {
+					return /^(?=.*[0-9])[a-zA-Z0-9]+[ -]?[a-zA-Z0-9]+$/
+							.test(value);
+				}, 'Invalid postal code');
 
-			$.validator
-				.addMethod(
-						'regexAdditional', 
-						function(value,	element) {
-							return /^[a-zA-Z0-9.\-,/ ]+$/.test(value);
-						}, 'Invalid address');
-
-			$.validator
-				.addMethod(
-					'uniqueCompanyName', 
-					function(value, element) {
-		
-						var isValidName = false;
-		
-						$.ajax({
-									type : 'POST',
-									url : 'checkUnique',
-									contentType : "application/json",
-								    async: false,
-									data : {
-										name : $('#agencyName').val()
-									},					
-						success : function(responseData, textStatus, jqXHR) {
-							if (responseData == 'true') {
-								isValidName = false;
-							} else if (responseData == 'false') {
-								isValidName = true;
-							}
-									
-						},
-						error : function(jqXHR, textStatus, errorThrown) {
-							alert(textStatus + ' ' + errorThrown);
-						}
-						});
-						return isValidName;
-					}, 'Such agency already exists');
+			$.validator.addMethod(
+				'regexAdditional', 
+				function(value,	element) {
+					return /^[a-zA-Z0-9.\-,/ ]+$/.test(value);
+				}, 'Invalid address');
 
 			// Setup form validation on the #register-form element
 			$('#register-form')
@@ -99,7 +62,11 @@ $(document)
 										required : true,
 										minlength : 3,
 										maxlength : 100,
-										regexName : true
+										regexName : true,				
+										remote: {
+											url: 'checkName',
+											type: 'GET'
+										}										
 									},
 									description : {
 										required : true,
@@ -109,7 +76,7 @@ $(document)
 									},
 									phoneNumber : {
 										required : true,
-										minlength : 8,
+										minlength : 10,
 										regexPhoneNumber : true
 									},
 									webSite : {
@@ -148,7 +115,8 @@ $(document)
 									agencyName : {
 										required : 'Please enter name of the agency',
 										minlength : 'Name must be minimum 3 characters long',
-										maxlength : 'Name must be maximum 100 characters long'
+										maxlength : 'Name must be maximum 100 characters long',
+										remote : 'Such agency already exists'
 									},
 									description : {
 										required : 'Please enter description',
@@ -157,7 +125,7 @@ $(document)
 									},
 									phoneNumber : {
 										required : 'Please enter phone number',
-										minlength : 'Your phone number must be at least 8 characters long'
+										minlength : 'Your phone number must be at least 10 characters long'
 									},
 									country : {
 										required : 'Please enter country'
