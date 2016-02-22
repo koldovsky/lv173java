@@ -18,7 +18,6 @@
 	<jsp:include page="utils/navbar.jsp"></jsp:include>
 	<div class="page">
 		<h2 class="text-center">List of Users</h2>
-		<div class="jumbotron">
 			<table id="table" class="display" cellspacing="0" width="90%">
 				<thead>
 					<tr>
@@ -30,7 +29,6 @@
 				</thead>
 			</table>
 		</div>
-	</div>
 	<jsp:include page="utils/footer.jsp"></jsp:include>
 	<!-- jQuery dataTables -->
 	<script src="resources/js/lib/jquery/jquery.dataTables-1.10.11.min.js"></script>
