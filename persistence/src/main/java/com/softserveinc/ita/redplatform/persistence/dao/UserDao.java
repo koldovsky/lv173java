@@ -33,14 +33,6 @@ public interface UserDao extends GenericDao<User, Long> {
 			DataTablePredicate predicate);
 
 	/**
-	 * find admin by company.
-	 * 
-	 * @param companyName company name
-	 * @return User
-	 */
-	List<User> findAdminsByCompany(String companyName);
-
-	/**
 	 * find customer by company.
 	 * 
 	 * @param companyName company name
