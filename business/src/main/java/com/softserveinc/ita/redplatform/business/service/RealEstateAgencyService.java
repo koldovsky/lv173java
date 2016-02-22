@@ -114,8 +114,8 @@ public class RealEstateAgencyService {
      * @param name name
      * @return boolean
      */
-    public boolean exist(final String name) {
-	return realEstateAgencyDao.findAgencyByName(name) != null;
+    public boolean isNameAvailable(final String name) {
+	return realEstateAgencyDao.findAgencyByName(name) == null;
     }
     
     

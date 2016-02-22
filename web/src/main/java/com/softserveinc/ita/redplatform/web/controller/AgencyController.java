@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import 
@@ -81,20 +82,14 @@ public class AgencyController {
      * check if company exists.
      * 
      * @return boolean value
-     * @param name
-     *            name
+     * @param agencyName
+     *            agencyName
      */
-    @RequestMapping(value = "/checkUnique", method = RequestMethod.POST)
+    @RequestMapping(value = "/checkName", method = RequestMethod.GET)
     @ResponseBody
-    public final ResponseEntity<String>
-    		checkIfExist(@RequestBody final String name) {
-
-	if (realEstateAgencyService.exist(name)) {
-	    return new ResponseEntity<String>("true", HttpStatus.OK);
-	} else {
-	    return new ResponseEntity<String>("false", HttpStatus.OK);
-	}
-
+    public final boolean
+    		checkIfExist(@RequestParam final String agencyName) {
+	return realEstateAgencyService.isNameAvailable(agencyName);
     }
     
 

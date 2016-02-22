@@ -1,6 +1,10 @@
 $(document).ready(
 		function() {
 			
+		    $('#agencyName').each(function () {
+		        $(this).rules('remove', 'remote');
+		    });
+			
 			var href = $(location).attr('href');
 			var id = href.substr(href.lastIndexOf('/') + 1);
 			
