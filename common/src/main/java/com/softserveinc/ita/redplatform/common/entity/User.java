@@ -12,7 +12,7 @@ import javax.persistence.InheritanceType;
  */
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class User extends BaseEntity {
+public abstract class User extends BaseEntity {
 
     /** The email. */
     @Column(unique = true)
