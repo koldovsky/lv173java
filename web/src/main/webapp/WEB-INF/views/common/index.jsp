@@ -63,17 +63,23 @@
 				<h1 class="text-center">We use technology to make your life
 					easier</h1>
 				<br> <br> <br> <br> <br> <br>
-				<h2 class="text-center">
-					Our service was created for <b class="red">BUSINESS</b> and <b
-						class="red">CUSTOMERS</b>
-				</h2>
-				<br> <br> <img src="http://i68.tinypic.com/1498etj.jpg"
-					width="100%" alt="image"></img> <br> <br> <br>
-				<div class="text-description">
-					<p>
-						Our service helps communicate customer with companies more quickly
-						and easier. <br>
-					</p>
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-4">
+						 		<h2>REDplatform</h2>
+						 	<p class="text-description">
+						 			Real Estate Development Platform is software service. This service is developed for Real Estate companies and their customers. 
+						 	</p>
+						</div>
+						<div class="col-lg-4">
+						 		<h2>For Business</h2>
+						 		<p class="text-description">Create new orders. Control all customer and payments online. Maintain your business.</p>
+						</div>
+						<div class="col-lg-4">
+						 		<h2>For Customers</h2>
+						 		<p class="text-description">Approve your payments online. Organize your life.</p>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

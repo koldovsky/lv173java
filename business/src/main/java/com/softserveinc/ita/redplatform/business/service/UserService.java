@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 
 import com.softserveinc.ita.redplatform.common.dto.UserDTO;
@@ -48,6 +49,7 @@ public class UserService {
      * @param predicate predicate
      * @return List<User>
      */
+    @Secured("ROLE_ADMIN")
 	public List<UserDTO> loadAllUsers(final DataTablePredicate predicate) {
     	List<UserDTO> list = new LinkedList<UserDTO>();
     	for (User user : userDao.findAll(predicate)) {
@@ -62,6 +64,7 @@ public class UserService {
      * @param predicate predicate
      * @return List<User>
      */
+    @Secured("ROLE_REDADMIN")
     public List<UserDTO> 
     	loadUsersByCompanyAdmin(final String email, 
     			final DataTablePredicate predicate) {
@@ -87,6 +90,7 @@ public class UserService {
      * count all users.
      * @return count
      */
+    @Secured("ROLE_ADMIN")
     public long countAll() {
     	return userDao.countAll();
     }
@@ -96,6 +100,7 @@ public class UserService {
      * @param predicate 
      * @return count.
      */
+    @Secured("ROLE_ADMIN")
     public long countAll(final DataTablePredicate predicate) {
 		return userDao.countAll(predicate);
     	
@@ -105,6 +110,7 @@ public class UserService {
      * @param email Admin email
      * @return count
      */
+    @Secured("ROLE_REDADMIN")
     public long countAllCompanyUsers(final String email) {
     	return userDao.countAllCompanyUsers(email);
     }
@@ -115,6 +121,7 @@ public class UserService {
      * @param predicate 
      * @return count.
      */
+    @Secured("ROLE_REDADMIN")
     public long countAllCompanyUsers(final String email, 
     		final DataTablePredicate predicate) {
 		return userDao.countAllCompanyUsers(email, predicate);
