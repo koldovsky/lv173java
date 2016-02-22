@@ -1,5 +1,9 @@
 // When the browser is ready...
 $(document).ready(function() {
+	$('.alert .close').on('click', function(e) {
+	    $(this).parent().hide();
+	});
+	
 	var hideMessages = function(){
 		$('#error').hide();
 		$('#success').hide();
