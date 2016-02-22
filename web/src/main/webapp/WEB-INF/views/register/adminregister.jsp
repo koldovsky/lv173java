@@ -15,8 +15,11 @@
 	<div class="container">
 		<h1>New System Administrator Registration</h1>
 
-		<div id="error" class="alert alert-danger" role="alert"></div>
+		<div id="error" class="alert alert-danger" role="alert">
+		<a href="#" class="close" aria-label="close">&times;</a>
+		</div>
 		<div id="success" class="alert alert-success" role="alert">
+		<a href="#" class="close" aria-label="close">&times;</a>
 			System Administrator has been registered successfully.</div>
 
 		<form name="adminregisterform" id="adminregisterform" action="">
