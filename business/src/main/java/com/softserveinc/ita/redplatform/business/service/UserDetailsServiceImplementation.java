@@ -23,7 +23,7 @@ import com.softserveinc.ita.redplatform.common.entity.RealEstateAdminUser;
  * @author Ivaniv Roman
  *
  */
-@Service("UserDetailsServiceImplementation")
+@Service
 public class UserDetailsServiceImplementation implements UserDetailsService {
 
     /**
