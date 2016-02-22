@@ -4,7 +4,7 @@ $(document).ready(
 			var href = $(location).attr('href');
 			var id = href.substr(href.lastIndexOf('/') + 1);
 			
-			$('#title').html("Edit Real Estate Agency");
+			$('#title').html('Edit Real Estate Agency');
 			
 			$.ajax({
 				type : 'GET',
@@ -23,20 +23,22 @@ $(document).ready(
 					$('#additionalInfo').val(responseData.address.additional);
 					
 					$('#agencyID').val(responseData.id);
+					$('#error').hide();
+					$('#success').hide();
 			
 				},	
 				error : function(jqXHR, textStatus, errorThrown) {
 
-					if (jqXHR.status == 404) {
-						$("#error").html('Agency is not found');						
+					if (jqXHR.status === 404) {
+						$('#error').html('Agency is not found');						
 					} 
-					$("#error").show();
-					$("#success").hide();
+					$('#error').show();
+					$('#success').hide();
 				}
 			})
 			
 			$('#register-form').submit(function(event) {
-				if ($('#register-form').valid() === true) {
+				if ($('#register-form').valid()) {
 					var address = {
 							country : $('#country').val(),
 							region : $('#region').val(),
@@ -54,22 +56,21 @@ $(document).ready(
 							address : address
 						};
 						$.ajax({
-							type : "PUT",
+							type : 'PUT',
 							url : '/REDplatform/api/agency/'+id,
 							contentType : 'application/json',
 							data : JSON.stringify(agency),
 							dataType : 'json',
 							success : function(responseData, textStatus, jqXHR) {	
-								$("#success").html("Agency has been edited successfully");
-								$("#success").show();
-								$("#error").hide();
+								$('#success').html('Agency has been edited successfully').show();
+								$('#error').hide();
 							},
 							error : function(jqXHR, textStatus, errorThrown) {
-								console.log(textStatus+" "+errorThrown)
-								console.log(jqXHR.responseText)
+								console.error(textStatus+' '+errorThrown)
+								console.error(jqXHR.responseText)
 								
-								$("#error").show();
-								$("#success").hide();
+								$('#error').show();
+								$('#success').hide();
 							}
 						})
 					return false;

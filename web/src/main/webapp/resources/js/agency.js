@@ -69,21 +69,22 @@ $(document)
 						$.ajax({
 									type : 'POST',
 									url : 'checkUnique',
+									contentType : "application/json",
 								    async: false,
 									data : {
 										name : $('#agencyName').val()
-									}
-						})
-						.done(function(responseData, textStatus, jqXHR) {
+									},					
+						success : function(responseData, textStatus, jqXHR) {
 							if (responseData == 'true') {
 								isValidName = false;
 							} else if (responseData == 'false') {
 								isValidName = true;
 							}
 									
-						})
-						.fail( function(jqXHR, textStatus, errorThrown) {
+						},
+						error : function(jqXHR, textStatus, errorThrown) {
 							alert(textStatus + ' ' + errorThrown);
+						}
 						});
 						return isValidName;
 					}, 'Such agency already exists');

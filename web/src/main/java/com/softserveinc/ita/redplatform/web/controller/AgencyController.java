@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import 
@@ -88,7 +87,7 @@ public class AgencyController {
     @RequestMapping(value = "/checkUnique", method = RequestMethod.POST)
     @ResponseBody
     public final ResponseEntity<String>
-	    checkIfExist(@RequestParam final String name) {
+    		checkIfExist(@RequestBody final String name) {
 
 	if (realEstateAgencyService.exist(name)) {
 	    return new ResponseEntity<String>("true", HttpStatus.OK);
