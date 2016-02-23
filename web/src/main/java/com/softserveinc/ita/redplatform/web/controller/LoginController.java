@@ -36,9 +36,8 @@ public class LoginController {
 		.getAuthentication();
 
 	if (!(auth instanceof AnonymousAuthenticationToken)) {
-
-	    /* The user is logged in :) */
-	    return new ModelAndView("forward:/index");
+	    
+	    return new ModelAndView("redirect:/index");
 	}
 	
 	ModelAndView model = new ModelAndView();

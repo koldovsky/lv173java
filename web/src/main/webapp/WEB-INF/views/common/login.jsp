@@ -6,7 +6,7 @@
 <head>
 <meta charset="utf-8">
 <jsp:include page="../utils/jspheader.jsp"/>
-<link href="${pageContext.request.contextPath}/resources/css/login.css" rel="stylesheet">
+<link href="resources/css/login.css" rel="stylesheet">
 <title>Login</title>
 </head>
 <body>
@@ -24,15 +24,19 @@
 				</div>
 			</c:if>
 			<form name="loginform" action="<c:url value="/j_spring_security_check"></c:url>" method="post">
-				<fieldset>
-					<div class="form-group">
-						<input class="form-control" name='email' type="text">
-					</div>
-					<div class="form-group">
-						<input class="form-control" name='password' type="password">
-					</div>
-						<input class="btn btn-lg btn-success btn-block" type="submit" value="Login">
-				</fieldset>
+               <fieldset>
+                <div class="input-group">
+                <span class="input-group-addon" id="icon-email"></span>
+					<input class="form-control" name='email' type="text" placeholder="Email...">
+				 </div>
+				 <br>
+				<div class="input-group">
+                 <span class="input-group-addon" id="icon-password"></span>
+					<input class="form-control" name='password' type="password" placeholder="Password...">
+				</div>
+				<br>
+					<input class="btn btn-lg btn-success btn-block" type="submit" value="Login">
+               </fieldset>
 			</form>
 		</div>
 		</div>
