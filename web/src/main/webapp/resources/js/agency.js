@@ -4,52 +4,6 @@ $(document).ready(
 			$('#success').hide();
 			$('#error').hide();
 
-			$.validator.addMethod(
-				'regexName',
-				function(value, element) {
-					return /^(?=.*[a-zA-Z])[a-zA-Z0-9]+[a-zA-Z0-9!.@&,-\s\']+[a-zA-Z0-9.!]$/
-							.test(value);
-				}, 'Invalid name!');
-			
-			$.validator.addMethod(
-					'regexDescription',
-					function(value, element) {
-						return /^(?=.*[a-zA-Z])[a-zA-Z0-9]+[a-zA-Z0-9!.@&,-\s\'$%^*()<>№"]+[a-zA-Z0-9.!]$/
-								.test(value);
-					}, 'Invalid description!');
-
-			$.validator.addMethod(
-				'regexPhoneNumber',
-				function(value, element) {
-					return /^[+]?\d{10,12}$/
-							.test(value);
-			}, 'Invalid phone number!');
-
-			$.validator.addMethod(
-				'regexCountry', 
-				function(value,	element) {
-					return /^[a-zA-Z.\-,\' ]+$/.test(value);
-				}, 'Invalid country');
-			
-			$.validator.addMethod(
-				'regexRegion', 
-				function(value,	element) {
-					return /[a-zA-Z.\-,\' ]*/.test(value);
-				}, 'Invalid region');
-
-			$.validator.addMethod(
-				'regexPostalCode',
-				function(value, element) {
-					return /^(?=.*[0-9])[a-zA-Z0-9]{3,10}$/
-							.test(value);
-				}, 'Invalid postal code');
-
-			$.validator.addMethod(
-				'regexAdditional', 
-				function(value,	element) {
-					return /^[a-zA-Z0-9.\-,/ ]+$/.test(value);
-				}, 'Invalid address');
-
 			// Setup form validation on the #register-form element
 			$('#register-form')
 					.validate(

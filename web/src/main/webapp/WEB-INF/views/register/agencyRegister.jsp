@@ -12,6 +12,8 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/agencyRegistration.css">
 <script src="${pageContext.request.contextPath}/resources/js/agency.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/agencyRegister.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/validators.js"></script>
+
 
 </head>
 	<body>
