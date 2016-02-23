@@ -6,10 +6,8 @@ import org.springframework.stereotype.Service;
 
 import com.softserveinc.ita.redplatform.common.dto.AdminUserDTO;
 import com.softserveinc.ita.redplatform.common.entity.AdminUser;
-import com.softserveinc.ita.redplatform.common.entity.User;
 import com.softserveinc.ita.redplatform.common.mapper.AdminUserMapper;
 import com.softserveinc.ita.redplatform.persistence.dao.AdminUserDao;
-import com.softserveinc.ita.redplatform.persistence.dao.GenericDao;
 
 /**
  * Admin User Service.
@@ -29,12 +27,12 @@ public class AdminUserService extends AbstractUserService {
     private AdminUserMapper mapper;
 
     @Override
-    protected User doGetUserEntity(final Object dto) {
+    protected AdminUser getUserEntity(final Object dto) {
 	return mapper.toEntity((AdminUserDTO) dto);
     }
 
     @Override
-    protected GenericDao<AdminUser, Long> doGetDao() {
+    protected AdminUserDao getDao() {
 	return dao;
     }
 

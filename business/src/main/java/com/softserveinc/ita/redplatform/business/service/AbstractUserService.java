@@ -37,12 +37,12 @@ public abstract class AbstractUserService {
      */
     @Transactional
     public void register(final Object dto) {
-	User user = doGetUserEntity(dto);
+	User user = getUserEntity(dto);
 	String rawPassword = passGenerator.generatePassword();
 	notifyUserWithMail(user, rawPassword);
 	String encodedPassword = passEncoder.encode(rawPassword);
 	user.setPassword(encodedPassword);
-	doGetDao().save(user);
+	getDao().save(user);
     }
 
     /**
@@ -52,10 +52,10 @@ public abstract class AbstractUserService {
      *            the dto
      * @return the user
      */
-    protected abstract User doGetUserEntity(Object dto);
+    protected abstract User getUserEntity(Object dto);
 
     /**
-     * Notify user with mail.
+     * Notify user about successful registration via e-mail.
      *
      * @param recipient
      *            the recipient of the mail
@@ -94,5 +94,5 @@ public abstract class AbstractUserService {
      *
      * @return the dao
      */
-    protected abstract GenericDao doGetDao();
+    protected abstract GenericDao getDao();
 }

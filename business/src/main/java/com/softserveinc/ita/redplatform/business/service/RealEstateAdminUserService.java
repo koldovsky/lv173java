@@ -6,9 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.softserveinc.ita.redplatform.common.dto.RealEstateAdminUserDTO;
 import com.softserveinc.ita.redplatform.common.entity.RealEstateAdminUser;
-import com.softserveinc.ita.redplatform.common.entity.User;
 import com.softserveinc.ita.redplatform.common.mapper.RealEstateAdminUserMapper;
-import com.softserveinc.ita.redplatform.persistence.dao.GenericDao;
 import com.softserveinc.ita.redplatform.persistence.dao.RealEstateAdminUserDao;
 import com.softserveinc.ita.redplatform.persistence.dao.RealEstateAgencyDao;
 
@@ -34,7 +32,7 @@ public class RealEstateAdminUserService extends AbstractUserService {
     private RealEstateAdminUserMapper mapper;
 
     @Override
-    protected User doGetUserEntity(final Object dto) {
+    protected RealEstateAdminUser getUserEntity(final Object dto) {
 	RealEstateAdminUser admin = mapper.toEntity((RealEstateAdminUserDTO) dto);
 	admin.setAgency(agencyDao
 		.findById(((RealEstateAdminUserDTO) dto).getAgencyId()));
@@ -42,7 +40,7 @@ public class RealEstateAdminUserService extends AbstractUserService {
     }
     
     @Override
-    protected GenericDao<RealEstateAdminUser, Long> doGetDao() {
+    protected RealEstateAdminUserDao getDao() {
 	return dao;
     }
 }
