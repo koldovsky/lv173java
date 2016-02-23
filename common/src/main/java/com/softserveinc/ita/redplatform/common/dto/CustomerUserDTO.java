@@ -1,33 +1,47 @@
 package com.softserveinc.ita.redplatform.common.dto;
 
-import javax.persistence.Column;
-
 /**
  * Data Transfer Object for CustomerUser class.
  * 
  * @author Ivaniv Roman
  *
  */
+
 public class CustomerUserDTO {
-    /** first name. */
-    @Column(name = "firstName")
+    
+	/**
+     * first name.
+     */
     private String firstName;
 
-    /** last name. */
-    @Column(name = "lastName")
+    /**
+     * last name.
+     */
     private String lastName;
 
-    /** phone. */
-    @Column(name = "phone")
+    /**
+     * phone. 
+     */
     private String phone;
 
-    /** passport. */
-    @Column(name = "passport")
+    /**
+     * passport. 
+     */
     private String passport;
 
     /** individual tax number. */
-    @Column(name = "individualTaxNumber")
     private Integer individualTaxNumber;
+    
+    /**
+     * address.
+     */
+    private AddressDTO address;
+    
+    /**
+     * id.
+     */
+    private long id;
+    
 
     public final String getFirstName() {
 	return firstName;
@@ -69,5 +83,21 @@ public class CustomerUserDTO {
     setIndividualTaxNumber(final Integer newIndividualTaxNumber) {
 	this.individualTaxNumber = newIndividualTaxNumber;
     }
+
+	public final AddressDTO getAddress() {
+		return address;
+	}
+
+	public final void setAddress(final AddressDTO newAddress) {
+		this.address = newAddress;
+	}
+
+	public final long getId() {
+		return id;
+	}
+
+	public final void setId(final long newId) {
+		this.id = newId;
+	}
 
 }
