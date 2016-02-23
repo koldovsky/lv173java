@@ -68,6 +68,7 @@ public class UserListController {
 		DataTablePredicate predicate = new DataTablePredicate(draw,
 				start, length, column, order, search);
 		DataTableResponse<UserDTO> dtResp = new DataTableResponse<UserDTO>();
+		dtResp.setDraw(predicate.getDraw());
 		if (!SecurityContextHolder
 				.getContext()
 				.getAuthentication()

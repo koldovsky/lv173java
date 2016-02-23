@@ -68,3 +68,30 @@ footer {
 	font-size:80px;
 	color:white-space;
 }
+
+#motto{
+	margin: 11%;
+}
+
+.indexrow > .col-md-3 {
+	box-sizing: content-box;
+	background-color: #212f3f;
+  margin-left: 2%;
+	margin-right: 3%;
+	margin-top: 1%;
+	margin-bottom: 1%;
+	border-radius: 25px;
+	border: 2px solid black;
+}
+
+.indexrow{
+	color: white;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.col-md-3 h2{
+	color: red;
+}
