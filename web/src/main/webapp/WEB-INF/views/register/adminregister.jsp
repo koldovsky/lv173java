@@ -6,8 +6,9 @@
 <jsp:include page="../utils/jspheader.jsp" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/adminregister.css">
 <title>System Administrator registration</title>
-<script src="resources/js/lib/jquery/jquery.validate.min.js"></script>
-<script src="resources/js/adminregister.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/lib/jquery/jquery.validate.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/adminregister.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/validators.js"></script>
 
 </head>
 <body>

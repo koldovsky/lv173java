@@ -10,9 +10,7 @@ $(document).ready(function() {
 	}
 	hideMessages();
 
-	$.validator.addMethod('regexMail', function(value, element) {
-		return /^[A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,}$/i.test(value);
-	}, 'The e-mail should be valid!');
+
 
 	// Setup form validation on the #register-form element
 	$('#adminregisterform').validate({
