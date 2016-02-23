@@ -53,31 +53,28 @@
 			data-slide="next"> <span class="icon-next"></span>
 		</a>
 	</header>
-	<br>
-	<br>
 	<!-- Page Content -->
 	<div class="container">
+		<h1 class="text-center" id="motto">We use technology to make your life easier</h1>
 		<div class="row">
 			<div class="col-lg-12">
-				<br> <br> <br> <br>
-				<h1 class="text-center">We use technology to make your life
-					easier</h1>
-				<br> <br> <br> <br> <br> <br>
 				<div class="container">
 					<div class="row">
-						<div class="col-lg-4">
-						 		<h2>REDplatform</h2>
+						<div class="indexrow">
+						<div class="col-md-3">
+						 		<h2 class="red">REDplatform</h2>
 						 	<p class="text-description">
 						 			Real Estate Development Platform is software service. This service is developed for Real Estate companies and their customers. 
 						 	</p>
 						</div>
-						<div class="col-lg-4">
-						 		<h2>For Business</h2>
+						<div class="col-md-3">
+						 		<h2 class="red">For Business</h2>
 						 		<p class="text-description">Create new orders. Control all customer and payments online. Maintain your business.</p>
 						</div>
-						<div class="col-lg-4">
-						 		<h2>For Customers</h2>
+						<div class="col-md-3">
+						 		<h2  class="red">For Customers</h2>
 						 		<p class="text-description">Approve your payments online. Organize your life.</p>
+						</div>
 						</div>
 					</div>
 				</div>

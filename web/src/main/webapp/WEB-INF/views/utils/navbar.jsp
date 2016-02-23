@@ -35,7 +35,7 @@
     					<input class="btn btn-success" type="submit" value="Login">
 					</form>
 			</sec:authorize>
-			<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_REDADMIN', 'ROLE_USER')">
+			<sec:authorize access="isAuthenticated()">
 				<form action="/REDplatform/logout">
     					<input class="btn btn-danger" type="submit" value="Logout">
 				</form>

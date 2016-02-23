@@ -27,8 +27,8 @@ public class DataTableResponse<T> implements Serializable {
     /**
      * 	Information for DataTables to use for rendering.
      */
-    @JsonProperty(value = "sEcho")
-    private String echo;
+    @JsonProperty(value = "draw")
+    private int draw;
 
     /**
      * Optional - this is a string of column names, comma separated.
@@ -59,12 +59,12 @@ public class DataTableResponse<T> implements Serializable {
 		this.totalDisplayRecords = newTotalDisplayRecords;
 	}
 
-	public final String getEcho() {
-		return echo;
+	public final int getDraw() {
+		return draw;
 	}
 
-	public final void setEcho(final String newEcho) {
-		this.echo = newEcho;
+	public final void setDraw(final int newDraw) {
+		this.draw = newDraw;
 	}
 
 	public final String getColumns() {

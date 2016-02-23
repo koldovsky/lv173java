@@ -14,8 +14,8 @@ $(document).ready(function() {
 			{'data' : 'phone'}, 
 			{'data' : 'createdDate',
 			'render' : function(data,type,row){
-					var rowValue = row['createdDate'];
-					return new Date(data).toLocaleString();
+					var date =  row['createdDate'];
+					return new Date(date).toISOString().substr(0, 19).replace('T', ' ');
 				}
 			}
 		]

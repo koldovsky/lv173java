@@ -31,25 +31,6 @@ public class JPAUserDao extends JPAGenericDao<User, Long> implements UserDao {
 	}
 
 	/**
-	 * method find all company admins.
-	 * 
-	 * @param companyName
-	 *            company name
-	 * @return List<User>
-	 */
-	@Override
-	@SuppressWarnings("unchecked")
-	public final List<User> findAdminsByCompany(final String companyName) {
-		return (List<User>) getEntityManager()
-				.createQuery("from " + RealEstateAdminUser.class.getName()
-						+ " as user where user.id in (select redadmin.id from "
-						+ RealEstateAdminUser.class.getName()
-						+ " as redadmin inner join redadmin.agency"
-						+ " as agency where agency.name=:companyName))")
-				.setParameter("companyName", companyName).getResultList();
-	}
-
-	/**
 	 * method find all company customers.
 	 * 
 	 * @param companyName
@@ -90,6 +71,12 @@ public class JPAUserDao extends JPAGenericDao<User, Long> implements UserDao {
 		} else {
 			orderField = "user.createdDate";
 		}
+		String orderDirection;
+		if (predicate.getOrder().equalsIgnoreCase("desc")) {
+			orderDirection = "desc";
+		} else {
+			orderDirection = "asc";
+		}
 		return (List<User>) getEntityManager()
 				.createQuery("select user from "
 						+ User.class.getName()
@@ -125,7 +112,7 @@ public class JPAUserDao extends JPAGenericDao<User, Long> implements UserDao {
 						+ " or user.lastName like :search"
 						+ " or user.firstName like :search )"
 						+ " order by " + orderField
-						+ " " + predicate.getOrder())
+						+ " " + orderDirection)
 				.setParameter("email", email)
 				.setParameter("search", predicate.getSearch() + "%")
 				.setFirstResult(predicate.getStart())
@@ -150,6 +137,12 @@ public class JPAUserDao extends JPAGenericDao<User, Long> implements UserDao {
 		} else {
 			orderField = "user.createdDate";
 		}
+		String orderDirection;
+		if (predicate.getOrder().equalsIgnoreCase("desc")) {
+			orderDirection = "desc";
+		} else {
+			orderDirection = "asc";
+		}
 		return (List<User>) getEntityManager()
 				.createQuery("select user from "
 						+ User.class.getName()
@@ -159,7 +152,7 @@ public class JPAUserDao extends JPAGenericDao<User, Long> implements UserDao {
 						+ " or user.lastName like :search"
 						+ " or user.firstName like :search"
 						+ " order by " + orderField
-						+ " " + predicate.getOrder())
+						+ " " + orderDirection)
 				.setParameter("search", predicate.getSearch() + "%")
 				.setFirstResult(predicate.getStart())
 				.setMaxResults(predicate.getLength())
