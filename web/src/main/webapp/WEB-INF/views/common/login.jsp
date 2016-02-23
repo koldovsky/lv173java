@@ -6,7 +6,7 @@
 <head>
 <meta charset="utf-8">
 <jsp:include page="../utils/jspheader.jsp"/>
-<link href="resources/css/login.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/login.css" rel="stylesheet">
 <title>Login</title>
 </head>
 <body>
