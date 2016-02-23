@@ -1,4 +1,4 @@
-package com.softserveinc.ita.redplatform.web.controller;
+package com.sofserveinc.ita.redplatform.web.api;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import 
@@ -27,7 +28,7 @@ public class AgencyRestController {
     /**
      * Logger for Agency Controller class.
      */
-    public static final Logger LOGGER =
+    private static final Logger LOGGER =
 	    Logger.getLogger(AgencyRestController.class);
 
     
@@ -80,5 +81,36 @@ public class AgencyRestController {
 	return new ResponseEntity<RealEstateAgencyDTO>(
 		realEstateAgencyDTO, 
 		HttpStatus.OK);
+    }
+    
+    /**
+     * check if company exists.
+     * 
+     * @return boolean value
+     * @param agencyName
+     *            agencyName
+     */
+    @RequestMapping(value = "/checkName", method = RequestMethod.GET)
+    public final boolean
+    		checkIfExist(@RequestParam final String agencyName) {
+	return realEstateAgencyService.isNameAvailable(agencyName);
+    }
+    
+    /**
+     * register Agency.
+     * 
+     * @return status.
+     * @param realEstateAgencyDTO
+     *            realEstateAgencyDTO
+     */
+    @RequestMapping(value = "agency", method = RequestMethod.POST)
+    public final ResponseEntity<RealEstateAgencyDTO> registerAgency(
+	    @RequestBody final RealEstateAgencyDTO realEstateAgencyDTO) {
+
+	realEstateAgencyService.create(realEstateAgencyDTO);
+
+	return new ResponseEntity<RealEstateAgencyDTO>(
+		realEstateAgencyDTO, HttpStatus.OK
+		);
     }
 }
