@@ -1,29 +1,27 @@
 // When the browser is ready...
-$(document)
-.ready(
+$(document).ready(
 		function() {
-			$('#navMenu').removeClass('navbar-fixed-top');
 			$('#success').hide();
 			$('#error').hide();
 
 			$.validator.addMethod(
 				'regexName',
 				function(value, element) {
-					return /^(?=.*[a-zA-Z])[a-zA-Z0-9 ]+[ !.@&,-]{0,2}[ a-zA-Z0-9!.@&,-]+$/
+					return /^(?=.*[a-zA-Z])[a-zA-Z0-9]+[a-zA-Z0-9!.@&,-\s\']+[a-zA-Z0-9.!]$/
 							.test(value);
-				}, 'Invalid symbol!');
+				}, 'Invalid name!');
 			
 			$.validator.addMethod(
-				'regexDescription',
-				function(value, element) {
-					return /^(?=.*[a-zA-Z])[a-zA-Z0-9]+[ !.@&,-]?[ a-zA-Z0-9!.@&,-]+$/
-							.test(value);
-				}, 'Invalid symbol!');
+					'regexDescription',
+					function(value, element) {
+						return /^(?=.*[a-zA-Z])[a-zA-Z0-9]+[a-zA-Z0-9!.@&,-\s\'$%^*()<>№"]+[a-zA-Z0-9.!]$/
+								.test(value);
+					}, 'Invalid description!');
 
 			$.validator.addMethod(
 				'regexPhoneNumber',
 				function(value, element) {
-					return /^[+]?\d{2}[\s-(]?\d{3}[\s-)]?[\s-]?\d{1}[\s-]?\d{1}[\s-]?\d{1}[\s-]?\d{1}[\s-]?\d{1}[\s-]?\d{1}[\s-]?\d{1,3}$/
+					return /^[+]?\d{10,12}$/
 							.test(value);
 			}, 'Invalid phone number!');
 
@@ -42,7 +40,7 @@ $(document)
 			$.validator.addMethod(
 				'regexPostalCode',
 				function(value, element) {
-					return /^(?=.*[0-9])[a-zA-Z0-9]+[ -]?[a-zA-Z0-9]+$/
+					return /^(?=.*[0-9])[a-zA-Z0-9]{3,10}$/
 							.test(value);
 				}, 'Invalid postal code');
 
@@ -72,7 +70,7 @@ $(document)
 										required : true,
 										minlength : 4,
 										maxlength : 400,
-										regexName : true
+										regexDescription : true
 									},
 									phoneNumber : {
 										required : true,

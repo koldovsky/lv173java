@@ -3,7 +3,7 @@
 
 	<div class="container">
 	
-		<h1 id="title" class="well">
+		<h1 >
 			Registration for Real Estate Agency
 		</h1>
 
@@ -38,32 +38,35 @@
 								Description
 							</label>
 							<textarea name="description" class="form-control"
-								id="description" placeholder="Enter Description Here.." rows="3"></textarea>
+								id="description" placeholder="Enter Description Here.." rows="2"></textarea>
+						</div>
+											
+						<div class="row">						
+							<!-- Phone number-->
+							<div class="col-sm-6 form-group">
+								<div class="form-group">
+									<label class="control-label" for="phoneNumber">
+										<span class="glyphicon glyphicon-asterisk text-danger" aria-hidden="true"></span>
+										Phone Number
+									</label> 
+									<input type="text" name="phoneNumber" id="phoneNumber"
+										class="form-control" placeholder="Enter Phone Number Here..">
+								</div>
+							</div>
+	
+							<!-- Website-->
+							<div class="col-sm-6 form-group">
+								<div class="form-group">
+									<label class="control-label" for="webSite">
+										Website
+									</label> 
+									<input
+										type="text" name="webSite" id="webSite" class="form-control"
+										placeholder="Enter Website Name Here..">
+								</div>
+							</div>
 						</div>
 						
-						<hr>
-						
-						<!-- Phone number-->
-						<div class="form-group">
-							<label class="control-label" for="phoneNumber">
-								<span class="glyphicon glyphicon-asterisk text-danger" aria-hidden="true"></span>
-								Phone Number
-							</label> 
-							<input type="text" name="phoneNumber" id="phoneNumber"
-								class="form-control" placeholder="Enter Phone Number Here..">
-						</div>
-
-						<!-- Website-->
-						<div class="form-group">
-							<label class="control-label" for="webSite">
-								Website
-							</label> 
-							<input
-								type="text" name="webSite" id="webSite" class="form-control"
-								placeholder="Enter Website Name Here..">
-						</div>
-						
-						<hr>
 						
 						<!-- Address-->
 						<div class="row">
