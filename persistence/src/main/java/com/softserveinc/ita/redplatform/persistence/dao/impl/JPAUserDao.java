@@ -31,25 +31,6 @@ public class JPAUserDao extends JPAGenericDao<User, Long> implements UserDao {
 	}
 
 	/**
-	 * method find all company admins.
-	 * 
-	 * @param companyName
-	 *            company name
-	 * @return List<User>
-	 */
-	@Override
-	@SuppressWarnings("unchecked")
-	public final List<User> findAdminsByCompany(final String companyName) {
-		return (List<User>) getEntityManager()
-				.createQuery("from " + RealEstateAdminUser.class.getName()
-						+ " as user where user.id in (select redadmin.id from "
-						+ RealEstateAdminUser.class.getName()
-						+ " as redadmin inner join redadmin.agency"
-						+ " as agency where agency.name=:companyName))")
-				.setParameter("companyName", companyName).getResultList();
-	}
-
-	/**
 	 * method find all company customers.
 	 * 
 	 * @param companyName
