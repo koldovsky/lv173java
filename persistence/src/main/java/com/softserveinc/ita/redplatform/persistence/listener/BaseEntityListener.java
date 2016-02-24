@@ -1,9 +1,11 @@
-package com.softserveinc.ita.redplatform.common.entity.listener;
+package com.softserveinc.ita.redplatform.persistence.listener;
 
 import java.util.Date;
 
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
+
+import org.apache.log4j.Logger;
 
 import com.softserveinc.ita.redplatform.common.entity.BaseEntity;
 
@@ -13,14 +15,21 @@ import com.softserveinc.ita.redplatform.common.entity.BaseEntity;
  *
  */
 public class BaseEntityListener {
-
+    
+    /**
+     * LOGGER.
+     */
+     private static final Logger LOGGER = 
+ 	    			Logger.getLogger(SecurityContext.class);
+    
     /**
      * method that insert to database createdBy and CreatedDate.
      * @param entity entity
      */
     @PrePersist
     public final void prePersist(final BaseEntity entity) {
-	entity.setCreatedBy(SecurityContext.CURRENT_USER.get());
+	LOGGER.debug("In pre persist");
+	entity.setCreatedBy(SecurityContext.get());
 	entity.setCreatedDate(new Date());
     }
 
@@ -30,7 +39,8 @@ public class BaseEntityListener {
      */
     @PreUpdate
     public final void preUpdate(final BaseEntity entity) {
-	entity.setUpdatedBy(SecurityContext.CURRENT_USER.get());
+	LOGGER.debug("In pre update");
+	entity.setUpdatedBy(SecurityContext.get());
 	entity.setUpdatedDate(new Date());
     }
 }

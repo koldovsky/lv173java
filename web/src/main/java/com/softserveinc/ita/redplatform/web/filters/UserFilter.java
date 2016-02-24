@@ -14,10 +14,9 @@ import
 org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 
 import com.softserveinc.ita.redplatform.business.service.UserService;
-import com.softserveinc.ita.redplatform.common.entity.User;
-import com.softserveinc.ita.redplatform.common.entity.listener.SecurityContext;
 
 
 /**
@@ -49,10 +48,7 @@ public class UserFilter implements Filter {
 	Authentication auth = SecurityContextHolder.getContext()
 					.getAuthentication();
 	if (!(auth instanceof AnonymousAuthenticationToken)) {
-	         String userName =  auth.getName();
-	         User user = (User) userService.loadUserByEmail(userName);
-	 	 SecurityContext.CURRENT_USER.set(user);
-	 	 LOGGER.info("Current User - " + user.getEmail());
+	    userService.setLoggedUser((User) auth.getPrincipal());
 	}
 	
 	chain.doFilter(req, res);
@@ -64,7 +60,6 @@ public class UserFilter implements Filter {
      */
     @Override
     public final void init(final FilterConfig arg0) throws ServletException {
-	LOGGER.info("userFilter init");
     }
 
     /**

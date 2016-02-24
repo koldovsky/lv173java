@@ -73,4 +73,5 @@ public interface UserDao extends GenericDao<User, Long> {
 	 * @return count
 	 */
 	long countAllCompanyUsers(String email, DataTablePredicate predicate);
+
 }
