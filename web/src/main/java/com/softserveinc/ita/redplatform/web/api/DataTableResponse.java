@@ -1,4 +1,4 @@
-package com.sofserveinc.ita.redplatform.web.api;
+package com.softserveinc.ita.redplatform.web.api;
 import java.io.Serializable;
 import java.util.List;
 

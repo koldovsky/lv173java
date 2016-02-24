@@ -1,4 +1,4 @@
-package com.sofserveinc.ita.redplatform.web.api;
+package com.softserveinc.ita.redplatform.web.api;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
