@@ -4,7 +4,6 @@ package com.softserveinc.ita.redplatform.common.entity;
 import java.util.Date;
 
 import javax.persistence.Column;
-import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,8 +12,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToOne;
 
-import 
- com.softserveinc.ita.redplatform.common.entity.listener.BaseEntityListener;
 
 /**
  * Class that represents Base Entity.
@@ -22,7 +19,6 @@ import
  * @author Roman Ivaniv
  */
 @MappedSuperclass
-@EntityListeners(BaseEntityListener.class)
 public abstract class BaseEntity {
 
   /**
@@ -36,13 +32,13 @@ public abstract class BaseEntity {
    * One to one mapping.
    */
   @OneToOne
-  @JoinColumn(name = "createdById")
+  @JoinColumn(name = "createdById", updatable = false)
   private User createdBy;
 
   /**
   * Column for create Date information.
   */
-  @Column(name = "createdDate")
+  @Column(name = "createdDate", updatable = false)
   private Date createdDate;
 
   /**

@@ -27,8 +27,8 @@ public class UserController {
      */
     @RequestMapping(value = "/checkmail", method = RequestMethod.GET)
     @ResponseBody
-    public final String checkEmailAvailability(
+    public final boolean checkEmailAvailability(
 	    @RequestParam final String mail) {
-	return String.valueOf(userService.isEmailAvailable(mail));
+	return userService.isEmailAvailable(mail);
     }
 }
