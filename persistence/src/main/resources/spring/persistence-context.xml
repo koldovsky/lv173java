@@ -11,7 +11,7 @@
     http://www.springframework.org/schema/mvc 
     http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
 
-	<context:component-scan base-package="com.softserveinc.ita.redplatform.persistence.dao.impl" />
+	<context:component-scan base-package="com.softserveinc.ita.redplatform.persistence" />
 
 	<bean id="entityManagerFactoryBean"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
@@ -25,6 +25,7 @@
 				<value>com.softserveinc.ita.redplatform.common.entity</value>
 			</list>
 		</property>
+		
 		
 		<property name="mappingResources">
 			<value>spring/listener.xml</value>

@@ -86,14 +86,14 @@ public abstract class JPAGenericDao<E, N extends Number>
     /**
      * Get result from returned list.
      * @param list list
-     * @param <T> EntityType
-     * @return T Entity
+     * @param <E> EntityType
+     * @return E Entity
      */
-    protected final <T> T getSingleResult(final List list) {
+    protected final <E> E getSingleResult(final List list) {
   	if (list.isEmpty()) {
   	    return null;
   	} else {
-  	    return (T) list.get(0);
+  	    return (E) list.get(0);
   	}
     }
     

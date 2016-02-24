@@ -1,6 +1,10 @@
 package com.softserveinc.ita.redplatform.persistence.dao.impl;
 
 import java.util.List;
+
+import javax.persistence.FlushModeType;
+import javax.persistence.TypedQuery;
+
 import org.springframework.stereotype.Repository;
 import com.softserveinc.ita.redplatform.common.entity.CustomerUser;
 import com.softserveinc.ita.redplatform.common.entity.RealEstateAdminUser;
@@ -22,14 +26,17 @@ public class JPAUserDao extends JPAGenericDao<User, Long> implements UserDao {
 	 */
 	@Override
 	public final User findUserByEmail(final String email) {
-		List list = getEntityManager()
-				.createQuery("from "
-						+ User.class.getName()
-						+ " as user where user.email=:email")
-				.setParameter("email", email).getResultList();
-		return getSingleResult(list);
+
+		TypedQuery<User> query = (TypedQuery<User>) getEntityManager()
+			.createQuery("from "
+					+ User.class.getName()
+					+ " as user where user.email=:email")
+			.setParameter("email", email)
+			.setFlushMode(FlushModeType.COMMIT);
+        	return getSingleResult(query.getResultList());
 	}
 
+	
 	/**
 	 * method find all company customers.
 	 * 

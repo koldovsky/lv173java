@@ -8,7 +8,7 @@
 	<!-- enable use-expressions -->
 	<http auto-config="true" use-expressions="true">
 	
-		<intercept-url pattern="/adminregister" access="hasRole('ROLE_ADMIN')" />
+ 		<intercept-url pattern="/adminregister" access="hasRole('ROLE_ADMIN')" /> 
 		<intercept-url pattern="/agency" access="hasAnyRole('ROLE_REDADMIN', 'ROLE_REDADMIN')" />
 		<intercept-url pattern="/redadmin" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/api/**" access="hasAnyRole('ROLE_REDADMIN', 'ROLE_ADMIN')" />

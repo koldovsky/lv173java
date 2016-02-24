@@ -15,6 +15,7 @@ import com.softserveinc.ita.redplatform.common.entity.BaseEntity;
  *
  */
 public class BaseEntityListener {
+    
     /**
      * LOGGER.
      */
@@ -27,7 +28,7 @@ public class BaseEntityListener {
      */
     @PrePersist
     public final void prePersist(final BaseEntity entity) {
-	LOGGER.info("In pre persist");
+	LOGGER.debug("In pre persist");
 	entity.setCreatedBy(SecurityContext.get());
 	entity.setCreatedDate(new Date());
     }
@@ -38,7 +39,7 @@ public class BaseEntityListener {
      */
     @PreUpdate
     public final void preUpdate(final BaseEntity entity) {
-	LOGGER.info("In pre update");
+	LOGGER.debug("In pre update");
 	entity.setUpdatedBy(SecurityContext.get());
 	entity.setUpdatedDate(new Date());
     }

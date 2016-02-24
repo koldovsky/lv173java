@@ -132,16 +132,14 @@ public class UserService {
     public long countAllCompanyUsers(final String email, 
     		final DataTablePredicate predicate) {
 		return userDao.countAllCompanyUsers(email, predicate);
-    	
     }
-    
+
     /**
-     * set Logged User to SecurityContext.
-     *
-     * @param user the user
+     * Set logged user to ThreadLocal.
+     * @param principal user
      */
     public void setLoggedUser(
-	    final org.springframework.security.core.userdetails.User user) {
-	  securityContext.set(user);
+	    final org.springframework.security.core.userdetails.User principal) {
+	securityContext.set(principal);
     }
 }

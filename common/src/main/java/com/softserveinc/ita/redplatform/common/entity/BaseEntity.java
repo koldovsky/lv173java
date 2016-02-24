@@ -32,13 +32,13 @@ public abstract class BaseEntity {
    * One to one mapping.
    */
   @OneToOne
-  @JoinColumn(name = "createdById")
+  @JoinColumn(name = "createdById", updatable = false)
   private User createdBy;
 
   /**
   * Column for create Date information.
   */
-  @Column(name = "createdDate")
+  @Column(name = "createdDate", updatable = false)
   private Date createdDate;
 
   /**

@@ -17,6 +17,7 @@ import com.softserveinc.ita.redplatform.persistence.dao.UserDao;
  */
 @Component
 public final class SecurityContext {
+    
    /**
     * LOGGER.
     */
@@ -48,7 +49,6 @@ public final class SecurityContext {
      */
    public void set(final User user) {
        CURRENT_USER.set(user); 
-       LOGGER.info(user.toString());
    }
    
    /**
@@ -57,8 +57,7 @@ public final class SecurityContext {
     */
    public static com.softserveinc.ita.redplatform.common.entity.User get() {
        com.softserveinc.ita.redplatform.common.entity.User user = 
-	       userDao.findUserByEmail(CURRENT_USER.get().getUsername());
-       LOGGER.info("in Security context get" + user.getEmail());
+	       userDao.findUserByEmail(CURRENT_USER.get().getUsername());	
     return user;
    }
 
