@@ -25,6 +25,10 @@
 				<value>com.softserveinc.ita.redplatform.common.entity</value>
 			</list>
 		</property>
+		
+		<property name="mappingResources">
+			<value>spring/listener.xml</value>
+		</property>
 
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />

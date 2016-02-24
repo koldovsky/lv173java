@@ -13,6 +13,7 @@ import com.softserveinc.ita.redplatform.common.entity.User;
 import com.softserveinc.ita.redplatform.common.mapper.UserMapper;
 import com.softserveinc.ita.redplatform.common.predicate.DataTablePredicate;
 import com.softserveinc.ita.redplatform.persistence.dao.UserDao;
+import com.softserveinc.ita.redplatform.persistence.listener.SecurityContext;
 
 /**
  * User Service.
@@ -22,6 +23,12 @@ import com.softserveinc.ita.redplatform.persistence.dao.UserDao;
 @Service
 @Transactional
 public class UserService {
+    
+    /**
+     * SecurityContext.
+     */
+    @Autowired
+    private SecurityContext securityContext;
     
     /**
      * userDao.
@@ -126,5 +133,15 @@ public class UserService {
     		final DataTablePredicate predicate) {
 		return userDao.countAllCompanyUsers(email, predicate);
     	
+    }
+    
+    /**
+     * set Logged User to SecurityContext.
+     *
+     * @param user the user
+     */
+    public void setLoggedUser(
+	    final org.springframework.security.core.userdetails.User user) {
+	  securityContext.set(user);
     }
 }
