@@ -18,6 +18,24 @@ public class JPACustomerUserDao extends JPAGenericDao<CustomerUser, Long>
 	implements CustomerUserDao {
 
     /**
+     * Search fields string.
+     */
+    private final String searchFields = "customer.email like :search"
+		+ " or customer.firsName like :search"
+		+ " or customer.lastName like :search"
+		+ " or customer.createdDate like :search"
+		+ " or customer.updatedDate like :search"
+		+ " or customer.passport like:search"
+		+ " or customer.individualTaxNumber like :search"
+		+ " or customer.phone like :search";
+    /**
+     * Search query.
+     */
+    private final String searchQuery = CustomerUser.class.getName() 
+	    + " as customer where " 
+	    + searchFields;
+    
+    /**
      * find all customer users using predicate.
      * 
      * @param predicate predicate
@@ -29,15 +47,7 @@ public class JPACustomerUserDao extends JPAGenericDao<CustomerUser, Long>
 	    final DataTablePredicate predicate) {
 	return (List<CustomerUser>) getEntityManager()
 		.createQuery("select customer from "
-			+ CustomerUser.class.getName()
-			+ " where customer.email like :search"
-			+ " or customer.firsName like :search"
-			+ " or customer.lastName like :search"
-			+ " or customer.createdDate like :search"
-			+ " or customer.updatedDate like :search"
-			+ " or customer.passport like:search"
-			+ " or customer.individualTaxNumber like :search"
-			+ " or customer.phone like :search")
+			+ searchQuery)
 		.setParameter("search", predicate.getSearch() + "%")
 		.setFirstResult(predicate.getStart())
 		.setMaxResults(predicate.getLength())
@@ -66,18 +76,10 @@ public class JPACustomerUserDao extends JPAGenericDao<CustomerUser, Long>
     @Override
     public final long countAll(final DataTablePredicate predicate) {
 	return (long) getEntityManager()
-		.createQuery("select customer from "
-			+ CustomerUser.class.getName()
-			+ " where customer.email like :search"
-			+ " or customer.firsName like :search"
-			+ " or customer.lastName like :search"
-			+ " or customer.createdDate like :search"
-			+ " or customer.updatedDate like :search"
-			+ " or customer.passport like:search"
-			+ " or customer.individualTaxNumber like :search"
-			+ " or customer.phone like :search")
+		.createQuery("select count(*) from "
+			+ searchQuery)
 		.setParameter("search", predicate.getSearch() + "%")
 		.getSingleResult();
     }
-
+    
 }
