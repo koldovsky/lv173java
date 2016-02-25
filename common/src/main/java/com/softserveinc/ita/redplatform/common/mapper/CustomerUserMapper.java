@@ -1,6 +1,7 @@
 package com.softserveinc.ita.redplatform.common.mapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.softserveinc.ita.redplatform.common.dto.CustomerUserDTO;
 import com.softserveinc.ita.redplatform.common.entity.CustomerUser;
@@ -11,6 +12,7 @@ import com.softserveinc.ita.redplatform.common.entity.CustomerUser;
  * @author Ivaniv Roman.
  * 
  */
+@Component
 public class CustomerUserMapper implements 
 	GenericMapper<CustomerUser, CustomerUserDTO> {
 	
@@ -25,6 +27,8 @@ public class CustomerUserMapper implements
 	CustomerUserDTO customerUserDTO = new CustomerUserDTO();
 	customerUserDTO.setFirstName(customerUser.getFirstName());
 	customerUserDTO.setLastName(customerUser.getLastName());
+	customerUserDTO.setEmail(customerUser.getEmail());
+	customerUserDTO.setCreatedDate(customerUser.getCreatedDate());
 	customerUserDTO.setPhone(customerUser.getPhone());
 	customerUserDTO.setPassport(customerUser.getPassport());
 	customerUserDTO.setIndividualTaxNumber(
@@ -39,6 +43,8 @@ public class CustomerUserMapper implements
 	CustomerUser customerUser = new CustomerUser();
 	customerUser.setFirstName(customerUserDTO.getFirstName());
 	customerUser.setLastName(customerUserDTO.getLastName());
+	customerUser.setEmail(customerUserDTO.getEmail());
+	customerUser.setCreatedDate(customerUserDTO.getCreatedDate());
 	customerUser.setPhone(customerUserDTO.getPhone());
 	customerUser.setPassport(customerUserDTO.getPassport());
 	customerUser.setIndividualTaxNumber(
