@@ -1,10 +1,7 @@
 package com.softserveinc.ita.redplatform.persistence.listener;
 
 
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.stereotype.Component;
 
 import com.softserveinc.ita.redplatform.persistence.dao.UserDao;
 
@@ -15,50 +12,25 @@ import com.softserveinc.ita.redplatform.persistence.dao.UserDao;
  * @author oleh
  *
  */
-@Component
 public final class SecurityContext {
-    
-   /**
-    * LOGGER.
-    */
-    private static final Logger LOGGER = 
-	    			Logger.getLogger(SecurityContext.class);
     
     /**
      * ThreadLocal current user.
      */
-    private static final ThreadLocal<User> CURRENT_USER = 
+    public static final ThreadLocal<User> CURRENT_USER = 
 	    				new ThreadLocal<User>();
     /**
-     * userDao.
+     * ThreadLocal user Dao.
      */
-    private static UserDao userDao;
+    public static final ThreadLocal<UserDao> USER_DAO = 
+				new ThreadLocal<UserDao>();
     
     /**
-     * Constructor.
-     * @param newUserDao the newUserDao
+     * private Constructor.
      */
-    @Autowired
-    public SecurityContext(final UserDao newUserDao) {
-	SecurityContext.userDao = newUserDao;
+    private SecurityContext() {	
     }
     
-    /**
-     * 
-     * @param user the user
-     */
-   public void set(final User user) {
-       CURRENT_USER.set(user); 
-   }
-   
-   /**
-    * Get user entity.
-    * @return user
-    */
-   public static com.softserveinc.ita.redplatform.common.entity.User get() {
-       com.softserveinc.ita.redplatform.common.entity.User user = 
-	       userDao.findUserByEmail(CURRENT_USER.get().getUsername());	
-    return user;
-   }
-
+    
+        
 }

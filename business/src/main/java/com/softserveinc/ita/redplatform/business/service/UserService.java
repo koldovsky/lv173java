@@ -25,12 +25,6 @@ import com.softserveinc.ita.redplatform.persistence.listener.SecurityContext;
 public class UserService {
     
     /**
-     * SecurityContext.
-     */
-    @Autowired
-    private SecurityContext securityContext;
-    
-    /**
      * userDao.
      */
     @Autowired
@@ -140,6 +134,8 @@ public class UserService {
      */
     public void setLoggedUser(
 	    final org.springframework.security.core.userdetails.User principal) {
-	securityContext.set(principal);
+	SecurityContext.CURRENT_USER.set(principal);
+	SecurityContext.USER_DAO.set(userDao);
     }
+    
 }

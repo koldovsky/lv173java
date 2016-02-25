@@ -8,6 +8,7 @@ import javax.persistence.PreUpdate;
 import org.apache.log4j.Logger;
 
 import com.softserveinc.ita.redplatform.common.entity.BaseEntity;
+import com.softserveinc.ita.redplatform.common.entity.User;
 
 /**
  * Event listener to insert date and user.
@@ -29,7 +30,7 @@ public class BaseEntityListener {
     @PrePersist
     public final void prePersist(final BaseEntity entity) {
 	LOGGER.debug("In pre persist");
-	entity.setCreatedBy(SecurityContext.get());
+	entity.setCreatedBy(getUser());
 	entity.setCreatedDate(new Date());
     }
 
@@ -40,7 +41,13 @@ public class BaseEntityListener {
     @PreUpdate
     public final void preUpdate(final BaseEntity entity) {
 	LOGGER.debug("In pre update");
-	entity.setUpdatedBy(SecurityContext.get());
+	entity.setUpdatedBy(getUser());
 	entity.setUpdatedDate(new Date());
+    }
+    
+    private User getUser() {
+	return SecurityContext.USER_DAO.get().findUserByEmail(
+			SecurityContext.CURRENT_USER.get().getUsername()
+		);
     }
 }
