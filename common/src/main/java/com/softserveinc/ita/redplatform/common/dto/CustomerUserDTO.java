@@ -1,5 +1,7 @@
 package com.softserveinc.ita.redplatform.common.dto;
 
+import java.util.Date;
+
 /**
  * Data Transfer Object for CustomerUser class.
  * 
@@ -8,8 +10,8 @@ package com.softserveinc.ita.redplatform.common.dto;
  */
 
 public class CustomerUserDTO {
-    
-	/**
+
+    /**
      * first name.
      */
     private String firstName;
@@ -18,30 +20,38 @@ public class CustomerUserDTO {
      * last name.
      */
     private String lastName;
+    /**
+     * email.
+     */
+    private String email;
 
     /**
-     * phone. 
+     * phone.
      */
     private String phone;
 
     /**
-     * passport. 
+     * passport.
      */
     private String passport;
 
     /** individual tax number. */
     private Integer individualTaxNumber;
-    
+
+    /**
+     * Created date.
+     */
+    private Date createdDate;
+
     /**
      * address.
      */
     private AddressDTO address;
-    
+
     /**
      * id.
      */
     private long id;
-    
 
     public final String getFirstName() {
 	return firstName;
@@ -79,25 +89,41 @@ public class CustomerUserDTO {
 	return individualTaxNumber;
     }
 
-    public final void 
-    setIndividualTaxNumber(final Integer newIndividualTaxNumber) {
+    public final void
+	    setIndividualTaxNumber(final Integer newIndividualTaxNumber) {
 	this.individualTaxNumber = newIndividualTaxNumber;
     }
 
-	public final AddressDTO getAddress() {
-		return address;
-	}
+    public final AddressDTO getAddress() {
+	return address;
+    }
 
-	public final void setAddress(final AddressDTO newAddress) {
-		this.address = newAddress;
-	}
+    public final void setAddress(final AddressDTO newAddress) {
+	this.address = newAddress;
+    }
 
-	public final long getId() {
-		return id;
-	}
+    public final long getId() {
+	return id;
+    }
 
-	public final void setId(final long newId) {
-		this.id = newId;
-	}
+    public final void setId(final long newId) {
+	this.id = newId;
+    }
+
+    public final String getEmail() {
+	return email;
+    }
+
+    public final void setEmail(final String newEmail) {
+	this.email = newEmail;
+    }
+
+    public final Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public final void setCreatedDate(final Date newCreatedDate) {
+        this.createdDate = newCreatedDate;
+    }
 
 }

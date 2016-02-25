@@ -21,7 +21,7 @@ public class JPACustomerUserDao extends JPAGenericDao<CustomerUser, Long>
      * Search fields string.
      */
     private final String searchFields = "customer.email like :search"
-		+ " or customer.firsName like :search"
+		+ " or customer.firstName like :search"
 		+ " or customer.lastName like :search"
 		+ " or customer.createdDate like :search"
 		+ " or customer.updatedDate like :search"
