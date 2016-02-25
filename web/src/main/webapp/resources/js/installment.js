@@ -4,6 +4,9 @@ $(function() {
 	(function() {
 		$("body").css("padding-top", $(".navbar-fixed-top").height());
 	})();
+	
+	var href = $(location).attr('href');
+	var id = href.substr(href.lastIndexOf('/') + 1);
 
 	$('#error').hide();
 	$('#success').hide();
@@ -56,12 +59,12 @@ $(function() {
 				++i;
 
 			});
-
+			
 			var postData = JSON.stringify(info);
 
 			$.ajax({
 				type : 'POST',
-				url : 'installment',
+				url :  id,
 				data : postData,
 				contentType : 'application/json; charset=utf-8',
 				success : function(responseData, textStatus, jqXHR) {

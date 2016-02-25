@@ -5,8 +5,8 @@
 <head>
 <jsp:include page="utils/jspheader.jsp" />
 <title>Installment addition - REDplatform</title>
-<script src="resources/js/lib/jquery/jquery.validate.min.js"></script>
-<script src="resources/js/installment.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/lib/jquery/jquery.validate.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/installment.js"></script>
 </head>
 
 <body>
@@ -38,6 +38,10 @@
 					<input id="amount" name="amount" class="data name form-control"
 						placeholder="100,00" />
 				</div>
+			</div>
+			
+			<div class="row">
+				<input id="customerId" name="customerId" type="hidden" value=${userId} />
 			</div>
 		</form>
 		

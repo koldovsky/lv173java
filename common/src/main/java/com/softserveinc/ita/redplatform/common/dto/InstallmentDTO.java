@@ -13,10 +13,28 @@ public class InstallmentDTO {
 
     /** The date. */
     private String date;
+    
+    /** The customer id. */
+    private Long customerId;
+
+    /**
+     * Gets the customer id.
+     *
+     * @return the customer id
+     */
+    public final Long getCustomerId() {
+        return customerId;
+    }
 
 
-    /** The order id. */
-    private Long orderId;
+    /**
+     * Sets the customer id.
+     *
+     * @param newCustomerId the new customer id
+     */
+    public final void setCustomerId(final Long newCustomerId) {
+        customerId = newCustomerId;
+    }
 
 
     /**
@@ -56,25 +74,5 @@ public class InstallmentDTO {
      */
     public final void setDate(final String newDate) {
         date = newDate;
-    }
-
-
-    /**
-     * Gets the order id.
-     *
-     * @return the order id
-     */
-    public final Long getOrderId() {
-        return orderId;
-    }
-
-
-    /**
-     * Sets the order id.
-     *
-     * @param newOrderId the new order id
-     */
-    public final void setOrderId(final Long newOrderId) {
-        orderId = newOrderId;
     }
 }

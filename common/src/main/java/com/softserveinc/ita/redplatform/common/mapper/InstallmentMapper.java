@@ -13,13 +13,16 @@ import com.softserveinc.ita.redplatform.common.entity.Installment;
 @Component
 public class InstallmentMapper 
 	implements GenericMapper<Installment, InstallmentDTO> {
+    
+    /** The order mapper. */
+    private OrderMapper orderMapper;
 
     @Override
     public final InstallmentDTO toDto(final Installment entity) {
 	InstallmentDTO dto = new InstallmentDTO();
 	dto.setAmount(entity.getAmount());
 	dto.setDate(dto.getDate().toString());
-	dto.setOrderId(entity.getOrder().getId());
+	dto.setCustomerId(entity.getOrder().getCustomerUser().getId());
 	return dto;
     }
 

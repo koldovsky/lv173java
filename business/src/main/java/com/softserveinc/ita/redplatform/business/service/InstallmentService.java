@@ -11,7 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.softserveinc.ita.redplatform.common.dto.InstallmentDTO;
 import com.softserveinc.ita.redplatform.common.entity.Installment;
+import com.softserveinc.ita.redplatform.common.entity.Order;
 import com.softserveinc.ita.redplatform.common.mapper.InstallmentMapper;
+import com.softserveinc.ita.redplatform.common.mapper.OrderMapper;
+import com.softserveinc.ita.redplatform.persistence.dao.CustomerUserDao;
 import com.softserveinc.ita.redplatform.persistence.dao.InstallmentDao;
 import com.softserveinc.ita.redplatform.persistence.dao.OrderDao;
 
@@ -31,29 +34,40 @@ public class InstallmentService {
     @Autowired
     private OrderDao orderDao;
 
+    /** The customer user dao. */
+    @Autowired
+    private CustomerUserDao customerUserDao;
+
     /** The mapper. */
     @Autowired
-    private InstallmentMapper mapper;
+    private InstallmentMapper installmentMapper;
+
+    /** The mapper. */
+    @Autowired
+    private OrderMapper orderMapper;
 
     /**
      * Adds the installment.
      *
      * @param dtos
      *            the dtos
-     * @throws ParseException 
+     * @throws ParseException
+     *             the parse exception
      */
     @Transactional
     public void addInstallment(final List<InstallmentDTO> dtos) 
 	    throws ParseException {
 	Installment installment = null;
+	Order order = new Order();
+	order.setCustomerUser(customerUserDao
+		.findById(dtos.get(0).getCustomerId()));
 	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 	Date date = null;
 	for (InstallmentDTO dto : dtos) {
-	    installment = mapper.toEntity(dto);
+	    installment = installmentMapper.toEntity(dto);
 	    date = formatter.parse(dto.getDate());
 	    installment.setDate(date);
-	    //TODO set proper order instance here
-	    installment.setOrder(null);
+	    installment.setOrder(order);
 	    installmentDao.save(installment);
 	}
     }
