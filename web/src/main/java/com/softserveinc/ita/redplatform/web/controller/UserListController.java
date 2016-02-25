@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.softserveinc.ita.redplatform.business.service.UserService;
 import com.softserveinc.ita.redplatform.common.dto.UserDTO;
 import com.softserveinc.ita.redplatform.common.predicate.DataTablePredicate;
-import com.softserveinc.ita.redplatform.web.api.DataTableResponse;
+import com.softserveinc.ita.redplatform.web.utils.DataTableResponse;
 
 /**
  * Controller for users page.
