@@ -19,7 +19,8 @@ $(document).ready(
 										required : true,
 										minlength : 3,
 										maxlength : 100,
-										regexName : true,				
+										regexName : true,
+										regexDoubleSpace : true,
 										remote: {
 											url: 'checkName',
 											type: 'GET'
@@ -64,7 +65,8 @@ $(document).ready(
 									additionalInfo : {
 										required : true,
 										minlength : 2,
-										regexAdditional : true
+										regexAdditional : true,
+										regexDoubleSpace : true
 									}
 
 								},
@@ -73,7 +75,7 @@ $(document).ready(
 										required : 'Please enter name of the agency',
 										minlength : 'Name must be minimum 3 characters long',
 										maxlength : 'Name must be maximum 100 characters long',
-										remote : 'Such agency already exists'
+										remote : 'Such agency already exists!'
 									},
 									description : {
 										required : 'Please enter description',
@@ -89,17 +91,18 @@ $(document).ready(
 									},
 									region : {
 										required : 'Please enter region',
-										regexRegion : 'Invalid region'
+										regexRegion : 'Invalid region!'
 									},
 									postalCode : {
 										required : 'Please enter postal code'
 									},
 									locality : {
 										required : 'Please enter city or village',
-										regexCountry : 'Invalid city name'
+										regexCountry : 'Invalid city name!'
 									},
 									additionalInfo : {
-										required : 'Please enter address'
+										required : 'Please enter address',
+										regexDoubleSpace : 'Invalid address!'
 									}
 								}
 							});

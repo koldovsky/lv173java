@@ -11,9 +11,14 @@
 				return /^(?=.*[a-zA-Z])[a-zA-Z0-9]+[a-zA-Z0-9!.@&,-\s\']+[a-zA-Z0-9.!]$/
 						.test(value);
 			}, 'Invalid name!');
+	
+	$.validator.addMethod('regexDoubleSpace', function(value, element) {
+		return /^((?!\s\s).)*$/
+				.test(value);
+	}, 'Invalid name!');
 		
 	$.validator.addMethod('regexDescription', function(value, element) {
-				return /^(?=.*[a-zA-Z])[a-zA-Z0-9]+[a-zA-Z0-9!.@&,-\s\'$%^*()<>№"]+[a-zA-Z0-9.!]$/
+				return /^(?=.*[a-zA-Z])[a-zA-Z0-9]+[\s]?[a-zA-Z0-9!.@&,-\s\'$%^*()<>№"]+[a-zA-Z0-9.!]$/
 						.test(value);
 			}, 'Invalid description!');
 
@@ -35,7 +40,7 @@
 		}, 'Invalid postal code');
 
 	$.validator.addMethod('regexAdditional', function(value,	element) {
-			return /^[a-zA-Z0-9.\-,/ ]+$/.test(value);
+			return /^[a-zA-Z0-9.\-,/' ]+$/.test(value);
 		}, 'Invalid address');
 	
 	$.validator.addMethod('regexMail', function(value, element) {
