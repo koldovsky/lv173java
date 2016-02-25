@@ -9,11 +9,12 @@ $(document).ready(
 			var id = href.substr(href.lastIndexOf('/') + 1);
 			
 			$('#title').html('Edit Real Estate Agency');
-			
+			var root = window.location.pathname.split('/')[1];
+
 			$.ajax({
 				type : 'GET',
-				url : '/REDplatform/api/agency/'+id,
-				dataType : 'json',
+				url : '/'+root+'/api/agency/'+id,
+				dataType : 'json', 
 				success : function(responseData, textStatus, jqXHR) {
 					$('#agencyName').val(responseData.name);
 					$('#description').val(responseData.description);
@@ -28,7 +29,6 @@ $(document).ready(
 					
 					$('#agencyID').val(responseData.id);
 					$('#error').hide();
-					$('#success').hide();
 			
 				},	
 				error : function(jqXHR, textStatus, errorThrown) {
@@ -61,7 +61,7 @@ $(document).ready(
 						};
 						$.ajax({
 							type : 'PUT',
-							url : '/REDplatform/api/agency/'+id,
+							url : '/'+root+'/api/agency/'+id,
 							contentType : 'application/json',
 							data : JSON.stringify(agency),
 							dataType : 'json',
@@ -70,8 +70,6 @@ $(document).ready(
 								$('#error').hide();
 							},
 							error : function(jqXHR, textStatus, errorThrown) {
-								console.error(textStatus+' '+errorThrown)
-								console.error(jqXHR.responseText)
 								
 								$('#error').show();
 								$('#success').hide();

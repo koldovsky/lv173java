@@ -1,14 +1,19 @@
-// When the browser is ready...
 $(document).ready(
 		function() {
-			$('#success').hide();
-			$('#error').hide();
+			$('.alert .close').on('click', function(e) {
+			    $(this).parent().hide();
+			});
+			
+			var hideMessages = function(){
+				$('#error').hide();
+				$('#success').hide();
+			}
+			hideMessages();
 
-			// Setup form validation on the #register-form element
 			$('#register-form')
 					.validate(
-							{
-								// Specify the validation rules
+							{ 							
+								errorClass: 'text-danger',
 								rules : {
 									agencyName : {
 										required : true,

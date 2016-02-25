@@ -5,11 +5,16 @@
 		<h1 >
 			Registration for Real Estate Agency
 		</h1>
-
-		<div id="success" class="alert alert-success" role="alert">
-			Real estate agency has been added to the list successfully.</div>
-		<div id="error" class="alert alert-danger" role="alert">Failed to add agency</div>
 		
+		<div id="error" class="alert alert-danger" role="alert">
+		<a href="#" class="close" aria-label="close">&times;</a>
+			Failed to add agency
+		</div>
+		
+		<div id="success" class="alert alert-success" role="alert">
+		<a href="#" class="close" aria-label="close">&times;</a>
+			Real estate agency has been registered successfully.</div>
+	
 		<div class="text-danger">
 				<b>Fields marked with <span class="glyphicon glyphicon-asterisk text-danger" aria-hidden="true"></span> are required.</b>
 				<br/><br/>
