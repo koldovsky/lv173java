@@ -45,7 +45,7 @@ public class CustomerUserService extends AbstractUserService {
      * @param predicate predicate
      * @return customer user list
      */
-    @Secured("ROLE_ADMIN")
+    @Secured("ROLE_REDADMIN")
     public List<CustomerUser> loadCustomerUsers(
 	    final DataTablePredicate predicate) {
 	return customerUserDao.findAll(predicate);
@@ -55,7 +55,7 @@ public class CustomerUserService extends AbstractUserService {
      * count all customer users.
      * @return count
      */
-    @Secured("RED_ADMIN")
+    @Secured("ROLE_REDADMIN")
     public long countAllCustomerUsers() {
 	return customerUserDao.countAll();
     }
@@ -65,7 +65,7 @@ public class CustomerUserService extends AbstractUserService {
      * @param predicate predicate
      * @return count
      */
-    @Secured("RED_ADMIN")
+    @Secured("ROLE_REDADMIN")
     public long countAllCustomerUsers(
 	    final DataTablePredicate predicate) {
 	return customerUserDao.countAll(predicate);
