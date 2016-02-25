@@ -25,17 +25,15 @@
 			</c:if>
 			<form name="loginform" action="<c:url value="/j_spring_security_check"></c:url>" method="post">
                <fieldset>
-                <div class="input-group">
+                <div class="input-group" id="email-form">
                 <span class="input-group-addon" id="icon-email"></span>
 					<input class="form-control" name='email' type="text" placeholder="Email...">
 				 </div>
-				 <br>
-				<div class="input-group">
+				<div class="input-group" id="email-form">
                  <span class="input-group-addon" id="icon-password"></span>
 					<input class="form-control" name='password' type="password" placeholder="Password...">
 				</div>
-				<br>
-					<input class="btn btn-lg btn-success btn-block" type="submit" value="Login">
+					<input id="button" class="btn btn-lg btn-success btn-block" type="submit" value="Login">
                </fieldset>
 			</form>
 		</div>
