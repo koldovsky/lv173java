@@ -21,6 +21,43 @@ import com.softserveinc.ita.redplatform.persistence.dao.UserDao;
 @Repository("userDao")
 public class JPAUserDao extends JPAGenericDao<User, Long> implements UserDao {
 
+    	/**
+    	 * Search fields string.
+    	 */
+    	private final String searchFields =  "user.email like :search"
+		+ " or user.createdDate like :search"
+		+ " or user.phone like :search"
+		+ " or user.lastName like :search"
+		+ " or user.firstName like :search";
+    	
+    	/**
+    	 * Find Company Users Search Query.
+    	 */
+    	private final String companyUsersSearchQuery = User.class.getName()
+		+ " as user where user.id in ("
+		+ " select customer.id from "
+		+ CustomerUser.class.getName()
+		+ " as customer inner join"
+		+ " customer.orders as order"
+		+ " where order.createdBy.id in"
+		+ " ( select admin.id from "
+		+ RealEstateAdminUser.class.getName()
+		+ " as admin inner join admin.agency"
+		+ " as agency where agency ="
+		+ " (select adminuser.agency from "
+		+ RealEstateAdminUser.class.getName()
+		+ " as adminuser where adminuser.email =:email )))"
+		+ " and ( " + searchFields + " )"
+		+ " or user.id in ("
+		+ " select admin.id from "
+		+ RealEstateAdminUser.class.getName()
+		+ " as admin inner join admin.agency"
+		+ " as agency where agency ="
+		+ " (select adminuser.agency from "
+		+ RealEstateAdminUser.class.getName()
+		+ " as adminuser where adminuser.email =:email ))"
+		+ " and ( " + searchFields + " )";
+    	
 	/**
 	 * method find user by email.
 	 */
@@ -67,59 +104,11 @@ public class JPAUserDao extends JPAGenericDao<User, Long> implements UserDao {
 	@Override
 	public final List<User> findCompanyUsersByCompanyAdmin(final String email, 
 			final DataTablePredicate predicate) {
-		String orderField;
-		if (predicate.getColumn() == 0) {
-			orderField = "user.firstName " 
-					+ predicate.getOrder() + ", user.lastName";
-		} else if (predicate.getColumn() == 1) {
-			orderField = "user.email";
-		} else if (predicate.getColumn() == 2) {
-			orderField = "user.phone";
-		} else {
-			orderField = "user.createdDate";
-		}
-		String orderDirection;
-		if (predicate.getOrder().equalsIgnoreCase("desc")) {
-			orderDirection = "desc";
-		} else {
-			orderDirection = "asc";
-		}
 		return (List<User>) getEntityManager()
 				.createQuery("select user from "
-						+ User.class.getName()
-						+ " as user where user.id in ("
-						+ " select customer.id from "
-						+ CustomerUser.class.getName()
-						+ " as customer inner join"
-						+ " customer.orders as order"
-						+ " where order.createdBy.id in"
-						+ " ( select admin.id from "
-						+ RealEstateAdminUser.class.getName()
-						+ " as admin inner join admin.agency"
-						+ " as agency where agency ="
-						+ " (select adminuser.agency from "
-						+ RealEstateAdminUser.class.getName()
-						+ " as adminuser where adminuser.email =:email )))"
-						+ " and ( user.email like :search"
-						+ " or user.createdDate like :search"
-						+ " or user.phone like :search"
-						+ " or user.lastName like :search"
-						+ " or user.firstName like :search )"
-						+ " or user.id in ("
-						+ " select admin.id from "
-						+ RealEstateAdminUser.class.getName()
-						+ " as admin inner join admin.agency"
-						+ " as agency where agency ="
-						+ " (select adminuser.agency from "
-						+ RealEstateAdminUser.class.getName()
-						+ " as adminuser where adminuser.email =:email ))"
-						+ " and ( user.email like :search"
-						+ " or user.createdDate like :search"
-						+ " or user.phone like :search"
-						+ " or user.lastName like :search"
-						+ " or user.firstName like :search )"
-						+ " order by " + orderField
-						+ " " + orderDirection)
+						+ companyUsersSearchQuery
+						+ " order by " + getOrderField(predicate)
+						+ " " + getOrderDirection(predicate))
 				.setParameter("email", email)
 				.setParameter("search", predicate.getSearch() + "%")
 				.setFirstResult(predicate.getStart())
@@ -133,33 +122,13 @@ public class JPAUserDao extends JPAGenericDao<User, Long> implements UserDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public final List<User> findAll(final DataTablePredicate predicate) {
-		String orderField;
-		if (predicate.getColumn() == 0) {
-			orderField = "user.firstName " 
-					+ predicate.getOrder() + ", user.lastName";
-		} else if (predicate.getColumn() == 1) {
-			orderField = "user.email";
-		} else if (predicate.getColumn() == 2) {
-			orderField = "user.phone";
-		} else {
-			orderField = "user.createdDate";
-		}
-		String orderDirection;
-		if (predicate.getOrder().equalsIgnoreCase("desc")) {
-			orderDirection = "desc";
-		} else {
-			orderDirection = "asc";
-		}
 		return (List<User>) getEntityManager()
 				.createQuery("select user from "
 						+ User.class.getName()
-						+ " as user where user.email like :search"
-						+ " or user.createdDate like :search"
-						+ " or user.phone like :search"
-						+ " or user.lastName like :search"
-						+ " or user.firstName like :search"
-						+ " order by " + orderField
-						+ " " + orderDirection)
+						+ " as user where "
+						+ searchFields
+						+ " order by " + getOrderField(predicate)
+						+ " " + getOrderDirection(predicate))
 				.setParameter("search", predicate.getSearch() + "%")
 				.setFirstResult(predicate.getStart())
 				.setMaxResults(predicate.getLength())
@@ -187,11 +156,8 @@ public class JPAUserDao extends JPAGenericDao<User, Long> implements UserDao {
 		return (long) getEntityManager()
 				.createQuery("select count(*) from "
 						+ User.class.getName()
-						+ " as user where user.email like :search"
-						+ " or user.createdDate like :search"
-						+ " or user.phone like :search"
-						+ " or user.lastName like :search"
-						+ " or user.firstName like :search")
+						+ " as user where "
+						+ searchFields)
 				.setParameter("search", predicate.getSearch() + "%")
 				.getSingleResult();
 	}
@@ -240,43 +206,42 @@ public class JPAUserDao extends JPAGenericDao<User, Long> implements UserDao {
 			final DataTablePredicate predicate) {
 		return (long) getEntityManager()
 				.createQuery("select count(*) from "
-						+ User.class.getName()
-						+ " as user where user.id in ("
-						+ " select customer.id from "
-						+ CustomerUser.class.getName()
-						+ " as customer inner join"
-						+ " customer.orders as order"
-						+ " where order.createdBy.id in"
-						+ " ( select admin.id from "
-						+ RealEstateAdminUser.class.getName()
-						+ " as admin inner join admin.agency"
-						+ " as agency where agency ="
-						+ " (select adminuser.agency from "
-						+ RealEstateAdminUser.class.getName()
-						+ " as adminuser where adminuser.email =:email )))"
-						+ " and ( user.email like :search"
-						+ " or user.createdDate like :search"
-						+ " or user.phone like :search"
-						+ " or user.lastName like :search"
-						+ " or user.firstName like :search )"
-						+ " or user.id in ("
-						+ " select admin.id from "
-						+ RealEstateAdminUser.class.getName()
-						+ " as admin inner join admin.agency"
-						+ " as agency where agency ="
-						+ " (select adminuser.agency from "
-						+ RealEstateAdminUser.class.getName()
-						+ " as adminuser where adminuser.email =:email ))"
-						+ " and ( user.email like :search"
-						+ " or user.createdDate like :search"
-						+ " or user.phone like :search"
-						+ " or user.lastName like :search"
-						+ " or user.firstName like :search )")
+					+ companyUsersSearchQuery)
 				.setParameter("email", email)
 				.setParameter("search", predicate.getSearch() + "%")
 				.getSingleResult();
 	}
 	
+	/**
+	 * Get order Column name.
+	 * @param predicate predicate
+	 * @return order column name
+	 */
+	private String getOrderField(
+		final DataTablePredicate predicate) {
+		if (predicate.getColumn() == 0) {
+		    return "user.firstName " 
+			    + getOrderDirection(predicate) + ", user.lastName";
+		} else if (predicate.getColumn() == 1) {
+			return "user.email";
+		} else if (predicate.getColumn() == 2) {
+			return "user.phone";
+		}
+		return "user.createdDate";   
+	}
+	
+	/**
+	 * Get order direction.
+	 * @param predicate predicate
+	 * @return order column name
+	 */
+	private String getOrderDirection(
+		final DataTablePredicate predicate) {
+	    if (predicate.getOrder().equalsIgnoreCase("desc")) {
+		return "desc";
+	    }
+	    return "asc";   
+	}
 	
 }
 
