@@ -17,6 +17,21 @@ public class OrderDTO {
      */
     private Long id;
 
+    /**
+     * Description.
+     */
+    private String description;
+
+    /**
+     * Area in square meters.
+     */
+    private double area;
+    
+    /**
+     * Number of rooms.
+     */
+    private int roomsQuantity;
+
     public final Long getCustomerId() {
 	return customerId;
     }
@@ -31,6 +46,30 @@ public class OrderDTO {
 
     public final void setId(final Long newId) {
 	this.id = newId;
+    }
+
+    public final String getDescription() {
+	return description;
+    }
+
+    public final void setDescription(final String newDescription) {
+	this.description = newDescription;
+    }
+
+    public final double getArea() {
+	return area;
+    }
+
+    public final void setArea(final double newArea) {
+	this.area = newArea;
+    }
+
+    public final int getRoomsQuantity() {
+        return roomsQuantity;
+    }
+
+    public final void setRoomsQuantity(final int newRoomsQuantity) {
+        this.roomsQuantity = newRoomsQuantity;
     }
 
 }
