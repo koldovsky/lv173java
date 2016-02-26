@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.softserveinc.ita.redplatform.business.service.InstallmentService;
-import com.softserveinc.ita.redplatform.business.service.UserService;
+import com.softserveinc.ita.redplatform.business.service.OrderService;
 import com.softserveinc.ita.redplatform.common.dto.InstallmentDTO;
 
 /**
@@ -28,21 +28,24 @@ public class InstallmentController {
     @Autowired
     private InstallmentService installmentService;
 
-    /** The user service. */
+    /** The order service. */
     @Autowired
-    private UserService userService;
+    private OrderService orderService;
 
+    //TODO redesign the method so that 
+    //it returns ResponseEntity instance instead 
+    //of view name, if the page could not be rendered
     /**
      * Gets the installment addition page.
      *
-     * @param userId the user id
+     * @param orderId the order id
      * @return the registration page
      */
-    @RequestMapping(value = "/installment/{userId}", 
+    @RequestMapping(value = "/installment/{orderId}", 
 	    method = RequestMethod.GET)
     public final String getInstallmentAdditionPage(
-	    @PathVariable final Long userId) {
-	if (userService.isUserIdPresent(userId)) {
+	    @PathVariable final Long orderId) {
+	if (orderService.isOrderIdPresent(orderId)) {
 	    return "installment";
 	} else {
 	    return "404";
@@ -52,19 +55,19 @@ public class InstallmentController {
     /**
      * Adds installment.
      *
-     * @param userId
+     * @param orderId
      *            the user id
-     * @param dtos
-     *            the dtos
+     * @param installmentList
+     *            the installmentList
      * @return the response entity
      */
-    @RequestMapping(value = "/installment/{userId}", 
+    @RequestMapping(value = "/installment/{orderId}", 
 	    method = RequestMethod.POST)
     public final ResponseEntity<String> addInstallment(
-	    @PathVariable final Long userId,
-	    @RequestBody final List<InstallmentDTO> dtos) {
+	    @PathVariable final Long orderId,
+	    @RequestBody final List<InstallmentDTO> installmentList) {
 	try {
-	    installmentService.addInstallment(dtos, userId);
+	    installmentService.addInstallment(installmentList, orderId);
 	} catch (ParseException e) {
 	    return new ResponseEntity<>("Invalid input date.", 
 		    HttpStatus.BAD_REQUEST);

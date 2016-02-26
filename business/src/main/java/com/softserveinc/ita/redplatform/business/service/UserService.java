@@ -46,16 +46,6 @@ public class UserService {
     }
     
     /**
-     * Checks if is user id present.
-     *
-     * @param userId the user id
-     * @return true, if is user id present
-     */
-    public boolean isUserIdPresent(final Long userId) {
-	return userDao.findById(userId) != null;
-    }
-    
-    /**
      * load all users.
      * @param predicate predicate
      * @return List<User>

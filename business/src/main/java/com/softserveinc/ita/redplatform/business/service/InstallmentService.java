@@ -13,8 +13,8 @@ import com.softserveinc.ita.redplatform.common.dto.InstallmentDTO;
 import com.softserveinc.ita.redplatform.common.entity.Installment;
 import com.softserveinc.ita.redplatform.common.entity.Order;
 import com.softserveinc.ita.redplatform.common.mapper.InstallmentMapper;
-import com.softserveinc.ita.redplatform.persistence.dao.CustomerUserDao;
 import com.softserveinc.ita.redplatform.persistence.dao.InstallmentDao;
+import com.softserveinc.ita.redplatform.persistence.dao.OrderDao;
 
 /**
  * The class InstallmentService.
@@ -28,9 +28,9 @@ public class InstallmentService {
     @Autowired
     private InstallmentDao installmentDao;
 
-    /** The customer user dao. */
+    /** The order dao. */
     @Autowired
-    private CustomerUserDao customerUserDao;
+    private OrderDao orderDao;
 
     /** The mapper. */
     @Autowired
@@ -39,23 +39,22 @@ public class InstallmentService {
     /**
      * Adds the installment.
      *
-     * @param dtos the dtos
-     * @param customerId the customer id
+     * @param installmentList the installment list
+     * @param orderId the order id
      * @throws ParseException the parse exception
      */
     @Transactional
-    public void addInstallment(final List<InstallmentDTO> dtos, 
-	    final Long customerId) throws ParseException {
+    public void addInstallment(final List<InstallmentDTO> installmentList, 
+	    final Long orderId) throws ParseException {
 	Installment installment = null;
-	Order order = new Order();
-	order.setCustomerUser(customerUserDao
-		.findById(customerId));
+	Order order = null;
 	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 	Date date = null;
-	for (InstallmentDTO dto : dtos) {
+	for (InstallmentDTO dto : installmentList) {	    
 	    installment = installmentMapper.toEntity(dto);
 	    date = formatter.parse(dto.getDate());
 	    installment.setDate(date);
+	    order = orderDao.findById(orderId);
 	    installment.setOrder(order);
 	    installmentDao.save(installment);
 	}

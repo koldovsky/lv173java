@@ -45,5 +45,16 @@ public class OrderService {
 	orderDao.save(order);
 
     }
+    
+    /**
+     * Checks if order id is present.
+     *
+     * @param orderId the order id
+     * @return true, if order id is present
+     */
+    @Transactional
+    public boolean isOrderIdPresent(final Long orderId) {
+	return orderDao.findById(orderId) != null;
+    }
 
 }
