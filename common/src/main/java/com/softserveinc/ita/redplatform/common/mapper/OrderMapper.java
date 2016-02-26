@@ -17,7 +17,10 @@ public class OrderMapper implements GenericMapper<Order, OrderDTO> {
     public final OrderDTO toDto(final Order entity) {
 	OrderDTO orderDTO = new OrderDTO();
 	orderDTO.setId(entity.getId());
+	orderDTO.setDescription(entity.getDescription());
+	orderDTO.setArea(entity.getArea());
 	orderDTO.setCustomerId(entity.getCustomerUser().getId());
+	orderDTO.setRoomsQuantity(entity.getRoomsQuantity());
 	return orderDTO;
     }
 
@@ -25,6 +28,9 @@ public class OrderMapper implements GenericMapper<Order, OrderDTO> {
     public final Order toEntity(final OrderDTO dto) {
 	Order order = new Order();
 	order.setId(dto.getId());
+	order.setArea(dto.getArea());
+	order.setRoomsQuantity(dto.getRoomsQuantity());
+	order.setDescription(dto.getDescription());
 	return order;
     }
 
