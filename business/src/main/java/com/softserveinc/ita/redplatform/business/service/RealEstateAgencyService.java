@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,7 +40,7 @@ public class RealEstateAgencyService {
      * create realEstateAgency.
      * @param realEstateAgencyDTO realEstateAgencyDTO
      */
-   
+    @Secured({"ROLE_ADMIN", "ROLE_REDADMIN"})
     public void create(final RealEstateAgencyDTO realEstateAgencyDTO) {
 		
 	RealEstateAgency realEstateAgency = realEstateAgencyMapper
@@ -51,7 +52,7 @@ public class RealEstateAgencyService {
      * update realEstateAgency.
      * @param realEstateAgencyDTO realEstateAgencyDTO
      */
-   
+    @Secured({"ROLE_ADMIN", "ROLE_REDADMIN"})
     public void update(final RealEstateAgencyDTO realEstateAgencyDTO) {
 		
 	RealEstateAgency realEstateAgency = realEstateAgencyMapper
@@ -98,6 +99,7 @@ public class RealEstateAgencyService {
      * @param id the id
      * @return the RealEstateAgency entity
      */
+    @Secured({"ROLE_ADMIN", "ROLE_REDADMIN"})
     public RealEstateAgencyDTO getById(final long id) {
     	RealEstateAgency agency = realEstateAgencyDao
     			.findById(id);
