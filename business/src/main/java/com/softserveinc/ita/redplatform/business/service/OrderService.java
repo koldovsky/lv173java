@@ -35,22 +35,26 @@ public class OrderService {
     /**
      * Creates the order.
      *
-     * @param orderDTO the order dto
+     * @param orderDTO
+     *            the order dto
+     * @param customerId
+     *            Long customer Id
+     * @return Long order Id
      */
     @Transactional
-    public void create(final OrderDTO orderDTO) {
+    public Long create(final OrderDTO orderDTO, final Long customerId) {
 	Order order = mapper.toEntity(orderDTO);
-	order.setCustomerUser(
-		customerUserDao.findById(orderDTO.getCustomerId()));
-	orderDao.save(order);
+	order.setCustomerUser(customerUserDao.findById(customerId));
+	return orderDao.saveWithId(order);
 
     }
-    
+
     /**
      * Checks if order id is present.
      *
-     * @param orderId the order id
-     * @return true, if order id is present
+     * @param orderId
+     *            the order id
+     * @return boolean true if order id is present
      */
     @Transactional
     public boolean isOrderIdPresent(final Long orderId) {
