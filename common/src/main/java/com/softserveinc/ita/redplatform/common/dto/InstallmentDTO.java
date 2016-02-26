@@ -13,29 +13,6 @@ public class InstallmentDTO {
 
     /** The date. */
     private String date;
-    
-    /** The customer id. */
-    private Long customerId;
-
-    /**
-     * Gets the customer id.
-     *
-     * @return the customer id
-     */
-    public final Long getCustomerId() {
-        return customerId;
-    }
-
-
-    /**
-     * Sets the customer id.
-     *
-     * @param newCustomerId the new customer id
-     */
-    public final void setCustomerId(final Long newCustomerId) {
-        customerId = newCustomerId;
-    }
-
 
     /**
      * Gets the amount.

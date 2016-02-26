@@ -39,8 +39,12 @@ $(function() {
 	$('#add-more').click(
 			function() {
 				if ($('.installment-addition').last().valid()) {
-					$('.installment-addition').last().clone().appendTo(
-							$('#container'));
+					var $clone = $('.installment-addition').last().clone();
+					var $inputs = $clone.find('input');
+					$inputs.each(function() {
+						$(this).val('');
+					});
+					$clone.appendTo($('#container'));
 					$('#controls').appendTo($('#container'));
 				}
 			});

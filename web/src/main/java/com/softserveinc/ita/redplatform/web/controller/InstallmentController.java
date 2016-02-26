@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,18 +35,14 @@ public class InstallmentController {
     /**
      * Gets the installment addition page.
      *
-     * @param userId
-     *            the user id
-     * @param model
-     *            the model
+     * @param userId the user id
      * @return the registration page
      */
     @RequestMapping(value = "/installment/{userId}", 
 	    method = RequestMethod.GET)
     public final String getInstallmentAdditionPage(
-	    @PathVariable final Long userId, final Model model) {
+	    @PathVariable final Long userId) {
 	if (userService.isUserIdPresent(userId)) {
-	    model.addAttribute("userId", userId);
 	    return "installment";
 	} else {
 	    return "404";
@@ -69,7 +64,7 @@ public class InstallmentController {
 	    @PathVariable final Long userId,
 	    @RequestBody final List<InstallmentDTO> dtos) {
 	try {
-	    installmentService.addInstallment(dtos);
+	    installmentService.addInstallment(dtos, userId);
 	} catch (ParseException e) {
 	    return new ResponseEntity<>("Invalid input date.", 
 		    HttpStatus.BAD_REQUEST);

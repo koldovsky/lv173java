@@ -39,10 +39,6 @@
 						placeholder="100,00" />
 				</div>
 			</div>
-			
-			<div class="row">
-				<input id="customerId" name="customerId" type="hidden" value=${userId} />
-			</div>
 		</form>
 		
 		<div id="controls" class="row">
