@@ -5,9 +5,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -51,8 +50,7 @@ public class CustomerUser extends User {
   /**
   * Column Address has Set of peoples.
   */
-  @ManyToOne
-  @JoinColumn(name = "addressId")
+  @OneToOne(cascade = CascadeType.ALL)
   private Address address;
 
   /**

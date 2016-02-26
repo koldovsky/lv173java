@@ -5,8 +5,8 @@
 <head>
 <jsp:include page="utils/jspheader.jsp" />
 <title>Installment addition - REDplatform</title>
-<script src="resources/js/lib/jquery/jquery.validate.min.js"></script>
-<script src="resources/js/installment.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/lib/jquery/jquery.validate.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/installment.js"></script>
 </head>
 
 <body>

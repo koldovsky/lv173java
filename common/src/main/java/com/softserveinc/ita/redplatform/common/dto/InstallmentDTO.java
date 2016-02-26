@@ -14,11 +14,6 @@ public class InstallmentDTO {
     /** The date. */
     private String date;
 
-
-    /** The order id. */
-    private Long orderId;
-
-
     /**
      * Gets the amount.
      *
@@ -56,25 +51,5 @@ public class InstallmentDTO {
      */
     public final void setDate(final String newDate) {
         date = newDate;
-    }
-
-
-    /**
-     * Gets the order id.
-     *
-     * @return the order id
-     */
-    public final Long getOrderId() {
-        return orderId;
-    }
-
-
-    /**
-     * Sets the order id.
-     *
-     * @param newOrderId the new order id
-     */
-    public final void setOrderId(final Long newOrderId) {
-        orderId = newOrderId;
     }
 }
