@@ -9,18 +9,48 @@ $(document).ready(
 				$('#success').hide();
 			}
 			hideMessages();
+			
+			$.validator.addMethod('agencyName', function(value, element) {
+				return regexName.test(value);
+			}, 'Invalid name!');
+		
+			$.validator.addMethod('description', function(value, element) {
+						return regexDescription.test(value);
+			}, 'Invalid description!');
+		
+			$.validator.addMethod('phoneNumber', function(value, element) {
+					return regexPhoneNumber.test(value);
+			}, 'Invalid phone number!');
+		
+			$.validator.addMethod('country', function(value,	element) {
+					return regexCountry.test(value);
+			}, 'Invalid country');
+			
+			$.validator.addMethod('regionValid', function(value, element) {
+					return regexRegion.test(value);
+			}, 'Invalid region');
+		
+			$.validator.addMethod('postalCode', function(value, element) {
+					return regexPostalCode.test(value);
+			}, 'Invalid postal code');
+		
+			$.validator.addMethod('additional', function(value,	element) {
+					return regexAdditional.test(value);
+			}, 'Invalid address');
 
+			
 			$('#register-form')
 					.validate(
-							{ 							
+							{ 		
+								focusCleanup: true,
+							    onkeyup: false,
 								errorClass: 'text-danger',
 								rules : {
 									agencyName : {
 										required : true,
 										minlength : 3,
 										maxlength : 100,
-										regexName : true,
-										regexDoubleSpace : true,
+										agencyName : true,
 										remote: {
 											url: 'checkName',
 											type: 'GET'
@@ -30,43 +60,43 @@ $(document).ready(
 										required : true,
 										minlength : 4,
 										maxlength : 400,
-										regexDescription : true
+										description : true
 									},
 									phoneNumber : {
 										required : true,
 										minlength : 10,
-										regexPhoneNumber : true
+										phoneNumber : true
 									},
 									webSite : {
 										minlength : 6,
-										url : true
+										url : true,
+										maxlength : 50
 									},
 									country : {
 										required : true,
-										regexCountry : true,
+										country : true,
 										minlength : 2
 									},
 									region : {
-										regexRegion : true,
+										regionValid : true,
 										minlength : 2
 									},
 									postalCode : {
 										required : true,
-										regexPostalCode : true,
+										postalCode : true,
 										minlength : 3,
 										maxlength : 10
 
 									},
 									locality : {
 										required : true,
-										regexCountry : true,
+										country : true,
 										minlength : 2
 									},
 									additionalInfo : {
 										required : true,
 										minlength : 2,
-										regexAdditional : true,
-										regexDoubleSpace : true
+										additional : true									
 									}
 
 								},
@@ -91,18 +121,17 @@ $(document).ready(
 									},
 									region : {
 										required : 'Please enter region',
-										regexRegion : 'Invalid region!'
+										region : 'Invalid region!'
 									},
 									postalCode : {
 										required : 'Please enter postal code'
 									},
 									locality : {
 										required : 'Please enter city or village',
-										regexCountry : 'Invalid city name!'
+										country : 'Invalid city name!'
 									},
 									additionalInfo : {
-										required : 'Please enter address',
-										regexDoubleSpace : 'Invalid address!'
+										required : 'Please enter address'
 									}
 								}
 							});
