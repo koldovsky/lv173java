@@ -51,7 +51,7 @@ public class CustomerUserDTO {
     /**
      * id.
      */
-    private long id;
+    private Long id;
 
     public final String getFirstName() {
 	return firstName;
@@ -102,11 +102,11 @@ public class CustomerUserDTO {
 	this.address = newAddress;
     }
 
-    public final long getId() {
+    public final Long getId() {
 	return id;
     }
 
-    public final void setId(final long newId) {
+    public final void setId(final Long newId) {
 	this.id = newId;
     }
 
