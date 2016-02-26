@@ -28,9 +28,9 @@
 <!-- default-target-url="/index" -->
 
 	<beans:bean id="authenticationManager"
-        class="com.softserveinc.ita.redplatform.web.api.AuthenticationManager" />
+        class="com.softserveinc.ita.redplatform.business.service.AuthenticationManager" />
 
-	<beans:bean id="UserDetailsServiceImplementation"
+	<beans:bean id="userDetailsServiceImplementation"
 		class="com.softserveinc.ita.redplatform.business.service.UserDetailsServiceImplementation">
 		<beans:property name="userService" ref="userService"></beans:property>
 	</beans:bean>
@@ -44,7 +44,7 @@
 	
 	<!-- Select users and user_roles from database -->
 	<authentication-manager>
-		<authentication-provider user-service-ref="UserDetailsServiceImplementation">
+		<authentication-provider user-service-ref="userDetailsServiceImplementation">
 		 <password-encoder ref="bcryptEncoder"/>
 		</authentication-provider>
 	</authentication-manager>

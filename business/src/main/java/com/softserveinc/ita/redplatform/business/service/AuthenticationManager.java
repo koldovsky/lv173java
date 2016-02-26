@@ -1,4 +1,4 @@
-package com.softserveinc.ita.redplatform.web.api;
+package com.softserveinc.ita.redplatform.business.service;
 
 import java.io.IOException;
 import java.util.Collection;
