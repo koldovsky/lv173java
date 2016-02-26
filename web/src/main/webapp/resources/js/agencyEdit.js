@@ -9,11 +9,10 @@ $(document).ready(
 			var id = href.substr(href.lastIndexOf('/') + 1);
 			
 			$('#title').html('Edit Real Estate Agency');
-			var root = window.location.pathname.split('/')[1];
 
 			$.ajax({
 				type : 'GET',
-				url : '/'+root+'/api/agency/'+id,
+				url : context + '/api/agency/'+id,
 				dataType : 'json', 
 				success : function(responseData, textStatus, jqXHR) {
 					$('#agencyName').val(responseData.name);
@@ -61,7 +60,7 @@ $(document).ready(
 						};
 						$.ajax({
 							type : 'PUT',
-							url : '/'+root+'/api/agency/'+id,
+							url : context + '/api/agency/'+id,
 							contentType : 'application/json',
 							data : JSON.stringify(agency),
 							dataType : 'json',
