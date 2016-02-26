@@ -18,7 +18,7 @@
 	<jsp:include page="utils/navbar.jsp"></jsp:include>
 	<div class="page">
 		<h2 class="text-center">List of Users</h2>
-			<table id="table" class="display" cellspacing="0" width="90%">
+			<table id="table" class="display" cellspacing="0" width="100%">
 				<thead>
 					<tr>
 						<th>Name</th>
