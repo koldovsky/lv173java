@@ -8,11 +8,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>List of users</title>
 <!-- Custom CSS -->
-	<link href="resources/css/users.css" rel="stylesheet">
-	<link href="resources/css/lib/dataTables/jquery.dataTables-1.10.11.min.css"
+	<link href="${pageContext.request.contextPath}/resources/css/users.css" rel="stylesheet">
+	<link href="${pageContext.request.contextPath}/resources/css/lib/dataTables/jquery.dataTables-1.10.11.min.css"
 	rel="stylesheet">
 	<!-- users.js -->
-	<script src="resources/js/users.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/users.js"></script>
 </head>
 <body>
 	<jsp:include page="utils/navbar.jsp"></jsp:include>

@@ -1,5 +1,3 @@
-
-
 html,
 body {
     height: 100%;
@@ -26,6 +24,7 @@ body {
     -moz-background-size: cover;
     background-size: cover;
     -o-background-size: cover;
+    background-color:grey;
 }
 
 footer {
@@ -39,18 +38,6 @@ footer {
 .indexHeader{
 	font-family:"Helvetica", cursive, sans-serif;
 	font-size:25px;
-}
-
-.image1{
-	background-image:url('http://i66.tinypic.com/2hwqrk.jpg');
-}
-
-.image2{
-	background-image:url('http://i68.tinypic.com/29m3bsn.jpg');
-}
-
-.image3{
-	background-image:url('http://i63.tinypic.com/e0315k.jpg');
 }
 
 .carousel-text  {
@@ -75,17 +62,13 @@ footer {
 
 .indexrow > .col-md-3 {
 	box-sizing: content-box;
-	background-color: #212f3f;
   margin-left: 2%;
 	margin-right: 3%;
 	margin-top: 1%;
 	margin-bottom: 1%;
-	border-radius: 25px;
-	border: 2px solid black;
 }
 
 .indexrow{
-	color: white;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
