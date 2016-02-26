@@ -8,7 +8,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.softserveinc.ita.redplatform.business.service.UserService;
 import com.softserveinc.ita.redplatform.common.dto.UserDTO;
@@ -47,7 +46,6 @@ public class UserRestController {
      * @return users list
      */
     @RequestMapping(value = "/api/user", method = RequestMethod.GET)
-    @ResponseBody
     public final ResponseEntity<DataTableResponse<UserDTO>> getUserList(
 	    @RequestParam final int draw,
 	    @RequestParam final int length, @RequestParam final int start,
