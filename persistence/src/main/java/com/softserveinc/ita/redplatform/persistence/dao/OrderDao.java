@@ -10,4 +10,12 @@ import com.softserveinc.ita.redplatform.common.entity.Order;
  */
 public interface OrderDao extends GenericDao<Order, Long> {
 
+    /**
+     * OrderDao saveWithId method.
+     * @param order
+     *            Order entity
+     * @return Long id of an order
+     */
+    Long saveWithId(Order order);
+
 }
