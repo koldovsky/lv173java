@@ -17,6 +17,7 @@
 </head>
 	<body>
 		<input type="hidden" name="id" value="" id="agencyID">
+		<input type="hidden" name="id" value="" id="addressID">
 		<jsp:include page="utils/agency.jsp"></jsp:include>
 	</body>
 </html>

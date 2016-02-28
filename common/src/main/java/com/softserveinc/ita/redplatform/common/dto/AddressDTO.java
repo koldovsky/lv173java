@@ -8,6 +8,9 @@ package com.softserveinc.ita.redplatform.common.dto;
  */
 public class AddressDTO {
     
+        /** The id. */
+        private Long id;
+    
 	/** The country. */
 	private String country;
 	
@@ -68,5 +71,22 @@ public class AddressDTO {
 	    this.additional = newAdditional;
 	}
 
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
+	public final Long getId() {
+		return id;
+	}
+	
+	/**
+	 * Sets the id.
+	 *
+	 * @param newId the new id
+	 */
+	public final void setId(final Long newId) {
+		this.id = newId;
+	}
 	
 }

@@ -27,6 +27,7 @@ $(document).ready(
 					$('#additionalInfo').val(responseData.address.additional);
 					
 					$('#agencyID').val(responseData.id);
+					$('#addressID').val(responseData.address.id);
 					$('#error').hide();
 			
 				},	
@@ -43,6 +44,7 @@ $(document).ready(
 			$('#register-form').submit(function(event) {
 				if ($('#register-form').valid()) {
 					var address = {
+							id:	$('#addressID').val(),
 							country : $('#country').val(),
 							region : $('#region').val(),
 							postalCode : $('#postalCode').val(),

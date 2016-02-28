@@ -20,6 +20,7 @@ public class AddressMapper implements GenericMapper<Address, AddressDTO> {
     public final AddressDTO toDto(final Address entity) {
 	AddressDTO dto = new AddressDTO();
 	
+	dto.setId(entity.getId());
 	dto.setCountry(entity.getCountry());
 	dto.setRegion(entity.getRegion());
 	dto.setPostalCode(entity.getPostalCode());
@@ -36,6 +37,7 @@ public class AddressMapper implements GenericMapper<Address, AddressDTO> {
     public final Address toEntity(final AddressDTO dto) {
 	Address entity = new Address();
 	
+	entity.setId(dto.getId());
         entity.setCountry(dto.getCountry());
         entity.setRegion(dto.getRegion());
         entity.setPostalCode(dto.getPostalCode());
