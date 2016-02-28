@@ -16,6 +16,6 @@ public interface OrderDao extends GenericDao<Order, Long> {
      *            Order entity
      * @return Long id of an order
      */
-    Long saveWithId(Order order);
+    Order saveWithId(Order order);
 
 }

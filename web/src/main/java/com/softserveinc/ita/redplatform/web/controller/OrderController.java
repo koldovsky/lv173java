@@ -1,6 +1,8 @@
 package com.softserveinc.ita.redplatform.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -56,12 +58,12 @@ public class OrderController {
      * @return the response entity
      */
     @RequestMapping(value = "/order/{customerId}", method = RequestMethod.POST)
-    public final String addOrder(
+    public final ResponseEntity<OrderDTO> addOrder(
 	    @PathVariable final Long customerId,
 	    @RequestBody final OrderDTO orderDTO) {
-	Long orderId = orderService.create(orderDTO, customerId);
-	// TODO: Redirect user to installments page. Use FlashAttribute?
-	return "/installment/" + orderId.toString();
+
+	OrderDTO responseOrder = orderService.create(orderDTO, customerId);
+	return new ResponseEntity<OrderDTO>(responseOrder, HttpStatus.OK);
     }
 
 }

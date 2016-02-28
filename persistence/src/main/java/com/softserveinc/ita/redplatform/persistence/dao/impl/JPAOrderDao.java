@@ -21,10 +21,10 @@ public class JPAOrderDao extends JPAGenericDao<Order, Long>
      *            Order entity
      * @return Long id of an order
      */
-    public final Long saveWithId(final Order order) {
+    public final Order saveWithId(final Order order) {
 	getEntityManager().persist(order);
 	getEntityManager().flush();
-	return order.getId();
+	return order;
     }
 
 }
