@@ -41,6 +41,20 @@ public class Order extends BaseEntity {
      */
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<Payment> payments;
+    
+    /**
+     * Description of an order.
+     */
+    private String description;
+    
+    /**
+     * Area in square meters.
+     */
+    private double area;
+    /**
+     * Number of rooms.
+     */
+    private int roomsQuantity;
 
     /**
      * Get customerUser.
@@ -93,6 +107,30 @@ public class Order extends BaseEntity {
      */
     public final void setPayments(final List<Payment> newPayments) {
 	this.payments = newPayments;
+    }
+
+    public final String getDescription() {
+        return description;
+    }
+
+    public final void setDescription(final String newDescription) {
+        this.description = newDescription;
+    }
+
+    public final double getArea() {
+        return area;
+    }
+
+    public final void setArea(final double newArea) {
+        this.area = newArea;
+    }
+
+    public final int getRoomsQuantity() {
+        return roomsQuantity;
+    }
+
+    public final void setRoomsQuantity(final int newRoomsQuantity) {
+        this.roomsQuantity = newRoomsQuantity;
     }
 
 }

@@ -84,4 +84,14 @@ public class CustomerUserService extends AbstractUserService {
 	return customerUserDao.countAll(predicate);
     }
 
+    /**
+     * Checks if this customer is present in the system.
+     * @param customerId customer Id
+     * @return boolean true if it exists
+     */
+    @Secured("ROLE_REDADMIN")
+    public boolean isCustomerIdPresent(final Long customerId) {
+	return customerUserDao.findById(customerId) != null;
+    }
+
 }
