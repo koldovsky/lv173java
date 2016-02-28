@@ -4,7 +4,7 @@ $(function() {
 	(function() {
 		$("body").css("padding-top", $(".navbar-fixed-top").height());
 	})();
-	
+
 	var href = $(location).attr('href');
 	var id = href.substr(href.lastIndexOf('/') + 1);
 
@@ -13,62 +13,54 @@ $(function() {
 
 	$.validator.addMethod('fieldRequired', $.validator.methods.required,
 			'Field is required.');
-	$.validator.addClassRules('data', {
-		fieldRequired : true
-	});
-
 	$.validator.addMethod('dateCustom', function(value, element) {
 		return /^20\d\d-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/.test(value);
 	}, 'Date should be valid.');
 	$.validator.addMethod('amountCustom', function(value, element) {
 		return /^\d+\.\d\d$/.test(value);
 	}, 'Amount should be valid.');
-
-	$('.installment-addition').last().validate({
-		errorClass : 'text-danger',
-		rules : {
-			date : {
-				dateCustom : true,
-			},
-			amount : {
-				amountCustom : true
-			}
+	
+	$.validator.addClassRules('data', {fieldRequired : true});
+	$.validator.addClassRules('date', {dateCustom: true});
+	$.validator.addClassRules('amount', {amountCustom: true});
+	
+	$('#installment-form').validate({
+		errorClass : 'text-danger'
+	});
+	
+	var template = $.validator.format($('#template').html());
+	function addInstallmentItemFields() {
+		$(template(itemCount++)).appendTo("#installment-form");
+	}
+	
+	var itemCount = 0;
+	addInstallmentItemFields();
+	$('#add-more').click(function() {
+		if ($('#installment-form').valid()) {
+			addInstallmentItemFields();
 		}
 	});
-
-	$('#add-more').click(
-			function() {
-				if ($('.installment-addition').last().valid()) {
-					var $clone = $('.installment-addition').last().clone();
-					var $inputs = $clone.find('input');
-					$inputs.each(function() {
-						$(this).val('');
-					});
-					$clone.appendTo($('#container'));
-					$('#controls').appendTo($('#container'));
-				}
-			});
-
+	
 	$('#submit-data').click(function() {
-		if ($('.installment-addition').last().valid()) {
-			var info = [];
-			var i = 0;
-			$('.installment-addition').each(function() {
-				var formData = {};
-				var $inputs = $(this).find('input');
-				$inputs.each(function() {
-					formData[this.name] = $(this).val();
-				});
-				info[i] = formData;
-				++i;
-
-			});
+		if ($('#installment-form').valid()) {
 			
-			var postData = JSON.stringify(info);
+			function collectInstallmentData() {
+				var installment = [];
+				var inputIdTemplate = $.validator.format('{0}-{1}');
+				for (var i = 0; i < itemCount; i++){
+					installment[i] = {
+						date: $('#installment-form').find('#' + inputIdTemplate('date', i)).val(),
+						amount: $('#installment-form').find('#' + inputIdTemplate('amount', i)).val()
+					};
+				};
+				return installment;
+			}
+			
+			var postData = JSON.stringify(collectInstallmentData());
 
 			$.ajax({
 				type : 'POST',
-				url :  id,
+				url : id,
 				data : postData,
 				contentType : 'application/json; charset=utf-8',
 				success : function(responseData, textStatus, jqXHR) {
@@ -83,7 +75,6 @@ $(function() {
 					$('#error').show();
 				}
 			});
-
 			return false;
 		}
 	});
