@@ -12,31 +12,31 @@ $(document).ready(
 			
 			$.validator.addMethod('agencyName', function(value, element) {
 				return regexName.test(value);
-			}, 'Invalid name!');
+			}, 'Agency name should be valid.');
 		
 			$.validator.addMethod('description', function(value, element) {
 						return regexDescription.test(value);
-			}, 'Invalid description!');
+			}, 'Description should be valid');
 		
 			$.validator.addMethod('phoneNumber', function(value, element) {
 					return regexPhoneNumber.test(value);
-			}, 'Invalid phone number!');
+			}, messagePhoneIncorrect);
 		
 			$.validator.addMethod('country', function(value,	element) {
 					return regexCountry.test(value);
-			}, 'Invalid country!');
+			}, messageCountryIncorrect);
 			
 			$.validator.addMethod('regionValid', function(value, element) {
 				return this.optional(element) || regexCountry.test(value);
-			}, 'Invalid region!');
+			}, messageRegionIncorrect);
 		
 			$.validator.addMethod('postalCode', function(value, element) {
 					return regexPostalCode.test(value);
-			}, 'Invalid postal code!');
+			}, messagePostalCodeIncorrect);
 		
 			$.validator.addMethod('additional', function(value,	element) {
 					return regexAdditional.test(value);
-			}, 'Invalid address!');
+			}, messageAddressIncorrect);
 
 			
 			$('#register-form')
@@ -123,8 +123,8 @@ $(document).ready(
 										required : 'Please enter postal code'
 									},
 									locality : {
-										required : 'Please enter city or village',
-										country : 'Invalid city name!'
+										required : 'Please enter city',
+										country : messageLocalityIncorrect
 									},
 									additionalInfo : {
 										required : 'Please enter address'
