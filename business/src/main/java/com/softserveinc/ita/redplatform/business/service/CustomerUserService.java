@@ -36,7 +36,7 @@ public class CustomerUserService extends AbstractUserService {
     private CustomerUserMapper customerUserMapper;
 
     @Override
-    protected User getUserEntity(final Object dto) {
+    protected User getEntity(final Object dto) {
 	return customerUserMapper.toEntity((CustomerUserDTO) dto);
     }
 
@@ -92,6 +92,11 @@ public class CustomerUserService extends AbstractUserService {
     @Secured("ROLE_REDADMIN")
     public boolean isCustomerIdPresent(final Long customerId) {
 	return customerUserDao.findById(customerId) != null;
+    }
+
+    @Override
+    protected CustomerUserDTO getUserDTO(final User user) {
+	return customerUserMapper.toDto((CustomerUser) user);
     }
 
 }

@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -42,14 +43,23 @@ public class RealEstateAdminUserController {
      * @return the registration page
      */
     @RequestMapping(value = "/redadmin", method = RequestMethod.GET)
-    public final String getRegistrationPage(final Model model) {
+    public final String getRegisterPage(final Model model) {
+	addAgenciesToModel(model);
+	return "register/redAdminRegister";
+    }
+    
+    /**
+     * Adds agencies to model.
+     *
+     * @param model the model
+     */
+    private void addAgenciesToModel(final Model model) {
 	List<RealEstateAgencyDTO> agencies = agencyService.retrieveAllIdName();
 	model.addAttribute("agencies", agencies);
-	return "register/redAdminRegister";
     }
 
     /**
-     * Admin register.
+     * Registers the admin.
      *
      * @param dto
      *            the dto
@@ -61,4 +71,44 @@ public class RealEstateAdminUserController {
 	adminService.register(dto);
 	return new ResponseEntity<>(HttpStatus.CREATED);
     }
+    
+    /**
+     * Gets the edition page.
+     *
+     * @param model the model
+     * @param id the id
+     * @return the edits the page
+     */
+    @RequestMapping(value = "/redadmin/{id}", method = RequestMethod.GET)
+    public final String getEditPage(final Model model,
+	    @PathVariable final Long id) {
+	RealEstateAdminUserDTO admin = (RealEstateAdminUserDTO) adminService
+		.retrieve(id);
+	if (admin != null) {
+	    model.addAttribute("admin", admin);
+	    addAgenciesToModel(model);
+	    return "edit/redAdminEdit";
+	} else {
+	    return "404";
+	}
+	
+    }
+    
+
+    /**
+     * Edits the admin.
+     *
+     * @param id the id
+     * @param dto the dto
+     * @return the response entity
+     */
+    @RequestMapping(value = "/redadmin/{id}", method = RequestMethod.POST)
+    public final ResponseEntity<RealEstateAdminUserDTO> editAdmin(
+	    @PathVariable final Long id,
+	    @RequestBody final RealEstateAdminUserDTO dto) {
+	adminService.update(dto);
+	return new ResponseEntity<>(HttpStatus.OK);
+    }
+    
+    
 }

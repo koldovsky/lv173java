@@ -5,6 +5,8 @@ $(function() {
 		  $("body").css("padding-top", $(".navbar-fixed-top").height());
 		})();
 	
+	var path = $(location).attr('pathname');
+	
 	$('#error').hide();
 	$('#success').hide();
 	
@@ -29,7 +31,7 @@ $(function() {
 	$form.validate({
 	    		errorClass: 'text-danger',
 				rules: {
-					mail: {
+					email: {
 						mailCustom: true,
 						remote: mailAvailabilityCheckParams
 					},
@@ -38,7 +40,7 @@ $(function() {
 					}
 				},
 				messages: {
-					mail: {
+					email: {
 						remote: messageMailTaken
 					}
 				}
@@ -47,20 +49,17 @@ $(function() {
 	$form.submit(function(event) {
 		
 		if ($form.valid()) {
-			
-			var info = {
-					email: $('#mail').val(),
-					firstName: $('#first-name').val(),
-					lastName: $('#last-name').val(),
-					phone: $('#phone').val(),
-					agencyId: $('#agency-drop-down').val()
-			}
+			var $fields = $form.find('.data');
+			var info = {};
+			$fields.each(function (){
+				info[this.name] = $(this).val();
+			});
 			
 			var postData = JSON.stringify(info);
 		
 		$.ajax({
 			type: 'POST',
-			url: 'redadmin',
+			url: path,
 			data: postData,
 			contentType : 'application/json; charset=utf-8',
 			success: function(responseData, textStatus, jqXHR) {
