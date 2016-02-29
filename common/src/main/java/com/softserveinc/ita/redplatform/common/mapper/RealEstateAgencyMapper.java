@@ -39,6 +39,22 @@ public class RealEstateAgencyMapper
 
 	return realEstateAgencyDTO;
     }
+    
+    /**
+     * Transforms RED agency entity into dto 
+     * that contains only id and name info.
+     *
+     * @param realEstateAgency the RED agency
+     * @return the dto
+     */
+    public final RealEstateAgencyDTO toIdNameDto(
+	    			final RealEstateAgency realEstateAgency) {
+	RealEstateAgencyDTO realEstateAgencyDTO = new RealEstateAgencyDTO();
+	realEstateAgencyDTO.setId(realEstateAgency.getId());
+	realEstateAgencyDTO.setName(realEstateAgency.getName());
+	return realEstateAgencyDTO;
+    }
+    
 
     @Override
     public final RealEstateAgency toEntity(

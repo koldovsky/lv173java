@@ -62,40 +62,22 @@ public class RealEstateAgencyService {
 
     /**
      * Retrieves id and name info about 
-     * all agencies already registered in the system.
+     * all RED agencies already registered in the system.
      *
-     * @author Ilona Yavorska
-     * @return the list of RealEstateAgency entities.
+     * @return the list of RED agency entities.
      */
     public List<RealEstateAgencyDTO> retrieveAllIdName() {
     	List<RealEstateAgency> agencies = realEstateAgencyDao.findAll();
-    	List<RealEstateAgencyDTO> dtos = new ArrayList<>();
+    	List<RealEstateAgencyDTO> dtoList = new ArrayList<>();
     	for (RealEstateAgency agency : agencies) {
-    		RealEstateAgencyDTO dto = new RealEstateAgencyDTO();
-    		dto.setId(agency.getId());
-    		dto.setName(agency.getName());
-    		dtos.add(dto);
+    		dtoList.add(realEstateAgencyMapper.toIdNameDto(agency));
     	}
-    	return dtos;
+    	return dtoList;
     }
     
     /**
      * Gets the agency by id.
      *
-     * @author Ilona Yavorska
-     * @param id the id
-     * @return the RealEstateAgency entity
-     */
-    public RealEstateAgencyDTO getById(final String id) {
-    	RealEstateAgency agency = realEstateAgencyDao
-    			.findById(Long.parseLong(id));
-    	return realEstateAgencyMapper.toDto(agency);
-    }
-    
-    /**
-     * Gets the agency by id.
-     *
-     * @author Ilona Yavorska
      * @param id the id
      * @return the RealEstateAgency entity
      */
