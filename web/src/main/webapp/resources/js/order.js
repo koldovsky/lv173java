@@ -70,6 +70,10 @@ $(document).ready(function() {
 				contentType : 'application/json; charset=utf-8',
 				success : function(responseData, textStatus, jqXHR) {
 						$('#success').show();
+						var redirect = redirecturl;
+						redirect += "/installment/";
+						redirect += responseData.id;
+						window.location.assign(redirect);
 				},
 				error : function(jqXHR, textStatus, errorThrown) {
 					$('#error').text('Failed to add new order');
