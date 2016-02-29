@@ -88,7 +88,7 @@ public class CustomerUserListController {
      * @return users page
      */
     @SuppressWarnings("unchecked")
-    @RequestMapping(value = "/createorder", method = RequestMethod.GET)
+    @RequestMapping(value = "/chooseuserfororder", method = RequestMethod.GET)
     public final String getUsersPage() {
 	Authentication auth =
 		SecurityContextHolder.getContext().getAuthentication();
