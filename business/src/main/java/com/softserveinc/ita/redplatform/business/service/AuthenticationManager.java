@@ -73,7 +73,7 @@ public class AuthenticationManager implements AuthenticationSuccessHandler {
 		return "/index";
 	    } else if (grantedAuthority.getAuthority()
 		    .equals("ROLE_REDADMIN")) {
-		return "/agency";
+		return "/redadmincabinet";
 	    } else if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
 		return "/adminregister";
 	    }

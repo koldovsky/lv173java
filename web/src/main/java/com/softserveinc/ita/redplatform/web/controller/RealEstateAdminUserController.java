@@ -110,5 +110,16 @@ public class RealEstateAdminUserController {
 	return new ResponseEntity<>(HttpStatus.OK);
     }
     
+    /**
+     * Gets the cabinet page.
+     *
+     * @return the cabinet page
+     */
+    @RequestMapping(value = "/redadmincabinet", method = RequestMethod.GET)
+    public final String getCabinetPage() {
+	
+	return "redAdminCab";
+    }
+    
     
 }
