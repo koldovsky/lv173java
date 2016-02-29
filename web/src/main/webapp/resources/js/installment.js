@@ -17,7 +17,7 @@ $(function() {
 		return /^20\d\d-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/.test(value);
 	}, 'Date should be valid.');
 	$.validator.addMethod('amountCustom', function(value, element) {
-		return /^\d+\.\d\d$/.test(value);
+		return /^[1-9]+\.\d\d$/.test(value);
 	}, 'Amount should be valid.');
 	
 	$.validator.addClassRules('data', {fieldRequired : true});
@@ -30,7 +30,9 @@ $(function() {
 	
 	var template = $.validator.format($('#template').html());
 	function addInstallmentItemFields() {
-		$(template(itemCount++)).appendTo("#installment-form");
+		var item = $(template(++itemCount));
+		$('#controls').appendTo(item);
+		item.appendTo("#installment-form");
 	}
 	
 	var itemCount = 0;
@@ -47,10 +49,10 @@ $(function() {
 			function collectInstallmentData() {
 				var installment = [];
 				var inputIdTemplate = $.validator.format('{0}-{1}');
-				for (var i = 0; i < itemCount; i++){
+				for (var i = 0; i < itemCount; ++i){
 					installment[i] = {
-						date: $('#installment-form').find('#' + inputIdTemplate('date', i)).val(),
-						amount: $('#installment-form').find('#' + inputIdTemplate('amount', i)).val()
+						date: $('#installment-form').find('#' + inputIdTemplate('date', i + 1)).val(),
+						amount: $('#installment-form').find('#' + inputIdTemplate('amount', i + 1)).val()
 					};
 				};
 				return installment;
