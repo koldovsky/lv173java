@@ -9,17 +9,21 @@ $(function() {
 	$('#success').hide();
 	
 	$.validator.addMethod('fieldRequired', 
-			$.validator.methods.required, 'Field is required.');
+			$.validator.methods.required, messageFieldRequired);
 	$.validator.addClassRules('data', { fieldRequired: true });
 	
 	$.validator.addMethod('mailCustom', function(value, element) {
-			return /^[A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,}$/i.test(value);
-				}, 'Email should be valid.');
+			return regexMail.test(value);
+	}, messageMailIncorrect);
 	
 	$.validator.addMethod('nameCustom', function(value, element) {
-			return /^[A-Z][A-Z ,.-]{0,}$/i.test(value);
-	}, 'Name should be correct.');
+			return regexNameUser.test(value);
+	}, messageNameUserIncorrect);
 	$.validator.addClassRules('name', { nameCustom: true });
+	
+	$.validator.addMethod('phoneCustom', function(value, element) {
+			return regexPhoneUkraine.test(value);
+	}, messagePhoneIncorrect);
 	
 	var $form = $('#red-admin-register');
 	$form.validate({
@@ -27,28 +31,22 @@ $(function() {
 				rules: {
 					mail: {
 						mailCustom: true,
-						remote: {
-							url: 'checkmail',
-							type: 'GET'
-						}
+						remote: mailAvailabilityCheckParams
 					},
 					phone: {
-						digits: true
+						phoneCustom: true
 					}
 				},
 				messages: {
 					mail: {
-						remote: 'This email is already taken.'
-					},
-					phone: {
-						digits: 'Only digits are allowed.'
+						remote: messageMailTaken
 					}
 				}
 			});
 	
 	$form.submit(function(event) {
 		
-		if ($form.valid() == true) {
+		if ($form.valid()) {
 			
 			var info = {
 					email: $('#mail').val(),
@@ -66,9 +64,11 @@ $(function() {
 			data: postData,
 			contentType : 'application/json; charset=utf-8',
 			success: function(responseData, textStatus, jqXHR) {
+				$('#error').hide();
 				$('#success').show();
 			},
 			error : function(jqXHR, textStatus, errorThrown) {
+				$('#success').hide();
 				$('#error').show();
 			}
 		});

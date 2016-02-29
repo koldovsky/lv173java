@@ -12,7 +12,7 @@ $(function() {
 	$('#success').hide();
 
 	$.validator.addMethod('fieldRequired', $.validator.methods.required,
-			'Field is required.');
+			messageFieldRequired);
 	$.validator.addMethod('dateCustom', function(value, element) {
 		return /^20\d\d-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/.test(value);
 	}, 'Date should be valid.');
@@ -64,6 +64,7 @@ $(function() {
 				data : postData,
 				contentType : 'application/json; charset=utf-8',
 				success : function(responseData, textStatus, jqXHR) {
+					$('#error').hide;
 					$('#success').show();
 				},
 				error : function(jqXHR, textStatus, errorThrown) {
@@ -72,6 +73,7 @@ $(function() {
 							$("#error").text(jqXHR.responseText);
 						}
 					}
+					$('#success').hide();
 					$('#error').show();
 				}
 			});

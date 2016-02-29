@@ -8,6 +8,7 @@
 		<title>Real estate development administrator registration - REDplatform</title>
 		<script src="${pageContext.request.contextPath}/resources/js/lib/jquery/jquery.validate.min.js"></script>
 		<script src="${pageContext.request.contextPath}/resources/js/redAdminRegister.js"></script>
+		<script src="${pageContext.request.contextPath}/resources/js/regexes.js"></script>
 	</head>
 	
 	<body>
