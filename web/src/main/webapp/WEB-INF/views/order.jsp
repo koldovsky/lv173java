@@ -7,6 +7,9 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/adminregister.css">
 <title>Order creation</title>
+<script>
+	var ctp = '${pageContext.request.contextPath}';
+</script>
 
 
 </head>
@@ -77,6 +80,7 @@
 		src="${pageContext.request.contextPath}/resources/js/lib/jquery/jquery.validate.min.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/resources/js/regexes.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/redirecturl.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/order.js"></script>
 
 </body>
