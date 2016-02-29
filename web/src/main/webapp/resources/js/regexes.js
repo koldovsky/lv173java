@@ -1,10 +1,9 @@
-var regexName = /^(?=.*[a-zA-Z])[a-zA-Z0-9]+[a-zA-Z0-9!.@&,-\s\']+[a-zA-Z0-9.!]$/i;
-var regexDescription = /^(?=.*[a-zA-Z])[a-zA-Z0-9]+[a-zA-Z0-9!.@&,-\s\'$%^*()<>№"]+[a-zA-Z0-9.!]$/i;
+var regexName = /^(?=.*[a-zA-Z])[a-zA-Z0-9\s]+[a-zA-Z0-9!.@&$():,-\s\']+[a-zA-Z0-9.!)\'\s]$/i;
+var regexDescription = /^(?=.*[a-zA-Z])[a-zA-Z0-9\s]+[a-zA-Z0-9!.\[\]@&#%+=;:?\/,-\s\'$%^*()<>№"]+[a-zA-Z0-9.!\])\s:;]$/i;
 var regexPhoneNumber = /^[+]?\d{10,12}$/i;
-var regexCountry = /^(?=.*[a-zA-Z])[a-zA-Z.\-,\' ]+$/i;
-var regexRegion = /^(?=.*[a-zA-Z])[a-zA-Z.\-,\' ]+$/i;
+var regexCountry = /^(?=.*[a-zA-Z])[a-zA-Z.\-,\'\s]+$/i;
 var regexPostalCode = /^(?=.*[0-9])[a-zA-Z0-9]{3,10}$/i;
-var regexAdditional = /^(?=.*[a-zA-Z])[a-zA-Z0-9.:\-'\\\/,\s\[\]]+$/i;
+var regexAdditional = /^(?=.*[a-zA-Z])[a-zA-Z0-9.:()\-'\\\/,\s\[\]]+$/i;
 var regexMailCustom = /^[A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,}$/i;
 var regexNameCustom = /^[A-Z][A-Z ,.-]{0,}$/i;
 var regexMail = /^[A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,}$/i;

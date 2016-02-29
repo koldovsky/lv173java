@@ -105,7 +105,7 @@
 							<div class="col-sm-3 form-group">
 								<label class="control-label" for="locality">
 									<span class="glyphicon glyphicon-asterisk text-danger" aria-hidden="true"></span>
-									Locality
+									City
 								</label> 
 								<input type="text" name="locality" class="form-control"
 									id="locality" placeholder="Enter City Here..">

@@ -24,19 +24,19 @@ $(document).ready(
 		
 			$.validator.addMethod('country', function(value,	element) {
 					return regexCountry.test(value);
-			}, 'Invalid country');
+			}, 'Invalid country!');
 			
 			$.validator.addMethod('regionValid', function(value, element) {
-					return regexRegion.test(value);
-			}, 'Invalid region');
+				return this.optional(element) || regexCountry.test(value);
+			}, 'Invalid region!');
 		
 			$.validator.addMethod('postalCode', function(value, element) {
 					return regexPostalCode.test(value);
-			}, 'Invalid postal code');
+			}, 'Invalid postal code!');
 		
 			$.validator.addMethod('additional', function(value,	element) {
 					return regexAdditional.test(value);
-			}, 'Invalid address');
+			}, 'Invalid address!');
 
 			
 			$('#register-form')
@@ -78,8 +78,8 @@ $(document).ready(
 										minlength : 2
 									},
 									region : {
-										regionValid : true,
-										minlength : 2
+										minlength : 2,								
+										regionValid : true
 									},
 									postalCode : {
 										required : true,
@@ -118,10 +118,6 @@ $(document).ready(
 									},
 									country : {
 										required : 'Please enter country'
-									},
-									region : {
-										required : 'Please enter region',
-										region : 'Invalid region!'
 									},
 									postalCode : {
 										required : 'Please enter postal code'
