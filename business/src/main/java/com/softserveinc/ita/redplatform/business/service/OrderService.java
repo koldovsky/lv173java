@@ -42,10 +42,10 @@ public class OrderService {
      * @return Long order Id
      */
     @Transactional
-    public Long create(final OrderDTO orderDTO, final Long customerId) {
+    public OrderDTO create(final OrderDTO orderDTO, final Long customerId) {
 	Order order = mapper.toEntity(orderDTO);
 	order.setCustomerUser(customerUserDao.findById(customerId));
-	return orderDao.saveWithId(order);
+	return mapper.toDto(orderDao.saveWithId(order));
 
     }
 
