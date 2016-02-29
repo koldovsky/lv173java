@@ -10,7 +10,9 @@ $(document).ready(function() {
 	}
 	hideMessages();
 
-
+	$.validator.addMethod('regexMail', function(value, element) {
+		return regexMail.test(value);
+	}, messageMailIncorrect);
 
 	// Setup form validation on the #register-form element
 	$('#adminregisterform').validate({
