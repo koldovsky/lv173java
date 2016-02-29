@@ -1,16 +1,11 @@
 package com.softserveinc.ita.redplatform.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.softserveinc.ita.redplatform.business.service.CustomerUserService;
-import com.softserveinc.ita.redplatform.business.service.OrderService;
-import com.softserveinc.ita.redplatform.common.dto.OrderDTO;
 
 /**
  * Controller for order creation.
@@ -21,11 +16,7 @@ import com.softserveinc.ita.redplatform.common.dto.OrderDTO;
 @Controller
 public class OrderController {
 
-    /**
-     * Order service.
-     */
-    @Autowired
-    private OrderService orderService;
+    
     /**
      * Customer user service.
      */
@@ -48,22 +39,6 @@ public class OrderController {
 	}
     }
 
-    /**
-     * Adds order.
-     *
-     * @param customerId
-     *            the user id
-     * @param orderDTO
-     *            OrderDTO
-     * @return the response entity
-     */
-    @RequestMapping(value = "/order/{customerId}", method = RequestMethod.POST)
-    public final ResponseEntity<OrderDTO> addOrder(
-	    @PathVariable final Long customerId,
-	    @RequestBody final OrderDTO orderDTO) {
-
-	OrderDTO responseOrder = orderService.create(orderDTO, customerId);
-	return new ResponseEntity<OrderDTO>(responseOrder, HttpStatus.OK);
-    }
+    
 
 }
