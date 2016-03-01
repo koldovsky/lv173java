@@ -16,7 +16,7 @@ $(document).ready(
 		
 			$.validator.addMethod('description', function(value, element) {
 						return regexDescription.test(value);
-			}, 'Description should be valid');
+			}, 'Description should be valid.');
 		
 			$.validator.addMethod('phoneNumber', function(value, element) {
 					return regexPhoneNumber.test(value);

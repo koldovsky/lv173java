@@ -13,7 +13,7 @@
 <script src="${pageContext.request.contextPath}/resources/js/agency.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/agencyEdit.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/regexes.js"></script>
-<script>var context = "${pageContext.request.contextPath}"</script>
+
 </head>
 	<body>
 		<input type="hidden" name="id" value="" id="agencyID">

@@ -7,3 +7,4 @@
 <script src="${pageContext.request.contextPath}/resources/js/lib/bootstrap/bootstrap.min.js"></script>
 <!-- Common CSS -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
+<script>var context = "${pageContext.request.contextPath}"</script>

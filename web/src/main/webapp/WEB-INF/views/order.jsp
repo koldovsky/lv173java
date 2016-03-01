@@ -7,9 +7,6 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/adminregister.css">
 <title>Order creation</title>
-<script>
-	var ctp = '${pageContext.request.contextPath}';
-</script>
 
 
 </head>
