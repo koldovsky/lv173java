@@ -8,8 +8,9 @@ var regexPostalCode = /^(?=.*[0-9])[a-zA-Z0-9]{3,10}$/;
 var regexAdditional = /^(?=.*[a-zA-Z])[a-zA-Z0-9.:\-'\\\/,\s\[\]]+$/;
 var regexNameUser = /^[A-Z][A-Z ,.-]{0,}$/i;
 var regexMail = /^[A-Z0-9._%+-]+@(?:[A-Z0-9-]+\.)+[A-Z]{2,}$/i;
-var regexIndividualTaxNumber = /^[0-9]{9,10}$/;
-var regexPassport = /^((?=[A-Z])([A-Z0-9]){2}|([0-9]){2})[0-9]{6,7}$/;
+var regexIndividualTaxNumber = /^\d{10}$/;
+var regexPassport = /^[ABCEHIKMOPTX]{2}\d{6}$/;
+var regexPersonName= /^[A-Za-z]+([']?[A-Za-z])+([\s'-]?[A-Za-z])*$/;
 var mailAvailabilityCheckParams = {
 	url: 'checkmail',
 	type: 'GET'

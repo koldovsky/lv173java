@@ -1,7 +1,7 @@
 <jsp:include page="../utils/navbar.jsp"></jsp:include>
 <div class="container">
 
-	<h1>New Customer Registration</h1>
+	<h1 class="text-center">New Customer Registration</h1>
 
 	<div id="error" class="alert alert-danger" role="alert">
 		<a href="#" class="close" aria-label="close">&times;</a> Failed to
@@ -132,7 +132,7 @@
 		</div>
 
 		<div class="row">
-			<div class="col-md-4">
+			<div class="col-md-12">
 				<div class="submitButtonDiv">
 					<button id="submitButton" type="submit" class="btn btn-primary">Submit</button>
 				</div>

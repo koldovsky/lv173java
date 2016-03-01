@@ -8,7 +8,7 @@ $(document).ready(function(){
 	$('#error').hide();
 
 	$.validator.addMethod('validName', function(value, element) {
-		return regexNameUser.test(value);
+		return regexPersonName.test(value);
 	}, messageNameUserIncorrect);
 	
 	$.validator.addMethod('validMail', function(value, element) {
@@ -77,12 +77,12 @@ $(document).ready(function(){
 			passport : {
 				required : true,
 				minlength : 8,
-				maxlength : 9,
+				maxlength : 8,
 				validPassport : true
 			},
 			taxNumber : {
 				required : true,
-				minlength : 9,
+				minlength : 10,
 				maxlength : 10,
 				validIndividualTaxNumber : true
 			},
@@ -118,6 +118,9 @@ $(document).ready(function(){
 			},
 			lastName : {
 				validName : 'Last name should be correct.'
+			},
+			mail : {
+				remote : messageMailTaken
 			}
 		}
 	});

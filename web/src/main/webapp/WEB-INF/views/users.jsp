@@ -13,6 +13,7 @@
 	rel="stylesheet">
 	<!-- users.js -->
 	<script src="${pageContext.request.contextPath}/resources/js/users.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/lib/moment/moment-2.11.2.min.js"></script>
 </head>
 <body>
 	<jsp:include page="utils/navbar.jsp"></jsp:include>

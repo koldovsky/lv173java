@@ -1,4 +1,4 @@
-package com.softserveinc.ita.redplatform.web.utils;
+package com.softserveinc.ita.redplatform.web.datatables;
 import java.io.Serializable;
 import java.util.List;
 
@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * 
  * @author Hryhorii
  */
-public class DataTableResponse<T> implements Serializable {
+public class DataTablesResponse<T> implements Serializable {
 	
 	/**
 	 * Total records, before filtering .

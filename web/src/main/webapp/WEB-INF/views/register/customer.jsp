@@ -5,6 +5,8 @@
 <head>
 <jsp:include page="../utils/jspheader.jsp" />
 <title>Customer registration</title>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/customer.css">
 <script src="${pageContext.request.contextPath}/resources/js/lib/jquery/jquery.validate.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/register/customer.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/customer.js"></script>

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.softserveinc.ita.redplatform.business.service.UserService;
 import com.softserveinc.ita.redplatform.common.dto.UserDTO;
 import com.softserveinc.ita.redplatform.common.predicate.DataTablePredicate;
-import com.softserveinc.ita.redplatform.web.utils.DataTableResponse;
+import com.softserveinc.ita.redplatform.web.datatables.DataTablesResponse;
 
 /**
  * Rest Controller for users.
@@ -46,7 +46,7 @@ public class UserRestController {
      * @return users list
      */
     @RequestMapping(value = "/api/user", method = RequestMethod.GET)
-    public final ResponseEntity<DataTableResponse<UserDTO>> getUserList(
+    public final ResponseEntity<DataTablesResponse<UserDTO>> getUserList(
 	    @RequestParam final int draw,
 	    @RequestParam final int length, @RequestParam final int start,
 	    @RequestParam(value = "search[value]") final String search,
@@ -54,7 +54,7 @@ public class UserRestController {
 	    @RequestParam(value = "order[0][dir]") final String order) {
 	DataTablePredicate predicate = new DataTablePredicate(
 		draw, start, length, column, order, search);
-	DataTableResponse<UserDTO> dtResp = new DataTableResponse<UserDTO>();
+	DataTablesResponse<UserDTO> dtResp = new DataTablesResponse<UserDTO>();
 	dtResp.setDraw(predicate.getDraw());
 	if (!SecurityContextHolder.getContext().getAuthentication().getAuthorities()
 		.contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
@@ -71,7 +71,7 @@ public class UserRestController {
 	    dtResp.setTotalDisplayRecords(userService.countAll(predicate));
 	    dtResp.setData(userService.loadAllUsers(predicate));
 	}
-	return new ResponseEntity<DataTableResponse<UserDTO>>(
+	return new ResponseEntity<DataTablesResponse<UserDTO>>(
 		dtResp, HttpStatus.OK);
 
     }
