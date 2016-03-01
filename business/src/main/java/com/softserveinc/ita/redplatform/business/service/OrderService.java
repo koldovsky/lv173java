@@ -45,7 +45,8 @@ public class OrderService {
     public OrderDTO create(final OrderDTO orderDTO, final Long customerId) {
 	Order order = mapper.toEntity(orderDTO);
 	order.setCustomerUser(customerUserDao.findById(customerId));
-	return mapper.toDto(orderDao.saveWithId(order));
+	orderDao.save(order);
+	return mapper.toDto(order);
 
     }
 
