@@ -81,5 +81,20 @@ public class JPACustomerUserDao extends JPAGenericDao<CustomerUser, Long>
 		.setParameter("search", predicate.getSearch() + "%")
 		.getSingleResult();
     }
+
+    /**
+     * Get customer user by email.
+     * @param email user mail
+     * @return customer user
+     */
+    @Override
+    public final CustomerUser getCustomerUserByEmail(final String email) {
+	return (CustomerUser) getEntityManager()	
+		.createQuery("select customer from "
+			+ CustomerUser.class.getName()
+			+ " as customer where customer.email =:email")
+		.setParameter("email", email)
+		.getSingleResult();
+    }
     
 }

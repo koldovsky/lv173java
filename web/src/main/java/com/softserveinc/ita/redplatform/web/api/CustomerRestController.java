@@ -33,7 +33,9 @@ public class CustomerRestController {
     public final ResponseEntity<CustomerUserDTO> registerCustomerUser(
 	    @RequestBody final CustomerUserDTO customerUserDTO) {
 	customerUserService.register(customerUserDTO);
-	return new ResponseEntity<CustomerUserDTO>(customerUserDTO, 
+	CustomerUserDTO customer = customerUserService
+		.getUserDTOByEmail(customerUserDTO.getEmail()); 
+	return new ResponseEntity<CustomerUserDTO>(customer, 
 		HttpStatus.CREATED);
 	
     }

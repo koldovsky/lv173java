@@ -34,4 +34,11 @@ public interface CustomerUserDao extends GenericDao<CustomerUser, Long> {
      * @return count
      */
     long countAll(DataTablePredicate predicate);
+    
+    /**
+     * Get customer user by email.
+     * @param email user mail
+     * @return customer user
+     */
+    CustomerUser getCustomerUserByEmail(String email);
 }

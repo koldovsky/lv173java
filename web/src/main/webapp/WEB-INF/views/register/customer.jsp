@@ -7,12 +7,16 @@
 <title>Customer registration</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/customer.css">
-<script src="${pageContext.request.contextPath}/resources/js/lib/jquery/jquery.validate.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/register/customer.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/customer.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/regexes.js"></script>
+<script>
+	var ctp = '${pageContext.request.contextPath}';
+</script>
 </head>
 <body>
 	<jsp:include page="../utils/customer.jsp" />
+	<script src="${pageContext.request.contextPath}/resources/js/lib/jquery/jquery.validate.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/register/customer.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/customer.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/regexes.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/redirecturl.js"></script>
 </body>
 </html>
