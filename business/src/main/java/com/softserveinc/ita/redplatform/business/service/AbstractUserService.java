@@ -11,7 +11,7 @@ import com.softserveinc.ita.redplatform.integration.MailService;
 import com.softserveinc.ita.redplatform.persistence.dao.GenericDao;
 
 /**
- * The Class AbstractUserService.
+ * The class AbstractUserService.
  * 
  * @author Ilona Yavorska
  */
@@ -37,9 +37,9 @@ public abstract class AbstractUserService {
      */
     @Transactional
     public void register(final Object dto) {
-	User user = getUserEntity(dto);
+	User user = getEntity(dto);
 	String rawPassword = passGenerator.generatePassword();
-	notifyUserWithMail(user, rawPassword);
+	notifyWithMail(user, rawPassword);
 	String encodedPassword = passEncoder.encode(rawPassword);
 	user.setPassword(encodedPassword);
 	getDao().save(user);
@@ -52,7 +52,7 @@ public abstract class AbstractUserService {
      *            the dto
      * @return the user
      */
-    protected abstract User getUserEntity(Object dto);
+    protected abstract User getEntity(Object dto);
 
     /**
      * Notify user about successful registration via e-mail.
@@ -62,7 +62,7 @@ public abstract class AbstractUserService {
      * @param password
      *            the password
      */
-    private void notifyUserWithMail(final User recipient, 
+    private void notifyWithMail(final User recipient, 
 	    final String password) {
 	SimpleMailMessage simpleMessage = new SimpleMailMessage();
 	simpleMessage.setFrom("REDplatform");
@@ -95,4 +95,41 @@ public abstract class AbstractUserService {
      * @return the dao
      */
     protected abstract GenericDao getDao();
+    
+    
+    /**
+     * Retrieve user dto by id.
+     *
+     * @param id the id
+     * @return the user dto
+     */
+    @Transactional
+    public Object retrieve(final Long id) {
+	User user = (User) getDao().findById(id);
+	if (user != null) {
+	    return getUserDTO(user);
+	} else {
+	    return null;
+	}
+    }
+    
+    /**
+     * Gets the user dto.
+     *
+     * @param user the user
+     * @return the user dto
+     */
+    protected abstract Object getUserDTO(User user);
+    
+    
+    /**
+     * Update user.
+     *
+     * @param dto the dto
+     */
+    @Transactional
+    public void update(final Object dto) {
+	User user = getEntity(dto);
+	getDao().update(user);
+    }
 }

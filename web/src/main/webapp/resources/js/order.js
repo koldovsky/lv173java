@@ -65,11 +65,10 @@ $(document).ready(function() {
 
 			$.ajax({
 				type : 'POST',
-				url : id,
+				url : redirecturl + '/api/order/' + id,
 				data : postData,
 				contentType : 'application/json; charset=utf-8',
 				success : function(responseData, textStatus, jqXHR) {
-						$('#success').show();
 						var redirect = redirecturl;
 						redirect += "/installment/";
 						redirect += responseData.id;

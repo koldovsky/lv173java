@@ -21,10 +21,6 @@
 		<div id="error" class="alert alert-danger" role="alert">
 			<a href="#" class="close" aria-label="close">&times;</a>
 		</div>
-		<div id="success" class="alert alert-success" role="alert">
-			<a href="#" class="close" aria-label="close">&times;</a> Order has
-			been added successfully.
-		</div>
 
 		<form name="orderform" id="orderform" action="">
 			<div class="row">

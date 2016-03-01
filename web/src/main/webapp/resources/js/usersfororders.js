@@ -8,6 +8,7 @@ $(document).ready(function() {
 			dateType:'jsonp',
 			type:'GET'
 		},
+		
 		columns : [
 		    {'data' : 'firstName'},
 		    {'data' : 'lastName'},
@@ -22,7 +23,15 @@ $(document).ready(function() {
 					+ ':' + (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes())
 					+ ':' + (date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds());
 				}
+			},
+			{'data' : 'id',
+				'render' : function(data,type,row){
+					
+					var str='<a href=\''+redirecturl+ '/order/'+data+ '\'class="btn btn-primary btn-xs">Create new order</a>';
+					return str;
+				}
 			}
+			
 		]
 	});
 });

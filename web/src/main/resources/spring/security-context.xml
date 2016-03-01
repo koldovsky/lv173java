@@ -13,6 +13,7 @@
 		<intercept-url pattern="/redadmin" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/api/**" access="hasAnyRole('ROLE_REDADMIN', 'ROLE_ADMIN')" />
 		<intercept-url pattern="/checkUnique" access="hasAnyRole('ROLE_REDADMIN', 'ROLE_REDADMIN')" />
+		<intercept-url pattern="/currency" access="hasAnyRole('ROLE_REDADMIN', 'ROLE_REDADMIN')" />
 
 		<!-- access denied page -->
 		<access-denied-handler error-page="/index" />
