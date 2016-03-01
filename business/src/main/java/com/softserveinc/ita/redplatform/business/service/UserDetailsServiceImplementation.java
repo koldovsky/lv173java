@@ -40,11 +40,8 @@ public class UserDetailsServiceImplementation implements UserDetailsService {
 	com.softserveinc.ita.redplatform.common.entity.User user = 
 		userService.loadUserByEmail(username);
 	if (user instanceof AdminUser) {
-	    set.add(new String("ROLE_USER"));
 	    set.add(new String("ROLE_ADMIN"));
-	    set.add(new String("ROLE_REDADMIN"));
 	} else if (user instanceof RealEstateAdminUser) {
-	    set.add(new String("ROLE_USER"));
 	    set.add(new String("ROLE_REDADMIN"));
 	} else {
 	    set.add(new String("ROLE_USER"));
