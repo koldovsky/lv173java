@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.softserveinc.ita.redplatform.business.service.UserService;
 import com.softserveinc.ita.redplatform.common.dto.UserDTO;
 import com.softserveinc.ita.redplatform.common.predicate.DataTablePredicate;
@@ -18,6 +19,7 @@ import com.softserveinc.ita.redplatform.web.datatables.DataTablesResponse;
  * Rest Controller for users.
  * 
  * @author Hryhorii Somyk
+ * @author Ilona Yavorska
  */
 @RestController
 public class UserRestController {
@@ -27,6 +29,18 @@ public class UserRestController {
      */
     @Autowired
     private UserService userService;
+    
+    /**
+     * Check email availability.
+     * 
+     * @param mail the mail
+     * @return true, if email is available
+     */
+    @RequestMapping(value = "/checkmail", method = RequestMethod.GET)
+    public final boolean checkEmailAvailability(
+	    @RequestParam final String mail) {
+	return userService.isEmailAvailable(mail);
+    }
 
     /**
      * Returns User list.
