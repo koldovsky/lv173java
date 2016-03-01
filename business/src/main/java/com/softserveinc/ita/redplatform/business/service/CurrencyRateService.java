@@ -1,6 +1,5 @@
 package com.softserveinc.ita.redplatform.business.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +33,7 @@ public class CurrencyRateService {
      * @return list of currency rates
      */
     public List<CurrencyRate> findAllCurrency() {
-	ArrayList<CurrencyRate> list = (ArrayList<CurrencyRate>) 
-		currencyRateDao.findAllCurrency();
-	return list;
+	return currencyRateDao.findAll();
     };
     
     /**
@@ -75,7 +72,6 @@ public class CurrencyRateService {
      * @return object of currencyRate
      */
     public CurrencyRate findCurrencyById(final Long id) {
-	CurrencyRate currencyRate = currencyRateDao.findCurrencyById(id);
-	return currencyRate;
+	return currencyRateDao.findById(id);
     };
 }
