@@ -20,9 +20,6 @@ public class InstallmentController {
     @Autowired
     private OrderService orderService;
 
-    //TODO redesign the method so that 
-    //it returns ResponseEntity instance instead 
-    //of view name, if the page could not be rendered
     /**
      * Gets the installment addition page.
      *
@@ -36,7 +33,7 @@ public class InstallmentController {
 	if (orderService.isOrderIdPresent(orderId)) {
 	    return "installment";
 	} else {
-	    return "404";
+	    throw new ResourceNotFoundException();
 	}
     }
 }

@@ -72,7 +72,7 @@ public class RealEstateAdminUserController {
 	    addAgenciesToModel(model);
 	    return "edit/redAdminEdit";
 	} else {
-	    return "404";
+	    throw new ResourceNotFoundException();
 	}
 	
     }
