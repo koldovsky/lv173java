@@ -7,9 +7,7 @@
 <title>Customer registration</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/customer.css">
-<script>
-	var ctp = '${pageContext.request.contextPath}';
-</script>
+<script>var ctp = '${pageContext.request.contextPath}';</script>
 </head>
 <body>
 	<jsp:include page="../utils/customer.jsp" />

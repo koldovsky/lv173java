@@ -1,8 +1,4 @@
 $(document).ready(function() {
-	
-	function createCustomer() {
-		
-	}
 
 	$('#customer-form').submit(function(event) {
 		if ($('#customer-form').valid()) {var address = {
