@@ -15,6 +15,5 @@
 	<script src="${pageContext.request.contextPath}/resources/js/register/customer.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/customer.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/regexes.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/redirecturl.js"></script>
 </body>
 </html>

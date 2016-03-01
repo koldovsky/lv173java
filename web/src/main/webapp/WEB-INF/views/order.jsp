@@ -73,7 +73,6 @@
 		src="${pageContext.request.contextPath}/resources/js/lib/jquery/jquery.validate.min.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/resources/js/regexes.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/redirecturl.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/order.js"></script>
 
 </body>
