@@ -17,7 +17,7 @@ $(function() {
 		return /^20\d\d-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/.test(value);
 	}, 'Date should be valid.');
 	$.validator.addMethod('amountCustom', function(value, element) {
-		return /^[1-9]+\.\d\d$/.test(value);
+		return /^[1-9]\d*\.\d\d$/.test(value);
 	}, 'Amount should be valid.');
 	
 	$.validator.addClassRules('data', {fieldRequired : true});
