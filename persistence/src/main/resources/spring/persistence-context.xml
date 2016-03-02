@@ -28,7 +28,7 @@
 		
 		
 		<property name="mappingResources">
-			<value>spring/listener.xml</value>
+			<value>listeners/listener.xml</value>
 		</property>
 
 		<property name="jpaVendorAdapter">

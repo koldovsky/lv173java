@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 
 import com.softserveinc.ita.redplatform.common.entity.BaseEntity;
 import com.softserveinc.ita.redplatform.common.entity.User;
+import com.softserveinc.ita.redplatform.persistence.context.SecurityContext;
 
 /**
  * Event listener to insert date and user.
@@ -21,7 +22,7 @@ public class BaseEntityListener {
      * LOGGER.
      */
      private static final Logger LOGGER = 
- 	    			Logger.getLogger(SecurityContext.class);
+ 	    			Logger.getLogger(BaseEntityListener.class);
     
     /**
      * method that insert to database createdBy and CreatedDate.

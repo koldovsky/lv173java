@@ -1,4 +1,4 @@
-package com.softserveinc.ita.redplatform.persistence.listener;
+package com.softserveinc.ita.redplatform.persistence.context;
 
 
 import org.springframework.security.core.userdetails.User;
