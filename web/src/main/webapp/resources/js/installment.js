@@ -19,22 +19,21 @@ $(function() {
 	$.validator.addMethod('amountCustom', function(value, element) {
 		return /^[1-9]\d*\.\d\d$/.test(value);
 	}, 'Amount should be valid.');
-	
+
 	$.validator.addClassRules('data', {fieldRequired : true});
-	$.validator.addClassRules('date', {dateCustom: true});
-	$.validator.addClassRules('amount', {amountCustom: true});
-	
+	$.validator.addClassRules('date', {dateCustom : true});
+	$.validator.addClassRules('amount', {amountCustom : true});
+
 	$('#installment-form').validate({
 		errorClass : 'text-danger'
 	});
-	
+
 	var template = $.validator.format($('#template').html());
 	function addInstallmentItemFields() {
-		var item = $(template(++itemCount));
-		$('#controls').appendTo(item);
-		item.appendTo("#installment-form");
+		var fieldset = $(template(++itemCount));
+		fieldset.appendTo('#installment-form');
 	}
-	
+
 	var itemCount = 0;
 	addInstallmentItemFields();
 	$('#add-more').click(function() {
@@ -42,22 +41,40 @@ $(function() {
 			addInstallmentItemFields();
 		}
 	});
-	
+
+	$(this).on('keydown', '.fields', function() {
+		$('#controls-container').insertAfter($(this));
+		if ($('#installment-form fieldset.fields').length > 1) {
+			$('#delete-item').attr('style', 'display: inline');
+		} else {
+			$('#delete-item').attr('style', 'display: none');
+		}
+	});
+
+	$(this).on('click', '#delete-item', function() {
+		var fieldset = $(this).parents('#controls-container').prev();
+		fieldset.remove();
+		$('.fields').last().trigger('keydown');
+	});
+
 	$('#submit-data').click(function() {
 		if ($('#installment-form').valid()) {
-			
+
 			function collectInstallmentData() {
 				var installment = [];
-				var inputIdTemplate = $.validator.format('{0}-{1}');
-				for (var i = 0; i < itemCount; ++i){
-					installment[i] = {
-						date: $('#installment-form').find('#' + inputIdTemplate('date', i + 1)).val(),
-						amount: $('#installment-form').find('#' + inputIdTemplate('amount', i + 1)).val()
-					};
-				};
+				var i = 0;
+				var $fieldsets = $('#installment-form').find('fieldset');
+				$fieldsets.each(function() {
+					var $inputs = $(this).find('input');
+					installment[i] = {};
+					$inputs.each(function() {
+						installment[i][this.name] = $(this).val();
+					});
+					++i;
+				});
 				return installment;
 			}
-			
+
 			var postData = JSON.stringify(collectInstallmentData());
 
 			$.ajax({
