@@ -13,7 +13,7 @@ import com.softserveinc.ita.redplatform.common.entity.User;
 import com.softserveinc.ita.redplatform.common.mapper.UserMapper;
 import com.softserveinc.ita.redplatform.common.predicate.DataTablePredicate;
 import com.softserveinc.ita.redplatform.persistence.dao.UserDao;
-import com.softserveinc.ita.redplatform.persistence.listener.SecurityContext;
+import com.softserveinc.ita.redplatform.persistence.context.SecurityContext;
 
 /**
  * User Service.
