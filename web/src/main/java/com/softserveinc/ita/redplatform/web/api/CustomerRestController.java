@@ -3,6 +3,7 @@ package com.softserveinc.ita.redplatform.web.api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -38,6 +39,21 @@ public class CustomerRestController {
 	return new ResponseEntity<CustomerUserDTO>(customer, 
 		HttpStatus.CREATED);
 	
+    }
+    
+    /**
+     * Customer edit.
+     * @param id customer user id
+     * @return customer user dto
+     */
+    @RequestMapping(value = "api/customer/{id}", method = RequestMethod.GET)
+    public final ResponseEntity<CustomerUserDTO> getCustomer(
+	    @PathVariable final Long id) {
+	CustomerUserDTO customer = customerUserService.getUserDTOById(id);
+	if (customer == null) {
+	    return new ResponseEntity<CustomerUserDTO>(HttpStatus.NOT_FOUND);
+	}
+	return new ResponseEntity<CustomerUserDTO>(customer, HttpStatus.OK);
     }
 
 }
