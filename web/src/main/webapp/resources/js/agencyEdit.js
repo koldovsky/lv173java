@@ -36,7 +36,6 @@ $(document).ready(
 					if (jqXHR.status === 404) {
 						$('#error').html('Agency is not found');						
 					} 
-					$("#register-form :input").prop("disabled", true);
 					$('#error').show();
 					$('#success').hide();
 				}

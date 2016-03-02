@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToOne;
 
 
 /**
@@ -29,9 +28,9 @@ public abstract class BaseEntity {
   private Long id;
 
   /**
-   * One to one mapping.
+   * Many to one mapping.
    */
-  @OneToOne
+  @ManyToOne
   @JoinColumn(name = "createdById", updatable = false)
   private User createdBy;
 

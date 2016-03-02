@@ -102,6 +102,13 @@ public class RealEstateAgencyService {
 	return realEstateAgencyDao.findAgencyByName(name) == null;
     }
     
-    
+    /**
+     * check if agency exists.
+     * @param id id
+     * @return boolean
+     */
+    public boolean exists(final Long id) {
+	return realEstateAgencyDao.findById(id) != null;
+    } 
     
 }
