@@ -35,6 +35,19 @@ public class CurrencyRateDTO {
      * Column for date until the currency rate is set.
      */
     private Date toDate;
+    
+    /**
+     * Column for using NBU course.
+     */
+    private boolean nbu;
+
+    public final boolean isNbu() {
+        return nbu;
+    }
+
+    public final void setNbu(final boolean newNbu) {
+        this.nbu = newNbu;
+    }
 
     public final Long getId() {
         return id;
