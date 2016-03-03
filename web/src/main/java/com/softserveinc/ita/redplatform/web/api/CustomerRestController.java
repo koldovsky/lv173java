@@ -55,5 +55,19 @@ public class CustomerRestController {
 	}
 	return new ResponseEntity<CustomerUserDTO>(customer, HttpStatus.OK);
     }
+    
+    /**
+     * Customer update.
+     * @param id customer id
+     * @param customer customer user dto
+     * @return status
+     */
+    @RequestMapping(value = "api/customer/{id}", method = RequestMethod.PUT)
+    public final ResponseEntity<CustomerUserDTO> updateCustomer(
+	    @PathVariable final Long id,
+	    @RequestBody final CustomerUserDTO customer) {
+	customerUserService.update(customer);
+	return new ResponseEntity<CustomerUserDTO>(customer, HttpStatus.OK);
+    }
 
 }

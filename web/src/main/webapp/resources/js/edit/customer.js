@@ -8,6 +8,15 @@ $(document).ready( function(){
 	var id = href.substr(href.lastIndexOf('/') + 1);
 	document.title = 'Edit Customer';
 	
+	$('#pageHeader').html('Customer Edit');
+	
+	$('#mail').prop('readonly', true);
+	$('#mail').prop('tabindex', -1);
+	
+	var customerEmail;
+	var customerId;
+	var addressId;
+	
 	$.ajax({
 		type : 'GET',
 		url : context + '/api/customer/' + id,
@@ -24,6 +33,15 @@ $(document).ready( function(){
 			$('#postalCode').val(responseData.address.postalCode);
 			$('#locality').val(responseData.address.locality);
 			$('#address').val(responseData.address.additional);
+			
+			customerEmail = responseData.email;
+			customerId = responseData.id;
+			addressId = responseData.address.id;
+			
+			$.validator.addMethod('checkEmail', function(value, element){
+				return $('#mail').val() === customerEmail;
+			}, 'Email is \"' + customerEmail + '\", it is not allowed to change it');
+			
 		},
 		error : function (jqHXR, textStatus, errorThrown) {
 			if (jqHXR.status === 404) {
@@ -33,4 +51,50 @@ $(document).ready( function(){
 			$('#success').hide();
 		}
 	});
+	
+	$('#mail').each(function(){
+		$(this).rules('add', {checkEmail : true});
+	});
+	
+	$('#customer-form').submit(function(event) {
+		if ($('#customer-form').valid()) {
+			var address = {
+				id : addressId,
+				country : $('#country').val(),
+				region : $('#region').val(),
+				postalCode : $('#postalCode').val(),
+				locality : $('#locality').val(),
+				additional : $('#address').val()
+			}
+			
+			var customer = {
+				id : customerId,
+				firstName : $('#firstName').val(),
+				lastName : $('#lastName').val(),
+				email : $('#mail').val(),
+				phone : $('#phone').val(),
+				passport : $('#passport').val(),
+				individaulTaxNumber : $('#taxNumber').val(),
+				address : address
+			}
+			
+			$.ajax({
+				type : 'PUT',
+				url : context + '/api/customer/' + customerId,
+				contentType : 'application/json; charset=UTF-8',
+				data : JSON.stringify(customer),
+				dataType : 'json',
+				success : function(responseData, textStatus, jqXHR) {	
+					$('#success').html('Customer has been edited successfully').show();
+					$('#error').hide();
+				},
+				error : function(jqXHR, textStatus, errorThrown) {
+					$('#error').html('Failed to edit Customer').show();
+					$('#success').hide();
+				}
+			});
+		}
+		return false;
+	});
+	
 });

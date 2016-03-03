@@ -1,7 +1,7 @@
 <jsp:include page="../utils/navbar.jsp"></jsp:include>
 <div class="container">
 
-	<h1 class="text-center">New Customer Registration</h1>
+	<h1 id='pageHeader' class="text-center">New Customer Registration</h1>
 
 	<div id="error" class="alert alert-danger" role="alert">
 		<a href="#" class="close" aria-label="close">&times;</a> Failed to
