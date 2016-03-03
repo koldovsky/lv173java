@@ -16,6 +16,47 @@ $(function() {
 	$.validator.addMethod('dateCustom', function(value, element) {
 		return /^20\d\d-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/.test(value);
 	}, 'Date should be valid.');
+	
+	function evalMinDate(dateField, pattern) {
+		var prevFieldset = findCurrentFieldset(dateField).prevAll('fieldset').first();
+		var minDateVal = 0; //today
+		if (prevFieldset.length !== 0) {
+			var prevDateField = prevFieldset.find('.date');
+			minDateVal = prevDateField.val();
+			minDateVal = $.datepicker.parseDate(pattern, minDateVal);
+			minDateVal.setDate(minDateVal.getDate() + 1);
+		}
+		return minDateVal;
+	}
+	
+	function evalMaxDate(dateField, pattern) {
+		var nextFieldset = findCurrentFieldset(dateField).nextAll('fieldset').first();
+		var maxDateVal = null; //no limit
+		if (nextFieldset.length !== 0) {
+			var nextDateField = nextFieldset.find('.date');
+			maxDateVal = nextDateField.val();
+			maxDateVal = $.datepicker.parseDate(pattern, maxDateVal);
+			maxDateVal.setDate(maxDateVal.getDate() - 1);
+		}
+		return maxDateVal;
+	}
+	
+	function findCurrentFieldset(element) {
+		return element.parents('fieldset');
+	}
+
+	$(this).on('focus', '.date', function() {
+		var pattern = 'yy-mm-dd';
+		var minDateVal = evalMinDate($(this), pattern);
+		var maxDateVal = evalMaxDate($(this), pattern);
+		
+		$(this).datepicker({
+			dateFormat : pattern,
+			minDate : minDateVal,
+			maxDate : maxDateVal
+		});
+	});
+
 	$.validator.addMethod('amountCustom', function(value, element) {
 		return /^[1-9]\d*\.\d\d$/.test(value);
 	}, 'Amount should be valid.');
@@ -29,16 +70,16 @@ $(function() {
 	});
 
 	var template = $.validator.format($('#template').html());
-	function addInstallmentItemFields() {
+	function addInstallmentItemFieldsAfter(element) {
 		var fieldset = $(template(++itemCount));
-		fieldset.appendTo('#installment-form');
+		fieldset.insertAfter(element);
 	}
 
 	var itemCount = 0;
-	addInstallmentItemFields();
+	addInstallmentItemFieldsAfter($('#installment-form').children().last());
 	$('#add-more').click(function() {
 		if ($('#installment-form').valid()) {
-			addInstallmentItemFields();
+			addInstallmentItemFieldsAfter($(this).parents('#controls-container'));
 		}
 	});
 
@@ -68,7 +109,8 @@ $(function() {
 					var $inputs = $(this).find('input');
 					installment[i] = {};
 					$inputs.each(function() {
-						installment[i][this.name] = $(this).val();
+						var name = this.name.replace(/-.*/g, '');
+						installment[i][name] = $(this).val();
 					});
 					++i;
 				});

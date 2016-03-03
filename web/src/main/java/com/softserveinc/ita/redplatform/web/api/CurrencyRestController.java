@@ -13,28 +13,29 @@ import org.springframework.web.bind.annotation.RestController;
 import com.softserveinc.ita.redplatform.business.service.CurrencyRateService;
 import com.softserveinc.ita.redplatform.common.dto.CurrencyRateDTO;
 import com.softserveinc.ita.redplatform.common.entity.CurrencyRate;
+import com.softserveinc.ita.redplatform.integration.NbuJSON;
 
 /**
-* Rest Controller for registration new Real Estate Agency.
-* 
-* @author Roman Ivaniv
-* 
-*/
+ * Rest Controller for registration new Real Estate Agency.
+ * 
+ * @author Roman Ivaniv
+ * 
+ */
 @RestController
 public class CurrencyRestController {
-    
+
     /**
      * Logger for CurrencyRate Controller class.
      */
-    private static final Logger LOGGER =
+    private static final Logger LOGGER = 
 	    Logger.getLogger(AgencyRestController.class);
-    
+
     /**
      * currencyRateService object.
      */
     @Autowired
-    private CurrencyRateService currencyRateService; 
-    
+    private CurrencyRateService currencyRateService;
+
     /**
      * Get agency by id to edit.
      * 
@@ -43,20 +44,17 @@ public class CurrencyRestController {
      * @return ResponseEntity ResponseEntity
      */
     @RequestMapping(value = "/api/currency/{id}", method = RequestMethod.GET)
-    public final ResponseEntity<CurrencyRate>
-	    getCurrency(@PathVariable("id") final long id) {
+    public final ResponseEntity<CurrencyRate> getCurrency(
+	    @PathVariable("id") final long id) {
 
-	CurrencyRate currencyRate = 
-		currencyRateService.findCurrencyById(id);
+	CurrencyRate currencyRate = currencyRateService.findCurrencyById(id);
 	if (currencyRate == null) {
 	    LOGGER.info("currency not found");
-	    return new ResponseEntity<CurrencyRate>(
-		    HttpStatus.NOT_FOUND);
+	    return new ResponseEntity<CurrencyRate>(HttpStatus.NOT_FOUND);
 	}
-	return new ResponseEntity<CurrencyRate>(currencyRate,
-		HttpStatus.OK);
-    }   
-  
+	return new ResponseEntity<CurrencyRate>(currencyRate, HttpStatus.OK);
+    }
+
     /**
      * add currency rate.
      * 
@@ -67,9 +65,15 @@ public class CurrencyRestController {
     @RequestMapping(value = "currency", method = RequestMethod.POST)
     public final ResponseEntity<CurrencyRateDTO> addCurrency(
 	    @RequestBody final CurrencyRateDTO currencyRateDTO) {
+
+	if (currencyRateDTO.isNbu()) {
+	    NbuJSON nbu = new NbuJSON();
+	    currencyRateDTO.setAmount(nbu.setNbuCourse());
+	}
+
 	currencyRateService.create(currencyRateDTO);
-	return new ResponseEntity<CurrencyRateDTO>(
-		currencyRateDTO, HttpStatus.OK
-		);
+
+	return new ResponseEntity<CurrencyRateDTO>(currencyRateDTO, HttpStatus.OK);
     }
+
 }
