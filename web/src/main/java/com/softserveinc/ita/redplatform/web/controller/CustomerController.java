@@ -33,4 +33,14 @@ public class CustomerController {
 	}
 	return "common/index";
     }
+    
+    /**
+     * Edit customer page mapping.
+     * @return edit customer page
+     */
+    @RequestMapping(value = "/customer/{id}", method = RequestMethod.GET)
+    public final String getEditPage() {
+	return "edit/customer";
+    }
+    
 }

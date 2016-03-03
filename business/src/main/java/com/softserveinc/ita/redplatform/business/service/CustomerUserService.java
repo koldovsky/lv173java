@@ -108,5 +108,15 @@ public class CustomerUserService extends AbstractUserService {
 	return customerUserMapper.toDto(
 		customerUserDao.getCustomerUserByEmail(email));
     }
+    
+    /**
+     * Get UserDTO be id.
+     * @param id customer user id
+     * @return csutomer user dto
+     */
+    @Secured("ROLE_REDADMIN")
+    public CustomerUserDTO getUserDTOById(final Long id) {
+	return customerUserMapper.toDto(customerUserDao.findById(id));
+    }
 
 }

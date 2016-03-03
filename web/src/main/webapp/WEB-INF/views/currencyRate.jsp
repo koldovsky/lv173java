@@ -21,6 +21,11 @@
 			Failed to add currency
 		</div>
 		
+		<div id="invalidDate" class="alert alert-danger" role="alert">
+		<a href="#" class="close" aria-label="close">&times;</a>
+			Wrong date: "FROM DATE" must be greater/equal than today's date, and less/equal than "TO DATE"
+		</div>
+		
 		<div id="success" class="alert alert-success" role="alert">
 		<a href="#" class="close" aria-label="close">&times;</a>
 			Currency rate has been added successfully.</div>
@@ -33,13 +38,14 @@
 						<label class="control-label">Input amount of currency rate</label> 
 						<input type="text" name="amount" id="amount" 
 						class="form-control" placeholder="Enter new currency rate">
+						 <input type="checkbox" name="nbu" value="" id="nbu">Set NBU cource<br>
 					</div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-sm-6">
 					<div class="form-group">
-						<label class="control-label">From date</label> 
+						<label class="control-label">FROM DATE</label> 
 						<div>	
 						 <div class="date"><label class="control-label">Year</label>
 						<p><select size="1" class="form-control" name="fromYear" id="fromYear">	
@@ -60,7 +66,7 @@
 			<div class="row">
 				<div class="col-sm-6">
 					<div class="form-group">
-						<label class="control-label">To date</label> 
+						<label class="control-label">TO DATE</label> 
 						<div>
 						 <div class="date"><label class="control-label">Year</label>
 						<p><select size="1" name="toYear" class="form-control" id="toYear">
@@ -90,5 +96,6 @@
 	<jsp:include page="utils/footer.jsp"></jsp:include>
 	</div>
 	<script src="${pageContext.request.contextPath}/resources/js/currency.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/currencyNBU.js"></script>
 </body>
 </html>

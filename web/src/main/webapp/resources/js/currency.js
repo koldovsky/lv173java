@@ -1,7 +1,8 @@
 $(document).ready(function() {
-	
+
 	$("#success").hide();
 	$("#error").hide();
+	$("#invalidDate").hide();
 	
 	$('.alert .close').click(function(e) {
 	    $(this).parent().hide();
@@ -12,7 +13,7 @@ $(document).ready(function() {
 		if(check === true){
 			addCurrency();
 		}
-			return false;
+		return false;
 	});
 	
 	$('#fromMonth').click(function(event) {
@@ -68,6 +69,7 @@ function addCurrency() {
 			$('#currency-form')[0].reset();
 			$("#success").show();
 			$("#error").hide();
+			$("#invalidDate").hide();
 		},
 		error : function(jqXHR, textStatus, errorThrown) {
 			$("#error").show();
@@ -83,40 +85,41 @@ function setDate(){
 		
 	var select = document.getElementById('fromYear');
 		for (var i = minYear; i<=maxYear; i++){
-			var opt = document.createElement('option');
-			opt.value = i;
-			opt.innerHTML = i;
-			select.appendChild(opt);
+			var year = document.createElement('option');
+			year.value = i;
+			year.innerHTML = i;
+			select.appendChild(year);
 			};
 	
 	select = document.getElementById('toYear');
 		for (var i = minYear; i<=maxYear; i++){
-			var opt = document.createElement('option');
-			opt.value = i;
-			opt.innerHTML = i;
-			select.appendChild(opt);
+			var year = document.createElement('option');
+			year.value = i;
+			year.innerHTML = i;
+			select.appendChild(year);
 			};
 			
 	var month = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 	
 	select = document.getElementById('fromMonth');
 	for (var i = 0; i<12; i++){
-		var opt = document.createElement('option');
-		opt.value = i;
-		opt.innerHTML = month[i];
-		select.appendChild(opt);
+		var fromMonth = document.createElement('option');
+		fromMonth.value = i;
+		fromMonth.innerHTML = month[i];
+		select.appendChild(fromMonth);
 		};
 		
 	select = document.getElementById('toMonth');
 	for (var i = 0; i<12; i++){
-		var opt = document.createElement('option');
-		opt.value = i;
-		opt.innerHTML = month[i];
-		select.appendChild(opt);
+		var toMonth = document.createElement('option');
+		toMonth.value = i;
+		toMonth.innerHTML = month[i];
+		select.appendChild(toMonth);
 		};
 	
 		setFromDays();
 		setToDays();
+		setTodayDate();
 		
 }
 
@@ -180,14 +183,49 @@ function dateValidator(){
 	toDate.setDate($('#toDay').val());
 	
 	if(toDate < fromDate){
-		console.log("fromDate is greater than toDate" + fromDate);
-		$("#error").show();
+		$("#invalidDate").show();
 		return false;
 	} else if (now > fromDate){
-		$("#error").show();
-		console.log("now is greater than fromDate" + now);
+		$("#invalidDate").show();
 		return false;
 	} else {
 		return true;
 	};
-}
+};
+
+function setTodayDate(){
+	var todayDate = new Date();
+	
+	var todayMonth = todayDate.getMonth();
+	var todayDay = todayDate.getDay();
+	
+	var toMonth = document.getElementById("toMonth");
+	var fromMonth = document.getElementById("fromMonth");
+	var toMonthOptions = toMonth.options;
+	
+	var toDay = document.getElementById("toDay");
+	var fromDay = document.getElementById("fromDay");
+	var toDayOptions = toDay.options;
+	
+	for (var i = 0; i < toMonthOptions.length; i++){
+		if(i === todayMonth){
+			toMonth.selectedIndex = i;
+			fromMonth.selectedIndex = i;
+		}
+	};
+	
+	for (var i = 0; i < toDayOptions.length; i++){
+		if(i === todayDay){
+			toDay.selectedIndex = i-1;
+			fromDay.selectedIndex = i-1;
+		}
+	};
+};
+
+function validate(){
+	var regexp1=new RegExp("[^0-9]");
+	if(regexp1.test(document.getElementById("amount").value)){
+		alert("Only numbers are allowed");
+		return false;
+	}
+};
