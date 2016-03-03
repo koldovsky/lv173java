@@ -13,20 +13,23 @@ import com.softserveinc.ita.redplatform.persistence.context.SecurityContext;
 
 /**
  * Event listener to insert date and user.
+ * 
  * @author oleh
  *
  */
 public class BaseEntityListener {
-    
+
     /**
      * LOGGER.
      */
-     private static final Logger LOGGER = 
- 	    			Logger.getLogger(BaseEntityListener.class);
-    
+    private static final Logger LOGGER =
+	    Logger.getLogger(BaseEntityListener.class);
+
     /**
      * method that insert to database createdBy and CreatedDate.
-     * @param entity entity
+     * 
+     * @param entity
+     *            entity
      */
     @PrePersist
     public final void prePersist(final BaseEntity entity) {
@@ -37,7 +40,9 @@ public class BaseEntityListener {
 
     /**
      * method that insert to database updatedBy and updatedDate.
-     * @param entity entity
+     * 
+     * @param entity
+     *            entity
      */
     @PreUpdate
     public final void preUpdate(final BaseEntity entity) {
@@ -45,10 +50,9 @@ public class BaseEntityListener {
 	entity.setUpdatedBy(getUser());
 	entity.setUpdatedDate(new Date());
     }
-    
+
     private User getUser() {
 	return SecurityContext.USER_DAO.get().findUserByEmail(
-			SecurityContext.CURRENT_USER.get().getUsername()
-		);
+		SecurityContext.CURRENT_USER.get().getUsername());
     }
 }

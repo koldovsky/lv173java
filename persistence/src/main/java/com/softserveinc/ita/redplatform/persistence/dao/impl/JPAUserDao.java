@@ -2,10 +2,12 @@ package com.softserveinc.ita.redplatform.persistence.dao.impl;
 
 import java.util.List;
 
-import javax.persistence.FlushModeType;
 import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.softserveinc.ita.redplatform.common.entity.CustomerUser;
 import com.softserveinc.ita.redplatform.common.entity.RealEstateAdminUser;
 import com.softserveinc.ita.redplatform.common.entity.User;
@@ -61,6 +63,7 @@ public class JPAUserDao extends JPAGenericDao<User, Long> implements UserDao {
 	/**
 	 * method find user by email.
 	 */
+    	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	@Override
 	public final User findUserByEmail(final String email) {
 
@@ -68,8 +71,7 @@ public class JPAUserDao extends JPAGenericDao<User, Long> implements UserDao {
 			.createQuery("from "
 					+ User.class.getName()
 					+ " as user where user.email=:email")
-			.setParameter("email", email)
-			.setFlushMode(FlushModeType.COMMIT);
+			.setParameter("email", email);			
         	return getSingleResult(query.getResultList());
 	}
 
