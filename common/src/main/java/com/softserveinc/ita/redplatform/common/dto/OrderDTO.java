@@ -26,11 +26,14 @@ public class OrderDTO {
      * Area in square meters.
      */
     private double area;
-    
+
     /**
      * Number of rooms.
      */
     private int roomsQuantity;
+
+    /** The address of the real estate. */
+    private AddressDTO address;
 
     public final Long getCustomerId() {
 	return customerId;
@@ -65,11 +68,19 @@ public class OrderDTO {
     }
 
     public final int getRoomsQuantity() {
-        return roomsQuantity;
+	return roomsQuantity;
     }
 
     public final void setRoomsQuantity(final int newRoomsQuantity) {
-        this.roomsQuantity = newRoomsQuantity;
+	this.roomsQuantity = newRoomsQuantity;
+    }
+
+    public final AddressDTO getAddress() {
+        return address;
+    }
+
+    public final void setAddress(final AddressDTO newAddress) {
+        this.address = newAddress;
     }
 
 }
