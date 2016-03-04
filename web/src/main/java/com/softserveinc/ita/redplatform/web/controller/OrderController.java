@@ -30,7 +30,7 @@ public class OrderController {
     @RequestMapping(value = "/order", method = RequestMethod.GET)
     public final String getOrderPage() {
 	
-	    return "order";
+	    return "order/ordering";
 	
     }
 
