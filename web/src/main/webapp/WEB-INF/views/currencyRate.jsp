@@ -36,8 +36,10 @@
 				<div class="col-sm-6">
 					<div class="form-group">
 						<label class="control-label">Input amount of currency rate</label> 
+						<div class="text-danger">
 						<input type="text" name="amount" id="amount" 
 						class="form-control" placeholder="Enter new currency rate">
+						</div>
 						 <input type="checkbox" name="nbu" value="" id="nbu">Set NBU cource<br>
 					</div>
 				</div>
@@ -97,5 +99,8 @@
 	</div>
 	<script src="${pageContext.request.contextPath}/resources/js/currency.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/currencyNBU.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/regexes.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/lib/jquery/jquery-2.2.0.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/lib/jquery/jquery.validate.min.js"></script>
 </body>
 </html>

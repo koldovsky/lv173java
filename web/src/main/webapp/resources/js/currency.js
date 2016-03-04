@@ -1,5 +1,6 @@
 $(document).ready(function() {
-
+	
+	
 	$("#success").hide();
 	$("#error").hide();
 	$("#invalidDate").hide();
@@ -9,36 +10,38 @@ $(document).ready(function() {
 	});
 	
 	$('#currency-form').submit(function(event) {	
+		if ($('#currency-form').valid()) {
 		var check = dateValidator();
 		if(check === true){
 			addCurrency();
 		}
 		return false;
+		}
 	});
 	
 	$('#fromMonth').click(function(event) {
 		deleteFromDays();
 		setFromDays();
 		return false;
-});
+	});
 	
 	$('#toMonth').click(function(event) {
 		deleteToDays();
 		setToDays();
 		return false;
-});
+	});
 	
 	$('#fromYear').click(function(event) {
 		deleteFromDays();
 		setFromDays();
 		return false;
-});
+	});
 	
 	$('#toYear').click(function(event) {
 		deleteToDays();
 		setToDays();
 		return false;
-});
+	});
 	
 });
 
@@ -217,18 +220,10 @@ function setTodayDate(){
 		}
 	};
 	
-	for (var i = 0; i < toDayOptions.length; i++){
-		if(i === todayDay){
+	for (var i = 1; i < toDayOptions.length; i++){
+		if(i === (todayDay-1)){
 			toDay.selectedIndex = i-1;
 			fromDay.selectedIndex = i-1;
 		}
 	};
-};
-
-function validate(){
-	var regexp1=new RegExp("[^0-9]");
-	if(regexp1.test(document.getElementById("amount").value)){
-		alert("Only numbers are allowed");
-		return false;
-	}
 };

@@ -15,6 +15,8 @@ var mailAvailabilityCheckParams = {
 	url: 'checkmail',
 	type: 'GET'
 };
+var regexCurrencyRate = /^\d{0,3}(\.\d{0,3})?$/;
+var messageCurrencyIncorrect = 'Incorrect value';
 var messageMailTaken = 'This e-mail is already taken.';
 var messageNameUserIncorrect = 'Name should be correct.';
 var messageMailIncorrect = 'E-mail should be valid.';
