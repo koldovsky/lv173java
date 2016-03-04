@@ -3,6 +3,7 @@ package com.softserveinc.ita.redplatform.common.entity;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -27,7 +28,7 @@ public class Order extends BaseEntity {
     /**
      * Column for customerId.
      */
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "customerId")
     private CustomerUser customerUser;
 
@@ -46,15 +47,18 @@ public class Order extends BaseEntity {
     /**
      * Description of an order.
      */
+    @Column(nullable = false)
     private String description;
 
     /**
      * Area in square meters.
      */
+    @Column(nullable = false)
     private double area;
     /**
      * Number of rooms.
      */
+    @Column(nullable = false)
     private int roomsQuantity;
     
     
@@ -81,24 +85,7 @@ public class Order extends BaseEntity {
 	this.customerUser = newCustomerUser;
     }
 
-    /**
-     * Get Installment.
-     * 
-     * @return installment
-     */
-    public final List<Installment> getInstallment() {
-	return installments;
-    }
-
-    /**
-     * Set Installments value.
-     * 
-     * @param newInstallments
-     *            to set
-     */
-    public final void setInstallment(final List<Installment> newInstallments) {
-	this.installments = newInstallments;
-    }
+    
 
     /**
      * Get list of payments.
@@ -149,6 +136,14 @@ public class Order extends BaseEntity {
 
     public final void setAddress(final Address newAddress) {
         this.address = newAddress;
+    }
+
+    public final List<Installment> getInstallments() {
+        return installments;
+    }
+
+    public final void setInstallments(final List<Installment> newInstallments) {
+        this.installments = newInstallments;
     }
 
 }
