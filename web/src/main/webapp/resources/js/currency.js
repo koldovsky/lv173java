@@ -42,6 +42,8 @@ $(document).ready(function() {
 	
 });
 
+var nbu = false;
+
 function addCurrency() {
 	
 	var fromDate = new Date();
@@ -57,7 +59,8 @@ function addCurrency() {
 	var currency = {
 		amount : $('#amount').val(),
 		fromDate : fromDate,
-		toDate : toDate
+		toDate : toDate,
+		nbu: nbu
 	};
 	
 	$.ajax({
@@ -75,7 +78,7 @@ function addCurrency() {
 			$("#error").show();
 			$("#success").hide();
 		}
-	})
+	});
 }
 
 function setDate(){

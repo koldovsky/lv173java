@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.softserveinc.ita.redplatform.common.dto.CustomerUserDTO;
 import com.softserveinc.ita.redplatform.common.entity.CustomerUser;
@@ -117,6 +118,26 @@ public class CustomerUserService extends AbstractUserService {
     @Secured("ROLE_REDADMIN")
     public CustomerUserDTO getUserDTOById(final Long id) {
 	return customerUserMapper.toDto(customerUserDao.findById(id));
+    }
+    
+    /**
+     * Register new customer user.
+     * @param customer user dto
+     */
+    @Transactional
+    @Secured("ROLE_REDADMIN")
+    public void register(final Object customer) {
+	super.register(customer);
+    }
+    
+    /**
+     * Update new customer user.
+     * @param customer user dto
+     */
+    @Transactional
+    @Secured("ROLE_REDADMIN")
+    public void update(final Object customer) {
+	super.update(customer);
     }
 
 }

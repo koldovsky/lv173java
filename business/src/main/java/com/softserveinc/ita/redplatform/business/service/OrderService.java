@@ -1,12 +1,21 @@
 package com.softserveinc.ita.redplatform.business.service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.LinkedList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.softserveinc.ita.redplatform.common.dto.InstallmentDTO;
 import com.softserveinc.ita.redplatform.common.dto.OrderDTO;
+import com.softserveinc.ita.redplatform.common.entity.CustomerUser;
+import com.softserveinc.ita.redplatform.common.entity.Installment;
 import com.softserveinc.ita.redplatform.common.entity.Order;
+import com.softserveinc.ita.redplatform.common.mapper.InstallmentMapper;
 import com.softserveinc.ita.redplatform.common.mapper.OrderMapper;
 import com.softserveinc.ita.redplatform.persistence.dao.CustomerUserDao;
 import com.softserveinc.ita.redplatform.persistence.dao.OrderDao;
@@ -24,7 +33,13 @@ public class OrderService {
     @Autowired
     private OrderDao orderDao;
 
-    /** The customer user dao. */
+    /** The customer user service. */
+    @Autowired
+    private CustomerUserService customerUserService;
+
+    /**
+     * CutomerUser Dao.
+     */
     @Autowired
     private CustomerUserDao customerUserDao;
 
@@ -32,19 +47,42 @@ public class OrderService {
     @Autowired
     private OrderMapper mapper;
 
+    /** The installment mapper. */
+    @Autowired
+    private InstallmentMapper installmentMapper;
+
     /**
      * Creates the order.
      *
      * @param orderDTO
      *            the order dto
-     * @param customerId
-     *            Long customer Id
-     * @return Long order Id
+     * @return OrderDTO orderDTO
+     * @throws ParseException
+     *             parse exception
      */
     @Transactional
-    public OrderDTO create(final OrderDTO orderDTO, final Long customerId) {
+    public OrderDTO create(final OrderDTO orderDTO) throws ParseException {
 	Order order = mapper.toEntity(orderDTO);
-	order.setCustomerUser(customerUserDao.findById(customerId));
+	if (order.getCustomerUser().getId() != null) {
+	    order.setCustomerUser(
+		    customerUserDao.findById(order.getCustomerUser().getId()));
+	} else {
+	    CustomerUser customerUser = (CustomerUser) customerUserService
+		    .registerPreprocess(orderDTO.getCustomer());
+	    order.setCustomerUser(customerUser);
+	}
+	Installment installment = null;
+	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+	Date date = null;
+	LinkedList<Installment> installments = new LinkedList<>();
+	for (InstallmentDTO dto : orderDTO.getInstallment()) {
+	    installment = installmentMapper.toEntity(dto);
+	    date = formatter.parse(dto.getDate());
+	    installment.setDate(date);
+	    installment.setOrder(order);
+	    installments.add(installment);
+	}
+	order.setInstallments(installments);
 	orderDao.save(order);
 	return mapper.toDto(order);
 

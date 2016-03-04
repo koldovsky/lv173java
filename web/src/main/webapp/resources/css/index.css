@@ -4,6 +4,7 @@ body {
     background-image: url('../images/indexbackground.png');
 	background-attachment: fixed;
 	background-repeat: no-repeat;
+	background-size: cover;
 }
 
 .indexHeader{
@@ -15,11 +16,12 @@ body {
 }
 
 .indexrow > .col-md-3 {
+	algin-content: center;
 	box-sizing: content-box;
-  	margin-left: 2%;
-	margin-right: 3%;
 	margin-top: 1%;
 	margin-bottom: 1%;
+  	background-color:rgba(0,0,0,0.5);
+	border-radius:10%;
 }
 
 .indexrow{
@@ -27,15 +29,22 @@ body {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  padding-right: 3%;
 }
 
 .col-md-3{
 	color: white;
+	margin : 3%;
 }
 
-#footer{
-   position:absolute;
-   bottom:0;
-   width:90%;
-   color: white;
+#footer {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	padding: 1rem;
+	text-align: center;
+	color: white;
+	font-size: 20px;
 }

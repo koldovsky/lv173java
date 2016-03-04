@@ -6,8 +6,13 @@
 <jsp:include page="utils/jspheader.jsp" />
 <title>Installment addition - REDplatform</title>
 <script src="${pageContext.request.contextPath}/resources/js/lib/jquery/jquery.validate.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/lib/jquery-ui/jquery-ui.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/installment.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/regexes.js"></script>
+
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/lib/jquery-ui/jquery-ui.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/lib/jquery-ui/jquery-ui.structure.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/lib/jquery-ui/jquery-ui.theme.css">
 </head>
 
 <body>
@@ -23,14 +28,14 @@
 			id="template-container">
 			<!-- the template used for every fieldset creation -->
 			<div id="template">
-				<fieldset class="fields row">
+				<fieldset id="fieldset-{0}" class="fields row">
 					<div id="{0}" class="col-sm-offset-3 col-sm-6">
 						<h2 class="center">Installment</h2>
 						<div class="col-sm-12 form-group">
 							<label class="control-label" for="date-{0}"> <span
 								class="glyphicon glyphicon-asterisk text-danger"
 								aria-hidden="true"></span>Date
-							</label> <input id="date-{0}" name="date" class="data date form-control"
+							</label> <input id="date-{0}" name="date-{0}" class="data date form-control"
 								placeholder="YYYY-MM-DD" />
 						</div>
 
@@ -38,7 +43,7 @@
 							<label class="control-label" for="amount-{0}"> <span
 								class="glyphicon glyphicon-asterisk text-danger"
 								aria-hidden="true"></span>Amount
-							</label> <input id="amount-{0}" name="amount"
+							</label> <input id="amount-{0}" name="amount-{0}"
 								class="data amount form-control" placeholder="1000.00" />
 						</div>
 					</div>

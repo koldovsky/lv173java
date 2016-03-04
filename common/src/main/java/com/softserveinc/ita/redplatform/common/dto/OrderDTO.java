@@ -1,5 +1,7 @@
 package com.softserveinc.ita.redplatform.common.dto;
 
+import java.util.List;
+
 /**
  * DTO for Order.
  * 
@@ -10,7 +12,7 @@ public class OrderDTO {
     /**
      * Customer ID of Order.
      */
-    private Long customerId;
+    private CustomerUserDTO customer;
 
     /**
      * Order ID.
@@ -26,19 +28,19 @@ public class OrderDTO {
      * Area in square meters.
      */
     private double area;
-    
+
     /**
      * Number of rooms.
      */
     private int roomsQuantity;
 
-    public final Long getCustomerId() {
-	return customerId;
-    }
+    /** The address of the real estate. */
+    private AddressDTO address;
 
-    public final void setCustomerId(final Long newCustomerId) {
-	this.customerId = newCustomerId;
-    }
+    /**
+     * List of installments.
+     */
+    private List<InstallmentDTO> installment;
 
     public final Long getId() {
 	return id;
@@ -65,11 +67,36 @@ public class OrderDTO {
     }
 
     public final int getRoomsQuantity() {
-        return roomsQuantity;
+	return roomsQuantity;
     }
 
     public final void setRoomsQuantity(final int newRoomsQuantity) {
-        this.roomsQuantity = newRoomsQuantity;
+	this.roomsQuantity = newRoomsQuantity;
+    }
+
+    public final AddressDTO getAddress() {
+	return address;
+    }
+
+    public final void setAddress(final AddressDTO newAddress) {
+	this.address = newAddress;
+    }
+
+    public final CustomerUserDTO getCustomer() {
+	return customer;
+    }
+
+    public final void setCustomer(final CustomerUserDTO newCustomer) {
+	this.customer = newCustomer;
+    }
+
+    public final List<InstallmentDTO> getInstallment() {
+	return installment;
+    }
+
+    public final void
+	    setInstallment(final List<InstallmentDTO> newInstallment) {
+	this.installment = newInstallment;
     }
 
 }

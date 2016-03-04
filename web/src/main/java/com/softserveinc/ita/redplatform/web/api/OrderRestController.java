@@ -1,9 +1,10 @@
 package com.softserveinc.ita.redplatform.web.api;
 
+import java.text.ParseException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,20 +29,20 @@ public class OrderRestController {
     /**
      * Adds order.
      *
-     * @param customerId
-     *            the user id
      * @param orderDTO
      *            OrderDTO
      * @return the response entity
      */
-    @RequestMapping(value = "api/order/{customerId}",
-	    method = RequestMethod.POST)
-    public final ResponseEntity<OrderDTO> addOrder(
-	    @PathVariable final Long customerId,
-	    @RequestBody final OrderDTO orderDTO) {
-
-	OrderDTO responseOrder = orderService.create(orderDTO, customerId);
-	return new ResponseEntity<OrderDTO>(responseOrder, HttpStatus.OK);
+    @RequestMapping(value = "api/order/", method = RequestMethod.POST)
+    public final ResponseEntity<OrderDTO>
+	    addOrder(@RequestBody final OrderDTO orderDTO) {
+	OrderDTO responseOrder;
+	try {
+	    responseOrder = orderService.create(orderDTO);
+	} catch (ParseException exception) {
+	    return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+	}
+	return new ResponseEntity<>(responseOrder, HttpStatus.CREATED);
     }
 
 }

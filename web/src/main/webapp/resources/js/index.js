@@ -1,3 +1,1 @@
-$('.carousel').carousel({
-	interval : 5000
-})
+$('#footer hr').prop('hidden',true);

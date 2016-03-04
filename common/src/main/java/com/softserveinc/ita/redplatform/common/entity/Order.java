@@ -3,10 +3,12 @@ package com.softserveinc.ita.redplatform.common.entity;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -26,7 +28,7 @@ public class Order extends BaseEntity {
     /**
      * Column for customerId.
      */
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "customerId")
     private CustomerUser customerUser;
 
@@ -41,20 +43,28 @@ public class Order extends BaseEntity {
      */
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<Payment> payments;
-    
+
     /**
      * Description of an order.
      */
+    @Column(nullable = false)
     private String description;
-    
+
     /**
      * Area in square meters.
      */
+    @Column(nullable = false)
     private double area;
     /**
      * Number of rooms.
      */
+    @Column(nullable = false)
     private int roomsQuantity;
+    
+    
+    /** The address of the real estate. */
+    @OneToOne(cascade = CascadeType.ALL)
+    private Address address;
 
     /**
      * Get customerUser.
@@ -68,28 +78,14 @@ public class Order extends BaseEntity {
     /**
      * Set CustomerUser.
      * 
-     * @param newCustomerUser to set
+     * @param newCustomerUser
+     *            to set
      */
     public final void setCustomerUser(final CustomerUser newCustomerUser) {
 	this.customerUser = newCustomerUser;
     }
 
-    /**
-     * Get Installment.
-     * 
-     * @return installment
-     */
-    public final List<Installment> getInstallment() {
-	return installments;
-    }
-
-    /**
-     * Set Installments value.
-     * @param newInstallments to set
-     */
-    public final void setInstallment(final List<Installment> newInstallments) {
-	this.installments = newInstallments;
-    }
+    
 
     /**
      * Get list of payments.
@@ -103,34 +99,51 @@ public class Order extends BaseEntity {
     /**
      * Set list of payments.
      * 
-     * @param newPayments to set
+     * @param newPayments
+     *            to set
      */
     public final void setPayments(final List<Payment> newPayments) {
 	this.payments = newPayments;
     }
 
     public final String getDescription() {
-        return description;
+	return description;
     }
 
     public final void setDescription(final String newDescription) {
-        this.description = newDescription;
+	this.description = newDescription;
     }
 
     public final double getArea() {
-        return area;
+	return area;
     }
 
     public final void setArea(final double newArea) {
-        this.area = newArea;
+	this.area = newArea;
     }
 
     public final int getRoomsQuantity() {
-        return roomsQuantity;
+	return roomsQuantity;
     }
 
     public final void setRoomsQuantity(final int newRoomsQuantity) {
-        this.roomsQuantity = newRoomsQuantity;
+	this.roomsQuantity = newRoomsQuantity;
+    }
+
+    public final Address getAddress() {
+        return address;
+    }
+
+    public final void setAddress(final Address newAddress) {
+        this.address = newAddress;
+    }
+
+    public final List<Installment> getInstallments() {
+        return installments;
+    }
+
+    public final void setInstallments(final List<Installment> newInstallments) {
+        this.installments = newInstallments;
     }
 
 }
