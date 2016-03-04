@@ -2,7 +2,7 @@ package com.softserveinc.ita.redplatform.common.entity;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -37,7 +37,7 @@ public class Installment extends BaseEntity {
     /**
      * Column for order.
      */
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Order order;
 
     /**

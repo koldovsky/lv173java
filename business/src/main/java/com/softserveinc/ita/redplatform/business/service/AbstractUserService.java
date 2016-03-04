@@ -37,12 +37,25 @@ public abstract class AbstractUserService {
      */
     @Transactional
     public void register(final Object dto) {
+	User user = (User) registerPreprocess(dto);
+	getDao().save(user);
+    }
+
+    /**
+     * Preprocessing register.
+     * 
+     * @param dto
+     *            the dto
+     * @return Object user
+     */
+    @Transactional
+    public Object registerPreprocess(final Object dto) {
 	User user = getEntity(dto);
 	String rawPassword = passGenerator.generatePassword();
 	notifyWithMail(user, rawPassword);
 	String encodedPassword = passEncoder.encode(rawPassword);
 	user.setPassword(encodedPassword);
-	getDao().save(user);
+	return user;
     }
 
     /**
@@ -62,8 +75,7 @@ public abstract class AbstractUserService {
      * @param password
      *            the password
      */
-    private void notifyWithMail(final User recipient, 
-	    final String password) {
+    private void notifyWithMail(final User recipient, final String password) {
 	SimpleMailMessage simpleMessage = new SimpleMailMessage();
 	simpleMessage.setFrom("REDplatform");
 	simpleMessage.setTo(recipient.getEmail());
@@ -82,25 +94,25 @@ public abstract class AbstractUserService {
      * @param password
      *            the password
      */
-    private void setContentAndPassword(final SimpleMailMessage message, 
+    private void setContentAndPassword(final SimpleMailMessage message,
 	    final User user, final String password) {
 	String notification = "Welcome to the REDplatform! "
 		+ "You can find your credentials below:\nUsername: %s\nPassword: %s";
 	message.setText(String.format(notification, user.getEmail(), password));
     }
-    
+
     /**
      * Get dao.
      *
      * @return the dao
      */
     protected abstract GenericDao getDao();
-    
-    
+
     /**
      * Retrieve user dto by id.
      *
-     * @param id the id
+     * @param id
+     *            the id
      * @return the user dto
      */
     @Transactional
@@ -112,20 +124,21 @@ public abstract class AbstractUserService {
 	    return null;
 	}
     }
-    
+
     /**
      * Gets the user dto.
      *
-     * @param user the user
+     * @param user
+     *            the user
      * @return the user dto
      */
     protected abstract Object getUserDTO(User user);
-    
-    
+
     /**
      * Update user.
      *
-     * @param dto the dto
+     * @param dto
+     *            the dto
      */
     @Transactional
     public void update(final Object dto) {
