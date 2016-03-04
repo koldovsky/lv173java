@@ -4,43 +4,7 @@ $(document).ready(
 		    $('#agencyName').each(function () {
 		        $(this).rules('remove', 'remote');
 		    });
-			
-			var href = $(location).attr('href');
-			var id = href.substr(href.lastIndexOf('/') + 1);
-			
-			$('#title').html('Edit Real Estate Agency');
-
-			$.ajax({
-				type : 'GET',
-				url : context + '/api/agency/'+id,
-				dataType : 'json', 
-				success : function(responseData, textStatus, jqXHR) {
-					$('#agencyName').val(responseData.name);
-					$('#description').val(responseData.description);
-					$('#webSite').val(responseData.site);
-					$('#phoneNumber').val(responseData.phone);
-					
-					$('#country').val(responseData.address.country);
-					$('#region').val(responseData.address.region);
-					$('#postalCode').val(responseData.address.postalCode);
-					$('#locality').val(responseData.address.locality);
-					$('#additionalInfo').val(responseData.address.additional);
-					
-					$('#agencyID').val(responseData.id);
-					$('#addressID').val(responseData.address.id);
-					$('#error').hide();
-			
-				},	
-				error : function(jqXHR, textStatus, errorThrown) {
-
-					if (jqXHR.status === 404) {
-						$('#error').html('Agency is not found');						
-					} 
-					$('#error').show();
-					$('#success').hide();
-				}
-			})
-			
+	
 			$('#register-form').submit(function(event) {
 				if ($('#register-form').valid()) {
 					var address = {
@@ -60,9 +24,10 @@ $(document).ready(
 							phone : $('#phoneNumber').val(),
 							address : address
 						};
+						
 						$.ajax({
 							type : 'PUT',
-							url : context + '/api/agency/'+id,
+							url : context + '/api/agency/'+agency.id,
 							contentType : 'application/json',
 							data : JSON.stringify(agency),
 							dataType : 'json',

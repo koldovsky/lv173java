@@ -7,17 +7,18 @@
 <jsp:include page="utils/jspheader.jsp" />
 <script
 	src="${pageContext.request.contextPath}/resources/js/lib/jquery/jquery.validate.min.js">
+	
 </script>
 <title>Agency registration</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/agencyRegistration.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/agencyRegistration.css">
 <script src="${pageContext.request.contextPath}/resources/js/agency.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/agencyEdit.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/agencyEdit.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/regexes.js"></script>
 
 </head>
-	<body>
-		<input type="hidden" name="id" value="" id="agencyID">
-		<input type="hidden" name="id" value="" id="addressID">
-		<jsp:include page="utils/agency.jsp"></jsp:include>
-	</body>
+<body>
+	<jsp:include page="utils/agency.jsp"></jsp:include>
+</body>
 </html>
