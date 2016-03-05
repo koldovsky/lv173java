@@ -1,30 +1,37 @@
 $(function() {
 	var template = $.validator.format($('#template').html());
-	function addInstallmentItemFieldsAfter(element) {
+	function addInstallmentAfter(element) {
 		var installment = $(template(++itemCount));
 		installment.insertAfter(element);
+		return installment;
 	}
 
 	var itemCount = 0;
-	addInstallmentItemFieldsAfter($('#installmentform').children().first());
-	$('#add-more').click(function() {
+	var firstFieldset = addInstallmentAfter($('#installmentform').children().first());
+	hideDeleteButton.call(firstFieldset);
+	
+	$(this).on('click', '.add-more', function() {
 		if ($('#installmentform').valid()) {
-			addInstallmentItemFieldsAfter($(this).parents('#controls-container'));
+			var currentFieldset = $(this).parents('.fields');
+			addInstallmentAfter(currentFieldset);
+			showDeleteButton.call(currentFieldset);
 		}
 	});
 	
-	$('#delete-item').click(function() {
-		var installment = $(this).parents('#controls-container').prev();
-		installment.remove();
-		$('.fields').last().trigger('keydown');
-	});
-
-	$(this).on('keydown', '.fields', function() {
-		$('#controls-container').insertAfter($(this));
-		if ($('#installmentform div.fields').length > 1) {
-			$('#delete-item').attr('style', 'display: inline');
-		} else {
-			$('#delete-item').attr('style', 'display: none');
+	function showDeleteButton() {
+		$(this).find('.delete-item').attr('style', 'display: inline');
+	}
+	
+	function hideDeleteButton() {
+		$(this).find('.delete-item').attr('style', 'display: none');
+	}
+	
+	$(this).on('click', '.delete-item', function() {
+		var currentFieldset = $(this).parents('.fields');
+		currentFieldset.remove();
+		var fieldsets = $('#installmentform div.fields');
+		if (fieldsets.length === 1) {
+			hideDeleteButton.call(fieldsets);
 		}
 	});
 	

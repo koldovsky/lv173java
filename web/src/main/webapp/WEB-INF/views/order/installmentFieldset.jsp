@@ -1,4 +1,4 @@
-<form id="installmentform">
+<form id="installmentform" class="col-sm-offset-2 col-sm-8">
 	<div class="header">
 		<h2 class="center">Installments</h2>
 	</div>
