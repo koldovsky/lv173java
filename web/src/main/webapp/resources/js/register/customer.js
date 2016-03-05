@@ -10,7 +10,7 @@ $(document).ready(function() {
 			}
 
 			var customer = {
-				email : $('#mail').val(),
+				email : $('#email').val(),
 				firstName : $('#firstName').val(),
 				lastName : $('#lastName').val(),
 				phone : $('#phone').val(),

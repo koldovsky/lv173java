@@ -33,13 +33,13 @@ public class UserRestController {
     /**
      * Check email availability.
      * 
-     * @param mail the mail
+     * @param email the email
      * @return true, if email is available
      */
     @RequestMapping(value = "/checkmail", method = RequestMethod.GET)
     public final boolean checkEmailAvailability(
-	    @RequestParam final String mail) {
-	return userService.isEmailAvailable(mail);
+	    @RequestParam final String email) {
+	return userService.isEmailAvailable(email);
     }
 
     /**

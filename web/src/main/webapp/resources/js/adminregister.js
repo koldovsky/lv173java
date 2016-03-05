@@ -20,7 +20,7 @@ $(document).ready(function() {
 		// Specify the validation rules
 		rules : {
 			
-			mail : {
+			email : {
 				required : true,
 				minlength : 6,
 				maxlength : 60,
@@ -29,7 +29,7 @@ $(document).ready(function() {
 			}
 		},
 		messages : {
-			mail : {
+			email : {
 				required : 'Please enter new system administrator\'s login',
 				minlength : 'Login must be minimum 6 characters long',
 				maxlength : 'Login must be maximum 60 characters long',
@@ -43,7 +43,7 @@ $(document).ready(function() {
 			hideMessages();
 
 			var data = {
-				email : $('#mail').val()
+				email : $('#email').val()
 			};
 			var postData = JSON.stringify(data);
 

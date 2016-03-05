@@ -1,6 +1,6 @@
 $(document).ready( function(){
     
-	$('#mail').each(function () {
+	$('#email').each(function () {
         $(this).rules('remove', 'remote');
     });
 	
@@ -10,8 +10,8 @@ $(document).ready( function(){
 	
 	$('#pageHeader').html('Customer Edit');
 	
-	$('#mail').prop('readonly', true);
-	$('#mail').prop('tabindex', -1);
+	$('#email').prop('readonly', true);
+	$('#email').prop('tabindex', -1);
 	
 	var customerEmail;
 	var customerId;
@@ -24,7 +24,7 @@ $(document).ready( function(){
 		success : function (responseData, textStatus, jqHXR) {
 			$('#firstName').val(responseData.firstName);
 			$('#lastName').val(responseData.lastName);
-			$('#mail').val(responseData.email);
+			$('#email').val(responseData.email);
 			$('#phone').val(responseData.phone);
 			$('#passport').val(responseData.passport);
 			$('#taxNumber').val(responseData.individualTaxNumber);
@@ -39,7 +39,7 @@ $(document).ready( function(){
 			addressId = responseData.address.id;
 			
 			$.validator.addMethod('checkEmail', function(value, element){
-				return $('#mail').val() === customerEmail;
+				return $('#email').val() === customerEmail;
 			}, 'Email is \"' + customerEmail + '\", it is not allowed to change it');
 			
 		},
@@ -71,7 +71,7 @@ $(document).ready( function(){
 				id : customerId,
 				firstName : $('#firstName').val(),
 				lastName : $('#lastName').val(),
-				email : $('#mail').val(),
+				email : $('#email').val(),
 				phone : $('#phone').val(),
 				passport : $('#passport').val(),
 				individaulTaxNumber : $('#taxNumber').val(),

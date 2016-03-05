@@ -43,10 +43,10 @@
 		<div class="row">
 			<div class="col-md-6">
 				<div class="form-group">
-					<label class="control-label" for="mail"> <span
+					<label class="control-label" for="email"> <span
 						class="glyphicon glyphicon-asterisk text-danger"
 						aria-hidden="true"></span> Email
-					</label> <input type="email" class="form-control" name="mail" id="mail"
+					</label> <input type="email" class="form-control" name="email" id="email"
 						placeholder="Enter Email Here..">
 				</div>
 			</div>

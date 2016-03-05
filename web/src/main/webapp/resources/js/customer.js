@@ -58,7 +58,7 @@ $(document).ready(function(){
 				maxlength : 100,
 				validName : true
 			},
-			mail : {
+			email : {
 				required : true,
 				minlength : 6,
 				maxlength : 60,
@@ -119,7 +119,7 @@ $(document).ready(function(){
 			lastName : {
 				validName : 'Last name should be correct.'
 			},
-			mail : {
+			email : {
 				remote : messageMailTaken
 			}
 		}

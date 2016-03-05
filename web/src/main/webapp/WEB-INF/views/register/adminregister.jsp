@@ -28,9 +28,9 @@
 				<div class="col-sm-6">
 					<!-- New system adminstrator login-->
 					<div class="form-group">
-						<label class="control-label" for="adminregister">Input new
+						<label class="control-label" for="email">Input new
 							system administrator login</label> <input type="text"
-							class="form-control" name="mail" id="mail"
+							class="form-control" name="email" id="email"
 							placeholder="Enter new system administrator's mail">
 					</div>
 				</div>
