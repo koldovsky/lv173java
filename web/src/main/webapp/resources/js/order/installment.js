@@ -8,7 +8,7 @@ $(function() {
 	var itemCount = 0;
 	addInstallmentItemFieldsAfter($('#installmentform').children().first());
 	$('#add-more').click(function() {
-		if ($('#installmentform').parent().valid()) {
+		if ($('#installmentform').valid()) {
 			addInstallmentItemFieldsAfter($(this).parents('#controls-container'));
 		}
 	});

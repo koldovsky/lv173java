@@ -1,26 +1,20 @@
 $(function() {
 
 	$('#submitButton').click(function() {
-		if ($('#commonForm').valid()) {
+		if ($('#customerform').valid()) {
+			
+			function collectInputsFromFieldset(fieldset) {
+				var data = {};
+				var inputs = fieldset.find('input');
+				inputs.each(function() {
+					data[this.name] = $(this).val();
+				});
+				return data;
+			}
 			
 			function collectCustomerData() {
-				var address = {
-					country : $('#country').val(),
-					region : $('#region').val(),
-					postalCode : $('#postalCode').val(),
-					locality : $('#locality').val(),
-					additional : $('#address').val()
-				}
-
-				var customer = {
-					email : $('#mail').val(),
-					firstName : $('#firstName').val(),
-					lastName : $('#lastName').val(),
-					phone : $('#phone').val(),
-					passport : $('#passport').val(),
-					individualTaxNumber : $('#taxNumber').val(),
-					address : address
-				}
+				var customer = collectInputsFromFieldset($('#customerform #generalInfo'));
+				customer.address = collectInputsFromFieldset($('#customerform #address'));
 				return customer;
 			}
 
@@ -41,13 +35,11 @@ $(function() {
 			}
 
 			function collectOrderData() {
-				var order = {
-					description : $('#description').val(),
-					area : $('#area').val(),
-					roomsQuantity : $('#roomsQuantity').val(),
-					customer : collectCustomerData(),
-					installment : collectInstallmentsData()
-				};
+				var order = collectInputsFromFieldset($('#orderform #generalInfo'));
+				order.description = $('#orderform').find('#description').val();
+				order.address = collectInputsFromFieldset($('#orderform #address'));
+				order.customer = collectCustomerData();
+				order.installment = collectInstallmentsData();
 				return order;
 			}
 			

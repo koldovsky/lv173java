@@ -18,6 +18,7 @@
 <script src="${pageContext.request.contextPath}/resources/js/order/common.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/order/orderSubmission.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/regexes.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/validationRules.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/ordering.css">
 
 </head>
@@ -46,11 +47,11 @@
 		</div>
 
 
-		<form id="commonForm">
+		<div id="formContainer">
 			<jsp:include page="orderFieldset.jsp"></jsp:include>
 			<jsp:include page="installmentFieldset.jsp"></jsp:include>
 			<jsp:include page="customerFieldset.jsp"></jsp:include>
-		</form>
+		</div>
 	</div>
 
 

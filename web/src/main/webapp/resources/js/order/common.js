@@ -1,19 +1,27 @@
 $(function() {
 	$('#error').hide();
 	$('#success').hide();
-	$('form fieldset:first-child').fadeIn('slow');
+	$('#formContainer form:first-child').fadeIn('slow');
 
-	$('.prev').click(function(event) {
-		event.preventDefault();
-		$(this).parents('fieldset').fadeOut('slow', function() {
-			$(this).prev().fadeIn('slow');
-		});
+	function changeForms(button) {
+		var parentForm = button.parents('form');
+		if (parentForm.valid()) {
+			parentForm.fadeOut('slow', function() {
+				if (button.hasClass('prev')) {
+					$(this).prevAll('form').first().fadeIn('slow');
+				} else if (button.hasClass('next')) {
+					$(this).nextAll('form').first().fadeIn('slow');
+				}
+			});
+		}
+	}
+
+	$('.prev').click(function() {
+		changeForms($(this));
 	});
 
-	$('.next').click(function(event) {
-		event.preventDefault();
-		$(this).parents('fieldset').fadeOut('slow', function() {
-			$(this).next().fadeIn('slow');
-		});
+	$('.next').click(function() {
+		changeForms($(this));
 	});
+	
 });
