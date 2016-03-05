@@ -11,21 +11,21 @@ $(function() {
 	$('#success').hide();
 	
 	$.validator.addMethod('fieldRequired', 
-			$.validator.methods.required, messageFieldRequired);
+			$.validator.methods.required, ruleFieldRequired.message);
 	$.validator.addClassRules('data', { fieldRequired: true });
 	
 	$.validator.addMethod('mailCustom', function(value, element) {
-			return regexMail.test(value);
-	}, messageMailIncorrect);
+			return ruleMail.regexp.test(value);
+	}, ruleMail.message);
 	
 	$.validator.addMethod('nameCustom', function(value, element) {
-			return regexNameUser.test(value);
-	}, messageNameUserIncorrect);
+			return ruleUserName.regexp.test(value);
+	}, ruleUserName.message);
 	$.validator.addClassRules('name', { nameCustom: true });
 	
 	$.validator.addMethod('phoneCustom', function(value, element) {
-			return regexPhoneUkraine.test(value);
-	}, messagePhoneIncorrect);
+			return rulePhoneUkraine.regexp.test(value);
+	}, rulePhoneUkraine.message);
 	
 	var $form = $('#red-admin-register');
 	$form.validate({
@@ -33,7 +33,7 @@ $(function() {
 				rules: {
 					email: {
 						mailCustom: true,
-						remote: mailAvailabilityCheckParams
+						remote: ruleMailAvailability.params
 					},
 					phone: {
 						phoneCustom: true
@@ -41,7 +41,7 @@ $(function() {
 				},
 				messages: {
 					email: {
-						remote: messageMailTaken
+						remote: ruleMailAvailability.message
 					}
 				}
 			});

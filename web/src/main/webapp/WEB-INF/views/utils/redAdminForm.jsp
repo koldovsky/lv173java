@@ -70,3 +70,4 @@
 
 	<button type="submit" class="btn btn-primary col-sm-offset-5 col-sm-2">Submit</button>
 </form>
+<script src="${pageContext.request.contextPath}/resources/js/validationRules.js"></script>

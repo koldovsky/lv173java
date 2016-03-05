@@ -11,8 +11,8 @@ $(document).ready(function() {
 	hideMessages();
 
 	$.validator.addMethod('regexMail', function(value, element) {
-		return regexMail.test(value);
-	}, messageMailIncorrect);
+		return ruleMail.regexp.test(value);
+	}, ruleMail.message);
 
 	// Setup form validation on the #register-form element
 	$('#adminregisterform').validate({
@@ -25,10 +25,7 @@ $(document).ready(function() {
 				minlength : 6,
 				maxlength : 60,
 				regexMail : true,
-				remote: {
-					url: 'checkmail',
-					type: 'GET'
-				}
+				remote: ruleMailAvailability.params
 			}
 		},
 		messages : {
@@ -36,7 +33,7 @@ $(document).ready(function() {
 				required : 'Please enter new system administrator\'s login',
 				minlength : 'Login must be minimum 6 characters long',
 				maxlength : 'Login must be maximum 60 characters long',
-				remote: 'This email already taken!'	
+				remote: ruleMailAvailability.message	
 			}
 		}
 
