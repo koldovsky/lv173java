@@ -8,8 +8,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.softserveinc.ita.redplatform.common.dto.CurrencyRateDTO;
 import com.softserveinc.ita.redplatform.common.entity.CurrencyRate;
+import com.softserveinc.ita.redplatform.common.entity.RealEstateAdminUser;
 import com.softserveinc.ita.redplatform.common.mapper.CurrencyRateMapper;
 import com.softserveinc.ita.redplatform.persistence.dao.CurrencyRateDao;
+import com.softserveinc.ita.redplatform.persistence.dao.RealEstateAdminUserDao;
 
 /**
  * CurrencyRate Service.
@@ -19,6 +21,18 @@ import com.softserveinc.ita.redplatform.persistence.dao.CurrencyRateDao;
 @Service
 @Transactional
 public class CurrencyRateService {
+    
+    /**
+     * REDAdmin dao.
+     */
+    @Autowired
+    private RealEstateAdminUserDao dao;
+    
+    /**
+     *  User service.
+     */
+    @Autowired
+    private UserService userService;
     
     /** The currency dao. */
     @Autowired
@@ -39,11 +53,18 @@ public class CurrencyRateService {
     /**
      * 
      * @param currencyRateDTO object
+     * @param email of authentication user
      */
     @Transactional
-    public void create(final CurrencyRateDTO currencyRateDTO) {
+    public void create(final CurrencyRateDTO currencyRateDTO, 
+	    final String email) {
 	CurrencyRate currencyRate = currencyRateMapper
 		.toEntity(currencyRateDTO);
+	RealEstateAdminUser user = dao.findById(
+		userService.loadUserByEmail(email).getId());
+	if (user instanceof RealEstateAdminUser) {
+	    currencyRate.setReAgency(user.getAgency());
+	} 
 	currencyRateDao.save(currencyRate);
     }
     
