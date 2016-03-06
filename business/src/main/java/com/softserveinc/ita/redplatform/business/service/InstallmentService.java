@@ -1,7 +1,5 @@
 package com.softserveinc.ita.redplatform.business.service;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -41,18 +39,16 @@ public class InstallmentService {
      *
      * @param installmentList the installment list
      * @param orderId the order id
-     * @throws ParseException the parse exception
      */
     @Transactional
     public void addInstallment(final List<InstallmentDTO> installmentList, 
-	    final Long orderId) throws ParseException {
+	    final Long orderId) {
 	Installment installment = null;
 	Order order = null;
-	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 	Date date = null;
 	for (InstallmentDTO dto : installmentList) {	    
 	    installment = installmentMapper.toEntity(dto);
-	    date = formatter.parse(dto.getDate());
+	    date = new Date(dto.getDate());
 	    installment.setDate(date);
 	    order = orderDao.findById(orderId);
 	    installment.setOrder(order);

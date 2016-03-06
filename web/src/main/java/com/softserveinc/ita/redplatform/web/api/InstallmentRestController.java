@@ -1,6 +1,5 @@
 package com.softserveinc.ita.redplatform.web.api;
 
-import java.text.ParseException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,12 +40,7 @@ public class InstallmentRestController {
     public final ResponseEntity<String> addInstallment(
 	    @PathVariable final Long orderId,
 	    @RequestBody final List<InstallmentDTO> installmentList) {
-	try {
-	    installmentService.addInstallment(installmentList, orderId);
-	} catch (ParseException e) {
-	    return new ResponseEntity<>("Invalid input date.", 
-		    HttpStatus.BAD_REQUEST);
-	}
+	installmentService.addInstallment(installmentList, orderId);
 	return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

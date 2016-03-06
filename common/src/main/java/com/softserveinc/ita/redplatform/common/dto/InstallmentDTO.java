@@ -12,7 +12,7 @@ public class InstallmentDTO {
 
     
     /** The date. */
-    private String date;
+    private long date;
     
     
     /** The order id. */
@@ -64,7 +64,7 @@ public class InstallmentDTO {
      *
      * @return the date
      */
-    public final String getDate() {
+    public final long getDate() {
         return date;
     }
 
@@ -74,7 +74,7 @@ public class InstallmentDTO {
      *
      * @param newDate the new date
      */
-    public final void setDate(final String newDate) {
+    public final void setDate(final long newDate) {
         date = newDate;
     }
 }

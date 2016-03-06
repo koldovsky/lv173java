@@ -23,12 +23,9 @@ $(function() {
 				var i = 0;
 				var $fieldsets = $('#installmentform').find('.fields');
 				$fieldsets.each(function() {
-					var $inputs = $(this).find('input');
 					installments[i] = {};
-					$inputs.each(function() {
-						var name = this.name.replace(/-.*/g, '');
-						installments[i][name] = $(this).val();
-					});
+					installments[i].date = $(this).find('.dateSubmit').val();
+					installments[i].amount = $(this).find('.amount').val();
 					++i;
 				});
 				return installments;

@@ -12,6 +12,8 @@
 					</label> <input id="date-{0}" name="date-{0}"
 						class="data date form-control" placeholder="YYYY-MM-DD" />
 				</div>
+				
+				<input type="hidden" id="dateSubmit-{0}" class="dateSubmit">
 
 				<div class="col-sm-7 form-group">
 					<label class="control-label" for="amount-{0}"> <span

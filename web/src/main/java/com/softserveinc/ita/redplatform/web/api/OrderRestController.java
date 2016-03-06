@@ -1,7 +1,5 @@
 package com.softserveinc.ita.redplatform.web.api;
 
-import java.text.ParseException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,11 +35,7 @@ public class OrderRestController {
     public final ResponseEntity<OrderDTO>
 	    addOrder(@RequestBody final OrderDTO orderDTO) {
 	OrderDTO responseOrder;
-	try {
-	    responseOrder = orderService.create(orderDTO);
-	} catch (ParseException exception) {
-	    return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-	}
+	responseOrder = orderService.create(orderDTO);
 	return new ResponseEntity<>(responseOrder, HttpStatus.CREATED);
     }
 

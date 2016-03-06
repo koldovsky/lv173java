@@ -42,6 +42,8 @@ $(function() {
 		
 		$(this).datepicker({
 			dateFormat : pattern,
+			altFormat : '@',
+			altField : $(this).parents('.fields').find('.dateSubmit'),
 			minDate : minDateVal,
 			maxDate : maxDateVal
 		});

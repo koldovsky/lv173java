@@ -1,7 +1,5 @@
 package com.softserveinc.ita.redplatform.business.service;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 
@@ -57,11 +55,9 @@ public class OrderService {
      * @param orderDTO
      *            the order dto
      * @return OrderDTO orderDTO
-     * @throws ParseException
-     *             parse exception
      */
     @Transactional
-    public OrderDTO create(final OrderDTO orderDTO) throws ParseException {
+    public OrderDTO create(final OrderDTO orderDTO) {
 	Order order = mapper.toEntity(orderDTO);
 	if (order.getCustomerUser().getId() != null) {
 	    order.setCustomerUser(
@@ -72,12 +68,11 @@ public class OrderService {
 	    order.setCustomerUser(customerUser);
 	}
 	Installment installment = null;
-	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 	Date date = null;
 	LinkedList<Installment> installments = new LinkedList<>();
 	for (InstallmentDTO dto : orderDTO.getInstallment()) {
 	    installment = installmentMapper.toEntity(dto);
-	    date = formatter.parse(dto.getDate());
+	    date = new Date(dto.getDate());
 	    installment.setDate(date);
 	    installment.setOrder(order);
 	    installments.add(installment);

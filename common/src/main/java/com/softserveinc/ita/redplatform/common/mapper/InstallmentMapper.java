@@ -18,7 +18,7 @@ public class InstallmentMapper
     public final InstallmentDTO toDto(final Installment entity) {
 	InstallmentDTO dto = new InstallmentDTO();
 	dto.setAmount(entity.getAmount());
-	dto.setDate(entity.getDate().toString());
+	dto.setDate(entity.getDate().getTime());
 	dto.setOrderId(entity.getOrder().getId());
 	return dto;
     }
