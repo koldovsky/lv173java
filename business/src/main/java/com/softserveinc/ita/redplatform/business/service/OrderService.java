@@ -1,12 +1,14 @@
 package com.softserveinc.ita.redplatform.business.service;
 
 import java.util.LinkedList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.softserveinc.ita.redplatform.common.dto.CustomerUserDTO;
 import com.softserveinc.ita.redplatform.common.dto.InstallmentDTO;
 import com.softserveinc.ita.redplatform.common.dto.OrderDTO;
 import com.softserveinc.ita.redplatform.common.entity.CustomerUser;
@@ -58,25 +60,51 @@ public class OrderService {
     @Transactional
     public OrderDTO create(final OrderDTO orderDTO) {
 	Order order = mapper.toEntity(orderDTO);
-	if (order.getCustomerUser().getId() != null) {
-	    order.setCustomerUser(
-		    customerUserDao.findById(order.getCustomerUser().getId()));
-	} else {
-	    CustomerUser customerUser = (CustomerUser) customerUserService
-		    .registerPreprocess(orderDTO.getCustomer());
-	    order.setCustomerUser(customerUser);
-	}
-	Installment installment = null;
-	LinkedList<Installment> installments = new LinkedList<>();
-	for (InstallmentDTO dto : orderDTO.getInstallment()) {
-	    installment = installmentMapper.toEntity(dto);
-	    installment.setOrder(order);
-	    installments.add(installment);
-	}
+	CustomerUser customer = prepareCustomer(orderDTO.getCustomer());
+	order.setCustomerUser(customer);
+	List<Installment> installments = 
+		prepareInstallments(orderDTO.getInstallment(), order);
 	order.setInstallments(installments);
 	orderDao.save(order);
 	return mapper.toDto(order);
 
+    }
+    
+    /**
+     * Prepare customer.
+     *
+     * @param customerDTO the customer dto
+     * @return the customer
+     */
+    private CustomerUser prepareCustomer(final CustomerUserDTO customerDTO) {
+	CustomerUser customer;
+	if (customerDTO.getId() != null) {
+	    customer = customerUserDao.findById(customerDTO.getId());
+	} else {
+	    customer = (CustomerUser) customerUserService
+		    .registerPreprocess(customerDTO);
+	}
+	return customer;
+    }
+    
+    /**
+     * Prepare installments.
+     *
+     * @param dtos the list of installment DTOs
+     * @param order the order
+     * @return the list of installments
+     */
+    private List<Installment> 
+    	prepareInstallments(final List<InstallmentDTO> dtos,
+	    final Order order) {
+	List<Installment> installments = new LinkedList<>();
+	Installment installment = null;
+	for (InstallmentDTO dto : dtos) {
+	    installment = installmentMapper.toEntity(dto);
+	    installment.setOrder(order);
+	    installments.add(installment);
+	}
+	return installments;
     }
 
     /**
