@@ -1,5 +1,7 @@
 package com.softserveinc.ita.redplatform.common.mapper;
 
+import java.util.Date;
+
 import org.springframework.stereotype.Component;
 
 import com.softserveinc.ita.redplatform.common.dto.InstallmentDTO;
@@ -27,6 +29,7 @@ public class InstallmentMapper
     public final Installment toEntity(final InstallmentDTO dto) {
 	Installment entity = new Installment();
 	entity.setAmount(dto.getAmount());
+	entity.setDate(new Date(dto.getDate()));
 	return entity;
     }
 }

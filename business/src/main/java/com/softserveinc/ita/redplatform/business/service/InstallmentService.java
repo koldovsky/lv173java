@@ -1,6 +1,5 @@
 package com.softserveinc.ita.redplatform.business.service;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,11 +44,8 @@ public class InstallmentService {
 	    final Long orderId) {
 	Installment installment = null;
 	Order order = null;
-	Date date = null;
 	for (InstallmentDTO dto : installmentList) {	    
 	    installment = installmentMapper.toEntity(dto);
-	    date = new Date(dto.getDate());
-	    installment.setDate(date);
 	    order = orderDao.findById(orderId);
 	    installment.setOrder(order);
 	    installmentDao.save(installment);

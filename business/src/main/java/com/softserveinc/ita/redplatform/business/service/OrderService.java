@@ -1,6 +1,5 @@
 package com.softserveinc.ita.redplatform.business.service;
 
-import java.util.Date;
 import java.util.LinkedList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,12 +67,9 @@ public class OrderService {
 	    order.setCustomerUser(customerUser);
 	}
 	Installment installment = null;
-	Date date = null;
 	LinkedList<Installment> installments = new LinkedList<>();
 	for (InstallmentDTO dto : orderDTO.getInstallment()) {
 	    installment = installmentMapper.toEntity(dto);
-	    date = new Date(dto.getDate());
-	    installment.setDate(date);
 	    installment.setOrder(order);
 	    installments.add(installment);
 	}
