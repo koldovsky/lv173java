@@ -4,16 +4,19 @@ $(function() {
 	$('#formContainer form:first-child').fadeIn('slow');
 
 	function changeForms(button) {
-		var parentForm = button.parents('form');
-		if (parentForm.valid()) {
-			parentForm.fadeOut('slow', function() {
-				if (button.hasClass('prev')) {
-					$(this).prevAll('form').first().fadeIn('slow');
-				} else if (button.hasClass('next')) {
-					$(this).nextAll('form').first().fadeIn('slow');
-				}
-			});
-		}
+		findParentForm(button).fadeOut('slow', function() {
+			var fadeInForm;
+			if (button.hasClass('prev')) {
+				fadeInForm = $(this).prevAll('form').first();
+			} else {
+				fadeInForm = $(this).nextAll('form').first();
+			}
+			fadeInForm.fadeIn('slow');
+		});
+	}
+
+	function findParentForm(element) {
+		return element.parents('form');
 	}
 
 	$('.prev').click(function() {
@@ -21,7 +24,9 @@ $(function() {
 	});
 
 	$('.next').click(function() {
-		changeForms($(this));
+		if (findParentForm($(this)).valid()) {
+			changeForms($(this));
+		}
 	});
-	
+
 });
