@@ -74,7 +74,7 @@ $(document).ready( function(){
 				email : $('#email').val(),
 				phone : $('#phone').val(),
 				passport : $('#passport').val(),
-				individaulTaxNumber : $('#taxNumber').val(),
+				individualTaxNumber : $('#taxNumber').val(),
 				address : address
 			}
 			

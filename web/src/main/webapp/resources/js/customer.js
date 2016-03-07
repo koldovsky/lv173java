@@ -5,40 +5,36 @@ $(document).ready(function(){
 	});
 
 	$.validator.addMethod('validName', function(value, element) {
-		return regexPersonName.test(value);
-	}, messageNameUserIncorrect);
+		return ruleUserName.regexp.test(value);
+	}, ruleUserName.message);
 	
 	$.validator.addMethod('validMail', function(value, element) {
-		return regexMail.test(value);
-	}, messageMailIncorrect);
+		return ruleMail.regexp.test(value);
+	}, ruleMail.message);
 	
 	$.validator.addMethod('validPhoneNumber', function(value, element) {
-		return regexPhoneNumber.test(value);
-	}, messagePhoneIncorrect);
+		return rulePhoneUkraine.regexp.test(value);
+	}, rulePhoneUkraine.message);
 	
 	$.validator.addMethod('validPassport', function(value, element) {
-		return regexPassport.test(value);
-	}, 'Passport should be valid.');
+		return rulePassport.regexp.test(value);
+	}, rulePassport.message);
 	
 	$.validator.addMethod('validIndividualTaxNumber', function(value, element) {
-		return regexIndividualTaxNumber.test(value);
-	}, 'Individual Tax Number should be valid.');
+		return ruleIndividualTaxNumber.regexp.test(value);
+	}, ruleIndividualTaxNumber.message);
 	
 	$.validator.addMethod('validGeographicalName', function(value, element) {
-		return regexCountry.test(value);
-	}, messageCountryIncorrect);
-
-	$.validator.addMethod('validRegion', function(value, element) {
-		return this.optional(element) || regexCountry.test(value);
-	}, messageRegionIncorrect);
+		return ruleGeographicalName.regexp.test(value);
+	}, ruleGeographicalName.message);
 
 	$.validator.addMethod('validPostalCode', function(value, element) {
-		return regexPostalCode.test(value);
-	}, messagePostalCodeIncorrect);
+		return rulePostalCode.regexp.test(value);
+	}, rulePostalCode.message);
 
 	$.validator.addMethod('validAdditional', function(value, element) {
-		return regexAdditional.test(value);
-	}, messageAddressIncorrect);
+		return ruleAdditional.regexp.test(value);
+	}, ruleAdditional.message);
 
 	$('#customer-form').validate({
 		errorClass : 'text-danger',
@@ -60,10 +56,7 @@ $(document).ready(function(){
 				minlength : 6,
 				maxlength : 60,
 				validMail : true,
-				remote : {
-					url : 'checkmail',
-					type : 'GET'
-				}
+				remote : ruleMailAvailability.params
 			},
 			phone : {
 				required : true,
@@ -89,7 +82,7 @@ $(document).ready(function(){
 				minlength : 2
 			},
 			region : {
-				validRegion : true,
+				validGeographicalName : true,
 				minlength : 2
 			},
 			postalCode : {
@@ -117,7 +110,16 @@ $(document).ready(function(){
 				validName : 'Last name should be correct.'
 			},
 			email : {
-				remote : messageMailTaken
+				remote : ruleMailAvailability.message
+			},
+			country : {
+				validGeographicalName : 'Country should be correct.'
+			},
+			region : {
+				validGeographicalName : 'Region should be correct.'
+			},
+			locality : {
+				validGeographicalName : 'Locality should be correct.'
 			}
 		}
 	});

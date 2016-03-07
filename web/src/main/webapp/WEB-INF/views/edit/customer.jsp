@@ -13,7 +13,7 @@
 	<jsp:include page="../utils/customer.jsp" />
 	<script src="${pageContext.request.contextPath}/resources/js/lib/jquery/jquery.validate.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/customer.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/regexes.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/validationRules.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/edit/customer.js"></script>
 </body>
 </html>
