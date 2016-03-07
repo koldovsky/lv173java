@@ -3,13 +3,7 @@ $(document).ready(
 			$('.alert .close').on('click', function(e) {
 			    $(this).parent().hide();
 			});
-			
-			var hideMessages = function(){
-				$('#error').hide();
-				$('#success').hide();
-			}
-			hideMessages();
-			
+						
 			$.validator.addMethod('agencyName', function(value, element) {
 				return regexName.test(value);
 			}, 'Agency name should be valid.');

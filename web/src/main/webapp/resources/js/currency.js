@@ -1,8 +1,5 @@
 $(document).ready(function() {
 	
-	
-	$("#success").hide();
-	$("#error").hide();
 	$("#invalidDate").hide();
 	
 	$('.alert .close').click(function(e) {

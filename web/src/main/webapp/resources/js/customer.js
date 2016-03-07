@@ -4,9 +4,6 @@ $(document).ready(function(){
 		$(this).parent().hide();
 	});
 
-	$('#success').hide();
-	$('#error').hide();
-
 	$.validator.addMethod('validName', function(value, element) {
 		return regexPersonName.test(value);
 	}, messageNameUserIncorrect);

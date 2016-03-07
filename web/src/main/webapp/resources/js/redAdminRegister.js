@@ -7,9 +7,6 @@ $(function() {
 	
 	var path = $(location).attr('pathname');
 	
-	$('#error').hide();
-	$('#success').hide();
-	
 	$.validator.addMethod('fieldRequired', 
 			$.validator.methods.required, ruleFieldRequired.message);
 	$.validator.addClassRules('data', { fieldRequired: true });

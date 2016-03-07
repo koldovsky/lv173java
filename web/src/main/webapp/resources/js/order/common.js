@@ -1,6 +1,5 @@
 $(function() {
-	$('#error').hide();
-	$('#success').hide();
+
 	$('#formContainer form:first-child').fadeIn('slow');
 
 	function changeForms(button) {

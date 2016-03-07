@@ -5,3 +5,7 @@ span.glyphicon-asterisk {
 .center {
 	text-align: center;
 }
+
+#success, #error {
+	display: none;
+}
