@@ -36,7 +36,7 @@ public class CustomerUserDTO {
     private String passport;
 
     /** individual tax number. */
-    private Integer individualTaxNumber;
+    private Long individualTaxNumber;
 
     /**
      * Created date.
@@ -85,12 +85,12 @@ public class CustomerUserDTO {
 	this.passport = newPassport;
     }
 
-    public final Integer getIndividualTaxNumber() {
+    public final Long getIndividualTaxNumber() {
 	return individualTaxNumber;
     }
 
     public final void
-	    setIndividualTaxNumber(final Integer newIndividualTaxNumber) {
+	    setIndividualTaxNumber(final Long newIndividualTaxNumber) {
 	this.individualTaxNumber = newIndividualTaxNumber;
     }
 
