@@ -53,6 +53,6 @@ public class BaseEntityListener {
 
     private User getUser() {
 	return SecurityContext.USER_DAO.get().findUserByEmail(
-		SecurityContext.CURRENT_USER.get().getUsername());
+		SecurityContext.CURRENT_USER_MAIL.get());
     }
 }

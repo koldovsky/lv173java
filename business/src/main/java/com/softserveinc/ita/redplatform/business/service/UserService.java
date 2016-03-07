@@ -130,11 +130,10 @@ public class UserService {
 
     /**
      * Set logged user to ThreadLocal.
-     * @param principal user
+     * @param email email
      */
-    public void setLoggedUser(
-	    final org.springframework.security.core.userdetails.User principal) {
-	SecurityContext.CURRENT_USER.set(principal);
+    public void setLoggedUser(final String email) {
+	SecurityContext.CURRENT_USER_MAIL.set(email);
 	SecurityContext.USER_DAO.set(userDao);
     }
     

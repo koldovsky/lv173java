@@ -14,7 +14,6 @@ import
 org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 
 import com.softserveinc.ita.redplatform.business.service.UserService;
 
@@ -48,7 +47,7 @@ public class UserFilter implements Filter {
 	Authentication auth = SecurityContextHolder.getContext()
 					.getAuthentication();
 	if (!(auth instanceof AnonymousAuthenticationToken)) {
-	    userService.setLoggedUser((User) auth.getPrincipal());
+	    userService.setLoggedUser(auth.getName());
 	}
 	
 	chain.doFilter(req, res);

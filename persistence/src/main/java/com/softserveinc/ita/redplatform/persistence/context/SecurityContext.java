@@ -1,8 +1,6 @@
 package com.softserveinc.ita.redplatform.persistence.context;
 
 
-import org.springframework.security.core.userdetails.User;
-
 import com.softserveinc.ita.redplatform.persistence.dao.UserDao;
 
 
@@ -17,8 +15,8 @@ public final class SecurityContext {
     /**
      * ThreadLocal current user.
      */
-    public static final ThreadLocal<User> CURRENT_USER = 
-	    				new ThreadLocal<User>();
+    public static final ThreadLocal<String> CURRENT_USER_MAIL = 
+	    				new ThreadLocal<String>();
     /**
      * ThreadLocal user Dao.
      */
