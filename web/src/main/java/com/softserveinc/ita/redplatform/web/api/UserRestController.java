@@ -89,4 +89,18 @@ public class UserRestController {
 		dtResp, HttpStatus.OK);
 
     }
+    
+    /**
+     * Get current user mail.
+     * @return current user mail.
+     */
+    @RequestMapping(value = "api/currentusermail")
+    public final ResponseEntity<String> getCurrentUserMail() {
+	return new ResponseEntity<String>(
+		SecurityContextHolder
+		.getContext()
+		.getAuthentication()
+		.getName(),
+		HttpStatus.OK);
+    }
 }
