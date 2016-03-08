@@ -1,6 +1,6 @@
 // When the browser is ready...
 $(document).ready(function() {
-	$('.alert .close').on('click', function(e) {
+	$('.alert .close').on('click', function() {
 	    $(this).parent().hide();
 	});
 
@@ -34,7 +34,6 @@ $(document).ready(function() {
 	});
 	$('#adminregisterform').submit(function(event) {
 		if ($('#adminregisterform').valid()) {
-			hideMessages();
 
 			var data = {
 				email : $('#email').val()

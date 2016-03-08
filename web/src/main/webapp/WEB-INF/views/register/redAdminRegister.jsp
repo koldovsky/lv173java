@@ -14,9 +14,11 @@
 	<jsp:include page="../utils/navbar.jsp"></jsp:include>
 	<div class="container">
 		<h1 class="center">New real estate development administrator</h1>
-		<div id="error" class="alert alert-danger" role="alert">Failed
-			to add new administrator.</div>
-		<div id="success" class="alert alert-success" role="alert">
+		<div id="error" class="alert alert-danger" role="alert"><span
+					class="close glyphicon glyphicon-remove text-danger" aria-hidden="true"></span>
+					Failed to add new administrator.</div>
+		<div id="success" class="alert alert-success" role="alert"><span
+					class="close glyphicon glyphicon-remove text-danger" aria-hidden="true"></span>
 			Administrator has been registered successfully.</div>
 		<jsp:include page="../utils/redAdminForm.jsp"></jsp:include>
 	</div>

@@ -5,6 +5,10 @@ $(function() {
 		  $("body").css("padding-top", $(".navbar-fixed-top").height());
 		})();
 	
+	$('.alert .close').click(function() {
+	    $(this).parent().hide();
+	});
+	
 	var path = $(location).attr('pathname');
 	
 	$.validator.addMethod('fieldRequired', 

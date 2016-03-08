@@ -35,10 +35,12 @@
 
 		<h1 class="center">New order</h1>
 
-		<div id="error" class="alert alert-danger" role="alert">Failed
-			to add the order.</div>
-		<div id="success" class="alert alert-success" role="alert">The
-			order has been added successfully.</div>
+		<div id="error" class="alert alert-danger" role="alert"><span
+					class="close glyphicon glyphicon-remove text-danger" aria-hidden="true"></span>
+					Failed to add the order.</div>
+		<div id="success" class="alert alert-success" role="alert"><span
+					class="close glyphicon glyphicon-remove text-danger" aria-hidden="true"></span>
+					The order has been added successfully.</div>
 		<div class="text-danger">
 			<p class="center">
 				<b>Fields marked with <span

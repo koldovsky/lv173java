@@ -1,5 +1,8 @@
 $(function() {
-
+	$('.alert .close').click(function() {
+	    $(this).parent().hide();
+	});
+	
 	$('#formContainer form:first-child').fadeIn('slow');
 
 	function changeForms(button) {
