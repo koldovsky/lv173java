@@ -1,4 +1,4 @@
-<form id="installmentform" class="col-sm-offset-2 col-sm-8">
+<form id="installmentform" class="orderingUnit col-sm-offset-2 col-sm-8">
 	<div class="header">
 		<h2 class="center">Installments</h2>
 	</div>
@@ -11,8 +11,8 @@
 				To user <span class="caret"></span>
 			</button>
 			<ul class="dropdown-menu">
-				<li class="next">New user</li>
-				<li class="next">Existing user</li>
+				<li id="toNewCustomer" class="next">New user</li>
+				<li id="toCustomerList" class="next">Existing user</li>
 			</ul>
 		</div>
 	</div>

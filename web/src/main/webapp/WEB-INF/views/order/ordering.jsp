@@ -55,6 +55,7 @@
 			<jsp:include page="orderFieldset.jsp"></jsp:include>
 			<jsp:include page="installmentFieldset.jsp"></jsp:include>
 			<jsp:include page="customerFieldset.jsp"></jsp:include>
+			<jsp:include page="customerList.jsp"></jsp:include>
 		</div>
 	</div>
 

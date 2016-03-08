@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	var table = $('#table').DataTable({
+	table = $('#table').DataTable({
 		processing:true,
 		serverSide:true,
 		ajax : {
@@ -24,8 +24,8 @@ $(document).ready(function() {
 				
                 "orderable":      false,
                 "data":           null,
-                "defaultContent": '<button id="idButton" ' +
-					'class="btn btn-primary">Pick user</button>'
+                "defaultContent": '<button type="button" id="idButton" ' +
+					'class="submitButton btn btn-primary col-sm-offset-2 col-sm-3">Pick user</button>'
              }
 			
 		]
@@ -33,10 +33,6 @@ $(document).ready(function() {
 	
 	// Add event listener for opening and closing details
     $('#table tbody').on('click', '#idButton', function () {
-        var tr = $(this).closest('tr');
-        var row = table.row( tr );
-        var id = row['data']().id;
-        //TODO: connect id with submit method.
- 
+        $('#idButton').trigger('submit');
     } );
 });

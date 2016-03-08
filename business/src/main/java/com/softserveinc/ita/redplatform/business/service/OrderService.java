@@ -12,7 +12,6 @@ import com.softserveinc.ita.redplatform.common.dto.OrderDTO;
 import com.softserveinc.ita.redplatform.common.entity.CustomerUser;
 import com.softserveinc.ita.redplatform.common.entity.Installment;
 import com.softserveinc.ita.redplatform.common.entity.Order;
-import com.softserveinc.ita.redplatform.common.mapper.InstallmentMapper;
 import com.softserveinc.ita.redplatform.common.mapper.OrderMapper;
 import com.softserveinc.ita.redplatform.persistence.dao.CustomerUserDao;
 import com.softserveinc.ita.redplatform.persistence.dao.OrderDao;
@@ -47,10 +46,6 @@ public class OrderService {
     /** The mapper. */
     @Autowired
     private OrderMapper mapper;
-
-    /** The installment mapper. */
-    @Autowired
-    private InstallmentMapper installmentMapper;
 
     /**
      * Creates the order.
