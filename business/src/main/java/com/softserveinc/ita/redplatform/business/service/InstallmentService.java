@@ -1,17 +1,15 @@
 package com.softserveinc.ita.redplatform.business.service;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.softserveinc.ita.redplatform.common.dto.InstallmentDTO;
 import com.softserveinc.ita.redplatform.common.entity.Installment;
 import com.softserveinc.ita.redplatform.common.entity.Order;
 import com.softserveinc.ita.redplatform.common.mapper.InstallmentMapper;
-import com.softserveinc.ita.redplatform.persistence.dao.InstallmentDao;
-import com.softserveinc.ita.redplatform.persistence.dao.OrderDao;
 
 /**
  * The class InstallmentService.
@@ -21,34 +19,27 @@ import com.softserveinc.ita.redplatform.persistence.dao.OrderDao;
 @Service
 public class InstallmentService {
 
-    /** The installment dao. */
-    @Autowired
-    private InstallmentDao installmentDao;
-
-    /** The order dao. */
-    @Autowired
-    private OrderDao orderDao;
-
     /** The mapper. */
     @Autowired
     private InstallmentMapper installmentMapper;
-
+    
     /**
-     * Adds the installment.
+     * Prepare installment list for order.
      *
-     * @param installmentList the installment list
-     * @param orderId the order id
+     * @param dtos the list of installment DTOs
+     * @param order the order
+     * @return the list of installments
      */
-    @Transactional
-    public void addInstallment(final List<InstallmentDTO> installmentList, 
-	    final Long orderId) {
+    public List<Installment> 
+    	prepareInstallments(final List<InstallmentDTO> dtos,
+	    final Order order) {
+	List<Installment> installments = new LinkedList<>();
 	Installment installment = null;
-	Order order = null;
-	for (InstallmentDTO dto : installmentList) {	    
+	for (InstallmentDTO dto : dtos) {
 	    installment = installmentMapper.toEntity(dto);
-	    order = orderDao.findById(orderId);
 	    installment.setOrder(order);
-	    installmentDao.save(installment);
+	    installments.add(installment);
 	}
+	return installments;
     }
 }

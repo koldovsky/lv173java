@@ -1,6 +1,5 @@
 package com.softserveinc.ita.redplatform.business.service;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.softserveinc.ita.redplatform.common.dto.CustomerUserDTO;
-import com.softserveinc.ita.redplatform.common.dto.InstallmentDTO;
 import com.softserveinc.ita.redplatform.common.dto.OrderDTO;
 import com.softserveinc.ita.redplatform.common.entity.CustomerUser;
 import com.softserveinc.ita.redplatform.common.entity.Installment;
@@ -35,6 +33,10 @@ public class OrderService {
     /** The customer user service. */
     @Autowired
     private CustomerUserService customerUserService;
+    
+    /** The installment service. */
+    @Autowired
+    private InstallmentService installmentService;
 
     /**
      * CutomerUser Dao.
@@ -62,8 +64,8 @@ public class OrderService {
 	Order order = mapper.toEntity(orderDTO);
 	CustomerUser customer = prepareCustomer(orderDTO.getCustomer());
 	order.setCustomerUser(customer);
-	List<Installment> installments = 
-		prepareInstallments(orderDTO.getInstallment(), order);
+	List<Installment> installments = installmentService
+		.prepareInstallments(orderDTO.getInstallment(), order);
 	order.setInstallments(installments);
 	orderDao.save(order);
 	return mapper.toDto(order);
@@ -85,26 +87,6 @@ public class OrderService {
 		    .registerPreprocess(customerDTO);
 	}
 	return customer;
-    }
-    
-    /**
-     * Prepare installments.
-     *
-     * @param dtos the list of installment DTOs
-     * @param order the order
-     * @return the list of installments
-     */
-    private List<Installment> 
-    	prepareInstallments(final List<InstallmentDTO> dtos,
-	    final Order order) {
-	List<Installment> installments = new LinkedList<>();
-	Installment installment = null;
-	for (InstallmentDTO dto : dtos) {
-	    installment = installmentMapper.toEntity(dto);
-	    installment.setOrder(order);
-	    installments.add(installment);
-	}
-	return installments;
     }
 
     /**
