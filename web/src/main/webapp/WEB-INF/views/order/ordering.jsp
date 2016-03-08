@@ -12,8 +12,10 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/lib/jquery-ui/jquery-ui.structure.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/lib/jquery-ui/jquery-ui.theme.css">
 <link href="${pageContext.request.contextPath}/resources/css/lib/dataTables/jquery.dataTables-1.10.11.min.css" rel="stylesheet">
+<script src="${pageContext.request.contextPath}/resources/js/lib/moment/moment-2.11.2.min.js"></script>
 
 <script src="${pageContext.request.contextPath}/resources/js/order/installment.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/order/usersfororders.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/order/calender.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/order/common.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/order/orderSubmission.js"></script>
