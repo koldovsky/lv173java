@@ -1,16 +1,9 @@
 package com.softserveinc.ita.redplatform.web.controller;
 
-import java.util.Collection;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -83,28 +76,5 @@ public class CustomerUserListController {
 
     }
 
-    /**
-     * Users page mapping.
-     * 
-     * @return users page
-     */
-    @SuppressWarnings("unchecked")
-    @RequestMapping(value = "/chooseuserfororder", method = RequestMethod.GET)
-    public final String getUsersPage() {
-	Authentication auth =
-		SecurityContextHolder.getContext().getAuthentication();
-	if (auth instanceof AnonymousAuthenticationToken) {
-	    return "common/login";
-	} else {
-	    Collection<GrantedAuthority> authorities =
-		    (Collection<GrantedAuthority>) SecurityContextHolder
-			    .getContext().getAuthentication().getAuthorities();
-	    if (authorities
-		    .contains(new SimpleGrantedAuthority("ROLE_REDADMIN"))) {
-		return "usersfororders";
-	    }
-	}
-	return "common/index";
-    }
 
 }

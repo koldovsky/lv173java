@@ -12,7 +12,7 @@ var ruleMoneyAmount = {
 };
 var ruleMailAvailability = {
 		params: {
-			url: redirecturl + '/checkmail',
+			url: context + '/checkmail',
 			type: 'GET'
 		},
 		message: 'This e-mail is already taken.'

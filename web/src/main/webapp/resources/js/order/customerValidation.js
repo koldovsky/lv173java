@@ -56,7 +56,7 @@ $(function() {
 				maxlength : 60,
 				validMail : true,
 				remote : {
-					url : 'checkmail',
+					url : context + '/checkmail',
 					type : 'GET'
 				}
 			},

@@ -44,7 +44,7 @@ $(function() {
 
 			$.ajax({
 				type : 'POST',
-				url : redirecturl + '/api/order/',
+				url : context + '/api/order/',
 				data : postData,
 				contentType : 'application/json; charset=utf-8',
 				success : function(responseData, textStatus, jqXHR) {
