@@ -32,13 +32,12 @@
 						<a href="${pageContext.request.contextPath}/login">Login</a>
 					</sec:authorize> <sec:authorize access="isAuthenticated()">
 						<a id="navbarMail" href="${pageContext.request.contextPath}/cabinet">Email</a>
-							<ul class="dropdown-menu">
-								<li><a href="${pageContext.request.contextPath}/cabinet">Cabinet</a>
-								</li>
-								<li><a href="${pageContext.request.contextPath}/logout">Logout</a>
-								</li>
-							</ul>
-						</a>
+						<ul class="dropdown-menu">
+							<li><a href="${pageContext.request.contextPath}/cabinet">Cabinet</a>
+							</li>
+							<li><a href="${pageContext.request.contextPath}/logout">Logout</a>
+							</li>
+						</ul>
 					</sec:authorize>
 				</li>
 			</ul>

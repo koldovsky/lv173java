@@ -4,7 +4,7 @@ $(document).ready( function(){
         $(this).rules('remove', 'remote');
 	});
 	
-	$('#submitButton').prop('class','btn btn-primary');
+	$('#submitButton-1').prop('class','btn btn-primary');
 	
 	var href = $(location).attr('href');
 	var id = href.substr(href.lastIndexOf('/') + 1);

@@ -17,6 +17,7 @@
 		<intercept-url pattern="/users" access="hasAnyRole('ROLE_REDADMIN', 'ROLE_ADMIN')" />
 		<intercept-url pattern="/customer/**" access="hasRole('ROLE_USER')" />
 		<intercept-url pattern="/order*" access="hasRole('ROLE_REDADMIN')" />
+		<intercept-url pattern="/cabinet" access="isAuthenticated()" />
 
 		<!-- access denied page -->
 		<access-denied-handler error-page="/index" />
