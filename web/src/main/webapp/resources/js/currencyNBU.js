@@ -5,11 +5,23 @@ $(function() {
             amount: {
 				required: true,
 				amount: true
+			},
+			from:{
+				required: true
+			},
+			to:{
+				required: true
 			}
         },
         messages: {
 			amount: {
 				required: "Please provide an amount"
+			},
+			from: {
+				required: "Please fill the date"
+			},
+			to: {
+				required: "Please fill the date"
 			}
         }
     });
