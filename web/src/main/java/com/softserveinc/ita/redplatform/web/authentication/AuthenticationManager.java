@@ -71,11 +71,11 @@ public class AuthenticationManager implements AuthenticationSuccessHandler {
 	for (GrantedAuthority grantedAuthority : authorities) {
 	    if (grantedAuthority.getAuthority().equals("ROLE_USER")) {
 		return "/index";
-	    } else if (grantedAuthority.getAuthority()
+	    } else if (grantedAuthority.getAuthority()//TODO: remove this checking
 		    .equals("ROLE_REDADMIN")) {
-		return "/redadmincabinet";
+		return "/cabinet";
 	    } else if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
-		return "/adminregister";
+		return "/cabinet";
 	    }
 	}
 	throw new IllegalStateException();
