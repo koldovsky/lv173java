@@ -4,6 +4,7 @@ package com.softserveinc.ita.redplatform.common.entity;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,7 +31,7 @@ public abstract class BaseEntity {
   /**
    * Many to one mapping.
    */
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "createdById", updatable = false)
   private User createdBy;
 
@@ -43,7 +44,7 @@ public abstract class BaseEntity {
   /**
   * Many to one mapping.
   */
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "updatedById")
   private User updatedBy;
 
