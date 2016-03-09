@@ -1,11 +1,18 @@
 package com.softserveinc.ita.redplatform.web.api;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,20 +53,33 @@ public class CurrencyRestController {
     /**
      * Get agency by id to edit.
      * 
-     * @param id
-     *            id
+     * @param fromDate
+     *            fromDate
      * @return ResponseEntity ResponseEntity
+     * @throws ParseException 
      */
-    @RequestMapping(value = "/api/currency/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/currency/{fromDate}", 
+	    method = RequestMethod.GET)
     public final ResponseEntity<CurrencyRate> getCurrency(
-	    @PathVariable("id") final long id) {
-
-	CurrencyRate currencyRate = currencyRateService.findCurrencyById(id);
+	    @PathVariable("fromDate") final Date fromDate) throws ParseException {
+	CurrencyRate currencyRate = 
+		currencyRateService.findCurrencyByDate(fromDate);
 	if (currencyRate == null) {
 	    LOGGER.info("currency not found");
 	    return new ResponseEntity<CurrencyRate>(HttpStatus.NOT_FOUND);
 	}
 	return new ResponseEntity<CurrencyRate>(currencyRate, HttpStatus.OK);
+    }
+    
+    /**
+     * 
+     * @param binder binder
+     */
+    @InitBinder
+    public final void initBinder(final WebDataBinder binder) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        binder.registerCustomEditor(Date.class, 
+        	new CustomDateEditor(dateFormat, false));
     }
 
     /**
