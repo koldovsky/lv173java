@@ -2,6 +2,14 @@
 	<div class="header">
 		<h2 class="center">Customer</h2>
 	</div>
+	<div class="text-danger">
+		<p class="center">
+			<b>Fields marked with <span
+				class="glyphicon glyphicon-asterisk text-danger" aria-hidden="true">
+			</span> are required.
+			</b>
+		</p>
+	</div>
 	<fieldset id="generalInfo">
 		<div class="row">
 			<div class="col-md-6">

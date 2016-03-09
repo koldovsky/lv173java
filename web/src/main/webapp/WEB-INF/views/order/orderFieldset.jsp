@@ -1,4 +1,12 @@
 <form id="orderform" class="orderingUnit">
+	<div class="text-danger">
+		<p class="center">
+			<b>Fields marked with <span
+				class="glyphicon glyphicon-asterisk text-danger" aria-hidden="true">
+			</span> are required.
+			</b>
+		</p>
+	</div>
 	<fieldset id="generalInfo">
 		<div class="row">
 			<div class="col-sm-12">

@@ -41,15 +41,6 @@
 		<div id="success" class="alert alert-success" role="alert"><span
 					class="close glyphicon glyphicon-remove text-danger" aria-hidden="true"></span>
 					The order has been added successfully.</div>
-		<div class="text-danger">
-			<p class="center">
-				<b>Fields marked with <span
-					class="glyphicon glyphicon-asterisk text-danger" aria-hidden="true">
-				</span> are required.
-				</b>
-			</p>
-		</div>
-
 
 		<div id="formContainer">
 			<jsp:include page="orderFieldset.jsp"></jsp:include>
