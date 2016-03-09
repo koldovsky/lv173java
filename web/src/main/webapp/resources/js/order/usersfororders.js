@@ -25,7 +25,7 @@ $(document).ready(function() {
                 "orderable":      false,
                 "data":           null,
                 "defaultContent": '<button type="button" id="idButton" ' +
-					'class="submitButton btn btn-primary col-sm-offset-2 col-sm-3">Pick user</button>'
+					'class="submitButton btn btn-primary">Pick user</button>'
              }
 			
 		]
