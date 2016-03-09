@@ -91,8 +91,7 @@
 
 	<div class="row globalControls">
 		<button type="button"
-			class="btn btn-primary next col-sm-offset-7 col-sm-3">To
-			installments</button>
+			class="btn btn-primary next col-sm-offset-7 col-sm-3">Next</button>
 	</div>
 </form>
 <script

@@ -18,8 +18,7 @@
 		<div class="col-md-12">
 			<div class="row globalControls">
 				<button type="button"
-					class="btn btn-primary prev col-sm-offset-2 col-sm-3">To
-					installments</button>
+					class="btn btn-primary prev col-sm-offset-2 col-sm-3">Prev</button>
 			</div>
 		</div>
 	</div>
