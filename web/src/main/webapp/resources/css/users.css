@@ -2,3 +2,8 @@
 	margin-left: 4%;
 	margin-right: 4%;
 }
+
+#footer{
+	position: fixed;
+	bottom:0px;
+}

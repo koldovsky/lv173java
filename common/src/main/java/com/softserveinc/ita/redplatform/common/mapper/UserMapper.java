@@ -27,6 +27,7 @@ public class UserMapper implements GenericMapper<User, UserDTO> {
 		UserDTO userDTO = new UserDTO();
 		userDTO.setEmail(entity.getEmail());
 		userDTO.setCreatedDate(entity.getCreatedDate());
+		userDTO.setId(entity.getId());
 		if (entity instanceof AdminUser) {
 			userDTO.setName("admin");
 			userDTO.setPhone("none");

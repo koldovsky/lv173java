@@ -94,13 +94,12 @@ public class UserRestController {
      * Get current user mail.
      * @return current user mail.
      */
-    @RequestMapping(value = "api/currentusermail")
-    public final ResponseEntity<String> getCurrentUserMail() {
-	return new ResponseEntity<String>(
+    @RequestMapping(value = "api/currentuser")
+    public final ResponseEntity<UserDTO> getCurrentUserMail() {
+	return new ResponseEntity<UserDTO>(userService.loadUserDTOByEmail(
 		SecurityContextHolder
 		.getContext()
 		.getAuthentication()
-		.getName(),
-		HttpStatus.OK);
+		.getName()), HttpStatus.OK);
     }
 }

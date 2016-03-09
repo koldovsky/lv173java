@@ -31,7 +31,7 @@
 					<sec:authorize access="isAnonymous()">
 						<a href="${pageContext.request.contextPath}/login">Login</a>
 					</sec:authorize> <sec:authorize access="isAuthenticated()">
-						<a id="navbarMail" href="cabinet">Email</a>
+						<a id="navbarMail" href="${pageContext.request.contextPath}/cabinet">Email</a>
 							<ul class="dropdown-menu">
 								<li><a href="${pageContext.request.contextPath}/cabinet">Cabinet</a>
 								</li>

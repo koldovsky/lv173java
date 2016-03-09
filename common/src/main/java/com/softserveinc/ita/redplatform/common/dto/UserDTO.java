@@ -11,6 +11,11 @@ import java.util.Date;
 
 public class UserDTO {
 	
+    	/**
+	 * id.
+	 */
+    	private Long id;
+    	
 	/**
 	 * email.
 	 */
@@ -61,6 +66,14 @@ public class UserDTO {
 
 	public final void setCreatedDate(final Date newCreatedDate) {
 		this.createdDate = newCreatedDate;
+	}
+
+	public final Long getId() {
+	    return id;
+	}
+
+	public final void setId(final Long newId) {
+	    this.id = newId;
 	}
 
 }

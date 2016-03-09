@@ -5,9 +5,9 @@ $(document).ready(function() {
 		  $("body").css("padding-top", $(".navbar-fixed-top").height());
 		})();
 	$.ajax({
-		url: context + '/api/currentusermail',
+		url: context + '/api/currentuser',
 		success : function(responseData, textStatus, jqXHR){
-			$('#navbarMail').html(responseData);
+			$('#navbarMail').html(responseData.email);
 		}
 	});
 });
