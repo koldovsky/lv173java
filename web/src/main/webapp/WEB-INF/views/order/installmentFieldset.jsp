@@ -10,8 +10,8 @@
 				Next<span class="caret"></span>
 			</button>
 			<ul class="dropdown-menu">
-				<li id="toNewCustomer" class="next">New user</li>
-				<li id="toCustomerList" class="next">Existing user</li>
+				<li><a id="toNewCustomer" class="next" href="#">New user</a></li>
+				<li><a id="toCustomerList" class="next" href="#">Existing user</a></li>
 			</ul>
 		</div>
 	</div>
