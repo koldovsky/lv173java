@@ -2,7 +2,10 @@ package com.softserveinc.ita.redplatform.integration;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import org.springframework.stereotype.Service;
 
@@ -28,13 +31,15 @@ public class CurrencyJson {
 	ObjectMapper mapper = new ObjectMapper();
 	double amount = 0;
 	try {
-
-	    // Convert JSON string from file to Object
-	    CurrencyNbuDTO currency = mapper.readValue(
+	    DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+	    Calendar cal = Calendar.getInstance();
+	    String date = dateFormat.format(cal.getTime());
+	    CurrencyNbuDTO [] currency = mapper.readValue(
 		    new URL("http://bank.gov.ua/NBUStatService/v1/statdirectory/exch"
-		    	+ "ange?valcode=USD&date=20160307&json"), CurrencyNbuDTO.class);
+		    	+ "ange?valcode=USD&date=" + date + "&json"), 
+		    	CurrencyNbuDTO[].class);
 	    DecimalFormat format = new DecimalFormat("###.###");
-	    amount = Double.parseDouble(format.format(currency.getRate()));
+	    amount = Double.parseDouble(format.format(currency[0].getRate()));
 	} catch (JsonGenerationException e) {
 	    e.printStackTrace();
 	} catch (JsonMappingException e) {
