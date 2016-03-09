@@ -24,7 +24,7 @@ $(document).ready(function() {
 				
                 "orderable":      false,
                 "data":           null,
-                "defaultContent": '<button type="button" id="idButton" ' +
+                "defaultContent": '<button type="submit" id="idButton" ' +
 					'class="submitButton btn btn-primary">Pick user</button>'
              }
 			
@@ -32,7 +32,7 @@ $(document).ready(function() {
 	});
 	
 	// Add event listener for opening and closing details
-    $('#table tbody').on('click', '#idButton', function () {
-        $('#idButton').trigger('submit');
+    $('#table tbody').on('submit', '#idButton', function () {
+        $('#idButton').trigger('click');
     } );
 });

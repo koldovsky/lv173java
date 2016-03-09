@@ -123,7 +123,7 @@
 					<button type="button" id="installmentsButton"
 						class="btn btn-primary prev col-sm-offset-2 col-sm-3">To
 						installments</button>
-					<button id="submitButton-1" type="submit"
+					<button id="submitButton-1" type="button"
 						class="submitButton btn btn-primary col-sm-offset-2 col-sm-3">Submit</button>
 				</div>
 			</div>

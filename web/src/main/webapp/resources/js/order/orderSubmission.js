@@ -9,7 +9,7 @@ $(function() {
 		return data;
 	}
 
-	$(this).on('submit', '.submitButton', function() {
+	$(this).on('click', '.submitButton', function() {
 		var customer;
 		if ($(this).attr('id') === 'submitButton-1') {
 			if ($('#customerform').valid()) {	
