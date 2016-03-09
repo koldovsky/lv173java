@@ -18,17 +18,7 @@
 			<div class="indexrow">
 				<div class="col-lg-4">
 				<h2>New order creation</h2>
-					<div class="dropdown">
-						<button class="btn btn-primary dropdown-toggle" type="button"
-							data-toggle="dropdown">
-							Create new order
-							<span class="caret"></span>
-						</button>
-						<ul class="dropdown-menu">
-							<li><a href="${pageContext.request.contextPath}/customer">Create new order for new user</a></li>
-							<li><a href="${pageContext.request.contextPath}/chooseuserfororder">Create new order for existing user</a></li>
-						</ul>
-					</div>
+					<a href="${pageContext.request.contextPath}/order" class="btn btn-primary">Create new order</a>
 				</div>
 				<div class="col-lg-4">
 					<h2>View users</h2>

@@ -3,7 +3,7 @@ $(document).ready(function() {
 		processing:true,
 		serverSide:true,
 		ajax : {
-			url : context + '/customeruserlist',
+			url : context + '/api/customeruserlist',
 			dataSrc: 'aaData',
 			dateType:'jsonp',
 			type:'GET'
