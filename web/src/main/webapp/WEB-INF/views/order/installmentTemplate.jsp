@@ -3,7 +3,6 @@
 	<!-- the template used for every fieldset creation -->
 	<div id="template">
 		<div id="fieldset-{0}" class="fields row">
-			<h3 class="center">Installment</h3>
 			<div id="fields-container-{0}" class="fields-container row">
 				<div class="col-sm-5 form-group">
 					<label class="control-label" for="date-{0}"> <span
