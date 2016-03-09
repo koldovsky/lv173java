@@ -22,6 +22,10 @@ $(function() {
 	$.validator.addMethod('validGeographicalName', function(value, element) {
 		return ruleGeographicalName.regexp.test(value);
 	}, ruleGeographicalName.message);
+	
+	$.validator.addMethod('validRegion', function(value, element) {
+		return this.optional(element) || ruleGeographicalName.regexp.test(value);
+	}, ruleGeographicalName.message);
 
 	$.validator.addMethod('validPostalCode', function(value, element) {
 		return rulePostalCode.regexp.test(value);
@@ -65,7 +69,7 @@ $(function() {
 				maxlength : 8,
 				validPassport : true
 			},
-			individaulTaxNumber : {
+			individualTaxNumber : {
 				required : true,
 				minlength : 10,
 				maxlength : 10,
@@ -77,7 +81,7 @@ $(function() {
 				minlength : 2
 			},
 			region : {
-				validGeographicalName : true,
+				validRegion : true,
 				minlength : 2
 			},
 			postalCode : {

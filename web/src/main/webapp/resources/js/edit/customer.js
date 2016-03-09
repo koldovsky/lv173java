@@ -47,7 +47,7 @@ $(document).ready( function(){
 		}
 	});
 	
-	$('#customerform').submit(function(event) {
+	$(this).on('click', '#submitButton-1', function(event) {
 		if ($('#customerform').valid()) {
 			var address = {
 				id : addressId,

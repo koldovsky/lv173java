@@ -132,13 +132,16 @@ public class CustomerUserService extends AbstractUserService {
     
     /**
      * Update new customer user.
-     * @param customer user dto
+     * @param customerDTO user dto
      */
     @Transactional
     @Secured("ROLE_USER")
-    public void update(final CustomerUserDTO customer) {
-	customerUserDao.updateCustomerFields(
-		customerUserMapper.toEntity(customer));
+    public void update(final CustomerUserDTO customerDTO) {
+	CustomerUser entity = customerUserDao.findById(customerDTO.getId());
+	CustomerUser customer = customerUserMapper.toEntity(customerDTO);
+	customer.setPassword(entity.getPassword());
+	customer.setEmail(entity.getEmail());
+	customerUserDao.update(customer);
     }
     
     /**
