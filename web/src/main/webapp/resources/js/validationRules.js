@@ -7,7 +7,7 @@ var ruleUserName = {
 		message: 'Name should be correct.'
 };
 var ruleMoneyAmount = {
-		regexp : /^[1-9]\d*(?:\.\d\d)?$/,
+		regexp : /^[1-9]\d*(?:\.\d{1,2})?$/,
 		message: 'Amount should be correct.'
 };
 var ruleMailAvailability = {
