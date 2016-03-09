@@ -41,17 +41,12 @@ $(document).ready( function(){
 			$.validator.addMethod('checkEmail', function(value, element){
 				return $('#email').val() === customerEmail;
 			}, 'Email is \"' + customerEmail + '\", it is not allowed to change it');
-			
 		},
-		error : function (jqHXR, textStatus, errorThrown) {
-			if (jqHXR.status === 404) {
-				$('#error').html('Customer not found.');
-			}
-			$('#error').show();
-			$('#success').hide();
+		error : function(jqHXR, textStatus, errorThrown) {
+			$('#content').html(jqHXR.responseText);
 		}
 	});
-	
+
 	$('#mail').each(function(){
 		$(this).rules('add', {checkEmail : true});
 	});

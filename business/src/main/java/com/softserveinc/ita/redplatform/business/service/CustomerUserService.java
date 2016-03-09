@@ -135,9 +135,23 @@ public class CustomerUserService extends AbstractUserService {
      * @param customer user dto
      */
     @Transactional
-    @Secured("ROLE_REDADMIN")
-    public void update(final Object customer) {
-	super.update(customer);
+    @Secured("ROLE_USER")
+    public void update(final CustomerUserDTO customer) {
+	customerUserDao.updateCustomerFields(
+		customerUserMapper.toEntity(customer));
+    }
+    
+    /**
+     * Retrieve customer user dto by id.
+     *
+     * @param id
+     *            the id
+     * @return the customer user dto
+     */
+    @Transactional
+    @Secured("ROLE_USER")
+    public Object retrieve(final Long id) {
+	return super.retrieve(id);
     }
 
 }

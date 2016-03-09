@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.softserveinc.ita.redplatform.business.service.CustomerUserService;
 import com.softserveinc.ita.redplatform.common.dto.CustomerUserDTO;
 import com.softserveinc.ita.redplatform.common.predicate.DataTablePredicate;
+import com.softserveinc.ita.redplatform.web.controller
+.ResourceNotFoundException;
 import com.softserveinc.ita.redplatform.web.datatables.DataTablesResponse;
 
 /**
@@ -60,9 +62,11 @@ public class CustomerRestController {
     @RequestMapping(value = "api/customer/{id}", method = RequestMethod.GET)
     public final ResponseEntity<CustomerUserDTO>
 	    getCustomer(@PathVariable final Long id) {
-	CustomerUserDTO customer = customerUserService.getUserDTOById(id);
-	if (customer == null) {
-	    return new ResponseEntity<CustomerUserDTO>(HttpStatus.NOT_FOUND);
+	CustomerUserDTO customer = (CustomerUserDTO) 
+		customerUserService.retrieve(id);
+	if (customer == null || (!customer.getEmail().equals(
+		SecurityContextHolder.getContext().getAuthentication().getName()))) {
+	    throw new ResourceNotFoundException();
 	}
 	return new ResponseEntity<CustomerUserDTO>(customer, HttpStatus.OK);
     }
@@ -72,16 +76,28 @@ public class CustomerRestController {
      * 
      * @param id
      *            customer id
-     * @param customer
+     * @param customerDTO
      *            customer user dto
      * @return status
      */
     @RequestMapping(value = "api/customer/{id}", method = RequestMethod.PUT)
     public final ResponseEntity<CustomerUserDTO> updateCustomer(
 	    @PathVariable final Long id,
-	    @RequestBody final CustomerUserDTO customer) {
-	customerUserService.update(customer);
-	return new ResponseEntity<CustomerUserDTO>(customer, HttpStatus.OK);
+	    @RequestBody final CustomerUserDTO customerDTO) {
+	CustomerUserDTO customer = (CustomerUserDTO)
+		customerUserService.retrieve(customerDTO.getId());
+	String principalName = SecurityContextHolder
+		.getContext()
+		.getAuthentication()
+		.getName(); 
+	if (customerDTO.getEmail().equals(principalName) 
+		&& customer.getEmail().equals(principalName)
+		&& customer.getAddress().getId()
+		.equals(customerDTO.getAddress().getId())) {
+		customerUserService.update(customerDTO);
+		return new ResponseEntity<CustomerUserDTO>(customer, HttpStatus.OK);   
+	}
+	return new ResponseEntity<CustomerUserDTO>(HttpStatus.FORBIDDEN);
     }
 
     /**

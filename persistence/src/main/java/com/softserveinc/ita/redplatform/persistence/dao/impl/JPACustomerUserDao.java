@@ -97,4 +97,18 @@ public class JPACustomerUserDao extends JPAGenericDao<CustomerUser, Long>
 		.getSingleResult();
     }
     
+    /**
+     * Update customer user without updating email and password.
+     * @param customer user
+     * @return customer
+     */
+    public final CustomerUser updateCustomerFields(
+	    final CustomerUser customer) {
+	CustomerUser entity = findById(customer.getId());
+	customer.setEmail(entity.getEmail());
+	customer.setPassword(entity.getPassword());
+	update(customer);
+	return customer;
+    }
+    
 }

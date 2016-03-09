@@ -15,7 +15,7 @@
 		<intercept-url pattern="/checkUnique" access="hasAnyRole('ROLE_REDADMIN', 'ROLE_ADMIN')" />
 		<intercept-url pattern="/currency" access="hasAnyRole('ROLE_REDADMIN', 'ROLE_ADMIN')" />
 		<intercept-url pattern="/users" access="hasAnyRole('ROLE_REDADMIN', 'ROLE_ADMIN')" />
-		<intercept-url pattern="/customer/**" access="hasRole('ROLE_REDADMIN')" />
+		<intercept-url pattern="/customer/**" access="hasRole('ROLE_USER')" />
 		<intercept-url pattern="/order*" access="hasRole('ROLE_REDADMIN')" />
 
 		<!-- access denied page -->
