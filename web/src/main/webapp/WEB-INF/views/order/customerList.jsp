@@ -1,4 +1,4 @@
-<form id="customerlist">
+<form id="customerlist" class="orderingUnit">
 	<div class="header">
 		<h2 class="center">List of customers</h2>
 	</div>
@@ -14,4 +14,13 @@
 			</tr>
 		</thead>
 	</table>
+	<div class="row">
+		<div class="col-md-12">
+			<div class="row globalControls">
+				<button type="button"
+					class="btn btn-primary prev col-sm-offset-2 col-sm-3">To
+					installments</button>
+			</div>
+		</div>
+	</div>
 </form>

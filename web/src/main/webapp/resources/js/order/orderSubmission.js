@@ -1,22 +1,28 @@
 $(function() {
+	
+	function collectInputsFromFieldset(fieldset) {
+		var data = {};
+		var inputs = fieldset.find('input');
+		inputs.each(function() {
+			data[this.name] = $(this).val();
+		});
+		return data;
+	}
 
-	$('#submitButton').click(function() {
-		if ($('#customerform').valid()) {
-			
-			function collectInputsFromFieldset(fieldset) {
-				var data = {};
-				var inputs = fieldset.find('input');
-				inputs.each(function() {
-					data[this.name] = $(this).val();
-				});
-				return data;
-			}
-			
-			function collectCustomerData() {
-				var customer = collectInputsFromFieldset($('#customerform #generalInfo'));
+	$(this).on('submit', '.submitButton', function() {
+		var customer;
+		if ($(this).attr('id') === 'submitButton-1') {
+			if ($('#customerform').valid()) {	
+				customer = collectInputsFromFieldset($('#customerform #generalInfo'));
 				customer.address = collectInputsFromFieldset($('#customerform #address'));
-				return customer;
+			} else {
+				return;
 			}
+		} else {
+			var tr = $(this).closest('tr');
+			var row = table.row( tr );
+			customer = row['data']();
+		}
 
 			function collectInstallmentsData() {
 				var installments = [];
@@ -35,7 +41,7 @@ $(function() {
 				var order = collectInputsFromFieldset($('#orderform #generalInfo'));
 				order.description = $('#orderform').find('#description').val();
 				order.address = collectInputsFromFieldset($('#orderform #address'));
-				order.customer = collectCustomerData();
+				order.customer = customer;
 				order.installment = collectInstallmentsData();
 				return order;
 			}
@@ -62,6 +68,5 @@ $(function() {
 				}
 			});
 			return false;
-		}
 	});
 });
