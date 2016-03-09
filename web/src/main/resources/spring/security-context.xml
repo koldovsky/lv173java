@@ -8,14 +8,15 @@
 	<!-- enable use-expressions -->
 	<http auto-config="true" use-expressions="true">
 	
-		<intercept-url pattern="/adminregister" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/adminregister*" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/agency/**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_REDADMIN')" />
 		<intercept-url pattern="/redadmin" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/api/**" access="hasAnyRole('ROLE_REDADMIN', 'ROLE_ADMIN')" />
+		<intercept-url pattern="/api/**" access="isAuthenticated()" />
 		<intercept-url pattern="/checkUnique" access="hasAnyRole('ROLE_REDADMIN', 'ROLE_ADMIN')" />
 		<intercept-url pattern="/currency" access="hasAnyRole('ROLE_REDADMIN', 'ROLE_ADMIN')" />
 		<intercept-url pattern="/users" access="hasAnyRole('ROLE_REDADMIN', 'ROLE_ADMIN')" />
-		<intercept-url pattern="/customer/**" access="hasRole('ROLE_REDADMIN')" />
+		<intercept-url pattern="/customer/**" access="hasRole('ROLE_USER')" />
+		<intercept-url pattern="/order*" access="hasRole('ROLE_REDADMIN')" />
 
 		<!-- access denied page -->
 		<access-denied-handler error-page="/index" />
@@ -31,7 +32,7 @@
 <!-- default-target-url="/index" -->
 
 	<beans:bean id="authenticationManager"
-        class="com.softserveinc.ita.redplatform.web.filters.AuthenticationManager" />
+        class="com.softserveinc.ita.redplatform.web.authentication.AuthenticationManager" />
 
 	<beans:bean id="userDetailsServiceImplementation"
 		class="com.softserveinc.ita.redplatform.business.service.UserDetailsServiceImplementation">

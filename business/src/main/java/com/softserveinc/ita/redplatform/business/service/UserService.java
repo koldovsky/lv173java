@@ -137,4 +137,13 @@ public class UserService {
 	SecurityContext.USER_DAO.set(userDao);
     }
     
+    /**
+     * load user by email.
+     * @param email user email
+     * @return User DTO
+     */
+    public UserDTO loadUserDTOByEmail(final String email) {
+	return userMapper.toDto(loadUserByEmail(email));
+    }
+    
 }

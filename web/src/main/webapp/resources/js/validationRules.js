@@ -12,7 +12,7 @@ var ruleMoneyAmount = {
 };
 var ruleMailAvailability = {
 		params: {
-			url: redirecturl + '/checkmail',
+			url: context + '/checkmail',
 			type: 'GET'
 		},
 		message: 'This e-mail is already taken.'
@@ -25,4 +25,24 @@ var rulePhoneUkraine = {
 };
 var ruleFieldRequired = {
 		message: 'Field is required'
+};
+var rulePassport = {
+		regexp : /^[ABCEHIKMOPTX]{2}\d{6}$/,
+		message: 'Passport should be valid.'
+};
+var ruleIndividualTaxNumber = {
+		regexp : /^\d{10}$/,
+		message: 'Individual Tax Number should be valid.'
+};
+var ruleGeographicalName = {
+		regexp : /^(?=.*[a-zA-Z])[a-zA-Z.\-,\' ]+$/,
+		message: 'Geographical name should be correct.'
+};
+var rulePostalCode = {
+		regexp : /^(?=.*[0-9])[a-zA-Z0-9]{3,10}$/,
+		message: 'Postal code should be valid.'
+};
+var ruleAdditional = {
+		regexp : /^(?=.*[a-zA-Z])[a-zA-Z0-9.:\-'\\\/,\s\[\]]+$/,
+		message: 'Address should be valid.'
 };

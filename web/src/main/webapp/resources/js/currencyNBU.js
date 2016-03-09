@@ -4,14 +4,12 @@ $(function() {
         	errorClass: 'text-danger',
             amount: {
 				required: true,
-				minlength: 1,
 				amount: true
 			}
         },
         messages: {
 			amount: {
-				required: "Please provide an amount",
-				minlength: "Amount must be at least 1 character long"
+				required: "Please provide an amount"
 			}
         }
     });

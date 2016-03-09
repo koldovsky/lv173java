@@ -1,8 +1,10 @@
 $(document).ready( function(){
-    
+	
 	$('#email').each(function () {
         $(this).rules('remove', 'remote');
-    });
+	});
+	
+	$('#submitButton').prop('class','btn btn-primary');
 	
 	var href = $(location).attr('href');
 	var id = href.substr(href.lastIndexOf('/') + 1);
@@ -12,6 +14,8 @@ $(document).ready( function(){
 	
 	$('#email').prop('readonly', true);
 	$('#email').prop('tabindex', -1);
+	
+	$('#installmentsButton').remove();
 	
 	var customerEmail;
 	var customerId;
@@ -27,44 +31,31 @@ $(document).ready( function(){
 			$('#email').val(responseData.email);
 			$('#phone').val(responseData.phone);
 			$('#passport').val(responseData.passport);
-			$('#taxNumber').val(responseData.individualTaxNumber);
+			$('#individualTaxNumber').val(responseData.individualTaxNumber);
 			$('#country').val(responseData.address.country);
 			$('#region').val(responseData.address.region);
 			$('#postalCode').val(responseData.address.postalCode);
 			$('#locality').val(responseData.address.locality);
-			$('#address').val(responseData.address.additional);
+			$('#additional').val(responseData.address.additional);
 			
 			customerEmail = responseData.email;
 			customerId = responseData.id;
 			addressId = responseData.address.id;
-			
-			$.validator.addMethod('checkEmail', function(value, element){
-				return $('#email').val() === customerEmail;
-			}, 'Email is \"' + customerEmail + '\", it is not allowed to change it');
-			
 		},
-		error : function (jqHXR, textStatus, errorThrown) {
-			if (jqHXR.status === 404) {
-				$('#error').html('Customer not found.');
-			}
-			$('#error').show();
-			$('#success').hide();
+		error : function(jqHXR, textStatus, errorThrown) {
+			$('#content').html(jqHXR.responseText);
 		}
 	});
 	
-	$('#mail').each(function(){
-		$(this).rules('add', {checkEmail : true});
-	});
-	
-	$('#customer-form').submit(function(event) {
-		if ($('#customer-form').valid()) {
+	$('#customerform').submit(function(event) {
+		if ($('#customerform').valid()) {
 			var address = {
 				id : addressId,
 				country : $('#country').val(),
 				region : $('#region').val(),
 				postalCode : $('#postalCode').val(),
 				locality : $('#locality').val(),
-				additional : $('#address').val()
+				additional : $('#additional').val()
 			}
 			
 			var customer = {
@@ -74,7 +65,7 @@ $(document).ready( function(){
 				email : $('#email').val(),
 				phone : $('#phone').val(),
 				passport : $('#passport').val(),
-				individaulTaxNumber : $('#taxNumber').val(),
+				individualTaxNumber : $('#individualTaxNumber').val(),
 				address : address
 			}
 			
@@ -87,6 +78,7 @@ $(document).ready( function(){
 				success : function(responseData, textStatus, jqXHR) {	
 					$('#success').html('Customer has been edited successfully').show();
 					$('#error').hide();
+					window.location.href = context + '/cabinet';
 				},
 				error : function(jqXHR, textStatus, errorThrown) {
 					$('#error').html('Failed to edit Customer').show();

@@ -1,5 +1,6 @@
 package com.softserveinc.ita.redplatform.business.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,10 +90,10 @@ public class CurrencyRateService {
     }
     /**
      * 
-     * @param id parameter
+     * @param fromDate parameter
      * @return object of currencyRate
      */
-    public CurrencyRate findCurrencyById(final Long id) {
-	return currencyRateDao.findById(id);
+    public CurrencyRate findCurrencyByDate(final Date fromDate) {
+	return currencyRateDao.findCurrencyByDate(fromDate);
     };
 }

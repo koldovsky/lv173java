@@ -3,6 +3,7 @@
 <script src="${pageContext.request.contextPath}/resources/js/common/navbar.js"></script>
 <!-- Autorisation CSS -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/autorization.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/lib/bootstrap/bootstrap.min.css">
 <!-- Navigation -->
 <nav id="navMenu" class="navbar navbar-default navbar-fixed-top"
 	role="navigation">
@@ -25,21 +26,22 @@
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
-				<li><a href="/REDplatform/">Home page</a></li>
-				<li><a href="#">Contact</a></li>
+				<li><a href="${pageContext.request.contextPath}/index">Home page</a></li>
+				<li>
+					<sec:authorize access="isAnonymous()">
+						<a href="${pageContext.request.contextPath}/login">Login</a>
+					</sec:authorize> <sec:authorize access="isAuthenticated()">
+						<a id="navbarMail" href="${pageContext.request.contextPath}/cabinet">Email</a>
+							<ul class="dropdown-menu">
+								<li><a href="${pageContext.request.contextPath}/cabinet">Cabinet</a>
+								</li>
+								<li><a href="${pageContext.request.contextPath}/logout">Logout</a>
+								</li>
+							</ul>
+						</a>
+					</sec:authorize>
+				</li>
 			</ul>
-		</div>
-		<div id="autorization">
-			<sec:authorize access="isAnonymous()">
-					<form action="/REDplatform/login">
-    					<input class="btn btn-success" type="submit" value="Login">
-					</form>
-			</sec:authorize>
-			<sec:authorize access="isAuthenticated()">
-				<form action="/REDplatform/logout">
-    					<input class="btn btn-danger" type="submit" value="Logout">
-				</form>
-			</sec:authorize>
 		</div>
 		<!-- /.navbar-collapse -->
 	</div>

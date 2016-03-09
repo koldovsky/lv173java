@@ -45,7 +45,7 @@ public class CustomerUser extends User {
   * Column for Customer individualTaxNumber.
   */
   @Column(name = "individualTaxNumber")
-  private Integer individualTaxNumber;
+  private Long individualTaxNumber;
 
   /**
   * Column Address has Set of peoples.
@@ -137,7 +137,7 @@ public class CustomerUser extends User {
   *
   * @return the individualTaxNumber
   */
-  public final Integer getIndividualTaxNumber() {
+  public final Long getIndividualTaxNumber() {
     return individualTaxNumber;
   }
 
@@ -146,7 +146,7 @@ public class CustomerUser extends User {
   *
   * @param newIndividualTaxNumb to be set 
   */
-  public final void setIndividualTaxNumber(final Integer newIndividualTaxNumb) {
+  public final void setIndividualTaxNumber(final Long newIndividualTaxNumb) {
     this.individualTaxNumber = newIndividualTaxNumb;
   }
 

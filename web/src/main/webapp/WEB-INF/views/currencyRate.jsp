@@ -6,34 +6,28 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Currency rate</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/currency.css">
 <jsp:include page="utils/jspheader.jsp" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/currency.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/lib/jquery-ui/jquery-ui.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/lib/jquery-ui/jquery-ui.structure.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/lib/jquery-ui/jquery-ui.theme.css">
 </head>
-<body onload="setDate()">
+<body>
 	<jsp:include page="utils/navbar.jsp"></jsp:include>
-	<div >
-	<div class="container" id="body">
-		<h1>Currency rate</h1>
-		
+	<div id="body">
+	<div class="container">
+		<h1 class="center">Currency rate</h1>
+			
+		<form name="currency-form" id="currency-form" method="post" action="">
 		<div id="error" class="alert alert-danger" role="alert">
 		<a href="#" class="close" aria-label="close">&times;</a>
 			Failed to add currency
 		</div>
-		
-		<div id="invalidDate" class="alert alert-danger" role="alert">
-		<a href="#" class="close" aria-label="close">&times;</a>
-			Wrong date: "FROM DATE" must be greater/equal than today's date, and less/equal than "TO DATE"
-		</div>
-		
 		<div id="success" class="alert alert-success" role="alert">
 		<a href="#" class="close" aria-label="close">&times;</a>
-			Currency rate has been added successfully.</div>
-		
-		<form name="currency-form" id="currency-form" method="post" action="">
-			<div>
+			Currency rate has been added successfully.</div>	
 			<div class="row">
-				<div class="col-sm-6">
+				<div>
 					<div class="form-group">
 						<label class="control-label">Input amount of currency rate</label> 
 						<div class="text-danger">
@@ -45,62 +39,42 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-sm-6">
-					<div class="form-group">
+				<div class="form-group">
 						<label class="control-label">FROM DATE</label> 
-						<div>	
-						 <div class="date"><label class="control-label">Year</label>
-						<p><select size="1" class="form-control" name="fromYear" id="fromYear">	
-						   </select></p>
-						 </div>
-						 <div class="date"><label class="control-label">Month</label>
-						<p><select size="1" class="form-control" name="fromMonth" id="fromMonth">
-						   </select></p>
-						 </div>
-						 <div class="date"><label class="control-label">Day</label>
-						<p><select size="1" class="form-control" name="fromDay" id="fromDay">
-						   </select></p>
-						 </div>
-						 </div>
+					<div>	
+						<input type="text" name="from" id="from" 
+							class="form-control" placeholder="Enter from date">
 					</div>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-sm-6">
-					<div class="form-group">
+				<div class="form-group">
 						<label class="control-label">TO DATE</label> 
-						<div>
-						 <div class="date"><label class="control-label">Year</label>
-						<p><select size="1" name="toYear" class="form-control" id="toYear">
-						   </select></p>
-						 </div>
-						 <div class="date"><label class="control-label">Month</label>
-						<p><select size="1" class="form-control" name="toMonth" id="toMonth">
-						   </select></p>
-						 </div>
-						 <div class="date"><label class="control-label">Day</label>
-						<p><select class="form-control" size="1" id="toDay">
-						   </select></p>
-						 </div>
-						 </div>
+					<div>
+						<input type="text" name="to" id="to" 
+							class="form-control" placeholder="Enter to date">
 					</div>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-sm-6">
+				<div class="col-sm-4">
 					<button type="submit" class="btn btn-primary">Submit</button>
 				</div>
 			</div>
 		</form>
 		</div>
 	</div>
-	<div id="footer">
-	<jsp:include page="utils/footer.jsp"></jsp:include>
+	<footer id="footer">
+	<div class="col-md-12">
+		<hr>
+		<p class="text-center">Copyright &copy; REDplatform 2016</p>
 	</div>
+	</footer>
 	<script src="${pageContext.request.contextPath}/resources/js/currency.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/currencyNBU.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/regexes.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/lib/jquery/jquery-2.2.0.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/lib/jquery/jquery.validate.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/lib/jquery-ui/jquery-ui.min.js"></script>
 </body>
 </html>

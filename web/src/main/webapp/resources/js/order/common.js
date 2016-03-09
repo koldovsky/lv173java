@@ -1,31 +1,37 @@
 $(function() {
 
-	$('#formContainer form:first-child').fadeIn('slow');
+	$('.alert .close').click(function() {
+	    $(this).parent().hide();
+	});
 
-	function changeForms(button) {
-		findParentForm(button).fadeOut('slow', function() {
-			var fadeInForm;
-			if (button.hasClass('prev')) {
-				fadeInForm = $(this).prevAll('form').first();
-			} else {
-				fadeInForm = $(this).nextAll('form').first();
-			}
-			fadeInForm.fadeIn('slow');
-		});
+	$('#formContainer .orderingUnit:first-child').fadeIn('slow');
+
+	function changeOrderingUnits(oldUnit, newUnit, validationFlag) {
+		if (!validationFlag || oldUnit.valid()) {
+			oldUnit.fadeOut('slow', function() {
+				newUnit.fadeIn('slow');
+			});
+		}
 	}
 
-	function findParentForm(element) {
-		return element.parents('form');
+	function findParentOrderingUnit(element) {
+		return element.parents('.orderingUnit');
 	}
 
 	$('.prev').click(function() {
-		changeForms($(this));
+		var parentOrderingUnit = findParentOrderingUnit($(this));
+		var unitToFadeIn = parentOrderingUnit.prevAll('.orderingUnit').first();
+		changeOrderingUnits(parentOrderingUnit, unitToFadeIn, false);
 	});
 
 	$('.next').click(function() {
-		if (findParentForm($(this)).valid()) {
-			changeForms($(this));
+		if ($(this).attr('id') === 'toNewCustomer') {
+			$('#customerlist').appendTo('#formContainer');
+		} else if ($(this).attr('id') === 'toCustomerList') {
+			$('#customerform').appendTo('#formContainer');
 		}
+		var parentOrderingUnit = findParentOrderingUnit($(this));
+		var unitToFadeIn = parentOrderingUnit.nextAll('.orderingUnit').first();
+		changeOrderingUnits(parentOrderingUnit, unitToFadeIn, true);
 	});
-
 });

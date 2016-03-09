@@ -12,8 +12,10 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/lib/jquery-ui/jquery-ui.structure.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/lib/jquery-ui/jquery-ui.theme.css">
 <link href="${pageContext.request.contextPath}/resources/css/lib/dataTables/jquery.dataTables-1.10.11.min.css" rel="stylesheet">
+<script src="${pageContext.request.contextPath}/resources/js/lib/moment/moment-2.11.2.min.js"></script>
 
 <script src="${pageContext.request.contextPath}/resources/js/order/installment.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/order/usersfororders.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/order/calender.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/order/common.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/order/orderSubmission.js"></script>
@@ -33,10 +35,12 @@
 
 		<h1 class="center">New order</h1>
 
-		<div id="error" class="alert alert-danger" role="alert">Failed
-			to add the order.</div>
-		<div id="success" class="alert alert-success" role="alert">The
-			order has been added successfully.</div>
+		<div id="error" class="alert alert-danger" role="alert"><span
+					class="close glyphicon glyphicon-remove text-danger" aria-hidden="true"></span>
+					Failed to add the order.</div>
+		<div id="success" class="alert alert-success" role="alert"><span
+					class="close glyphicon glyphicon-remove text-danger" aria-hidden="true"></span>
+					The order has been added successfully.</div>
 		<div class="text-danger">
 			<p class="center">
 				<b>Fields marked with <span
@@ -51,6 +55,7 @@
 			<jsp:include page="orderFieldset.jsp"></jsp:include>
 			<jsp:include page="installmentFieldset.jsp"></jsp:include>
 			<jsp:include page="customerFieldset.jsp"></jsp:include>
+			<jsp:include page="customerList.jsp"></jsp:include>
 		</div>
 	</div>
 

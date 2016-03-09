@@ -48,13 +48,13 @@ public class OrderMapper implements GenericMapper<Order, OrderDTO> {
 		customerUserMapper.toDto(entity.getCustomerUser()));
 	orderDTO.setRoomsQuantity(entity.getRoomsQuantity());
 	orderDTO.setAddress(addressMapper.toDto(entity.getAddress()));
-	
+
 	List<InstallmentDTO> installmentDTOs = new LinkedList<>();
 	for (Installment installment : entity.getInstallments()) {
 	    installmentDTOs.add(installmentMapper.toDto(installment));
 	}
 	orderDTO.setInstallment(installmentDTOs);
-	
+
 	return orderDTO;
     }
 
@@ -65,8 +65,17 @@ public class OrderMapper implements GenericMapper<Order, OrderDTO> {
 	order.setArea(dto.getArea());
 	order.setRoomsQuantity(dto.getRoomsQuantity());
 	order.setDescription(dto.getDescription());
-	order.setAddress(addressMapper.toEntity(dto.getAddress()));
-	order.setCustomerUser(customerUserMapper.toEntity(dto.getCustomer()));
+	if (dto.getAddress() == null) {
+	    order.setAddress(null);
+	} else {
+	    order.setAddress(addressMapper.toEntity(dto.getAddress()));
+	}
+	if (dto.getCustomer() == null) {
+	    order.setCustomerUser(null);
+	} else {
+	    order.setCustomerUser(
+		    customerUserMapper.toEntity(dto.getCustomer()));
+	}
 	return order;
     }
 

@@ -10,10 +10,20 @@
 <script>var ctp = '${pageContext.request.contextPath}';</script>
 </head>
 <body>
-	<jsp:include page="../utils/customer.jsp" />
-	<script src="${pageContext.request.contextPath}/resources/js/lib/jquery/jquery.validate.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/customer.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/regexes.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/edit/customer.js"></script>
+	<div id="content">
+		<jsp:include page="../utils/navbar.jsp"></jsp:include>
+		<div id="error" class="alert alert-danger" role="alert">
+		<a class="close" aria-label="close">&times;</a>
+		Failed to edit Customer.
+		</div>
+		<div id="success" class="alert alert-success" role="alert">
+		<a class="close" aria-label="close">&times;</a>
+			Customer has been edited successfully.</div>
+		<jsp:include page="../order/customerFieldset.jsp" />
+		<script src="${pageContext.request.contextPath}/resources/js/lib/jquery/jquery.validate.min.js"></script>
+		<script src="${pageContext.request.contextPath}/resources/js/order/customerValidation.js"></script>
+		<script src="${pageContext.request.contextPath}/resources/js/validationRules.js"></script>
+		<script src="${pageContext.request.contextPath}/resources/js/edit/customer.js"></script>
+	</div>
 </body>
 </html>

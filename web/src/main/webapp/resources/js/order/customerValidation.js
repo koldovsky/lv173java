@@ -1,52 +1,48 @@
 $(function() {
 	$.validator.addMethod('validName', function(value, element) {
-		return regexPersonName.test(value);
-	}, messageNameUserIncorrect);
-
+		return ruleUserName.regexp.test(value);
+	}, ruleUserName.message);
+	
 	$.validator.addMethod('validMail', function(value, element) {
-		return regexMail.test(value);
-	}, messageMailIncorrect);
-
+		return ruleMail.regexp.test(value);
+	}, ruleMail.message);
+	
 	$.validator.addMethod('validPhoneNumber', function(value, element) {
-		return regexPhoneNumber.test(value);
-	}, messagePhoneIncorrect);
-
+		return rulePhoneUkraine.regexp.test(value);
+	}, rulePhoneUkraine.message);
+	
 	$.validator.addMethod('validPassport', function(value, element) {
-		return regexPassport.test(value);
-	}, 'Passport should be valid.');
-
+		return rulePassport.regexp.test(value);
+	}, rulePassport.message);
+	
 	$.validator.addMethod('validIndividualTaxNumber', function(value, element) {
-		return regexIndividualTaxNumber.test(value);
-	}, 'Individual Tax Number should be valid.');
-
+		return ruleIndividualTaxNumber.regexp.test(value);
+	}, ruleIndividualTaxNumber.message);
+	
 	$.validator.addMethod('validGeographicalName', function(value, element) {
-		return regexCountry.test(value);
-	}, messageCountryIncorrect);
-
-	$.validator.addMethod('validRegion', function(value, element) {
-		return this.optional(element) || regexCountry.test(value);
-	}, messageRegionIncorrect);
+		return ruleGeographicalName.regexp.test(value);
+	}, ruleGeographicalName.message);
 
 	$.validator.addMethod('validPostalCode', function(value, element) {
-		return regexPostalCode.test(value);
-	}, messagePostalCodeIncorrect);
+		return rulePostalCode.regexp.test(value);
+	}, rulePostalCode.message);
 
 	$.validator.addMethod('validAdditional', function(value, element) {
-		return regexAdditional.test(value);
-	}, messageAddressIncorrect);
+		return ruleAdditional.regexp.test(value);
+	}, ruleAdditional.message);
 
 	$('#customerform').validate({
 		errorClass : 'text-danger',
 		rules : {
 			firstName : {
 				required : true,
-				minlength : 1,
+				minlength : 2,
 				maxlength : 100,
 				validName : true
 			},
 			lastName : {
 				required : true,
-				minlength : 1,
+				minlength : 2,
 				maxlength : 100,
 				validName : true
 			},
@@ -55,15 +51,12 @@ $(function() {
 				minlength : 6,
 				maxlength : 60,
 				validMail : true,
-				remote : {
-					url : 'checkmail',
-					type : 'GET'
-				}
+				remote : ruleMailAvailability.params
 			},
 			phone : {
 				required : true,
 				minlength : 10,
-				maxlength : 12,
+				maxlength : 13,
 				validPhoneNumber : true
 			},
 			passport : {
@@ -72,7 +65,7 @@ $(function() {
 				maxlength : 8,
 				validPassport : true
 			},
-			individualTaxNumber : {
+			individaulTaxNumber : {
 				required : true,
 				minlength : 10,
 				maxlength : 10,
@@ -84,7 +77,7 @@ $(function() {
 				minlength : 2
 			},
 			region : {
-				validRegion : true,
+				validGeographicalName : true,
 				minlength : 2
 			},
 			postalCode : {
@@ -98,21 +91,30 @@ $(function() {
 				validGeographicalName : true,
 				minlength : 2
 			},
-			address : {
+			additional : {
 				required : true,
 				minlength : 2,
 				validAdditional : true
 			}
 		},
 		messages : {
-			firstName : {
+			firstName : { 
 				validName : 'First name should be correct.'
 			},
 			lastName : {
 				validName : 'Last name should be correct.'
 			},
 			email : {
-				remote : messageMailTaken
+				remote : ruleMailAvailability.message
+			},
+			country : {
+				validGeographicalName : 'Country should be correct.'
+			},
+			region : {
+				validGeographicalName : 'Region should be correct.'
+			},
+			locality : {
+				validGeographicalName : 'Locality should be correct.'
 			}
 		}
 	});

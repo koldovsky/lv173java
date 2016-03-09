@@ -9,3 +9,7 @@ span.glyphicon-asterisk {
 #success, #error {
 	display: none;
 }
+
+.btn-primary{
+	width:200px;
+}

@@ -1,5 +1,7 @@
 package com.softserveinc.ita.redplatform.persistence.dao;
 
+import java.util.Date;
+
 import com.softserveinc.ita.redplatform.common.entity.CurrencyRate;
 
 /**
@@ -8,4 +10,10 @@ import com.softserveinc.ita.redplatform.common.entity.CurrencyRate;
  * @author Ivaniv Roman
  */
 public interface CurrencyRateDao extends GenericDao<CurrencyRate, Long> {
+    
+    /**
+     * @param fromDate param
+     * @return object of Currency rate
+     */
+    CurrencyRate findCurrencyByDate(final Date fromDate);
 }

@@ -41,4 +41,13 @@ public interface CustomerUserDao extends GenericDao<CustomerUser, Long> {
      * @return customer user
      */
     CustomerUser getCustomerUserByEmail(String email);
+    
+    /**
+     * Update customer user without updating email and password.
+     * @param customer user
+     * @return customer
+     */
+    CustomerUser updateCustomerFields(CustomerUser customer);
+    
+    
 }
