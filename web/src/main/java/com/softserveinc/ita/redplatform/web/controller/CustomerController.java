@@ -13,17 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class CustomerController {
-
-    /**
-     * registerCustomer page mapping.
-     * 
-     * @return customer registration page
-     */
-    @RequestMapping(value = "/customer", method = RequestMethod.GET)
-    public final String getRegisterPage() {
-	return "register/customer";
-
-    }
     
     /**
      * Edit customer page mapping.
