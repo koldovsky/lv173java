@@ -27,6 +27,8 @@
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<li><a href="${pageContext.request.contextPath}/index">Home page</a></li>
+			</ul>
+			<ul id="user-info" class="nav navbar-nav">
 				<li>
 					<sec:authorize access="isAnonymous()">
 						<a href="${pageContext.request.contextPath}/login">Login</a>
