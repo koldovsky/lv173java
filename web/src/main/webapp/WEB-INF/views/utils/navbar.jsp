@@ -16,7 +16,7 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="/REDplatform/">
+			<a class="navbar-brand" href="${pageContext.request.contextPath}">
 				<div class="indexHeader">
 					<b class="red">RED</b>platform
 				</div>

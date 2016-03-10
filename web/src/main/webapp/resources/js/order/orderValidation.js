@@ -18,6 +18,10 @@ $(function() {
 	$.validator.addMethod('validAdditional', function(value, element) {
 		return regexAdditional.test(value);
 	}, messageAddressIncorrect);
+	
+	$.validator.addMethod('minStrict', function (value, el, param) {
+	    return value > param;
+	});
 
 	// Setup form validation on the #register-form element
 	$('#orderform').validate({
@@ -35,7 +39,8 @@ $(function() {
 				required : true,
 				minlength : 1,
 				maxlength : 10,
-				number : true
+				number : true,
+				minStrict : 1
 			},
 			roomsQuantity : {
 				required : true,
@@ -72,7 +77,9 @@ $(function() {
 		},
 		messages : {
 			area : {
-				number : 'Only valid numbers allowed!'
+				number : 'Only valid numbers allowed!',
+				minStrict : 'Enter positive number!'
+				
 			}
 			
 		}

@@ -80,9 +80,9 @@
 				<div class="form-group">
 					<label class="control-label" for="locality"> <span
 						class="glyphicon glyphicon-asterisk text-danger"
-						aria-hidden="true"></span> Locality
+						aria-hidden="true"></span> City
 					</label> <input type="text" class="form-control" name="locality"
-						id="locality" placeholder="Enter Locality Here..">
+						id="locality" placeholder="Enter City Here..">
 				</div>
 			</div>
 			<div class="col-md-6">
