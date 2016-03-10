@@ -34,3 +34,8 @@
 	background: #27AE60;
 	color: white;
 }
+
+.delete-item {
+	background: #CC0000 !important;
+	border-color: #CC0000 !important;
+}

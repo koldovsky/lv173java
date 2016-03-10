@@ -34,7 +34,7 @@
 								</button>
 								<button id="delete-item-{0}" type="button"
 									class="delete-item btn btn-primary col-sm-6">
-									<span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+									<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 								</button>
 							</div>
 						</div>

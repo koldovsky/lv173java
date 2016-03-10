@@ -10,7 +10,7 @@
 		</div>
 	</div>
 	<div class="row globalControls">
-		<button type="button" class="btn btn-primary prev col-sm-offset-2 col-sm-3">Prev</button>
+		<button type="button" class="btn btn-primary prev col-sm-offset-2 col-sm-3">Previous</button>
 		<div class="dropdown col-sm-offset-2 col-sm-3">
 			<button type="button" class="btn btn-primary dropdown-toggle" type="button" 
 				data-toggle="dropdown">
