@@ -1,3 +1,37 @@
 .orderingUnit {
 	display: none;
 }
+
+#progressbar {
+	margin-bottom: 10px;
+	overflow: hidden;
+	counter-reset: step;
+    text-align:center;
+}
+#progressbar li {
+	list-style-type: none;
+	text-transform: uppercase;
+	font-size: 14px;
+    padding: 0 15px;
+	display:inline-block;
+	position: relative;
+    margin: 0 !important;
+    padding-bottom: 15px;
+}
+#progressbar li:before {
+    content: counter(step);
+    counter-increment: step;
+    width: 24px;
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    background: white;
+    border-radius: 100px;
+    margin: 0 auto 5px auto;
+    line-height: 24px;
+}
+#progressbar li.active:before,  #progressbar li.active:after{
+	background: #27AE60;
+	color: white;
+}

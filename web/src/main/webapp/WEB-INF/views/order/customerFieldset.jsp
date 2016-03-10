@@ -1,7 +1,4 @@
 <form id="customerform" class="orderingUnit">
-	<div class="header">
-		<h2 class="center">Customer</h2>
-	</div>
 	<div class="text-danger">
 		<p class="center">
 			<b>Fields marked with <span
@@ -137,5 +134,3 @@
 		</div>
 	</fieldset>
 </form>
-<script
-src="${pageContext.request.contextPath}/resources/js/order/customerValidation.js"></script>

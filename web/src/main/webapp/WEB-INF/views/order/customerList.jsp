@@ -1,7 +1,4 @@
 <form id="customerlist" class="orderingUnit">
-	<div class="header">
-		<h2 class="center">List of customers</h2>
-	</div>
 	<table id="table" class="display" cellspacing="0" width="100%">
 		<thead>
 			<tr>

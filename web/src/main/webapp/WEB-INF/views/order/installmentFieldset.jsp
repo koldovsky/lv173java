@@ -1,8 +1,5 @@
-<form id="installmentform" class="orderingUnit col-sm-offset-2 col-sm-8">
+<form id="installmentform" class="orderingUnit">
 	<div>
-		<div class="header">
-			<h2 class="center">Installments</h2>
-		</div>
 		<div class="text-danger">
 			<p class="center">
 				<b>Fields marked with <span
@@ -24,7 +21,5 @@
 				<li><a id="toCustomerList" class="next" href="#">Existing user</a></li>
 			</ul>
 		</div>
-
 	</div>
 </form>
-<script src="${pageContext.request.contextPath}/resources/js/order/installmentValidation.js"></script>

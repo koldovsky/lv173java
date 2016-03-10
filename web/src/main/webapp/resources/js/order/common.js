@@ -10,6 +10,8 @@ $(function() {
 		if (!validationFlag || oldUnit.valid()) {
 			oldUnit.fadeOut('slow', function() {
 				newUnit.fadeIn('slow');
+				$("#progressbar li").eq($('.orderingUnit').index(oldUnit)).removeClass('active');
+				$("#progressbar li").eq($('.orderingUnit').index(newUnit)).addClass('active');
 			});
 		}
 	}
@@ -17,7 +19,7 @@ $(function() {
 	function findParentOrderingUnit(element) {
 		return element.parents('.orderingUnit');
 	}
-
+	
 	$('.prev').click(function() {
 		var parentOrderingUnit = findParentOrderingUnit($(this));
 		var unitToFadeIn = parentOrderingUnit.prevAll('.orderingUnit').first();

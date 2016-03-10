@@ -102,5 +102,3 @@
 			class="btn btn-primary next col-sm-offset-7 col-sm-3">Next</button>
 	</div>
 </form>
-<script
-	src="${pageContext.request.contextPath}/resources/js/order/orderValidation.js"></script>

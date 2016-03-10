@@ -14,6 +14,9 @@
 <link href="${pageContext.request.contextPath}/resources/css/lib/dataTables/jquery.dataTables-1.10.11.min.css" rel="stylesheet">
 <script src="${pageContext.request.contextPath}/resources/js/lib/moment/moment-2.11.2.min.js"></script>
 
+<script src="${pageContext.request.contextPath}/resources/js/order/customerValidation.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/order/installmentValidation.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/order/orderValidation.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/order/installment.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/order/usersfororders.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/order/calender.js"></script>
@@ -41,8 +44,14 @@
 		<div id="success" class="alert alert-success" role="alert"><span
 					class="close glyphicon glyphicon-remove text-danger" aria-hidden="true"></span>
 					The order has been added successfully.</div>
-
-		<div id="formContainer">
+					
+		<ul id="progressbar">
+			<li class="active">Order info</li>
+			<li>Installments</li>
+			<li>Customer</li>
+		</ul>
+		
+		<div id="formContainer"  class="col-sm-offset-1 col-sm-10">
 			<jsp:include page="orderFieldset.jsp"></jsp:include>
 			<jsp:include page="installmentFieldset.jsp"></jsp:include>
 			<jsp:include page="customerFieldset.jsp"></jsp:include>
