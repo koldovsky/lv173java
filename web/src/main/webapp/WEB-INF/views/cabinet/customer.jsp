@@ -6,7 +6,7 @@
 <jsp:include page="../utils/jspheader.jsp" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/adminregister.css">
-<title>Order creation</title>
+<title>Work Place</title>
 <script src="${pageContext.request.contextPath}/resources/js/cabinet/customer.js"></script>
 
 </head>

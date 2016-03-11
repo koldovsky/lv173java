@@ -31,7 +31,7 @@ var rulePassport = {
 		message: 'Passport should be valid.'
 };
 var ruleIndividualTaxNumber = {
-		regexp : /^\d{10}$/,
+		regexp : /^[1-9]{1}\d{9}$/,
 		message: 'Individual Tax Number should be valid.'
 };
 var ruleGeographicalName = {

@@ -20,3 +20,10 @@ span.glyphicon-asterisk {
 		margin-right: 25px;
 	}
 }
+
+@media screen and (max-width: 768px){
+  #navbarMail:hover +.dropdown-menu, .dropdown-menu:hover{
+		width: 100%;
+		position:  relative;
+		}
+}

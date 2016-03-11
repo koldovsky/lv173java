@@ -6,6 +6,8 @@ $(document).ready( function(){
 	
 	$('#submitButton-1').prop('class','btn btn-primary');
 	
+	$('#navMenu').after('<h1 class=\"text-center\">Edit information</h1>');
+	
 	var href = $(location).attr('href');
 	var id = href.substr(href.lastIndexOf('/') + 1);
 	document.title = 'Edit Customer';
