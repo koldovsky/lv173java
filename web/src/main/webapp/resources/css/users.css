@@ -1,9 +1,9 @@
 .page {
 	margin-left: 4%;
 	margin-right: 4%;
+	height: 95%;
 }
 
-#footer{
-	position: fixed;
-	bottom:0px;
+body, html{
+	height:100%;
 }
