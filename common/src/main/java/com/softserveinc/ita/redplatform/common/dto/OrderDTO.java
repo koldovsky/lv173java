@@ -1,5 +1,6 @@
 package com.softserveinc.ita.redplatform.common.dto;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -41,6 +42,11 @@ public class OrderDTO {
      * List of installments.
      */
     private List<InstallmentDTO> installment;
+    
+    /**
+     * Created date.
+     */
+    private Date createdDate; 
 
     public final Long getId() {
 	return id;
@@ -97,6 +103,14 @@ public class OrderDTO {
     public final void
 	    setInstallment(final List<InstallmentDTO> newInstallment) {
 	this.installment = newInstallment;
+    }
+
+    public final Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public final void setCreatedDate(final Date newCreatedDate) {
+        this.createdDate = newCreatedDate;
     }
 
 }

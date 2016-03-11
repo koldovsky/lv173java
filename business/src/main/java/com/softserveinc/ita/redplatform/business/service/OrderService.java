@@ -1,5 +1,6 @@
 package com.softserveinc.ita.redplatform.business.service;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +14,11 @@ import com.softserveinc.ita.redplatform.common.entity.CustomerUser;
 import com.softserveinc.ita.redplatform.common.entity.Installment;
 import com.softserveinc.ita.redplatform.common.entity.Order;
 import com.softserveinc.ita.redplatform.common.mapper.OrderMapper;
+import com.softserveinc.ita.redplatform.common.predicate.DataTablePredicate;
 import com.softserveinc.ita.redplatform.persistence.dao.CustomerUserDao;
 import com.softserveinc.ita.redplatform.persistence.dao.OrderDao;
 
+// TODO: Auto-generated Javadoc
 /**
  * Order Service.
  * 
@@ -32,7 +35,7 @@ public class OrderService {
     /** The customer user service. */
     @Autowired
     private CustomerUserService customerUserService;
-    
+
     /** The installment service. */
     @Autowired
     private InstallmentService installmentService;
@@ -66,11 +69,12 @@ public class OrderService {
 	return mapper.toDto(order);
 
     }
-    
+
     /**
      * Prepare customer.
      *
-     * @param customerDTO the customer dto
+     * @param customerDTO
+     *            the customer dto
      * @return the customer
      */
     private CustomerUser prepareCustomer(final CustomerUserDTO customerDTO) {
@@ -94,6 +98,39 @@ public class OrderService {
     @Transactional
     public boolean isOrderIdPresent(final Long orderId) {
 	return orderDao.findById(orderId) != null;
+    }
+
+    /**
+     * Count company orders by email.
+     *
+     * @param email
+     *            the email
+     * @return the long
+     */
+    @Transactional
+    public Long countCompanyOrdersByEmail(final String email) {
+	return orderDao.countCompanyOrders(email);
+    }
+
+    /**
+     * Load company orders by email.
+     *
+     * @param email
+     *            the email
+     * @param predicate
+     *            the predicate
+     * @return the list
+     */
+    @Transactional
+    public List<OrderDTO> loadCompanyOrdersByEmail(final String email,
+	    final DataTablePredicate predicate) {
+	List<Order> orders = orderDao.loadCompanyOrders(email, predicate);
+	LinkedList<OrderDTO> orderDTOs = new LinkedList<>();
+	for (Order order : orders) {
+	    orderDTOs.add(mapper.toDto(order));
+	}
+	return orderDTOs;
+
     }
 
 }

@@ -54,8 +54,7 @@ $(function() {
 				data : postData,
 				contentType : 'application/json; charset=utf-8',
 				success : function(responseData, textStatus, jqXHR) {
-					$('#error').hide;
-					$('#success').show();
+					window.location.replace(context + '/orders');
 				},
 				error : function(jqXHR, textStatus, errorThrown) {
 					if (jqXHR.status === 400) {

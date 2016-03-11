@@ -24,6 +24,10 @@
 					<h2>View users</h2>
 					<a href="${pageContext.request.contextPath}/users" class="btn btn-primary">View the users</a>
 				</div>
+				<div class="col-lg-4">
+					<h2>View orders</h2>
+					<a href="${pageContext.request.contextPath}/orders" class="btn btn-primary">View the orders</a>
+				</div>
 
 			</div>
 

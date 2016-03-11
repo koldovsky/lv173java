@@ -48,7 +48,7 @@ public class OrderMapper implements GenericMapper<Order, OrderDTO> {
 		customerUserMapper.toDto(entity.getCustomerUser()));
 	orderDTO.setRoomsQuantity(entity.getRoomsQuantity());
 	orderDTO.setAddress(addressMapper.toDto(entity.getAddress()));
-
+	orderDTO.setCreatedDate(entity.getCreatedDate());
 	List<InstallmentDTO> installmentDTOs = new LinkedList<>();
 	for (Installment installment : entity.getInstallments()) {
 	    installmentDTOs.add(installmentMapper.toDto(installment));
@@ -60,22 +60,19 @@ public class OrderMapper implements GenericMapper<Order, OrderDTO> {
 
     @Override
     public final Order toEntity(final OrderDTO dto) {
+
+	if (dto.getAddress() == null || dto.getCustomer() == null) {
+	    return null;
+	}
+
 	Order order = new Order();
 	order.setId(dto.getId());
 	order.setArea(dto.getArea());
 	order.setRoomsQuantity(dto.getRoomsQuantity());
 	order.setDescription(dto.getDescription());
-	if (dto.getAddress() == null) {
-	    order.setAddress(null);
-	} else {
-	    order.setAddress(addressMapper.toEntity(dto.getAddress()));
-	}
-	if (dto.getCustomer() == null) {
-	    order.setCustomerUser(null);
-	} else {
-	    order.setCustomerUser(
-		    customerUserMapper.toEntity(dto.getCustomer()));
-	}
+	order.setAddress(addressMapper.toEntity(dto.getAddress()));
+	order.setCustomerUser(customerUserMapper.toEntity(dto.getCustomer()));
+
 	return order;
     }
 
