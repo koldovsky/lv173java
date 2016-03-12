@@ -17,7 +17,7 @@ import com.softserveinc.ita.redplatform.persistence.dao.CurrencyRateDao;
 public class JPACurrencyRate extends JPAGenericDao<CurrencyRate, Long> 
                         implements CurrencyRateDao {
     @Override
-    public final CurrencyRate findCurrencyByDate(final Date fromDate) {
+    public final CurrencyRate findCurrencyFromDate(final Date fromDate) {
 	@SuppressWarnings("unchecked")
 	ArrayList<CurrencyRate> list = (ArrayList<CurrencyRate>) getEntityManager()
 		.createQuery("from " + CurrencyRate.class.getName() 

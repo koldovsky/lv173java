@@ -1,6 +1,5 @@
 package com.softserveinc.ita.redplatform.web.api;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -61,9 +60,9 @@ public class CurrencyRestController {
     @RequestMapping(value = "/api/currency/{fromDate}", 
 	    method = RequestMethod.GET)
     public final ResponseEntity<CurrencyRate> getCurrency(
-	    @PathVariable("fromDate") final Date fromDate) throws ParseException {
+	    @PathVariable("fromDate") final Date fromDate) {
 	CurrencyRate currencyRate = 
-		currencyRateService.findCurrencyByDate(fromDate);
+		currencyRateService.findCurrencyByFromDate(fromDate);
 	if (currencyRate == null) {
 	    LOGGER.info("currency not found");
 	    return new ResponseEntity<CurrencyRate>(HttpStatus.NOT_FOUND);
@@ -94,7 +93,7 @@ public class CurrencyRestController {
 	    @RequestBody final CurrencyRateDTO currencyRateDTO) {
 
 	if (currencyRateDTO.isNbu()) {
-	    currencyRateDTO.setAmount(currencyJson.setNbuCourse());
+	    currencyRateDTO.setAmount(currencyJson.getCourse());
 	}
 	
 	Authentication auth = SecurityContextHolder.getContext().

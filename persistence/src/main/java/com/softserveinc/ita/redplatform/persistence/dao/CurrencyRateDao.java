@@ -15,5 +15,5 @@ public interface CurrencyRateDao extends GenericDao<CurrencyRate, Long> {
      * @param fromDate param
      * @return object of Currency rate
      */
-    CurrencyRate findCurrencyByDate(final Date fromDate);
+    CurrencyRate findCurrencyFromDate(final Date fromDate);
 }

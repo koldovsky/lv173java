@@ -12,7 +12,6 @@ import com.softserveinc.ita.redplatform.common.entity.CurrencyRate;
 import com.softserveinc.ita.redplatform.common.entity.RealEstateAdminUser;
 import com.softserveinc.ita.redplatform.common.mapper.CurrencyRateMapper;
 import com.softserveinc.ita.redplatform.persistence.dao.CurrencyRateDao;
-import com.softserveinc.ita.redplatform.persistence.dao.RealEstateAdminUserDao;
 
 /**
  * CurrencyRate Service.
@@ -22,12 +21,6 @@ import com.softserveinc.ita.redplatform.persistence.dao.RealEstateAdminUserDao;
 @Service
 @Transactional
 public class CurrencyRateService {
-    
-    /**
-     * REDAdmin dao.
-     */
-    @Autowired
-    private RealEstateAdminUserDao dao;
     
     /**
      *  User service.
@@ -61,11 +54,9 @@ public class CurrencyRateService {
 	    final String email) {
 	CurrencyRate currencyRate = currencyRateMapper
 		.toEntity(currencyRateDTO);
-	RealEstateAdminUser user = dao.findById(
-		userService.loadUserByEmail(email).getId());
-	if (user instanceof RealEstateAdminUser) {
-	    currencyRate.setReAgency(user.getAgency());
-	} 
+	RealEstateAdminUser redAdmin = (RealEstateAdminUser)
+		userService.loadUserByEmail(email);
+	currencyRate.setReAgency(redAdmin.getAgency());
 	currencyRateDao.save(currencyRate);
     }
     
@@ -93,7 +84,7 @@ public class CurrencyRateService {
      * @param fromDate parameter
      * @return object of currencyRate
      */
-    public CurrencyRate findCurrencyByDate(final Date fromDate) {
-	return currencyRateDao.findCurrencyByDate(fromDate);
+    public CurrencyRate findCurrencyByFromDate(final Date fromDate) {
+	return currencyRateDao.findCurrencyFromDate(fromDate);
     };
 }

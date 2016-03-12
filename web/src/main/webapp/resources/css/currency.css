@@ -39,15 +39,15 @@
 }
 
 #success{
-	width:280px;
+	width:340px;
 	margin: auto;
 	text-align: center;
-	margin-left: -15px;
+	margin-left: -45px;
 }
 
 #error{
-	width:280px;
+	width:340px;
 	margin: auto;
 	text-align: center;
-	margin-left: -15px;
+	margin-left: -45px;
 }

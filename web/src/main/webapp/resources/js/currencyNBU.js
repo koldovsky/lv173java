@@ -1,5 +1,5 @@
 $(function() {
-    $("#currency-form").validate({
+    $('#currency-form').validate({
         rules: {
         	errorClass: 'text-danger',
             amount: {
@@ -15,13 +15,13 @@ $(function() {
         },
         messages: {
 			amount: {
-				required: "Please provide an amount"
+				required: 'Please provide an amount'
 			},
 			from: {
-				required: "Please fill the date"
+				required: 'Please, fill date'
 			},
 			to: {
-				required: "Please fill the date"
+				required: 'Please, fill date'
 			}
         }
     });
@@ -33,17 +33,17 @@ $(function() {
   });
 
 
-document.getElementById("nbu").addEventListener("click", checkBox);
+document.getElementById('nbu').addEventListener('click', checkBox);
 
 function checkBox() {
-    var x = document.getElementById("nbu").checked;
+    var x = document.getElementById('nbu').checked;
     if (x === true){
-    	document.getElementById("nbu").checked = true;
-    	document.getElementById("amount").disabled = true;
+    	document.getElementById('nbu').checked = true;
+    	document.getElementById('amount').disabled = true;
     	nbu = true;
     } else {
-    	document.getElementById("nbu").checked = false;
-    	document.getElementById("amount").disabled = false;
+    	document.getElementById('nbu').checked = false;
+    	document.getElementById('amount').disabled = false;
     	nbu = false;
     };
 };

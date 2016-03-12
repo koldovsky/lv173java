@@ -41,7 +41,7 @@
 			<div class="row">
 				<div class="form-group">
 						<label class="control-label">FROM DATE</label> 
-					<div>	
+					<div class="text-danger">	
 						<input type="text" name="from" id="from" 
 							class="form-control" placeholder="Enter from date">
 					</div>
@@ -50,7 +50,7 @@
 			<div class="row">
 				<div class="form-group">
 						<label class="control-label">TO DATE</label> 
-					<div>
+					<div class="text-danger">
 						<input type="text" name="to" id="to" 
 							class="form-control" placeholder="Enter to date">
 					</div>
