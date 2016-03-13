@@ -53,7 +53,7 @@ public class AgencyController {
 	    throw new ResourceNotFoundException();
 	}
 	model.addAttribute("agency", agency);
-	return "agencyEdit";
+	return "edit/agencyEdit";
     }
 
 }
