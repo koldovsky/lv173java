@@ -6,7 +6,7 @@ package com.softserveinc.ita.redplatform.common.dto;
  * @author Ivaniv Roman
  *
  */
-public class CurrencyNbuDTO {
+public class CurrencyAmountDTO {
 
     /**
      * Currency amount.

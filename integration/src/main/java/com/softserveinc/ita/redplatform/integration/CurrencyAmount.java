@@ -12,7 +12,7 @@ import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.softserveinc.ita.redplatform.common.dto.CurrencyNbuDTO;
+import com.softserveinc.ita.redplatform.common.dto.CurrencyAmountDTO;
 
 /**
  * Class for taking NBU course.
@@ -43,8 +43,8 @@ public class CurrencyAmount {
 	mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 	double amount = 0;
 	try {
-	    CurrencyNbuDTO [] currency = mapper.readValue(
-		    new URL(nbuCurrency + date + json), CurrencyNbuDTO[].class);
+	    CurrencyAmountDTO [] currency = mapper.readValue(
+		    new URL(nbuCurrency + date + json), CurrencyAmountDTO[].class);
 	    amount = currency[0].getRate();
 	} catch (JsonGenerationException e) {
 	    e.printStackTrace();

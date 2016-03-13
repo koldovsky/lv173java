@@ -17,8 +17,7 @@
 			<h1>Customer work place</h1>
 			<div class="indexrow">
 				<div class="col-lg-4">
-				<h2>Customer edit page</h2>
-					<a id="edit-customer" class="btn btn-primary">Edit</a>
+					<a id="edit-customer" class="btn btn-primary">Edit personal info</a>
 				</div>
 			</div>
 

@@ -70,7 +70,7 @@ public class AuthenticationManager implements AuthenticationSuccessHandler {
 		(Collection<GrantedAuthority>) authentication.getAuthorities();
 	for (GrantedAuthority grantedAuthority : authorities) {
 	    if (grantedAuthority.getAuthority().equals("ROLE_USER")) {
-		return "/index";
+		return "/cabinet";
 	    } else if (grantedAuthority.getAuthority()//TODO: remove this checking
 		    .equals("ROLE_REDADMIN")) {
 		return "/cabinet";
