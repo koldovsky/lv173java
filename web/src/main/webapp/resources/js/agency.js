@@ -5,32 +5,38 @@ $(document).ready(
 			});
 						
 			$.validator.addMethod('agencyName', function(value, element) {
-				return regexName.test(value);
+				return /^(?=.*[a-zA-Z])[a-zA-Z0-9\s]+[a-zA-Z0-9!.@&$():,-\s\']+[a-zA-Z0-9.!)\'\s]$/
+				                 .test(value);
 			}, 'Agency name should be valid.');
 		
 			$.validator.addMethod('description', function(value, element) {
-						return regexDescription.test(value);
+						return /^(?=.*[a-zA-Z])[a-zA-Z0-9\s]+[a-zA-Z0-9!.\[\]@&#%+=;:?\/,-\s\'$%^*()<>№"]+[a-zA-Z0-9.!\])\s:;]$/
+								.test(value);
 			}, 'Description should be valid.');
 		
 			$.validator.addMethod('phoneNumber', function(value, element) {
-					return regexPhoneNumber.test(value);
-			}, messagePhoneIncorrect);
+					return rulePhoneUkraine.regexp.test(value);
+			}, rulePhoneUkraine.message);
 		
 			$.validator.addMethod('country', function(value,	element) {
-					return regexCountry.test(value);
-			}, messageCountryIncorrect);
+					return ruleCountry.regexp.test(value);
+			}, ruleCountry.message);
 			
 			$.validator.addMethod('regionValid', function(value, element) {
-				return this.optional(element) || regexCountry.test(value);
-			}, messageRegionIncorrect);
+				return this.optional(element) || ruleRegion.regexp.test(value);
+			}, ruleRegion.message);
 		
 			$.validator.addMethod('postalCode', function(value, element) {
-					return regexPostalCode.test(value);
-			}, messagePostalCodeIncorrect);
+					return rulePostalCode.regexp.test(value);
+			}, rulePostalCode.message);
+			
+			$.validator.addMethod('locality', function(value, element) {
+				return ruleLocality.regexp.test(value);
+			}, ruleLocality.message);
 		
 			$.validator.addMethod('additional', function(value,	element) {
-					return regexAdditional.test(value);
-			}, messageAddressIncorrect);
+					return ruleAdditional.regexp.test(value);
+			}, ruleAdditional.message);
 
 			
 			$('#register-form')
@@ -84,7 +90,7 @@ $(document).ready(
 									},
 									locality : {
 										required : true,
-										country : true,
+										locality : true,
 										minlength : 2
 									},
 									additionalInfo : {
@@ -117,8 +123,7 @@ $(document).ready(
 										required : 'Please enter postal code'
 									},
 									locality : {
-										required : 'Please enter city',
-										country : messageLocalityIncorrect
+										required : 'Please enter city'
 									},
 									additionalInfo : {
 										required : 'Please enter address'
