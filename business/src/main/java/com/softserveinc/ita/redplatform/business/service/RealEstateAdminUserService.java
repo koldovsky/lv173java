@@ -10,6 +10,7 @@ import com.softserveinc.ita.redplatform.common.entity.User;
 import com.softserveinc.ita.redplatform.common.mapper.RealEstateAdminUserMapper;
 import com.softserveinc.ita.redplatform.persistence.dao.RealEstateAdminUserDao;
 import com.softserveinc.ita.redplatform.persistence.dao.RealEstateAgencyDao;
+import com.softserveinc.ita.redplatform.persistence.dao.UserDao;
 
 /**
  * The class RealEstateAdminService.
@@ -27,6 +28,10 @@ public class RealEstateAdminUserService extends AbstractUserService {
     /** The agency dao. */
     @Autowired
     private RealEstateAgencyDao agencyDao;
+    
+    /** The user dao. */
+    @Autowired
+    private UserDao userDao;
 
     /** The admin user mapper. */
     @Autowired
@@ -48,5 +53,18 @@ public class RealEstateAdminUserService extends AbstractUserService {
     @Override
     protected RealEstateAdminUserDTO getUserDTO(final User admin) {
 	return mapper.toDto((RealEstateAdminUser) admin);
+    }
+    
+    /**
+     * Load real estate admin by name.
+     * @param name name
+     * @return RealEstateAdminUserDTO
+     */
+    @Secured("ROLE_REDADMIN")
+    public RealEstateAdminUserDTO
+	    loadRealEstateAdminUserByName(final String name) {
+	RealEstateAdminUserDTO redadmin = mapper
+		.toDto((RealEstateAdminUser) userDao.findUserByEmail(name));
+	return redadmin;
     }
 }

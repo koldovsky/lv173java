@@ -6,6 +6,8 @@
 <jsp:include page="../utils/jspheader.jsp" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/adminregister.css">
+	<script
+	src="${pageContext.request.contextPath}/resources/js/cabinet/redadmin.js"></script>
 <title>Work Place</title>
 
 
@@ -16,20 +18,21 @@
 		<div class="container">
 			<h1>REDAdmin work place</h1>
 			<div class="indexrow">
-				<div class="col-lg-4">
-				<h2>New order creation</h2>
+				<div class="col-lg-3">
 					<a href="${pageContext.request.contextPath}/order" class="btn btn-primary">Create new order</a>
 				</div>
-				<div class="col-lg-4">
-					<h2>View users</h2>
+				<div class="col-lg-3">				
 					<a href="${pageContext.request.contextPath}/users" class="btn btn-primary">View the users</a>
 				</div>
-				<div class="col-lg-4">
-					<h2>View orders</h2>
+				<div class="col-lg-3">
 					<a href="${pageContext.request.contextPath}/orders" class="btn btn-primary">View the orders</a>
 				</div>
-
+				<div class="col-lg-3">
+					<a id="agencyEdit" href="${pageContext.request.contextPath}/agency/" class="btn btn-primary">Edit agency</a>
+				</div>
 			</div>
+
+
 
 		</div>
 	</div>
