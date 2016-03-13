@@ -21,7 +21,7 @@ import com.softserveinc.ita.redplatform.common.dto.CurrencyNbuDTO;
  * 
  */
 @Service
-public class CurrencyJson {
+public class CurrencyAmount {
     
     /**
      * NBU url.
@@ -35,20 +35,16 @@ public class CurrencyJson {
     private static String json = "&json";
     
     /**
-     * 
+     * @param date object
      * @return nbu amount
      */
-    public final double getCourse() {
+    public final double getCourse(final String date) {
 	ObjectMapper mapper = new ObjectMapper();
 	mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 	double amount = 0;
 	try {
-	    DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
-	    Calendar cal = Calendar.getInstance();
-	    String date = dateFormat.format(cal.getTime());
 	    CurrencyNbuDTO [] currency = mapper.readValue(
-		    new URL(nbuCurrency + date + json), 
-		    	CurrencyNbuDTO[].class);
+		    new URL(nbuCurrency + date + json), CurrencyNbuDTO[].class);
 	    amount = currency[0].getRate();
 	} catch (JsonGenerationException e) {
 	    e.printStackTrace();
@@ -59,5 +55,21 @@ public class CurrencyJson {
 	}
 	return amount;
     }
-
+    
+    /**
+     * 
+     * @return date.
+     */
+    public final String getDate() {
+	DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+	Calendar cal = Calendar.getInstance();
+	if (cal.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
+	    cal.add(Calendar.DATE, 1);
+	}
+	if (cal.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY) {
+	    cal.add(Calendar.DATE, 2);
+	}
+	return dateFormat.format(cal.getTime());
+    }
+    
 }

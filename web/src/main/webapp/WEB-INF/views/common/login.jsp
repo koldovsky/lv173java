@@ -27,7 +27,7 @@
                <fieldset>
                 <div class="input-group" id="email-form">
                 <span class="input-group-addon" id="icon-email"></span>
-					<input class="form-control" name='email' type="text" placeholder="Email...">
+					<input class="form-control" name='email' type="email" placeholder="Email...">
 				 </div>
 				<div class="input-group" id="email-form">
                  <span class="input-group-addon" id="icon-password"></span>

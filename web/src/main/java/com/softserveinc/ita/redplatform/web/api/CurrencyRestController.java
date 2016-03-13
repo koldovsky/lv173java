@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.softserveinc.ita.redplatform.business.service.CurrencyRateService;
 import com.softserveinc.ita.redplatform.common.dto.CurrencyRateDTO;
 import com.softserveinc.ita.redplatform.common.entity.CurrencyRate;
-import com.softserveinc.ita.redplatform.integration.CurrencyJson;
+import com.softserveinc.ita.redplatform.integration.CurrencyAmount;
 
 /**
  * Rest Controller for registration new Real Estate Agency.
@@ -36,7 +36,7 @@ public class CurrencyRestController {
      * currencyJson object.
      */
     @Autowired
-    private CurrencyJson currencyJson;
+    private CurrencyAmount currencyAmount;
     /**
      * Logger for CurrencyRate Controller class.
      */
@@ -93,7 +93,8 @@ public class CurrencyRestController {
 	    @RequestBody final CurrencyRateDTO currencyRateDTO) {
 
 	if (currencyRateDTO.isNbu()) {
-	    currencyRateDTO.setAmount(currencyJson.getCourse());
+	    currencyRateDTO.setAmount(currencyAmount.getCourse(
+		    currencyAmount.getDate()));
 	}
 	
 	Authentication auth = SecurityContextHolder.getContext().
