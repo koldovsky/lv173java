@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<jsp:include page="utils/jspheader.jsp" />
+<jsp:include page="../utils/jspheader.jsp" />
 <script
 	src="${pageContext.request.contextPath}/resources/js/lib/jquery/jquery.validate.min.js">
 	
@@ -15,10 +15,10 @@
 <script src="${pageContext.request.contextPath}/resources/js/agency.js"></script>
 <script
 	src="${pageContext.request.contextPath}/resources/js/agencyEdit.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/regexes.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/validationRules.js"></script>
 
 </head>
 <body>
-	<jsp:include page="utils/agency.jsp"></jsp:include>
+	<jsp:include page="../utils/agency.jsp"></jsp:include>
 </body>
 </html>
