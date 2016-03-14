@@ -3,7 +3,6 @@ package com.softserveinc.ita.redplatform.web.api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +20,6 @@ import com.softserveinc.ita.redplatform.web.datatables.DataTablesResponse;
  */
 @RestController
 public class OrderRestController {
-    
 
     /**
      * Order service.
@@ -73,18 +71,14 @@ public class OrderRestController {
 	DataTablesResponse<OrderDTO> dtResp =
 		new DataTablesResponse<OrderDTO>();
 	dtResp.setDraw(predicate.getDraw());
-	if (SecurityContextHolder.getContext().getAuthentication()
-		.getAuthorities()
-		.contains(new SimpleGrantedAuthority("ROLE_REDADMIN"))) {
-	    String email = SecurityContextHolder.getContext()
-		    .getAuthentication().getName();
-	    Long companyOrderNumber =
-		    orderService.countCompanyOrdersByEmail(email);
-	    dtResp.setTotalDisplayRecords(companyOrderNumber);
-	    dtResp.setTotalRecords(companyOrderNumber);
-	    dtResp.setData(
-		    orderService.loadCompanyOrdersByEmail(email, predicate));
-	}
+
+	String email = SecurityContextHolder.getContext().getAuthentication()
+		.getName();
+	Long companyOrderNumber = orderService.countCompanyOrdersByEmail(email);
+	dtResp.setTotalDisplayRecords(companyOrderNumber);
+	dtResp.setTotalRecords(companyOrderNumber);
+	dtResp.setData(orderService.loadCompanyOrdersByEmail(email, predicate));
+
 	return new ResponseEntity<DataTablesResponse<OrderDTO>>(dtResp,
 		HttpStatus.OK);
 

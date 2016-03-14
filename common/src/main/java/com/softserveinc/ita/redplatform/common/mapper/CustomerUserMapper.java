@@ -13,9 +13,9 @@ import com.softserveinc.ita.redplatform.common.entity.CustomerUser;
  * 
  */
 @Component
-public class CustomerUserMapper implements 
-	GenericMapper<CustomerUser, CustomerUserDTO> {
-	
+public class CustomerUserMapper
+	implements GenericMapper<CustomerUser, CustomerUserDTO> {
+
     /**
      * Address mapper for conversion between DTO and entity.
      */
@@ -31,15 +31,19 @@ public class CustomerUserMapper implements
 	customerUserDTO.setCreatedDate(customerUser.getCreatedDate());
 	customerUserDTO.setPhone(customerUser.getPhone());
 	customerUserDTO.setPassport(customerUser.getPassport());
-	customerUserDTO.setIndividualTaxNumber(
-		customerUser.getIndividualTaxNumber());
+	customerUserDTO
+		.setIndividualTaxNumber(customerUser.getIndividualTaxNumber());
 	customerUserDTO.setId(customerUser.getId());
-	customerUserDTO.setAddress(addressMapper.toDto(customerUser.getAddress()));
+	customerUserDTO
+		.setAddress(addressMapper.toDto(customerUser.getAddress()));
 	return customerUserDTO;
     }
 
     @Override
     public final CustomerUser toEntity(final CustomerUserDTO customerUserDTO) {
+	if (customerUserDTO == null) {
+	    return null;
+	}
 	CustomerUser customerUser = new CustomerUser();
 	customerUser.setFirstName(customerUserDTO.getFirstName());
 	customerUser.setLastName(customerUserDTO.getLastName());
@@ -51,7 +55,7 @@ public class CustomerUserMapper implements
 		customerUserDTO.getIndividualTaxNumber());
 	customerUser.setId(customerUserDTO.getId());
 	customerUser.setAddress(
-			addressMapper.toEntity(customerUserDTO.getAddress()));
+		addressMapper.toEntity(customerUserDTO.getAddress()));
 	return customerUser;
     }
 

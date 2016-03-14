@@ -61,10 +61,6 @@ public class OrderMapper implements GenericMapper<Order, OrderDTO> {
     @Override
     public final Order toEntity(final OrderDTO dto) {
 
-	if (dto.getAddress() == null || dto.getCustomer() == null) {
-	    return null;
-	}
-
 	Order order = new Order();
 	order.setId(dto.getId());
 	order.setArea(dto.getArea());

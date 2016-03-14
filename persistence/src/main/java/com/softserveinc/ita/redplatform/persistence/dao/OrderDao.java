@@ -17,7 +17,7 @@ public interface OrderDao extends GenericDao<Order, Long> {
     /**
      * Gets the company orders.
      *
-     * @param email the email
+     * @param email the current user's email
      * @param predicate the predicate
      * @return the company orders
      */
@@ -26,7 +26,7 @@ public interface OrderDao extends GenericDao<Order, Long> {
     /**
      * Count company orders.
      *
-     * @param email the email
+     * @param email the current user's email
      * @return the long
      */
     Long countCompanyOrders(String email);

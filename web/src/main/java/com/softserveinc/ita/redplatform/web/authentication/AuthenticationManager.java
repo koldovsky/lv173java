@@ -1,13 +1,11 @@
 package com.softserveinc.ita.redplatform.web.authentication;
 
 import java.io.IOException;
-import java.util.Collection;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.WebAttributes;
@@ -65,18 +63,8 @@ public class AuthenticationManager implements AuthenticationSuccessHandler {
      */
     protected final String
 	    determineTargetUrl(final Authentication authentication) {
-	@SuppressWarnings("unchecked")
-	Collection<GrantedAuthority> authorities =
-		(Collection<GrantedAuthority>) authentication.getAuthorities();
-	for (GrantedAuthority grantedAuthority : authorities) {
-	    if (grantedAuthority.getAuthority().equals("ROLE_USER")) {
-		return "/cabinet";
-	    } else if (grantedAuthority.getAuthority()//TODO: remove this checking
-		    .equals("ROLE_REDADMIN")) {
-		return "/cabinet";
-	    } else if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
-		return "/cabinet";
-	    }
+	if (authentication.isAuthenticated()) {
+	    return "/cabinet";
 	}
 	throw new IllegalStateException();
 
