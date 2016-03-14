@@ -1,5 +1,6 @@
 package com.softserveinc.ita.redplatform.integration;
 
+import org.apache.log4j.Logger;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
@@ -13,6 +14,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.softserveinc.ita.redplatform.common.dto.CurrencyAmountDTO;
+import com.softserveinc.ita.redplatform.common.entity.CurrencyRate;
 
 /**
  * Class for taking NBU course.
@@ -22,6 +24,10 @@ import com.softserveinc.ita.redplatform.common.dto.CurrencyAmountDTO;
  */
 @Service
 public class CurrencyAmount {
+    /**
+     * 
+     */
+    private static final Logger LOGGER = Logger.getLogger(CurrencyRate.class);
     
     /**
      * NBU url.
@@ -47,11 +53,11 @@ public class CurrencyAmount {
 		    new URL(nbuCurrency + date + json), CurrencyAmountDTO[].class);
 	    amount = currency[0].getRate();
 	} catch (JsonGenerationException e) {
-	    e.printStackTrace();
+	    LOGGER.info("JsonGeneration", e);
 	} catch (JsonMappingException e) {
-	    e.printStackTrace();
+	    LOGGER.info("JsonMappingExeption", e);
 	} catch (IOException e) {
-	    e.printStackTrace();
+	    LOGGER.info("IOExeption", e);
 	}
 	return amount;
     }

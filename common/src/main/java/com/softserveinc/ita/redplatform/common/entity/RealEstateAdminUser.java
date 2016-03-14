@@ -2,6 +2,7 @@ package com.softserveinc.ita.redplatform.common.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -34,7 +35,7 @@ public class RealEstateAdminUser extends User {
     /**
      * Many to One connection to Real Estate Agencies.
      */
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private RealEstateAgency agency;
 
     /**
