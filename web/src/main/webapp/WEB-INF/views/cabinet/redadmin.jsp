@@ -6,8 +6,8 @@
 <jsp:include page="../utils/jspheader.jsp" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/adminregister.css">
-<title>Work Place</title>
-
+<script	src="${pageContext.request.contextPath}/resources/js/cabinet/redadmin.js"></script>
+	<title>Work Place</title>
 
 </head>
 <body>
@@ -27,6 +27,11 @@
 				</div>
 				<div class="col-lg-3">
 					<a href="${pageContext.request.contextPath}/currency" class="btn btn-primary">Add currency rate</a>
+				</div>
+			</div>
+			<div class="indexrow">
+				<div class="col-lg-3">
+					<a id="agencyEdit" href="${pageContext.request.contextPath}/agency/" class="btn btn-primary">Edit agency</a>
 				</div>
 			</div>
 
