@@ -47,6 +47,17 @@ public class OrderDTO {
      * Created date.
      */
     private Date createdDate; 
+    
+    /** The in progress flag. */
+    private boolean isInProgress;
+
+    public final boolean isInProgress() {
+        return isInProgress;
+    }
+
+    public final void setInProgress(final boolean newInProgressFlag) {
+        isInProgress = newInProgressFlag;
+    }
 
     public final Long getId() {
 	return id;
@@ -112,5 +123,4 @@ public class OrderDTO {
     public final void setCreatedDate(final Date newCreatedDate) {
         this.createdDate = newCreatedDate;
     }
-
 }

@@ -32,6 +32,7 @@
 					<th>User e-mail</th>
 					<th>Area</th>
 					<th>Rooms Quantity</th>
+					<th>Status</th>
 					<th>Details</th>
 
 				</tr>

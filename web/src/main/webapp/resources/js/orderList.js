@@ -14,7 +14,7 @@ $(document).ready(function() {
 			{'data' : 'createdDate',
 			'render' : function(data,type,row){
 					var date = new Date(row['createdDate']);
-					return moment(date).format('YYYY-MM-DD HH:mm:ss');
+					return moment(date).format('YYYY-MM-DD');
 				}
 			},
 
@@ -23,6 +23,7 @@ $(document).ready(function() {
 		    {'data' : 'customer.email'},
 		    {'data' : 'area'},
 		    {'data' : 'roomsQuantity'},
+		    {'data' : 'inProgress'},
 			{
 		    	"width" : '5%',
                 "orderable":      false,

@@ -42,4 +42,18 @@ public class InstallmentService {
 	}
 	return installments;
     }
+    
+    /**
+     * Gets the apartment cost.
+     *
+     * @param installments the installments
+     * @return the apartment cost
+     */
+    public double getApartmentCost(final List<Installment> installments) {
+	double cost = 0;
+	for (Installment installment : installments) {
+	    cost += installment.getAmount();
+	}
+	return cost;
+    }
 }

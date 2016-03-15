@@ -13,6 +13,7 @@ import com.softserveinc.ita.redplatform.common.dto.OrderDTO;
 import com.softserveinc.ita.redplatform.common.entity.CustomerUser;
 import com.softserveinc.ita.redplatform.common.entity.Installment;
 import com.softserveinc.ita.redplatform.common.entity.Order;
+import com.softserveinc.ita.redplatform.common.entity.Payment;
 import com.softserveinc.ita.redplatform.common.mapper.OrderMapper;
 import com.softserveinc.ita.redplatform.common.predicate.DataTablePredicate;
 import com.softserveinc.ita.redplatform.persistence.dao.CustomerUserDao;
@@ -28,10 +29,6 @@ import com.softserveinc.ita.redplatform.persistence.dao.OrderDao;
 @Secured("ROLE_REDADMIN")
 public class OrderService {
 
-    /** The order dao. */
-    @Autowired
-    private OrderDao orderDao;
-
     /** The customer user service. */
     @Autowired
     private CustomerUserService customerUserService;
@@ -39,12 +36,20 @@ public class OrderService {
     /** The installment service. */
     @Autowired
     private InstallmentService installmentService;
+    
+    /** The payment service. */
+    @Autowired
+    private PaymentService paymentService;
 
     /**
      * CutomerUser Dao.
      */
     @Autowired
     private CustomerUserDao customerUserDao;
+    
+    /** The order dao. */
+    @Autowired
+    private OrderDao orderDao;
 
     /** The mapper. */
     @Autowired
@@ -67,7 +72,6 @@ public class OrderService {
 	order.setInstallments(installments);
 	orderDao.save(order);
 	return mapper.toDto(order);
-
     }
 
     /**
@@ -126,11 +130,27 @@ public class OrderService {
 	    final DataTablePredicate predicate) {
 	List<Order> orders = orderDao.loadCompanyOrders(email, predicate);
 	LinkedList<OrderDTO> orderDTOs = new LinkedList<>();
+	OrderDTO orderDTO;
 	for (Order order : orders) {
-	    orderDTOs.add(mapper.toDto(order));
+	    orderDTO = mapper.toDto(order);
+	    orderDTO.setInProgress(isInProgress(order));
+	    orderDTOs.add(orderDTO);
 	}
 	return orderDTOs;
 
+    }
+    
+    /**
+     * Checks if order is in progress.
+     *
+     * @param order the order
+     * @return true, if order is in progress
+     */
+    public boolean isInProgress(final Order order) {
+	List<Installment> installments = order.getInstallments();
+	List<Payment> payments = order.getPayments();
+	return installmentService.getApartmentCost(installments) 
+		- paymentService.getTotalPaidAmount(payments) > 0;
     }
 
 }

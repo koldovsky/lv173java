@@ -33,7 +33,7 @@ public class PaymentService {
 	private PaymentMapper mapper;
 
 	/**
-	 * Method return payments list by order id.
+	 * Method returns payments list by order id.
 	 * 
 	 * @param id
 	 *            order id
@@ -45,6 +45,20 @@ public class PaymentService {
 			payments.add(mapper.toDto(payment));
 		}
 		return payments;
+	}
+	
+	/**
+	 * Gets the total paid amount.
+	 *
+	 * @param payments the payments
+	 * @return the total paid amount
+	 */
+	public double getTotalPaidAmount(final List<Payment> payments) {
+	    	double total = 0;
+	    	for (Payment payment : payments) {
+	    	    total += payment.getAmount();
+	    	}
+	    	return total;
 	}
 
 }
