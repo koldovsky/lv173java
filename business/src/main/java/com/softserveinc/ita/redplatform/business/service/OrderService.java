@@ -152,5 +152,17 @@ public class OrderService {
 	return installmentService.getApartmentCost(installments) 
 		- paymentService.getTotalPaidAmount(payments) > 0;
     }
+    
+	/**
+	 * Method return order by order id.
+	 * 
+	 * @param id
+	 *            order id
+	 * @return oder order
+	 */
+    @Transactional
+	public Order getOrderById(final Long id) {
+		return orderDao.findById(id);
+	}
 
 }

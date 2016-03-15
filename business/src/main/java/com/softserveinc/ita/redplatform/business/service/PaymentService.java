@@ -5,11 +5,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.softserveinc.ita.redplatform.common.dto.PaymentDTO;
+import com.softserveinc.ita.redplatform.common.entity.Order;
 import com.softserveinc.ita.redplatform.common.entity.Payment;
 import com.softserveinc.ita.redplatform.common.mapper.PaymentMapper;
-import com.softserveinc.ita.redplatform.persistence.dao.PaymentDao;
 
 /**
  * Payment Service.
@@ -24,7 +25,7 @@ public class PaymentService {
 	 * Payment dao.
 	 */
 	@Autowired
-	private PaymentDao paymentDao;
+	private OrderService orderService;
 
 	/**
 	 * Payment mapper.
@@ -39,9 +40,11 @@ public class PaymentService {
 	 *            order id
 	 * @return list of payments
 	 */
+	@Transactional
 	public List<PaymentDTO> getPayments(final Long id) {
 		List<PaymentDTO> payments = new LinkedList<>();
-		for (Payment payment : paymentDao.getPaymentsByOrderId(id)) {
+		Order order = orderService.getOrderById(id);
+		for (Payment payment : order.getPayments()) {
 			payments.add(mapper.toDto(payment));
 		}
 		return payments;
