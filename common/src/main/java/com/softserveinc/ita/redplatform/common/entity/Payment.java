@@ -48,6 +48,11 @@ public class Payment extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "orderId")
     private Order order;
+    
+    /**
+     * Path or an URI of picture that has been attached. 
+     */
+    private String picturePath;
 
     /**
      * Get amount.
@@ -119,6 +124,14 @@ public class Payment extends BaseEntity {
      */
     public final void setOrder(final Order newOrder) {
 	this.order = newOrder;
+    }
+
+    public final String getPicturePath() {
+        return picturePath;
+    }
+
+    public final void setPicturePath(final String newPicturePath) {
+        this.picturePath = newPicturePath;
     }
 
 }

@@ -2,52 +2,86 @@ package com.softserveinc.ita.redplatform.common.dto;
 
 import java.util.Date;
 
-import com.softserveinc.ita.redplatform.common.entity.State;
+import com.softserveinc.ita.redplatform.common.entity.CurrencyRate;
+import com.softserveinc.ita.redplatform.common.entity.Order;
 
 /**
- * Payment DTO.
+ * The class PaymentDTO.
  * 
- * @author Hryhorii
- *
+ * @author Bulhakov Alex
  */
 public class PaymentDTO {
-	/**
-	 * Amount.
-	 */
-	private double amount;
-	
-	/**
-	 * State.
-	 */
-	private State state;
-	
-	/**
-	 * Created date.
-	 */
-	private Date createdDate;
 
-	public final double getAmount() {
-		return amount;
-	}
+    /** The amount. */
+    private double amount;
+    
+    /** The order. */
+    private Order order;
+    
+    /** The currency rate. */
+    private CurrencyRate currencyRate;
+    
+    /** Path or an URI of picture that has been attached.  */
+    private String picturePath;
+    
+    /** Date created.  */
+    private Date createdDate;
 
-	public final void setAmount(final double newAmount) {
-		this.amount = newAmount;
-	}
+    /**
+     * Gets the amount.
+     *
+     * @return the amount
+     */
+    public final double getAmount() {
+        return amount;
+    }
 
-	public final State getState() {
-		return state;
-	}
 
-	public final void setState(final State newState) {
-		this.state = newState;
-	}
+    /**
+     * Sets the amount.
+     *
+     * @param newAmount the new amount
+     */
+    public final void setAmount(final double newAmount) {
+        amount = newAmount;
+    }
 
-	public final Date getCreatedDate() {
-		return createdDate;
-	}
+    public final CurrencyRate getCurrencyRate() {
+        return currencyRate;
+    }
 
-	public final void setCreatedDate(final Date newCreatedDate) {
-		this.createdDate = newCreatedDate;
-	}
 
+    public final void setCurrencyRate(final CurrencyRate newCurrencyRate) {
+        this.currencyRate = newCurrencyRate;
+    }
+
+
+    public final String getPicturePath() {
+        return picturePath;
+    }
+
+
+    public final void setPicturePath(final String newPicturePath) {
+        this.picturePath = newPicturePath;
+    }
+
+
+    public final Date getCreatedDate() {
+        return createdDate;
+    }
+
+
+    public final void setCreatedDate(final Date newCreatedDate) {
+        this.createdDate = newCreatedDate;
+    }
+
+
+    public final Order getOrder() {
+        return order;
+    }
+
+
+    public final void setOrder(final Order newOrder) {
+        this.order = newOrder;
+    }
 }
