@@ -2,6 +2,7 @@ package com.softserveinc.ita.redplatform.common.mapper;
 
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.softserveinc.ita.redplatform.common.dto.PaymentDTO;
@@ -15,13 +16,18 @@ import com.softserveinc.ita.redplatform.common.entity.Payment;
 @Component
 public class PaymentMapper 
 	implements GenericMapper<Payment, PaymentDTO> {
+	
+	/** 
+	 * Currency rate mapper.
+	 */
+	@Autowired
+	private CurrencyRateMapper currencyRateMapper;
 
     @Override
     public final PaymentDTO toDto(final Payment entity) {
 	PaymentDTO dto = new PaymentDTO();
 	dto.setAmount(entity.getAmount());
-	dto.setOrder(entity.getOrder());
-	dto.setCurrencyRate(entity.getCurrencyRate());
+	dto.setCurrencyRate(currencyRateMapper.toDto(entity.getCurrencyRate()));
 	dto.setPicturePath(entity.getPicturePath());
 	dto.setCreatedDate(entity.getCreatedDate());
 	return dto;
@@ -31,7 +37,7 @@ public class PaymentMapper
     public final Payment toEntity(final PaymentDTO dto) {
 	Payment entity = new Payment();
 	entity.setAmount(dto.getAmount());
-	entity.setCurrencyRate(dto.getCurrencyRate());
+	entity.setCurrencyRate(currencyRateMapper.toEntity(dto.getCurrencyRate()));
 	entity.setOrder(dto.getOrder());
 	return entity;
     }

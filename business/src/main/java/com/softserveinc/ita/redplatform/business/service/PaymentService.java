@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.softserveinc.ita.redplatform.business.statistics.PaymentsStatistics;
 import com.softserveinc.ita.redplatform.common.dto.PaymentDTO;
 import com.softserveinc.ita.redplatform.common.entity.Order;
 import com.softserveinc.ita.redplatform.common.entity.Payment;
@@ -32,22 +33,34 @@ public class PaymentService {
 	 */
 	@Autowired
 	private PaymentMapper mapper;
+	
+	/**
+	 * Installment Service.
+	 */
+	@Autowired
+	private InstallmentService installmentService;
 
 	/**
-	 * Method returns payments list by order id.
+	 * Method generate payments statistic for order by order id.
 	 * 
 	 * @param id
 	 *            order id
-	 * @return list of payments
+	 * @return payment statistic
 	 */
 	@Transactional
-	public List<PaymentDTO> getPayments(final Long id) {
-		List<PaymentDTO> payments = new LinkedList<>();
+	public PaymentsStatistics generateStatistics(final Long id) {
+		PaymentsStatistics statistic = new PaymentsStatistics();
 		Order order = orderService.getOrderById(id);
-		for (Payment payment : order.getPayments()) {
-			payments.add(mapper.toDto(payment));
+		List<Payment> payments = order.getPayments();
+		List<PaymentDTO> paymentDTOs = new LinkedList<PaymentDTO>();
+		for (Payment payment : payments) {
+			paymentDTOs.add(mapper.toDto(payment));
 		}
-		return payments;
+		statistic.setApartmentPrice(
+				installmentService.getApartmentCost(order.getInstallments()));
+		statistic.setTotalPaidAmount(getTotalPaidAmount(payments));
+		statistic.setPayments(paymentDTOs);
+		return statistic;
 	}
 	
 	/**

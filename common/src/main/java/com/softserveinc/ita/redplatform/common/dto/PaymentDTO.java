@@ -2,7 +2,6 @@ package com.softserveinc.ita.redplatform.common.dto;
 
 import java.util.Date;
 
-import com.softserveinc.ita.redplatform.common.entity.CurrencyRate;
 import com.softserveinc.ita.redplatform.common.entity.Order;
 
 /**
@@ -19,7 +18,7 @@ public class PaymentDTO {
     private Order order;
     
     /** The currency rate. */
-    private CurrencyRate currencyRate;
+    private CurrencyRateDTO currencyRateDTO;
     
     /** Path or an URI of picture that has been attached.  */
     private String picturePath;
@@ -46,13 +45,13 @@ public class PaymentDTO {
         amount = newAmount;
     }
 
-    public final CurrencyRate getCurrencyRate() {
-        return currencyRate;
+    public final CurrencyRateDTO getCurrencyRate() {
+        return currencyRateDTO;
     }
 
 
-    public final void setCurrencyRate(final CurrencyRate newCurrencyRate) {
-        this.currencyRate = newCurrencyRate;
+    public final void setCurrencyRate(final CurrencyRateDTO newCurrencyRate) {
+        this.currencyRateDTO = newCurrencyRate;
     }
 
 
