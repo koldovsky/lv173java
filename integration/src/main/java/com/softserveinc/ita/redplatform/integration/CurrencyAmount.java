@@ -9,9 +9,7 @@ import java.util.Calendar;
 
 import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.softserveinc.ita.redplatform.common.dto.CurrencyAmountDTO;
 import com.softserveinc.ita.redplatform.common.entity.CurrencyRate;
@@ -28,45 +26,26 @@ public class CurrencyAmount {
      * 
      */
     private static final Logger LOGGER = Logger.getLogger(CurrencyRate.class);
-    
+
     /**
      * NBU url.
      */
     private static String nbuCurrency = "http://bank.gov.ua/NBUStatService/"
-    	+ "v1/statdirectory/exchange?valcode=USD&date=";
-    
+	    + "v1/statdirectory/exchange?valcode=USD&date=";
+
     /**
      * ending of NBU url.
      */
     private static String json = "&json";
-    
+
     /**
-     * @param date object
+     *
      * @return nbu amount
      */
-    public final double getCourse(final String date) {
+    public final double getRate() {
 	ObjectMapper mapper = new ObjectMapper();
 	mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 	double amount = 0;
-	try {
-	    CurrencyAmountDTO [] currency = mapper.readValue(
-		    new URL(nbuCurrency + date + json), CurrencyAmountDTO[].class);
-	    amount = currency[0].getRate();
-	} catch (JsonGenerationException e) {
-	    LOGGER.info("JsonGeneration", e);
-	} catch (JsonMappingException e) {
-	    LOGGER.info("JsonMappingExeption", e);
-	} catch (IOException e) {
-	    LOGGER.info("IOExeption", e);
-	}
-	return amount;
-    }
-    
-    /**
-     * 
-     * @return date.
-     */
-    public final String getDate() {
 	DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
 	Calendar cal = Calendar.getInstance();
 	if (cal.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
@@ -75,7 +54,14 @@ public class CurrencyAmount {
 	if (cal.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY) {
 	    cal.add(Calendar.DATE, 2);
 	}
-	return dateFormat.format(cal.getTime());
+	String date = dateFormat.format(cal.getTime());
+	try {
+	    CurrencyAmountDTO[] currency = mapper.readValue(
+		    new URL(nbuCurrency + date + json), CurrencyAmountDTO[].class);
+	    amount = currency[0].getRate();
+	} catch (IOException e) {
+	    LOGGER.info("Error with parsing currency rate", e);
+	}
+	return amount;
     }
-    
 }

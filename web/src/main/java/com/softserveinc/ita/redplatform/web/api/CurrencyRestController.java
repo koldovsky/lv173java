@@ -2,7 +2,6 @@ package com.softserveinc.ita.redplatform.web.api;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -21,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.softserveinc.ita.redplatform.business.service.CurrencyRateService;
 import com.softserveinc.ita.redplatform.common.dto.CurrencyRateDTO;
 import com.softserveinc.ita.redplatform.common.entity.CurrencyRate;
-import com.softserveinc.ita.redplatform.integration.CurrencyAmount;
 
 /**
  * Rest Controller for registration new Real Estate Agency.
@@ -31,18 +29,13 @@ import com.softserveinc.ita.redplatform.integration.CurrencyAmount;
  */
 @RestController
 public class CurrencyRestController {
-
-    /**
-     * currencyJson object.
-     */
-    @Autowired
-    private CurrencyAmount currencyAmount;
+   
     /**
      * Logger for CurrencyRate Controller class.
      */
     private static final Logger LOGGER = 
 	    Logger.getLogger(AgencyRestController.class);
-
+    
     /**
      * currencyRateService object.
      */
@@ -91,17 +84,11 @@ public class CurrencyRestController {
     @RequestMapping(value = "currency", method = RequestMethod.POST)
     public final ResponseEntity<CurrencyRateDTO> addCurrency(
 	    @RequestBody final CurrencyRateDTO currencyRateDTO) {
-
-	if (currencyRateDTO.isNbu()) {
-	    currencyRateDTO.setAmount(currencyAmount.getCourse(
-		    currencyAmount.getDate()));
-	}
 	
 	Authentication auth = SecurityContextHolder.getContext().
 		getAuthentication();
 	currencyRateService.create(currencyRateDTO, auth.getName());
-
 	return new ResponseEntity<CurrencyRateDTO>(currencyRateDTO, HttpStatus.OK);
     }
-
+    
 }

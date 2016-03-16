@@ -11,6 +11,7 @@ import com.softserveinc.ita.redplatform.common.dto.CurrencyRateDTO;
 import com.softserveinc.ita.redplatform.common.entity.CurrencyRate;
 import com.softserveinc.ita.redplatform.common.entity.RealEstateAdminUser;
 import com.softserveinc.ita.redplatform.common.mapper.CurrencyRateMapper;
+import com.softserveinc.ita.redplatform.integration.CurrencyAmount;
 import com.softserveinc.ita.redplatform.persistence.dao.CurrencyRateDao;
 
 /**
@@ -21,13 +22,19 @@ import com.softserveinc.ita.redplatform.persistence.dao.CurrencyRateDao;
 @Service
 @Transactional
 public class CurrencyRateService {
-    
+
     /**
-     *  User service.
+     * currencyJson object.
+     */
+    @Autowired
+    private CurrencyAmount currencyAmount;
+
+    /**
+     * User service.
      */
     @Autowired
     private UserService userService;
-    
+
     /** The currency dao. */
     @Autowired
     private CurrencyRateDao currencyRateDao;
@@ -35,7 +42,7 @@ public class CurrencyRateService {
     /** The mapper. */
     @Autowired
     private CurrencyRateMapper currencyRateMapper;
-    
+
     /**
      * 
      * @return list of currency rates
@@ -43,48 +50,55 @@ public class CurrencyRateService {
     public List<CurrencyRate> findAllCurrency() {
 	return currencyRateDao.findAll();
     };
-    
+
     /**
      * 
-     * @param currencyRateDTO object
-     * @param email of authentication user
+     * @param currencyRateDTO
+     *            object
+     * @param email
+     *            of authentication user
      */
     @Transactional
-    public void create(final CurrencyRateDTO currencyRateDTO, 
+    public void create(final CurrencyRateDTO currencyRateDTO,
 	    final String email) {
-	CurrencyRate currencyRate = currencyRateMapper
-		.toEntity(currencyRateDTO);
-	RealEstateAdminUser redAdmin = (RealEstateAdminUser)
-		userService.loadUserByEmail(email);
+	if (currencyRateDTO.isNbu()) {
+	    currencyRateDTO.setAmount(currencyAmount.getRate());
+	}
+	CurrencyRate currencyRate = currencyRateMapper.toEntity(currencyRateDTO);
+	RealEstateAdminUser redAdmin = 
+			(RealEstateAdminUser) userService.loadUserByEmail(email);
 	currencyRate.setReAgency(redAdmin.getAgency());
 	currencyRateDao.save(currencyRate);
     }
-    
+
     /**
      * 
-     * @param currencyRateDTO object
+     * @param currencyRateDTO
+     *            object
      */
     public void update(final CurrencyRateDTO currencyRateDTO) {
-	CurrencyRate currencyRate = currencyRateMapper
-		.toEntity(currencyRateDTO);
+	CurrencyRate currencyRate = currencyRateMapper.toEntity(currencyRateDTO);
 	currencyRateDao.update(currencyRate);
     }
-    
+
     /**
      * 
-     * @param currencyRateDTO object
+     * @param currencyRateDTO
+     *            object
      */
     public void delete(final CurrencyRateDTO currencyRateDTO) {
-	CurrencyRate currencyRate = currencyRateMapper
-		.toEntity(currencyRateDTO);
+	CurrencyRate currencyRate = currencyRateMapper.toEntity(currencyRateDTO);
 	currencyRateDao.remove(currencyRate);
     }
+
     /**
      * 
-     * @param fromDate parameter
+     * @param fromDate
+     *            parameter
      * @return object of currencyRate
      */
     public CurrencyRate findCurrencyByFromDate(final Date fromDate) {
 	return currencyRateDao.findCurrencyFromDate(fromDate);
     };
+
 }
