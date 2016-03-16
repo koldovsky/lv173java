@@ -48,15 +48,15 @@ public class OrderDTO {
      */
     private Date createdDate; 
     
-    /** The in progress flag. */
-    private boolean isInProgress;
+    /** The status. */
+    private String status;
 
-    public final boolean isInProgress() {
-        return isInProgress;
+    public final String getStatus() {
+        return status;
     }
 
-    public final void setInProgress(final boolean newInProgressFlag) {
-        isInProgress = newInProgressFlag;
+    public final void setStatus(final String newStatus) {
+        status = newStatus;
     }
 
     public final Long getId() {

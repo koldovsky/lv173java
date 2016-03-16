@@ -133,11 +133,27 @@ public class OrderService {
 	OrderDTO orderDTO;
 	for (Order order : orders) {
 	    orderDTO = mapper.toDto(order);
-	    orderDTO.setInProgress(isInProgress(order));
+	    orderDTO.setStatus(getOrderStatus(order).toString());
 	    orderDTOs.add(orderDTO);
 	}
 	return orderDTOs;
 
+    }
+    
+    /**
+     * Gets the order status.
+     *
+     * @param order the order
+     * @return the order status
+     */
+    public OrderStatus getOrderStatus(final Order order) {
+	if (isInProgress(order)) {
+	    if (isMissedFulfillment(order)) {
+		return OrderStatus.MISSED_FULFILLMENT;
+	    }
+	    return OrderStatus.IN_PROGRESS;
+	}
+	return OrderStatus.FINISHED;
     }
     
     /**
@@ -146,11 +162,36 @@ public class OrderService {
      * @param order the order
      * @return true, if order is in progress
      */
-    public boolean isInProgress(final Order order) {
+    private boolean isInProgress(final Order order) {
 	List<Installment> installments = order.getInstallments();
 	List<Payment> payments = order.getPayments();
 	return installmentService.getApartmentCost(installments) 
 		- paymentService.getTotalPaidAmount(payments) > 0;
+    }
+    
+    /**
+     * Checks if order is missed fulfillment.
+     *
+     * @param order the order
+     * @return true, if order is missed fulfillment
+     */
+    private boolean isMissedFulfillment(final Order order) {
+	List<Installment> installments = order.getInstallments();
+	List<Payment> payments = order.getPayments();
+	return paymentService.getPaidAmountTillNow(payments)
+		- installmentService.getInstallmentsAmountTillNow(installments) < 0;
+    }
+    
+    /**
+     * Represents order status.
+     */
+    private enum OrderStatus {
+	/** The in progress status. */
+	IN_PROGRESS, 
+	/** The finished status. */
+	FINISHED, 
+	/** The missed fulfillment status. */
+	MISSED_FULFILLMENT;
     }
     
 	/**

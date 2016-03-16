@@ -1,5 +1,6 @@
 package com.softserveinc.ita.redplatform.business.service;
 
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -76,5 +77,23 @@ public class PaymentService {
 	    	}
 	    	return total;
 	}
+	
 
+	/**
+	 * Gets the paid amount till now.
+	 *
+	 * @param payments the payments
+	 * @return the paid amount till now
+	 */
+	public double getPaidAmountTillNow(
+		final List<Payment> payments) {
+	    	Date now = new Date();
+		double amount = 0;
+		for (Payment payment : payments) {
+		    if (payment.getCreatedDate().before(now)) {
+			amount += payment.getAmount();
+		    }
+		}
+		return amount;
+	}
 }

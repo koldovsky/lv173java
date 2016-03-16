@@ -23,18 +23,21 @@ $(document).ready(function() {
 		    {'data' : 'customer.email'},
 		    {'data' : 'area'},
 		    {'data' : 'roomsQuantity'},
-		    {'data' : 'inProgress',
+		    {'data' : 'status',
 			 'orderable' : false,
 			 'render' : function (data, type, row) {
 				 	var status;
 				 	var labelClass;
-				 	if (row['inProgress']) {
+				 	if (row['status'] === 'IN_PROGRESS') {
 				 		status = 'in progress';
 				 		labelClass = 'label-info';
+				 	} else if (row['status'] === 'MISSED_FULFILLMENT') {
+				 		status = 'missed fulfillment';
+				 		labelClass = 'label-danger';
 				 	} else {
 				 		status = 'finished';
 				 		labelClass = 'label-success';
-				 		}
+				 	}
 				 	return '<span class="label ' + labelClass + '">' + status + '</span>';
 				 }
 		    },
