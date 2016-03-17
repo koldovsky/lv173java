@@ -51,19 +51,12 @@ $(document).ready(function() {
 		    	 		    	'</div>' +
 		    	 		    '</div>'
 		     	}
-		    },
-			{
-		    	"width" : '5%',
-                "orderable":      false,
-                "data":           null,
-                "defaultContent": '<a href="#" class="details-control btn btn-info btn-sm">Details</a>'
-            }
+		    }
 		]
 	});
 	// Add event listener for opening and closing details
-    $('#table tbody').on('click', '.details-control', function () {
-        var tr = $(this).closest('tr');
-        var row = table.row( tr );
+    $('#table tbody').on('click', 'tr', function () {
+        var row = table.row($(this));
  
         if ( row.child.isShown() ) {
             // This row is already open - close it
