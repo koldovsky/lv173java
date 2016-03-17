@@ -52,15 +52,9 @@ public class PaymentService {
 	public PaymentsStatistics generateStatistics(final Long id) {
 		PaymentsStatistics statistic = new PaymentsStatistics();
 		Order order = orderService.getOrderById(id);
-		List<Payment> payments = order.getPayments();
-		List<PaymentDTO> paymentDTOs = new LinkedList<PaymentDTO>();
-		for (Payment payment : payments) {
-			paymentDTOs.add(mapper.toDto(payment));
-		}
 		statistic.setApartmentPrice(
 				installmentService.getApartmentCost(order.getInstallments()));
-		statistic.setTotalPaidAmount(getTotalPaidAmount(payments));
-		statistic.setPayments(paymentDTOs);
+		statistic.setTotalPaidAmount(getTotalPaidAmount(order.getPayments()));
 		return statistic;
 	}
 	
@@ -95,5 +89,21 @@ public class PaymentService {
 		    }
 		}
 		return amount;
+	}
+
+	/**
+	 * Get all payments for order by order id.
+	 * 
+	 * @param id
+	 *            order id
+	 * @return payments list
+	 */
+	@Transactional
+	public List<PaymentDTO> getPayments(final Long id) {
+		List<PaymentDTO> paymentDTOs = new LinkedList<>();
+		for (Payment payment : orderService.getOrderById(id).getPayments()) {
+			paymentDTOs.add(mapper.toDto(payment));
+		}
+		return paymentDTOs;
 	}
 }

@@ -4,6 +4,10 @@
 	height: 95%;
 }
 
+#container{
+	height:inherit;
+}
+
 body, html{
 	height:100%;
 }

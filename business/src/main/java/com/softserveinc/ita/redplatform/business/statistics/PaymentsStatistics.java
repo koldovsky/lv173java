@@ -1,9 +1,5 @@
 package com.softserveinc.ita.redplatform.business.statistics;
 
-import java.util.List;
-
-import com.softserveinc.ita.redplatform.common.dto.PaymentDTO;
-
 /**
  * Payment Statistic.
  * 
@@ -12,6 +8,10 @@ import com.softserveinc.ita.redplatform.common.dto.PaymentDTO;
  */
 public class PaymentsStatistics {
 
+	/**
+	 * Percentage.
+	 */
+	private static final int PERCENTAGE = 100;
 	/**
 	 * Total paid amount.
 	 */
@@ -26,11 +26,6 @@ public class PaymentsStatistics {
 	 * Left to pay amount.
 	 */
 	private double leftPayAmount;
-
-	/**
-	 * List of payments.
-	 */
-	private List<PaymentDTO> payments;
 
 	public final double getTotalPaidAmount() {
 		return totalPaidAmount;
@@ -66,19 +61,15 @@ public class PaymentsStatistics {
 		return leftPayAmount;
 	}
 
-	public final List<PaymentDTO> getPayments() {
-		return payments;
-	}
-
-	public final void setPayments(final List<PaymentDTO> newPayments) {
-		this.payments = newPayments;
-	}
-
 	/**
 	 * Method count the amount left to pay.
 	 */
 	private void countLeftPayAmount() {
 		leftPayAmount = apartmentPrice - totalPaidAmount;
+	}
+	
+	public final double getProgress() {
+		return totalPaidAmount / apartmentPrice * PERCENTAGE;
 	}
 
 }

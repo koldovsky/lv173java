@@ -78,7 +78,10 @@ public class PaymentDTO {
     public final Order getOrder() {
         return order;
     }
-
+    
+	public final double getAmoutAccordingToRate() {
+		return amount * currencyRateDTO.getAmount();
+	}
 
     public final void setOrder(final Order newOrder) {
         this.order = newOrder;
