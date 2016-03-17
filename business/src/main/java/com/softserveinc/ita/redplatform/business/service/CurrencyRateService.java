@@ -11,7 +11,7 @@ import com.softserveinc.ita.redplatform.common.dto.CurrencyRateDTO;
 import com.softserveinc.ita.redplatform.common.entity.CurrencyRate;
 import com.softserveinc.ita.redplatform.common.entity.RealEstateAdminUser;
 import com.softserveinc.ita.redplatform.common.mapper.CurrencyRateMapper;
-import com.softserveinc.ita.redplatform.integration.CurrencyAmount;
+import com.softserveinc.ita.redplatform.integration.CurrencyRateParser;
 import com.softserveinc.ita.redplatform.persistence.dao.CurrencyRateDao;
 
 /**
@@ -27,7 +27,7 @@ public class CurrencyRateService {
      * currencyJson object.
      */
     @Autowired
-    private CurrencyAmount currencyAmount;
+    private CurrencyRateParser currencyRateParser;
 
     /**
      * User service.
@@ -60,13 +60,13 @@ public class CurrencyRateService {
      */
     @Transactional
     public void create(final CurrencyRateDTO currencyRateDTO,
-	    final String email) {
+	    	final String email) {
 	if (currencyRateDTO.isNbu()) {
-	    currencyRateDTO.setAmount(currencyAmount.getRate());
+	    currencyRateDTO.setAmount(currencyRateParser.getRate());
 	}
 	CurrencyRate currencyRate = currencyRateMapper.toEntity(currencyRateDTO);
-	RealEstateAdminUser redAdmin = 
-			(RealEstateAdminUser) userService.loadUserByEmail(email);
+	RealEstateAdminUser redAdmin = (RealEstateAdminUser) 
+			userService.loadUserByEmail(email);
 	currencyRate.setReAgency(redAdmin.getAgency());
 	currencyRateDao.save(currencyRate);
     }
@@ -101,4 +101,42 @@ public class CurrencyRateService {
 	return currencyRateDao.findCurrencyFromDate(fromDate);
     };
 
+    /**
+     * load all currencies.
+     * 
+     * @return List<CurrencyRateDTO>
+     */
+    public List<CurrencyRate> loadAllCurrencies() {
+	return currencyRateDao.findAll();
+    }
+    
+    /**
+     * 
+     * @param email of RedAdmin.
+     * @return list of currencyRates
+     */
+    public List<CurrencyRate> loadAllCurrenciesByCompany(final String email) {
+	RealEstateAdminUser redAdmin = (RealEstateAdminUser) 
+			userService.loadUserByEmail(email);
+	return currencyRateDao.findAllCurrenciesByCompany(redAdmin.getAgency());
+    }
+    
+    /**
+     * 
+     * @return number of currencies
+     */
+    public long countAll() {
+	return currencyRateDao.countAll();
+    }
+    
+    /**
+     * 
+     * @param email of RedAdmin.
+     * @return number of company currencies
+     */
+    public long countAllCompanyCurrencies(final String email) {
+	RealEstateAdminUser redAdmin = (RealEstateAdminUser) 
+			userService.loadUserByEmail(email);
+	return currencyRateDao.countAllCompanyCurrencies(redAdmin.getAgency());
+    }
 }

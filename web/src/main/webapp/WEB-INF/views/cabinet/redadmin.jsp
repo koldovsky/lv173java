@@ -31,6 +31,9 @@
 			</div>
 			<div class="indexrow">
 				<div class="col-lg-3">
+					<a href="${pageContext.request.contextPath}/currencies" class="btn btn-primary">View currency rates</a>
+				</div>
+				<div class="col-lg-3">
 					<a id="agencyEdit" href="${pageContext.request.contextPath}/agency/" class="btn btn-primary">Edit agency</a>
 				</div>
 			</div>

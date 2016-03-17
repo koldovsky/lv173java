@@ -21,7 +21,7 @@ import com.softserveinc.ita.redplatform.common.entity.CurrencyRate;
  * 
  */
 @Service
-public class CurrencyAmount {
+public class CurrencyRateParser {
     /**
      * 
      */

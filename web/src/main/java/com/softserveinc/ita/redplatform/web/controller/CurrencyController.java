@@ -24,4 +24,14 @@ public class CurrencyController {
 	return "currencyRate";
     }
     
+    /**
+     * List of currencies.
+     * 
+     * @return currencies view.
+     */
+    @RequestMapping(value = "currencies", method = RequestMethod.GET)
+    public final String currencyListPage() {
+	return "currencies";
+    }
+    
 }

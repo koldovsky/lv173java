@@ -8,6 +8,7 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -15,11 +16,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.softserveinc.ita.redplatform.business.service.CurrencyRateService;
 import com.softserveinc.ita.redplatform.common.dto.CurrencyRateDTO;
 import com.softserveinc.ita.redplatform.common.entity.CurrencyRate;
+import com.softserveinc.ita.redplatform.common.predicate.DataTablePredicate;
+import com.softserveinc.ita.redplatform.web.datatables.DataTablesResponse;
 
 /**
  * Rest Controller for registration new Real Estate Agency.
@@ -89,6 +93,56 @@ public class CurrencyRestController {
 		getAuthentication();
 	currencyRateService.create(currencyRateDTO, auth.getName());
 	return new ResponseEntity<CurrencyRateDTO>(currencyRateDTO, HttpStatus.OK);
+    }
+
+    /**
+     * Returns User list.
+     * 
+     * @param draw
+     *            draw
+     * @param length
+     *            length
+     * @param start
+     *            start
+     * @param search
+     *            search text
+     * @param column
+     *            column index
+     * @param order
+     *            order type
+     * @return users list
+     */
+    @RequestMapping(value = "/api/currency", method = RequestMethod.GET)
+    public final ResponseEntity<DataTablesResponse<CurrencyRate>> getUserList(
+	    @RequestParam final int draw,
+	    @RequestParam final int length, @RequestParam final int start,
+	    @RequestParam(value = "search[value]") final String search,
+	    @RequestParam(value = "order[0][column]") final int column,
+	    @RequestParam(value = "order[0][dir]") final String order) {
+	DataTablePredicate predicate = new DataTablePredicate(
+		draw, start, length, column, order, search);
+	DataTablesResponse<CurrencyRate> dtResp = 
+		new DataTablesResponse<CurrencyRate>();
+	dtResp.setDraw(predicate.getDraw());
+	if (SecurityContextHolder.getContext().getAuthentication().getAuthorities()
+		.contains(new SimpleGrantedAuthority("ROLE_REDADMIN"))) {
+	    String email = SecurityContextHolder
+		    .getContext()
+		    .getAuthentication()
+		    .getName();
+	    dtResp.setTotalDisplayRecords(
+		    currencyRateService.countAllCompanyCurrencies(email));
+	    dtResp.setTotalRecords(currencyRateService.
+		    countAllCompanyCurrencies(email));
+	    dtResp.setData(currencyRateService.loadAllCurrenciesByCompany(email));
+	} else {
+	    dtResp.setTotalRecords(currencyRateService.countAll());
+	    dtResp.setTotalDisplayRecords(currencyRateService.countAll());
+	    dtResp.setData(currencyRateService.loadAllCurrencies());
+	}
+	return new ResponseEntity<DataTablesResponse<CurrencyRate>>(
+		dtResp, HttpStatus.OK);
+
     }
     
 }
