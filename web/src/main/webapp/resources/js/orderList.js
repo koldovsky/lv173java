@@ -41,6 +41,17 @@ $(document).ready(function() {
 				 	return '<span class="label ' + labelClass + '">' + status + '</span>';
 				 }
 		    },
+		    {'data' : 'progress',
+		     'render' : function(data, type, row) {
+		    	 	var progress = Math.round(row['progress'] * 100);
+		    	 	return '<div class="progress">' +
+		    	 	  			'<div class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0"' +
+		    	 				'aria-valuemax="100" aria-valuenow="' + progress + '" style="width:' + progress +'%">' +
+		    	 		    			progress + '%' +
+		    	 		    	'</div>' +
+		    	 		    '</div>'
+		     	}
+		    },
 			{
 		    	"width" : '5%',
                 "orderable":      false,

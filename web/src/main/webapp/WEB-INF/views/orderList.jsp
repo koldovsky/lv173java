@@ -33,8 +33,8 @@
 					<th>Area</th>
 					<th>Rooms Quantity</th>
 					<th>Status</th>
+					<th>Progress</th>
 					<th>Details</th>
-
 				</tr>
 			</thead>
 		</table>

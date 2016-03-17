@@ -19,7 +19,6 @@ import com.softserveinc.ita.redplatform.common.predicate.DataTablePredicate;
 import com.softserveinc.ita.redplatform.persistence.dao.CustomerUserDao;
 import com.softserveinc.ita.redplatform.persistence.dao.OrderDao;
 
-// TODO: Auto-generated Javadoc
 /**
  * Order Service.
  * 
@@ -134,6 +133,7 @@ public class OrderService {
 	for (Order order : orders) {
 	    orderDTO = mapper.toDto(order);
 	    orderDTO.setStatus(getOrderStatus(order).toString());
+	    orderDTO.setProgress(getProgress(order));
 	    orderDTOs.add(orderDTO);
 	}
 	return orderDTOs;
@@ -146,7 +146,7 @@ public class OrderService {
      * @param order the order
      * @return the order status
      */
-    public OrderStatus getOrderStatus(final Order order) {
+    private OrderStatus getOrderStatus(final Order order) {
 	if (isInProgress(order)) {
 	    if (isMissedFulfillment(order)) {
 		return OrderStatus.MISSED_FULFILLMENT;
@@ -192,6 +192,19 @@ public class OrderService {
 	FINISHED, 
 	/** The missed fulfillment status. */
 	MISSED_FULFILLMENT;
+    }
+    
+    /**
+     * Gets the progress.
+     *
+     * @param order the order
+     * @return the progress
+     */
+    private double getProgress(final Order order) {
+	List<Installment> installments = order.getInstallments();
+	List<Payment> payments = order.getPayments();
+	return paymentService.getPaidAmountTillNow(payments) 
+		/ installmentService.getApartmentCost(installments);
     }
     
 	/**

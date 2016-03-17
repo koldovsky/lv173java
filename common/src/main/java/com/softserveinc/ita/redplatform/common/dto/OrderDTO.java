@@ -50,6 +50,17 @@ public class OrderDTO {
     
     /** The status. */
     private String status;
+    
+    /** The progress. */
+    private double progress;
+
+    public final double getProgress() {
+        return progress;
+    }
+
+    public final void setProgress(final double newProgress) {
+        progress = newProgress;
+    }
 
     public final String getStatus() {
         return status;
