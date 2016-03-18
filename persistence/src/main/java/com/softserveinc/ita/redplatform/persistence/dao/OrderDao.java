@@ -5,7 +5,7 @@ import java.util.List;
 import com.softserveinc.ita.redplatform.common.entity.Order;
 import com.softserveinc.ita.redplatform.common.predicate.DataTablePredicate;
 
-// TODO: Auto-generated Javadoc
+
 /**
  * Dao interface for Order entity.
  * 
