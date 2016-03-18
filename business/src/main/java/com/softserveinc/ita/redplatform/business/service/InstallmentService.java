@@ -1,6 +1,5 @@
 package com.softserveinc.ita.redplatform.business.service;
 
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -56,23 +55,5 @@ public class InstallmentService {
 	    cost += installment.getAmount();
 	}
 	return cost;
-    }
-    
-    /**
-     * Gets the installments amount till now.
-     *
-     * @param installments the installments
-     * @return the installments amount till now
-     */
-    public double getInstallmentsAmountTillNow(
-	    final List<Installment> installments) {
-	Date now = new Date();
-	double amount = 0;
-	for (Installment installment : installments) {
-	    if (installment.getDate().before(now)) {
-		amount += installment.getAmount();
-	    }
-	}
-	return amount;
     }
 }
