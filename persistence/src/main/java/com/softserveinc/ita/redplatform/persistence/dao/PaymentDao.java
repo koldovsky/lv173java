@@ -10,4 +10,12 @@ import com.softserveinc.ita.redplatform.common.entity.Payment;
  */
 public interface PaymentDao extends GenericDao<Payment, Long> {
 
+	/**
+	 * Gets the paid amount.
+	 *
+	 * @param newOrderId the order id
+	 * @return the paid amount
+	 */
+	double getPaidAmount(Long newOrderId);
+
 }

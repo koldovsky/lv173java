@@ -13,16 +13,18 @@ import com.softserveinc.ita.redplatform.common.dto.OrderDTO;
 import com.softserveinc.ita.redplatform.common.entity.CustomerUser;
 import com.softserveinc.ita.redplatform.common.entity.Installment;
 import com.softserveinc.ita.redplatform.common.entity.Order;
-import com.softserveinc.ita.redplatform.common.entity.Payment;
 import com.softserveinc.ita.redplatform.common.mapper.OrderMapper;
 import com.softserveinc.ita.redplatform.common.predicate.DataTablePredicate;
 import com.softserveinc.ita.redplatform.persistence.dao.CustomerUserDao;
+import com.softserveinc.ita.redplatform.persistence.dao.InstallmentDao;
 import com.softserveinc.ita.redplatform.persistence.dao.OrderDao;
+import com.softserveinc.ita.redplatform.persistence.dao.PaymentDao;
 
 /**
  * Order Service.
  * 
  * @author Bulhakov Alex
+ * @author Ilona Yavorska
  */
 @Service
 @Secured("ROLE_REDADMIN")
@@ -35,20 +37,24 @@ public class OrderService {
     /** The installment service. */
     @Autowired
     private InstallmentService installmentService;
-    
-    /** The payment service. */
-    @Autowired
-    private PaymentService paymentService;
 
     /**
      * CutomerUser Dao.
      */
     @Autowired
     private CustomerUserDao customerUserDao;
-    
+
     /** The order dao. */
     @Autowired
     private OrderDao orderDao;
+
+    /** The installment dao. */
+    @Autowired
+    private InstallmentDao installmentDao;
+
+    /** The payment dao. */
+    @Autowired
+    private PaymentDao paymentDao;
 
     /** The mapper. */
     @Autowired
@@ -139,11 +145,12 @@ public class OrderService {
 	return orderDTOs;
 
     }
-    
+
     /**
      * Gets the order status.
      *
-     * @param order the order
+     * @param order
+     *            the order
      * @return the order status
      */
     private OrderStatus getOrderStatus(final Order order) {
@@ -155,68 +162,65 @@ public class OrderService {
 	}
 	return OrderStatus.FINISHED;
     }
-    
+
     /**
      * Checks if order is in progress.
      *
-     * @param order the order
+     * @param order
+     *            the order
      * @return true, if order is in progress
      */
     private boolean isInProgress(final Order order) {
-	List<Installment> installments = order.getInstallments();
-	List<Payment> payments = order.getPayments();
-	return installmentService.getApartmentCost(installments) 
-		- paymentService.getTotalPaidAmount(payments) > 0;
+	return installmentDao.getOrderCost(order.getId())
+		- paymentDao.getPaidAmount(order.getId()) > 0;
     }
-    
+
     /**
      * Checks if order is missed fulfillment.
      *
-     * @param order the order
+     * @param order
+     *            the order
      * @return true, if order is missed fulfillment
      */
     private boolean isMissedFulfillment(final Order order) {
-	List<Installment> installments = order.getInstallments();
-	List<Payment> payments = order.getPayments();
-	return paymentService.getPaidAmountTillNow(payments)
-		- installmentService.getInstallmentsAmountTillNow(installments) < 0;
+	return paymentDao.getPaidAmount(order.getId())
+		- installmentDao.getInstallmentAmountTillNow(order.getId()) < 0;
     }
-    
+
     /**
      * Represents order status.
      */
     private enum OrderStatus {
 	/** The in progress status. */
-	IN_PROGRESS, 
+	IN_PROGRESS,
 	/** The finished status. */
-	FINISHED, 
+	FINISHED,
 	/** The missed fulfillment status. */
 	MISSED_FULFILLMENT;
     }
-    
+
     /**
      * Gets the progress.
      *
-     * @param order the order
+     * @param order
+     *            the order
      * @return the progress
      */
     private double getProgress(final Order order) {
-	List<Installment> installments = order.getInstallments();
-	List<Payment> payments = order.getPayments();
-	return paymentService.getPaidAmountTillNow(payments) 
-		/ installmentService.getApartmentCost(installments);
+	return paymentDao.getPaidAmount(order.getId())
+		/ installmentDao.getOrderCost(order.getId());
     }
-    
-	/**
-	 * Method return order by order id.
-	 * 
-	 * @param id
-	 *            order id
-	 * @return oder order
-	 */
+
+    /**
+     * Method return order by order id.
+     * 
+     * @param id
+     *            order id
+     * @return oder order
+     */
     @Transactional
-	public Order getOrderById(final Long id) {
-		return orderDao.findById(id);
-	}
+    public Order getOrderById(final Long id) {
+	return orderDao.findById(id);
+    }
 
 }
