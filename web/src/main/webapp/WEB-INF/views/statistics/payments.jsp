@@ -21,53 +21,44 @@
 			<h2 class="text-center">Payments Statistics</h2>
 			<div class="row">
 				<div class="col-md-7">
-					<h3 class="center">
-						List of Payments
-						</h4>
-						<table id="table" class="display" cellspacing="0" width="100%">
-							<thead>
-								<tr>
-									<th>Date</th>
-									<th>Amount</th>
-									<th>Rate</th>
-									<th>Amount According to Rate</th>
-								</tr>
-							</thead>
-						</table>
+					<h3 class="center">List of Payments</h3>
+					<table id="table" class="display" cellspacing="0" width="100%">
+						<thead>
+							<tr>
+								<th>Date</th>
+								<th>Amount</th>
+								<th>Rate</th>
+								<th>Amount According to Rate</th>
+							</tr>
+						</thead>
+					</table>
 				</div>
-				<div class="col-md-5">
-					<div class="jumbotron">
-						<form class="form-horizontal">
-							<div class="form-group">
-								<div class="col-sm-6">
-									<p class="center form-control-static">Apartment Price :</p>
+				<div class="col-md-5" id="info">
+					<h3 class="center">Info</h3>
+					<table class="table table-striped table-bordered center">
+						<tr>
+							<td>Price</td>
+							<td id="apartmentPrice"></td>
+						</tr>
+						<tr>
+							<td>Total paid amount</td>
+							<td id="totalPaidAmount"></td>
+						</tr>
+						<tr>
+							<td>Total amount left to pay</td>
+							<td id="leftPayAmount"></td>
+						</tr>
+						<tr>
+							<td>Progress</td>
+							<td>
+								<div class="progress">
+									<div class="progress-bar progress-bar-info" role="progressbar"
+										aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"
+										id="progress" style="width: 50%">0% Complete</div>
 								</div>
-								<div class="col-sm-6">
-									<p id="apartmentPrice" class="center form-control-static">65000</p>
-								</div>
-							</div>
-						</form>
-						<form class="form-horizontal">
-							<div class="form-group">
-								<div class="col-sm-6">
-									<p class="center form-control-static">Total Paid Amount :</p>
-								</div>
-								<div class="col-sm-6">
-									<p id="totalPaidAmount" class="center form-control-static">65000</p>
-								</div>
-							</div>
-						</form>
-						<form class="form-horizontal">
-							<div class="form-group">
-								<div class="col-sm-6">
-									<p class="center form-control-static">Progress :</p>
-								</div>
-								<div class="col-sm-6">
-									<p id="progress" class="center form-control-static">65000</p>
-								</div>
-							</div>
-						</form>
-					</div>
+							</td>
+						</tr>
+					</table>
 				</div>
 			</div>
 		</div>

@@ -35,13 +35,16 @@ $(document).ready(function() {
 			"width" : '30%'
 		} ]
 	});
-	
+
 	$.ajax({
 		url : context + '/api/statistics/order/' + id + '/payments',
-		success : function(responseData, textStatus, jqXHR){
+		success : function(responseData, textStatus, jqXHR) {
 			$('#apartmentPrice').html(responseData.apartmentPrice);
 			$('#totalPaidAmount').html(responseData.totalPaidAmount);
-			$('#progress').html(Math.round(responseData.progress) + '%');
+			$('#leftPayAmount').html(responseData.leftPayAmount);
+			var progress = responseData.progress.toFixed(2);
+			$('#progress').html(progress + '%');
+			$('#progress').prop('style', 'width:' + progress + '%;')
 		}
 	});
 });
