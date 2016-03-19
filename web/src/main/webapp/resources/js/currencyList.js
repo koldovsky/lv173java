@@ -13,13 +13,13 @@ $(document).ready(function() {
 			{'data' : 'fromDate',
 			'render' : function(data,type,row){
 					var date = new Date(row['fromDate']);
-					return moment(date).format('YYYY-MM-DD HH:mm:ss');
+					return moment(date).format('YYYY-MM-DD');
 				}
 			},
 			{'data' : 'toDate',
 			'render' : function(data,type,row){
 					var date = new Date(row['toDate']);
-					return moment(date).format('YYYY-MM-DD HH:mm:ss');
+					return moment(date).format('YYYY-MM-DD');
 				}
 			}
 		]

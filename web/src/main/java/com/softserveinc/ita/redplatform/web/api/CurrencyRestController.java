@@ -131,18 +131,18 @@ public class CurrencyRestController {
 		    .getAuthentication()
 		    .getName();
 	    dtResp.setTotalDisplayRecords(
+		    currencyRateService.countAllCompanyCurrencies(email, predicate));
+	    dtResp.setTotalRecords(
 		    currencyRateService.countAllCompanyCurrencies(email));
-	    dtResp.setTotalRecords(currencyRateService.
-		    countAllCompanyCurrencies(email));
-	    dtResp.setData(currencyRateService.loadAllCurrenciesByCompany(email));
+	    dtResp.setData(currencyRateService.
+		    loadAllCurrenciesByCompany(email, predicate));
 	} else {
 	    dtResp.setTotalRecords(currencyRateService.countAll());
-	    dtResp.setTotalDisplayRecords(currencyRateService.countAll());
-	    dtResp.setData(currencyRateService.loadAllCurrencies());
+	    dtResp.setTotalDisplayRecords(currencyRateService.countAll(predicate));
+	    dtResp.setData(currencyRateService.loadAllCurrencies(predicate));
 	}
 	return new ResponseEntity<DataTablesResponse<CurrencyRate>>(
 		dtResp, HttpStatus.OK);
-
     }
     
 }

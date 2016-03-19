@@ -11,6 +11,7 @@ import com.softserveinc.ita.redplatform.common.dto.CurrencyRateDTO;
 import com.softserveinc.ita.redplatform.common.entity.CurrencyRate;
 import com.softserveinc.ita.redplatform.common.entity.RealEstateAdminUser;
 import com.softserveinc.ita.redplatform.common.mapper.CurrencyRateMapper;
+import com.softserveinc.ita.redplatform.common.predicate.DataTablePredicate;
 import com.softserveinc.ita.redplatform.integration.CurrencyRateParser;
 import com.softserveinc.ita.redplatform.persistence.dao.CurrencyRateDao;
 
@@ -42,14 +43,6 @@ public class CurrencyRateService {
     /** The mapper. */
     @Autowired
     private CurrencyRateMapper currencyRateMapper;
-
-    /**
-     * 
-     * @return list of currency rates
-     */
-    public List<CurrencyRate> findAllCurrency() {
-	return currencyRateDao.findAll();
-    };
 
     /**
      * 
@@ -100,25 +93,28 @@ public class CurrencyRateService {
     public CurrencyRate findCurrencyByFromDate(final Date fromDate) {
 	return currencyRateDao.findCurrencyFromDate(fromDate);
     };
-
+    
     /**
      * load all currencies.
-     * 
+     * @param predicate predicate
      * @return List<CurrencyRateDTO>
      */
-    public List<CurrencyRate> loadAllCurrencies() {
-	return currencyRateDao.findAll();
+    public List<CurrencyRate> loadAllCurrencies(
+	    	final DataTablePredicate predicate) {
+	return currencyRateDao.findAll(predicate);
     }
     
     /**
-     * 
+     * @param predicate predicate
      * @param email of RedAdmin.
      * @return list of currencyRates
      */
-    public List<CurrencyRate> loadAllCurrenciesByCompany(final String email) {
+    public List<CurrencyRate> loadAllCurrenciesByCompany(
+	    final String email, final DataTablePredicate predicate) {
 	RealEstateAdminUser redAdmin = (RealEstateAdminUser) 
 			userService.loadUserByEmail(email);
-	return currencyRateDao.findAllCurrenciesByCompany(redAdmin.getAgency());
+	return currencyRateDao.findAllCurrenciesByCompany(
+		redAdmin.getAgency(), predicate);
     }
     
     /**
@@ -130,6 +126,14 @@ public class CurrencyRateService {
     }
     
     /**
+     * @param predicate predicate
+     * @return number of currencies
+     */
+    public long countAll(final DataTablePredicate predicate) {
+	return currencyRateDao.countAll(predicate);
+    }
+    
+    /**
      * 
      * @param email of RedAdmin.
      * @return number of company currencies
@@ -138,5 +142,18 @@ public class CurrencyRateService {
 	RealEstateAdminUser redAdmin = (RealEstateAdminUser) 
 			userService.loadUserByEmail(email);
 	return currencyRateDao.countAllCompanyCurrencies(redAdmin.getAgency());
+    }
+    
+    /**
+     * @param predicate predicate
+     * @param email of RedAdmin.
+     * @return number of company currencies
+     */
+    public long countAllCompanyCurrencies(final String email, 
+	    final DataTablePredicate predicate) {
+	RealEstateAdminUser redAdmin = (RealEstateAdminUser) 
+			userService.loadUserByEmail(email);
+	return currencyRateDao.countAllCompanyCurrencies(redAdmin.getAgency(),
+		predicate);
     }
 }

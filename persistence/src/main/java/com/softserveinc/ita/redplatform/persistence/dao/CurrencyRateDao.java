@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.softserveinc.ita.redplatform.common.entity.CurrencyRate;
 import com.softserveinc.ita.redplatform.common.entity.RealEstateAgency;
+import com.softserveinc.ita.redplatform.common.predicate.DataTablePredicate;
 
 /**
  * Currency rate dao interface.
@@ -22,10 +23,12 @@ public interface CurrencyRateDao extends GenericDao<CurrencyRate, Long> {
     
     /**
      * find all currencies by some company.
+     * @param predicate predicate
      * @param reAgency real estte agency.
      * @return list of Currency Rates
      */
-    List<CurrencyRate> findAllCurrenciesByCompany(RealEstateAgency reAgency);
+    List<CurrencyRate> findAllCurrenciesByCompany(RealEstateAgency reAgency,
+	    DataTablePredicate predicate);
     
     /**
      * 
@@ -34,8 +37,30 @@ public interface CurrencyRateDao extends GenericDao<CurrencyRate, Long> {
     long countAll();
     
     /**
+     * @param predicate predicate
+     * @return number of currencies
+     */
+    long countAll(DataTablePredicate predicate);
+    
+    /**
      * @param reAgency real estte agency.
      * @return number of company currencies
      */
     long countAllCompanyCurrencies(RealEstateAgency reAgency);
+    
+    /**
+     * 
+     * @param reAgency reAgency
+     * @param predicate predicate
+     * @return number of company currencies
+     */
+    long countAllCompanyCurrencies(RealEstateAgency reAgency,
+	    DataTablePredicate predicate);
+    
+    /**
+     * 
+     * @param predicate predicate
+     * @return list of currency rates
+     */
+    List<CurrencyRate> findAll(DataTablePredicate predicate);
 }
