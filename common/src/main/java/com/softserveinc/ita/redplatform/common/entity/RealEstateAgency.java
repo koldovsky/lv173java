@@ -5,7 +5,6 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -40,7 +39,7 @@ public class RealEstateAgency extends BaseEntity {
 	private RealEstateAgency mainOffice;
 	
 	/** The branches. */
-	@OneToMany(mappedBy = "mainOffice", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "mainOffice")
 	private Set<RealEstateAgency> branches;
 	
 	/**

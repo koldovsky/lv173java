@@ -31,7 +31,7 @@ public abstract class BaseEntity {
   /**
    * Many to one mapping.
    */
-  @ManyToOne(fetch = FetchType.EAGER)
+  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "createdById", updatable = false)
   private User createdBy;
 
@@ -44,7 +44,7 @@ public abstract class BaseEntity {
   /**
   * Many to one mapping.
   */
-  @ManyToOne(fetch = FetchType.EAGER)
+  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "updatedById")
   private User updatedBy;
 
