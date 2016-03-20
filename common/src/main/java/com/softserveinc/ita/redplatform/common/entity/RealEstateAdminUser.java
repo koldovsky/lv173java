@@ -35,7 +35,7 @@ public class RealEstateAdminUser extends User {
     /**
      * Many to One connection to Real Estate Agencies.
      */
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     private RealEstateAgency agency;
 
     /**
