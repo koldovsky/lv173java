@@ -17,12 +17,13 @@ $(document).ready(function() {
 					return moment(date).format('YYYY-MM-DD');
 				}
 			},
-
+			
 			{'data' : 'customer.firstName'},
 		    {'data' : 'customer.lastName'},
 		    {'data' : 'customer.email'},
-		    {'data' : 'area'},
-		    {'data' : 'roomsQuantity'},
+		    {'data' : 'address.country'},
+		    {'data' : 'address.locality'},
+		    {'data' : 'address.additional'},
 		    {'data' : 'status',
 			 'orderable' : false,
 			 'render' : function (data, type, row) {
@@ -74,20 +75,16 @@ function format ( data ) {
     // `d` is the original data object for the row
     return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
         '<tr>'+
-            '<td>Description:</td>'+
-            '<td>'+data.description+'</td>'+
+            '<td>Area:</td>'+
+            '<td>'+data.area+'</td>'+
         '</tr>'+
         '<tr>'+
-            '<td>Country:</td>'+
-            '<td>'+data.address.country+'</td>'+
+            '<td>Rooms Quantity:</td>'+
+            '<td>'+data.roomsQuantity+'</td>'+
         '</tr>'+
         '<tr>'+
-            '<td>City:</td>'+
-            '<td>'+data.address.locality+'</td>'+
-        '</tr>'+
-        '<tr>'+
-            '<td>Address:</td>'+
-            '<td>'+data.address.additional+'</td>'
+        	'<td>Description:</td>'+
+        	'<td>'+data.description+'</td>'+
         '</tr>'
     '</table>';
 }
