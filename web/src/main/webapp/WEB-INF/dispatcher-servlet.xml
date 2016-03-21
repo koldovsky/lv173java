@@ -28,6 +28,11 @@
 			<value>.jsp</value>
 		</property>
 	</bean>
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- Maximum file size - 1 MB -->
+		<property name="maxUploadSize" value="1000000" />
+	</bean>
 
 	<mvc:annotation-driven>
 		<mvc:message-converters>
