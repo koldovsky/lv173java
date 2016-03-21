@@ -60,7 +60,7 @@ public class JPAOrderDao extends JPAGenericDao<Order, Long>
 	 */
 	@Override
 	public final Order getOrder(final Long id, final String email) {
-		return (Order) getEntityManager()
+		List<Order> list = (List<Order>) getEntityManager()
 				.createQuery(
 						"from " + Order.class.getName() + " as customOrder "
 								+ "where customOrder.id = :id and ( "
@@ -70,7 +70,11 @@ public class JPAOrderDao extends JPAGenericDao<Order, Long>
 								+ RealEstateAdminUser.class.getName()
 								+ " as admin where" + " admin.email = :email))")
 				.setParameter("id", id).setParameter("email", email)
-				.getSingleResult();
+				.getResultList();
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+		return null;
 	}
 
 }

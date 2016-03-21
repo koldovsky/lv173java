@@ -54,21 +54,27 @@ public class PaymentService {
     @Autowired
     private UserService userService;
 
-    /**
-     * Get all payments for order by order id.
-     * 
-     * @param id
-     *            order id
-     * @return payments list
-     */
-    @Transactional
-    public List<PaymentDTO> getPayments(final Long id) {
-	List<PaymentDTO> paymentDTOs = new LinkedList<>();
-	for (Payment payment : orderService.getOrderById(id).getPayments()) {
-	    paymentDTOs.add(mapper.toDto(payment));
+	/**
+	 * Get all payments for order by order id.
+	 * 
+	 * @param id
+	 *            order id
+	 * @param email
+	 *            user email
+	 * @return payments list
+	 */
+	@Transactional
+	public List<PaymentDTO> getPayments(final Long id, final String email) {
+		List<PaymentDTO> paymentDTOs = new LinkedList<>();
+		Order order = orderService.getOrder(id, email);
+		if (order != null) {
+			for (Payment payment : order.getPayments()) {
+				paymentDTOs.add(mapper.toDto(payment));
+			}
+			return paymentDTOs;
+		}
+		return null;
 	}
-	return paymentDTOs;
-    }
 
     /**
      * Creates the payment.

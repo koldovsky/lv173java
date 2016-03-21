@@ -73,7 +73,14 @@ public class PaymentRestController {
 	@RequestMapping(value = "api/order/{id}/payments",
 			method = RequestMethod.GET)
 	public final List<PaymentDTO> getPayments(@PathVariable final Long id) {
-		return paymentService.getPayments(id);
+		List<PaymentDTO> paymentDTOs =
+				paymentService.getPayments(id, SecurityContextHolder
+						.getContext().getAuthentication().getName());
+		if (paymentDTOs == null) {
+			throw new ResourceNotFoundException();
+		}
+		return paymentDTOs;
+
 	}
 
     /**
