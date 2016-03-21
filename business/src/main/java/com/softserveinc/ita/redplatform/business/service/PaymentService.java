@@ -9,7 +9,6 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.softserveinc.ita.redplatform.business.statistics.PaymentsStatistics;
 import com.softserveinc.ita.redplatform.common.dto.PaymentDTO;
 import com.softserveinc.ita.redplatform.common.entity.Order;
 import com.softserveinc.ita.redplatform.common.entity.Payment;
@@ -38,12 +37,6 @@ public class PaymentService {
     private PaymentMapper mapper;
 
     /**
-     * Installment Service.
-     */
-    @Autowired
-    private InstallmentService installmentService;
-
-    /**
      * Payment dao.
      */
     @Autowired
@@ -60,38 +53,6 @@ public class PaymentService {
      */
     @Autowired
     private UserService userService;
-
-    /**
-     * Method generate payments statistic for order by order id.
-     * 
-     * @param id
-     *            order id
-     * @return payment statistic
-     */
-    @Transactional
-    public PaymentsStatistics generateStatistics(final Long id) {
-	PaymentsStatistics statistic = new PaymentsStatistics();
-	Order order = orderService.getOrderById(id);
-	statistic.setApartmentPrice(
-		installmentService.getApartmentCost(order.getInstallments()));
-	statistic.setTotalPaidAmount(getTotalPaidAmount(order.getPayments()));
-	return statistic;
-    }
-
-    /**
-     * Gets the total paid amount.
-     *
-     * @param payments
-     *            the payments
-     * @return the total paid amount
-     */
-    public double getTotalPaidAmount(final List<Payment> payments) {
-	double total = 0;
-	for (Payment payment : payments) {
-	    total += payment.getAmount();
-	}
-	return total;
-    }
 
     /**
      * Get all payments for order by order id.
