@@ -48,4 +48,29 @@ public class JPAOrderDao extends JPAGenericDao<Order, Long>
 
     }
 
+	/**
+	 * Method get order by id and user email. Method check if user has access to
+	 * the order then return order, else return null.
+	 * 
+	 * @param id
+	 *            order id
+	 * @param email
+	 *            user email
+	 * @return order order
+	 */
+	@Override
+	public final Order getOrder(final Long id, final String email) {
+		return (Order) getEntityManager()
+				.createQuery(
+						"from " + Order.class.getName() + " as customOrder "
+								+ "where customOrder.id = :id and ( "
+								+ "customOrder.customerUser.email = :email or "
+								+ "customOrder.createdBy.agency = "
+								+ "(select admin.agency from "
+								+ RealEstateAdminUser.class.getName()
+								+ " as admin where" + " admin.email = :email))")
+				.setParameter("id", id).setParameter("email", email)
+				.getSingleResult();
+	}
+
 }

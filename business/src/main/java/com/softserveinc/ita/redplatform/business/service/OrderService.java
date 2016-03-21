@@ -8,6 +8,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.softserveinc.ita.redplatform.business.statistics.PaymentsStatistics;
 import com.softserveinc.ita.redplatform.common.dto.CustomerUserDTO;
 import com.softserveinc.ita.redplatform.common.dto.OrderDTO;
 import com.softserveinc.ita.redplatform.common.entity.CustomerUser;
@@ -29,6 +30,11 @@ import com.softserveinc.ita.redplatform.persistence.dao.PaymentDao;
 @Service
 @Secured("ROLE_REDADMIN")
 public class OrderService {
+
+	/**
+	 * Percentage.
+	 */
+	private static final int PERCENTAGE = 100;
 
     /** The customer user service. */
     @Autowired
@@ -222,5 +228,48 @@ public class OrderService {
     public Order getOrderById(final Long id) {
 	return orderDao.findById(id);
     }
+    
+	/**
+	 * Method return get order by order id and user email. Check if user has
+	 * access to order info then return order else return null.
+	 * 
+	 * @param id
+	 *            order id
+	 * @param email
+	 *            user email
+	 * @return order
+	 */
+	public Order getOrder(final Long id, final String email) {
+		return orderDao.getOrder(id, email);
+	}
+    
+	/**
+	 * Method generate payments statistics for order. Check if user has access
+	 * to this order.
+	 * 
+	 * @param id
+	 *            order id
+	 * @param email
+	 *            user email
+	 * @return payments statistics
+	 */
+	@Transactional
+	public PaymentsStatistics generatePaymentsStatistics(final Long id,
+			final String email) {
+		Order order = getOrder(id, email);
+		if (order != null) {
+			PaymentsStatistics statistics = new PaymentsStatistics();
+			double apartmentPrice = installmentDao.getOrderCost(id);
+			double totalPaidAmount = paymentDao.getPaidAmount(id);
+			statistics.setApartmentPrice(apartmentPrice);
+			statistics.setTotalPaidAmount(totalPaidAmount);
+			statistics.setLeftPayAmount(apartmentPrice - totalPaidAmount);
+			statistics.setProgress(
+					totalPaidAmount / apartmentPrice * PERCENTAGE);
+			return statistics;
+		}
+		return null;
+	}
+    
 
 }

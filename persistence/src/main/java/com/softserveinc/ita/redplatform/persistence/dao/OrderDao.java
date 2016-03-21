@@ -31,5 +31,16 @@ public interface OrderDao extends GenericDao<Order, Long> {
      */
     Long countCompanyOrders(String email);
 
+	/**
+	 * Method get order by id and user email. Method check if current user has
+	 * access to the order.
+	 * 
+	 * @param id
+	 *            order id
+	 * @param email
+	 *            user email
+	 * @return order order
+	 */
+	Order getOrder(Long id, String email);
 
 }

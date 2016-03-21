@@ -9,10 +9,6 @@ package com.softserveinc.ita.redplatform.business.statistics;
 public class PaymentsStatistics {
 
 	/**
-	 * Percentage.
-	 */
-	private static final int PERCENTAGE = 100;
-	/**
 	 * Total paid amount.
 	 */
 	private double totalPaidAmount;
@@ -27,49 +23,41 @@ public class PaymentsStatistics {
 	 */
 	private double leftPayAmount;
 
+	/**
+	 * Progress.
+	 */
+	private double progress;
+
 	public final double getTotalPaidAmount() {
 		return totalPaidAmount;
 	}
 
-	/**
-	 * Method set new total paid amount and count amount left to pay.
-	 * 
-	 * @param newTotalPaidAmount
-	 *            total paid amount
-	 */
 	public final void setTotalPaidAmount(final double newTotalPaidAmount) {
 		this.totalPaidAmount = newTotalPaidAmount;
-		countLeftPayAmount();
 	}
 
 	public final double getApartmentPrice() {
 		return apartmentPrice;
 	}
 
-	/**
-	 * Method set new apartment price and count amount left to pay.
-	 * 
-	 * @param newApartmentPrice
-	 *            apartment price
-	 */
 	public final void setApartmentPrice(final double newApartmentPrice) {
 		this.apartmentPrice = newApartmentPrice;
-		countLeftPayAmount();
 	}
 
 	public final double getLeftPayAmount() {
 		return leftPayAmount;
 	}
 
-	/**
-	 * Method count the amount left to pay.
-	 */
-	private void countLeftPayAmount() {
-		leftPayAmount = apartmentPrice - totalPaidAmount;
+	public final void setLeftPayAmount(final double newLeftPayAmount) {
+		this.leftPayAmount = newLeftPayAmount;
 	}
-	
+
 	public final double getProgress() {
-		return totalPaidAmount / apartmentPrice * PERCENTAGE;
+		return progress;
+	}
+
+	public final void setProgress(final double newProgress) {
+		this.progress = newProgress;
 	}
 
 }
