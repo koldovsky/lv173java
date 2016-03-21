@@ -30,8 +30,9 @@
 					<th>First Name</th>
 					<th>Last Name</th>
 					<th>User e-mail</th>
-					<th>Area</th>
-					<th>Rooms Quantity</th>
+					<th>Country</th>
+					<th>City</th>
+					<th>Address</th>
 					<th>Status</th>
 					<th>Progress</th>
 				</tr>
