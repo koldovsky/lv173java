@@ -218,6 +218,7 @@ public class OrderService {
      *            order id
      * @return oder order
      */
+    @Secured({ "ROLE_REDADMIN", "ROLE_USER" })
     @Transactional
     public Order getOrderById(final Long id) {
 	return orderDao.findById(id);
