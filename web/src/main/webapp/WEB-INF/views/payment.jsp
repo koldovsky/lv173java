@@ -31,8 +31,8 @@
 			</b> <br /> <br />
 		</div>
 		<div id="error" class="alert alert-danger" role="alert">
-			<a href="#" class="close" aria-label="close">&times;</a> Failed to
-			create new payment!
+		<a href="#" class="close" aria-label="close">&times;</a>
+		<div id = "messDiv"></div>
 		</div>
 		<form name="paymentform" id="paymentform" action="">
 			<div class="col-lg-6">
