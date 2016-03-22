@@ -9,11 +9,13 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.softserveinc.ita.redplatform.business.statistics.PaymentsStatistics;
 import com.softserveinc.ita.redplatform.common.dto.PaymentDTO;
 import com.softserveinc.ita.redplatform.common.entity.Order;
 import com.softserveinc.ita.redplatform.common.entity.Payment;
 import com.softserveinc.ita.redplatform.common.mapper.PaymentMapper;
 import com.softserveinc.ita.redplatform.persistence.dao.PaymentDao;
+import com.softserveinc.ita.redplatform.persistence.dao.impl.JPAInstallmentDao;
 
 /**
  * Payment Service.
@@ -54,27 +56,63 @@ public class PaymentService {
     @Autowired
     private UserService userService;
 
-	/**
-	 * Get all payments for order by order id.
-	 * 
-	 * @param id
-	 *            order id
-	 * @param email
-	 *            user email
-	 * @return payments list
-	 */
-	@Transactional
-	public List<PaymentDTO> getPayments(final Long id, final String email) {
-		List<PaymentDTO> paymentDTOs = new LinkedList<>();
-		Order order = orderService.getOrder(id, email);
-		if (order != null) {
-			for (Payment payment : order.getPayments()) {
-				paymentDTOs.add(mapper.toDto(payment));
-			}
-			return paymentDTOs;
-		}
-		return null;
+    /** The installment dao. */
+    @Autowired
+    private JPAInstallmentDao installmentDao;
+
+    /**
+     * Method generate payments statistic for order by order id.
+     * 
+     * @param id
+     *            order id
+     * @return payment statistic
+     */
+    @Transactional
+    public PaymentsStatistics generateStatistics(final Long id) {
+	PaymentsStatistics statistic = new PaymentsStatistics();
+	Order order = orderService.getOrderById(id);
+	statistic.setApartmentPrice(
+		installmentDao.getOrderCost(id));
+	statistic.setTotalPaidAmount(getTotalPaidAmount(order.getPayments()));
+	return statistic;
+    }
+
+    /**
+     * Gets the total paid amount.
+     *
+     * @param payments
+     *            the payments
+     * @return the total paid amount
+     */
+    public double getTotalPaidAmount(final List<Payment> payments) {
+	double total = 0;
+	for (Payment payment : payments) {
+	    total += payment.getAmount();
 	}
+	return total;
+    }
+
+    /**
+     * Get all payments for order by order id.
+     * 
+     * @param id
+     *            order id
+     * @param email
+     *            user email
+     * @return payments list
+     */
+    @Transactional
+    public List<PaymentDTO> getPayments(final Long id, final String email) {
+	List<PaymentDTO> paymentDTOs = new LinkedList<>();
+	Order order = orderService.getOrder(id, email);
+	if (order != null) {
+	    for (Payment payment : order.getPayments()) {
+		paymentDTOs.add(mapper.toDto(payment));
+	    }
+	    return paymentDTOs;
+	}
+	return null;
+    }
 
     /**
      * Creates the payment.
@@ -93,8 +131,7 @@ public class PaymentService {
     @Secured("ROLE_USER")
     @Transactional
     public void createPayment(final Long orderId, final double amount,
-	    final byte[] image, 
-	    final String customerEmail) throws IOException {
+	    final byte[] image, final String customerEmail) throws IOException {
 	Payment payment = new Payment();
 	Order order = orderService.getOrderById(orderId);
 	if (order.getCustomerUser().getId() != userService
