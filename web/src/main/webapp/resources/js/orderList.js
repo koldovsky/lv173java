@@ -43,6 +43,7 @@ $(document).ready(function() {
 				 }
 		    },
 		    {'data' : 'progress',
+		     'orderable' : false,
 		     'render' : function(data, type, row) {
 		    	 	var progress = Math.round(row['progress'] * 100);
 		    	 	return '<div class="progress">' +
@@ -62,12 +63,12 @@ $(document).ready(function() {
         if ( row.child.isShown() ) {
             // This row is already open - close it
             row.child.hide();
-            tr.removeClass('shown');
+            $(this).removeClass('shown');
         }
         else {
             // Open this row
             row.child( format(row.data()) ).show();
-            tr.addClass('shown');
+            $(this).addClass('shown');
         }
     } );
 });
