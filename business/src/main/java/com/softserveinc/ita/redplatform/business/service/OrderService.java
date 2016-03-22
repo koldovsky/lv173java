@@ -240,6 +240,7 @@ public class OrderService {
 	 *            user email
 	 * @return order
 	 */
+    @Secured({"ROLE_USER", "ROLE_REDADMIN"})
 	public Order getOrder(final Long id, final String email) {
 		return orderDao.getOrder(id, email);
 	}
@@ -255,6 +256,7 @@ public class OrderService {
 	 * @return payments statistics
 	 */
 	@Transactional
+	@Secured({ "ROLE_USER", "ROLE_REDADMIN" })
 	public PaymentsStatistics generatePaymentsStatistics(final Long id,
 			final String email) {
 		Order order = getOrder(id, email);
@@ -262,11 +264,15 @@ public class OrderService {
 			PaymentsStatistics statistics = new PaymentsStatistics();
 			double apartmentPrice = installmentDao.getOrderCost(id);
 			double totalPaidAmount = paymentDao.getPaidAmount(id);
+			statistics.setNextInstallment(installmentService
+					.getNextInstallment(order, totalPaidAmount));
+			statistics.setMissedInstallment(installmentService
+					.getMissedInstallment(order, totalPaidAmount));
 			statistics.setApartmentPrice(apartmentPrice);
 			statistics.setTotalPaidAmount(totalPaidAmount);
 			statistics.setLeftPayAmount(apartmentPrice - totalPaidAmount);
-			statistics.setProgress(
-					totalPaidAmount / apartmentPrice * PERCENTAGE);
+			statistics
+					.setProgress(totalPaidAmount / apartmentPrice * PERCENTAGE);
 			return statistics;
 		}
 		return null;

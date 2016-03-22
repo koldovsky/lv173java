@@ -1,9 +1,11 @@
 package com.softserveinc.ita.redplatform.business.statistics;
 
+import com.softserveinc.ita.redplatform.common.dto.InstallmentDTO;
+
 /**
  * Payment Statistic.
  * 
- * @author Hryhorii
+ * @author Hryhorii Somyk
  *
  */
 public class PaymentsStatistics {
@@ -27,6 +29,16 @@ public class PaymentsStatistics {
 	 * Progress.
 	 */
 	private double progress;
+
+	/**
+	 * Next installment.
+	 */
+	private InstallmentDTO nextInstallment;
+
+	/**
+	 * Missed installment.
+	 */
+	private InstallmentDTO missedInstallment;
 
 	public final double getTotalPaidAmount() {
 		return totalPaidAmount;
@@ -58,6 +70,24 @@ public class PaymentsStatistics {
 
 	public final void setProgress(final double newProgress) {
 		this.progress = newProgress;
+	}
+
+	public final InstallmentDTO getNextInstallment() {
+		return nextInstallment;
+	}
+
+	public final void
+			setNextInstallment(final InstallmentDTO newNextInstallment) {
+		this.nextInstallment = newNextInstallment;
+	}
+
+	public final InstallmentDTO getMissedInstallment() {
+		return missedInstallment;
+	}
+
+	public final void
+			setMissedInstallment(final InstallmentDTO newMissedInstallment) {
+		this.missedInstallment = newMissedInstallment;
 	}
 
 }

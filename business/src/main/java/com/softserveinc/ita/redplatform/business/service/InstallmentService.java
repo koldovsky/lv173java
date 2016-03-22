@@ -1,10 +1,13 @@
 package com.softserveinc.ita.redplatform.business.service;
 
+import java.util.Date;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.softserveinc.ita.redplatform.common.dto.InstallmentDTO;
 import com.softserveinc.ita.redplatform.common.entity.Installment;
@@ -43,4 +46,69 @@ public class InstallmentService {
 	return installments;
     }
     
+	/**
+	 * Method get next installment. If order is already paid return null;
+	 * 
+	 * @param order
+	 *            order
+	 * @param totalPaidAmount
+	 *            total paid amount
+	 * @return  next installment
+	 */
+	@Transactional
+	public InstallmentDTO getNextInstallment(final Order order,
+			final double totalPaidAmount) {
+		Installment installment;
+		Date date = new Date();
+		double sum = 0;
+		Iterator<Installment> iterator = order.getInstallments().iterator();
+		do {
+			installment = iterator.next();
+			sum += installment.getAmount();
+		} while (iterator.hasNext() && (!date.before(installment.getDate())
+				|| sum <= totalPaidAmount));
+		double left = sum - totalPaidAmount;
+		if (date.after(installment.getDate()) || left <= 0) {
+			return null;
+		}
+		InstallmentDTO nextInstallment = new InstallmentDTO();
+		nextInstallment.setAmount(left);
+		nextInstallment.setDate(installment.getDate().getTime());
+		return nextInstallment;
+	}
+
+	/**
+	 * Method return missed installment if exists else return null.
+	 * 
+	 * @param order
+	 *            order
+	 * @param totalPaidAmount
+	 *            total paid amount
+	 * @return missed installment
+	 */
+	@Transactional
+	public InstallmentDTO getMissedInstallment(final Order order,
+			final double totalPaidAmount) {
+		Installment installment;
+		Date date = new Date();
+
+		double sum = 0;
+		Iterator<Installment> iterator = order.getInstallments().iterator();
+		installment = iterator.next();
+		Date lastMissedDate = installment.getDate();
+		while (iterator.hasNext() && !date.before(installment.getDate())) {
+			sum += installment.getAmount();
+		lastMissedDate = installment.getDate();
+			installment = iterator.next();
+		}
+		double left = sum - totalPaidAmount;
+		if (left <= 0) {
+			return null;
+		}
+		InstallmentDTO missedInstallment = new InstallmentDTO();
+		missedInstallment.setAmount(left);
+		missedInstallment.setDate(lastMissedDate.getTime());
+		return missedInstallment;
+	}
+
 }
