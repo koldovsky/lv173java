@@ -1,5 +1,6 @@
 package com.softserveinc.ita.redplatform.business.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -10,10 +11,12 @@ import org.springframework.transaction.annotation.Transactional;
 import com.softserveinc.ita.redplatform.common.dto.CurrencyRateDTO;
 import com.softserveinc.ita.redplatform.common.entity.CurrencyRate;
 import com.softserveinc.ita.redplatform.common.entity.RealEstateAdminUser;
+import com.softserveinc.ita.redplatform.common.entity.RealEstateAgency;
 import com.softserveinc.ita.redplatform.common.mapper.CurrencyRateMapper;
 import com.softserveinc.ita.redplatform.common.predicate.DataTablePredicate;
 import com.softserveinc.ita.redplatform.integration.CurrencyRateParser;
 import com.softserveinc.ita.redplatform.persistence.dao.CurrencyRateDao;
+import com.softserveinc.ita.redplatform.persistence.dao.RealEstateAdminUserDao;
 
 /**
  * CurrencyRate Service.
@@ -23,7 +26,12 @@ import com.softserveinc.ita.redplatform.persistence.dao.CurrencyRateDao;
 @Service
 @Transactional
 public class CurrencyRateService {
-
+    
+    /**
+     * RealEstateAdminUserDao object.
+     */
+    @Autowired
+    private RealEstateAdminUserDao redAdminDao;
     /**
      * currencyJson object.
      */
@@ -43,7 +51,11 @@ public class CurrencyRateService {
     /** The mapper. */
     @Autowired
     private CurrencyRateMapper currencyRateMapper;
-
+    
+    /**
+     * one day in milliseconds. 
+     */
+    private static final long ONEDAYINMILLIS = 86400000;
     /**
      * 
      * @param currencyRateDTO
@@ -61,6 +73,8 @@ public class CurrencyRateService {
 	RealEstateAdminUser redAdmin = (RealEstateAdminUser) 
 			userService.loadUserByEmail(email);
 	currencyRate.setReAgency(redAdmin.getAgency());
+	updateCurrencyDatePeriods(email, currencyRate);
+	deleteCurrencyDatePeriods(email, currencyRate);
 	currencyRateDao.save(currencyRate);
     }
 
@@ -99,9 +113,14 @@ public class CurrencyRateService {
      * @param predicate predicate
      * @return List<CurrencyRateDTO>
      */
-    public List<CurrencyRate> loadAllCurrencies(
+    public List<CurrencyRateDTO> loadAllCurrencies(
 	    	final DataTablePredicate predicate) {
-	return currencyRateDao.findAll(predicate);
+	ArrayList<CurrencyRateDTO> currencyListDto = 
+		new ArrayList<CurrencyRateDTO>();
+	for (CurrencyRate currency : currencyRateDao.findAll(predicate)) {
+	    currencyListDto.add(currencyRateMapper.toDto(currency));
+	}
+	return currencyListDto;
     }
     
     /**
@@ -109,12 +128,17 @@ public class CurrencyRateService {
      * @param email of RedAdmin.
      * @return list of currencyRates
      */
-    public List<CurrencyRate> loadAllCurrenciesByCompany(
+    public List<CurrencyRateDTO> loadAllCurrenciesByCompany(
 	    final String email, final DataTablePredicate predicate) {
 	RealEstateAdminUser redAdmin = (RealEstateAdminUser) 
 			userService.loadUserByEmail(email);
-	return currencyRateDao.findAllCurrenciesByCompany(
-		redAdmin.getAgency(), predicate);
+	ArrayList<CurrencyRateDTO> currencyListDto = 
+		new ArrayList<CurrencyRateDTO>();
+	for (CurrencyRate currency : currencyRateDao
+		.findAllCurrenciesByCompany(redAdmin.getAgency(), predicate)) {
+	    currencyListDto.add(currencyRateMapper.toDto(currency));
+	}
+	return currencyListDto;
     }
     
     /**
@@ -155,5 +179,100 @@ public class CurrencyRateService {
 			userService.loadUserByEmail(email);
 	return currencyRateDao.countAllCompanyCurrencies(redAdmin.getAgency(),
 		predicate);
+    }
+    
+    /**
+     * 
+     * @param email Real admin estate email
+     * @param currencyRate currencyRate
+     */
+    public void updateCurrencyDatePeriods(final String email,
+	    final CurrencyRate currencyRate) {
+	RealEstateAgency agency = redAdminDao.findAgencyByEmail(email);
+	ArrayList<CurrencyRate> currencyList = (ArrayList<CurrencyRate>)
+		currencyRateDao.findAllCurrenciesByCompany(agency);
+	for (CurrencyRate currency : currencyList) {
+	    if ((currency.getFromDate().getTime() 
+		    >= currencyRate.getFromDate().getTime()) 
+		    && (currency.getToDate().getTime() 
+		    > currencyRate.getToDate().getTime()
+		    && (currency.getFromDate().getTime() 
+		    < currencyRate.getToDate().getTime()))) {
+		if ((currencyRate.getToDate().getTime() + ONEDAYINMILLIS) 
+			>= currency.getToDate().getTime()) {
+		    currencyRateDao.remove(currency);
+		} else {
+		    currency.setFromDate(new Date(currencyRate.getToDate().getTime()
+				+ ONEDAYINMILLIS));
+		    currencyRateDao.update(currency);   
+		}
+	    }
+	    if ((currency.getFromDate().getTime() 
+		    < currencyRate.getFromDate().getTime()) 
+		    && (currency.getToDate().getTime() 
+		    <= currencyRate.getToDate().getTime())
+		    && (currency.getToDate().getTime() 
+		    > currencyRate.getFromDate().getTime())) {
+		if ((currencyRate.getFromDate().getTime() - ONEDAYINMILLIS) 
+			<= currency.getFromDate().getTime()) {
+		    currencyRateDao.remove(currency);
+		} else {
+		    currency.setToDate(new Date(currencyRate.getFromDate().getTime()
+			- ONEDAYINMILLIS));
+		    currencyRateDao.update(currency);   
+		}
+	    }
+	    if ((currency.getFromDate().getTime() 
+		    < currencyRate.getFromDate().getTime()) 
+		    && (currency.getToDate().getTime() 
+		    > currencyRate.getToDate().getTime())) {
+		if ((currencyRate.getToDate().getTime() + ONEDAYINMILLIS) 
+			>= currency.getToDate().getTime()) {
+		    currencyRateDao.remove(currency);
+		} else {
+		    currency.setFromDate(new Date(currencyRate.getToDate().getTime()
+			+ ONEDAYINMILLIS));
+		    currencyRateDao.update(currency);   
+		}
+	    }
+	}	
+    }
+    
+    /**
+     * 
+     * @param email email
+     * @param currencyRate object
+     */
+    public void deleteCurrencyDatePeriods(final String email,
+	    final CurrencyRate currencyRate) {
+	RealEstateAgency agency = redAdminDao.findAgencyByEmail(email);
+	ArrayList<CurrencyRate> currencyList = (ArrayList<CurrencyRate>)
+		currencyRateDao.findAllCurrenciesByCompany(agency);
+	for (CurrencyRate currency : currencyList) {
+	    if ((currency.getFromDate().getTime() 
+		    == currencyRate.getFromDate().getTime()) 
+		    && (currency.getToDate().getTime() 
+		    == (currencyRate.getToDate().getTime()))) {
+		currencyRateDao.remove(currency);
+	    }
+	    if ((currency.getFromDate().getTime() 
+		    > currencyRate.getFromDate().getTime()) 
+		    && (currency.getToDate().getTime() 
+		    < currencyRate.getToDate().getTime())) {
+		currencyRateDao.remove(currency);
+	    }
+	    if ((currency.getFromDate().getTime() 
+		    == currencyRate.getFromDate().getTime()) 
+		    && (currency.getToDate().getTime() 
+		    < currencyRate.getToDate().getTime())) {
+		currencyRateDao.remove(currency);
+	    }
+	    if ((currency.getFromDate().getTime() 
+		    > currencyRate.getFromDate().getTime()) 
+		    && (currency.getToDate().getTime() 
+		    == currencyRate.getToDate().getTime())) {
+		currencyRateDao.remove(currency);
+	    } 
+	}
     }
 }

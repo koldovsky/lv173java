@@ -68,6 +68,16 @@ public class JPACurrencyRate extends JPAGenericDao<CurrencyRate, Long>
 		.getResultList();
     }
     
+    @SuppressWarnings("unchecked")
+    @Override
+    public final List<CurrencyRate> findAllCurrenciesByCompany(
+	    final RealEstateAgency reAgency) {
+	return (List<CurrencyRate>) getEntityManager()
+		.createQuery("from " + CurrencyRate.class.getName()
+		+ " where reAgency=:reAgency")
+		.setParameter("reAgency", reAgency).getResultList();
+    }
+    
     /**
      * Get order Column name.
      * @param predicate predicate

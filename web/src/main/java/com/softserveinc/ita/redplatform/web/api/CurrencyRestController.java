@@ -113,7 +113,8 @@ public class CurrencyRestController {
      * @return users list
      */
     @RequestMapping(value = "/api/currency", method = RequestMethod.GET)
-    public final ResponseEntity<DataTablesResponse<CurrencyRate>> getUserList(
+    public final ResponseEntity
+    	<DataTablesResponse<CurrencyRateDTO>> getUserList(
 	    @RequestParam final int draw,
 	    @RequestParam final int length, @RequestParam final int start,
 	    @RequestParam(value = "search[value]") final String search,
@@ -121,8 +122,8 @@ public class CurrencyRestController {
 	    @RequestParam(value = "order[0][dir]") final String order) {
 	DataTablePredicate predicate = new DataTablePredicate(
 		draw, start, length, column, order, search);
-	DataTablesResponse<CurrencyRate> dtResp = 
-		new DataTablesResponse<CurrencyRate>();
+	DataTablesResponse<CurrencyRateDTO> dtResp = 
+		new DataTablesResponse<CurrencyRateDTO>();
 	dtResp.setDraw(predicate.getDraw());
 	if (SecurityContextHolder.getContext().getAuthentication().getAuthorities()
 		.contains(new SimpleGrantedAuthority("ROLE_REDADMIN"))) {
@@ -141,7 +142,7 @@ public class CurrencyRestController {
 	    dtResp.setTotalDisplayRecords(currencyRateService.countAll(predicate));
 	    dtResp.setData(currencyRateService.loadAllCurrencies(predicate));
 	}
-	return new ResponseEntity<DataTablesResponse<CurrencyRate>>(
+	return new ResponseEntity<DataTablesResponse<CurrencyRateDTO>>(
 		dtResp, HttpStatus.OK);
     }
     

@@ -3,6 +3,7 @@ package com.softserveinc.ita.redplatform.persistence.dao;
 import java.util.List;
 
 import com.softserveinc.ita.redplatform.common.entity.RealEstateAdminUser;
+import com.softserveinc.ita.redplatform.common.entity.RealEstateAgency;
 
 /**
  * The interface RealEstateAdminUserDao.
@@ -20,4 +21,11 @@ public interface RealEstateAdminUserDao
      * @return List<User>
      * */
     List<RealEstateAdminUser> findAdminsByCompany(final String companyName);
+    
+    /**
+     * 
+     * @param email email
+     * @return agency id
+     */
+    RealEstateAgency findAgencyByEmail(String email);
 }

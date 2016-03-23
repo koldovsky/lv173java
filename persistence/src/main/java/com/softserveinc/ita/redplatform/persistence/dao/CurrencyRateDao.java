@@ -32,6 +32,12 @@ public interface CurrencyRateDao extends GenericDao<CurrencyRate, Long> {
     
     /**
      * 
+     * @param reAgency reAgency
+     * @return List of Currency Rates
+     */
+    List<CurrencyRate> findAllCurrenciesByCompany(RealEstateAgency reAgency);
+    /**
+     * 
      * @return number of currencies
      */
     long countAll();
