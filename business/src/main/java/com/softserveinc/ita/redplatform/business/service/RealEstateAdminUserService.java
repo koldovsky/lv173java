@@ -65,6 +65,7 @@ public class RealEstateAdminUserService extends AbstractUserService {
 	    loadRealEstateAdminUserByName(final String name) {
 	RealEstateAdminUserDTO redadmin = mapper
 		.toDto((RealEstateAdminUser) userDao.findUserByEmail(name));
+	redadmin.setAgencyId(dao.findAgencyByEmail(redadmin.getEmail()).getId());
 	return redadmin;
     }
 }
