@@ -5,7 +5,7 @@ $(document).ready(
 			});
 						
 			$.validator.addMethod('agencyName', function(value, element) {
-				return /^(?=.*[a-zA-Z])[a-zA-Z0-9\s]+[a-zA-Z0-9!.@&$():,-\s\']+[a-zA-Z0-9.!)\'\s]$/
+				return /^(?=.*[a-zA-Z])[a-zA-Z0-9\s]{1}[a-zA-Z0-9!.@&$():,-\s\']+[a-zA-Z0-9.!)\'\s]$/
 				                 .test(value);
 			}, 'Agency name should be valid.');
 		
@@ -130,5 +130,6 @@ $(document).ready(
 									}
 								}
 							});
+			
 
 		});

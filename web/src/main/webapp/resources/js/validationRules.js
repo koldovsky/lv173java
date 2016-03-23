@@ -55,6 +55,6 @@ var ruleLocality = {
 	message : 'City should be valid.'
 };
 var ruleAdditional = {
-	regexp : /^(?=.*[a-zA-Z])[a-zA-Z0-9.:\-'\\\/,\s\[\]]+$/,
+	regexp : /^(?=.*[a-zA-Z])[a-zA-Z0-9.:\-'\/,\s\[\]]+$/,
 	message : 'Address should be valid.'
 };

@@ -19,7 +19,7 @@ $(document).ready(
 						var agency = {
 							id:	$('#agencyID').val(),
 							name : $('#agencyName').val(),
-							description : $('#description').val(),
+																																																																																																																												description : $('#description').val(),
 							site : $('#webSite').val(),
 							phone : $('#phoneNumber').val(),
 							address : address
