@@ -99,9 +99,9 @@ public class PaymentRestController {
 	    @RequestParam("orderId") final Long orderId,
 	    @RequestParam("amount") final double amount,
 	    @RequestParam("image") final MultipartFile image) {
-	ResponseEntity<String> responseEntity = null;
+	ResponseEntity<String> responseEntity =
+		new ResponseEntity<String>("OK", HttpStatus.OK);
 	try {
-	    responseEntity = new ResponseEntity<String>("OK", HttpStatus.OK);
 	    paymentService.createPayment(orderId, amount, image.getBytes(),
 		    SecurityContextHolder.getContext().getAuthentication()
 			    .getName());
