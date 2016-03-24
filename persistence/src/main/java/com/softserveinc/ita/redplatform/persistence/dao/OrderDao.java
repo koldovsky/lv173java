@@ -3,7 +3,6 @@ package com.softserveinc.ita.redplatform.persistence.dao;
 import java.util.List;
 
 import com.softserveinc.ita.redplatform.common.entity.Order;
-import com.softserveinc.ita.redplatform.common.predicate.DataTablePredicate;
 
 /**
  * Dao interface for Order entity.
@@ -29,10 +28,9 @@ public interface OrderDao extends GenericDao<Order, Long> {
      * Load orders.
      *
      * @param userMail the user mail
-     * @param predicate the predicate
      * @return the order list
      */
-    List<Order> loadOrders(String userMail, DataTablePredicate predicate);
+    List<Order> loadOrders(String userMail);
 
     /**
      * Gets the agency name.

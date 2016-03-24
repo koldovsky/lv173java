@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 
 import com.softserveinc.ita.redplatform.common.entity.Order;
 import com.softserveinc.ita.redplatform.common.entity.RealEstateAdminUser;
-import com.softserveinc.ita.redplatform.common.predicate.DataTablePredicate;
 import com.softserveinc.ita.redplatform.persistence.dao.OrderDao;
 
 /**
@@ -61,8 +60,7 @@ public class JPAOrderDao extends JPAGenericDao<Order, Long>
 
     @SuppressWarnings("unchecked")
     @Override
-    public final List<Order> loadOrders(final String userMail,
-	    final DataTablePredicate predicate) {
+    public final List<Order> loadOrders(final String userMail) {
 	return (List<Order>) getEntityManager()
 		.createQuery(ordersBaseQuery).setParameter("email", userMail)
 		.getResultList();

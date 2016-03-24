@@ -2,12 +2,10 @@ $(function() {
     var table = $('#table')
 	    .DataTable(
 		    {
-			processing : true,
-			serverSide : true,
 			ajax : {
 			    url : 'api/orderlist',
-			    dataSrc : 'aaData',
-			    dateType : 'jsonp',
+			    dataSrc : '',
+			    dateType : 'json',
 			    type : 'GET'
 			},
 
@@ -75,7 +73,7 @@ $(function() {
 				    'targets' : 'progress',
 				    'data' : 'progress',
 				    'orderable' : false,
-				    'render' : function(data, type, row) {
+				    'render' : function(data, type, row, meta) {
 					var progress = Math
 						.round(row['progress'] * 100);
 					return '<div class="progress">'
@@ -83,7 +81,7 @@ $(function() {
 						+ 'aria-valuemax="100" aria-valuenow="'
 						+ progress + '" style="width:'
 						+ progress + '%">' + progress
-						+ '%' + '</div>' + '</div>'
+						+ '%' + '</div>' + '</div>';
 				    }
 				}
 

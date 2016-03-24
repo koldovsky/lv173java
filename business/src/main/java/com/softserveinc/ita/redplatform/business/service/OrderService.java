@@ -15,7 +15,6 @@ import com.softserveinc.ita.redplatform.common.entity.CustomerUser;
 import com.softserveinc.ita.redplatform.common.entity.Installment;
 import com.softserveinc.ita.redplatform.common.entity.Order;
 import com.softserveinc.ita.redplatform.common.mapper.OrderMapper;
-import com.softserveinc.ita.redplatform.common.predicate.DataTablePredicate;
 import com.softserveinc.ita.redplatform.persistence.dao.CustomerUserDao;
 import com.softserveinc.ita.redplatform.persistence.dao.InstallmentDao;
 import com.softserveinc.ita.redplatform.persistence.dao.OrderDao;
@@ -119,14 +118,11 @@ public class OrderService {
      *
      * @param userMail
      *            the user email
-     * @param predicate
-     *            the DataTables predicate
      * @return the order list
      */
     @Transactional
-    public List<OrderDTO> getOrders(final String userMail,
-	    final DataTablePredicate predicate) {
-	List<Order> orders = orderDao.loadOrders(userMail, predicate);
+    public List<OrderDTO> getOrders(final String userMail) {
+	List<Order> orders = orderDao.loadOrders(userMail);
 	ArrayList<OrderDTO> orderDTOs = new ArrayList<>();
 	OrderDTO orderDTO;
 	for (Order order : orders) {
@@ -168,7 +164,7 @@ public class OrderService {
 	return installmentDao.getOrderCost(order.getId())
 		- paymentDao.getPaidAmount(order.getId()) > 0;
     }
-
+    
     /**
      * Checks if order is missed fulfillment.
      *
@@ -217,21 +213,21 @@ public class OrderService {
     public Order getOrderById(final Long id) {
 	return orderDao.findById(id);
     }
-    
-	/**
-	 * Method return get order by order id and user email. Check if user has
-	 * access to order info then return order else return null.
-	 * 
-	 * @param id
-	 *            order id
-	 * @param email
-	 *            user email
-	 * @return order
-	 */
-    @Secured({"ROLE_USER", "ROLE_REDADMIN"})
-	public Order getOrder(final Long id, final String email) {
-		return orderDao.getOrder(id, email);
-	}
+
+    /**
+     * Method return get order by order id and user email. Check if user has
+     * access to order info then return order else return null.
+     * 
+     * @param id
+     *            order id
+     * @param email
+     *            user email
+     * @return order
+     */
+    @Secured({ "ROLE_USER", "ROLE_REDADMIN" })
+    public Order getOrder(final Long id, final String email) {
+	return orderDao.getOrder(id, email);
+    }
 
     /**
      * Method generate payments statistics for order. Check if user has access
@@ -244,7 +240,7 @@ public class OrderService {
      * @return payments statistics
      */
     @Transactional
-    @Secured({"ROLE_USER", "ROLE_REDADMIN"})
+    @Secured({ "ROLE_USER", "ROLE_REDADMIN" })
     public PaymentsStatistics generatePaymentsStatistics(final Long id,
 	    final String email) {
 	Order order = getOrder(id, email);
@@ -254,11 +250,11 @@ public class OrderService {
 	    double totalPaidAmount = paymentDao.getPaidAmount(id);
 	    statistics.setApartmentPrice(apartmentPrice);
 	    statistics.setTotalPaidAmount(totalPaidAmount);
-		statistics.setLeftPayAmount(apartmentPrice - totalPaidAmount);
-		statistics.setNextInstallment(installmentService
-			.getNextInstallment(order, totalPaidAmount));
-		statistics.setMissedInstallment(installmentService
-			.getMissedInstallment(order, totalPaidAmount));
+	    statistics.setLeftPayAmount(apartmentPrice - totalPaidAmount);
+	    statistics.setNextInstallment(installmentService
+		    .getNextInstallment(order, totalPaidAmount));
+	    statistics.setMissedInstallment(installmentService
+		    .getMissedInstallment(order, totalPaidAmount));
 	    statistics
 		    .setProgress(totalPaidAmount / apartmentPrice * PERCENTAGE);
 	    return statistics;
