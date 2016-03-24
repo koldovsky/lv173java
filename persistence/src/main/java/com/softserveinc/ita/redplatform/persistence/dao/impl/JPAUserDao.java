@@ -244,6 +244,5 @@ public class JPAUserDao extends JPAGenericDao<User, Long> implements UserDao {
 	    }
 	    return "asc";   
 	}
-	
 }
 

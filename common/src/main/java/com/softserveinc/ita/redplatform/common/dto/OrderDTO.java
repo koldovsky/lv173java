@@ -53,6 +53,17 @@ public class OrderDTO {
     
     /** The progress. */
     private double progress;
+    
+    /** The agency. */
+    private String agency;
+
+    public final String getAgency() {
+        return agency;
+    }
+
+    public final void setAgency(final String newAgency) {
+        agency = newAgency;
+    }
 
     public final double getProgress() {
         return progress;

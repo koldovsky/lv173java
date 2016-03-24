@@ -46,6 +46,10 @@ $(function() {
 				    'data' : 'address.additional'
 				},
 				{
+				    'targets' : 'agency',
+				    'data' : 'agency'
+				},
+				{
 				    'targets' : 'status',
 				    'data' : 'status',
 				    'orderable' : false,

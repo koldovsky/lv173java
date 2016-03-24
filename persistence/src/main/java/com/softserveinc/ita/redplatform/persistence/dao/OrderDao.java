@@ -33,4 +33,12 @@ public interface OrderDao extends GenericDao<Order, Long> {
      * @return the order list
      */
     List<Order> loadOrders(String userMail, DataTablePredicate predicate);
+
+    /**
+     * Gets the agency name.
+     *
+     * @param orderId the order id
+     * @return the agency name
+     */
+    String getAgencyName(Long orderId);
 }

@@ -37,6 +37,9 @@
 					<th class="country">Country</th>
 					<th class="locality">City</th>
 					<th class="additional">Address</th>
+					<sec:authorize access="hasRole('ROLE_USER')">
+						<th class="agency">Company</th>
+					</sec:authorize>
 					<th class="status">Status</th>
 					<th class="progress">Progress</th>
 				</tr>

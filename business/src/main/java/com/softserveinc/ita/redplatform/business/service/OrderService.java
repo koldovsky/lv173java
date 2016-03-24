@@ -133,6 +133,7 @@ public class OrderService {
 	    orderDTO = mapper.toDto(order);
 	    orderDTO.setStatus(getOrderStatus(order).toString());
 	    orderDTO.setProgress(getProgress(order));
+	    orderDTO.setAgency(orderDao.getAgencyName(order.getId()));
 	    orderDTOs.add(orderDTO);
 	}
 	return orderDTOs;

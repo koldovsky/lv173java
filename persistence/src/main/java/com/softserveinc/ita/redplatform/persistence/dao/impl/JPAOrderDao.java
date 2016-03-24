@@ -67,4 +67,14 @@ public class JPAOrderDao extends JPAGenericDao<Order, Long>
 		.createQuery(ordersBaseQuery).setParameter("email", userMail)
 		.getResultList();
     }
+    
+    @Override
+    public final String getAgencyName(final Long orderId) {
+	@SuppressWarnings("unchecked")
+	List<String> agencyName = (List<String>) getEntityManager()
+		.createQuery("select orders.createdBy.agency.name from " 
+		+ Order.class.getName() 
+		+ " as orders where id=" + orderId).getResultList();
+	return getSingleResult(agencyName);
+    }
 }
