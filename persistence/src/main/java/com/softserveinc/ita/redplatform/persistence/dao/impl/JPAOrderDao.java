@@ -44,9 +44,13 @@ public class JPAOrderDao extends JPAGenericDao<Order, Long>
     public final Order getOrder(final Long id, final String email) {
 	@SuppressWarnings("unchecked")
 	List<Order> list = (List<Order>) getEntityManager()
-		.createQuery(
-			ordersBaseQuery
-				+ " and customOrder.id = :id")
+		.createQuery("from " + Order.class.getName() + " as customOrder "
+				+ "where customOrder.id = :id and ( "
+				+ "customOrder.customerUser.email = :email or "
+				+ "customOrder.createdBy.agency = "
+				+ "(select admin.agency from "
+				+ RealEstateAdminUser.class.getName()
+				+ " as admin where admin.email = :email))")
 		.setParameter("id", id).setParameter("email", email)
 		.getResultList();
 	if (!list.isEmpty()) {

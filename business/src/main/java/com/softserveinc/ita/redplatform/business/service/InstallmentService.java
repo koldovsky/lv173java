@@ -91,23 +91,23 @@ public class InstallmentService {
 			final double totalPaidAmount) {
 		Installment installment;
 		Date date = new Date();
-
 		double sum = 0;
+		Date missedDate = new Date();
 		Iterator<Installment> iterator = order.getInstallments().iterator();
-		installment = iterator.next();
-		Date lastMissedDate = installment.getDate();
-		while (iterator.hasNext() && !date.before(installment.getDate())) {
-			sum += installment.getAmount();
-		lastMissedDate = installment.getDate();
+		do {
 			installment = iterator.next();
-		}
+			if (!date.before(installment.getDate())) {
+				sum += installment.getAmount();
+				missedDate = installment.getDate();
+			}
+		} while (iterator.hasNext() && !date.before(installment.getDate()));
 		double left = sum - totalPaidAmount;
 		if (left <= 0) {
 			return null;
 		}
 		InstallmentDTO missedInstallment = new InstallmentDTO();
 		missedInstallment.setAmount(left);
-		missedInstallment.setDate(lastMissedDate.getTime());
+		missedInstallment.setDate(missedDate.getTime());
 		return missedInstallment;
 	}
 

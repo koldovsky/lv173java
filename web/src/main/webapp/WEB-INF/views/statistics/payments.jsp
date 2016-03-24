@@ -26,16 +26,20 @@
 						<thead>
 							<tr>
 								<th>Date</th>
-								<th>Amount</th>
+								<th>Amount USD</th>
 								<th>Rate</th>
-								<th>Amount According to Rate</th>
+								<th>Amount UAH</th>
 							</tr>
 						</thead>
 					</table>
 				</div>
 				<div class="col-md-5" id="info">
-					<h3 class="center">Info</h3>
 					<table class="table table-striped table-bordered center">
+						<thead>
+							<tr>
+								<th colspan="2" class="center">Info</th>
+							</tr>
+						</thead>
 						<tr>
 							<td>Price</td>
 							<td id="apartmentPrice"></td>
@@ -48,17 +52,43 @@
 							<td>Total amount left to pay</td>
 							<td id="leftPayAmount"></td>
 						</tr>
-						<tr>
-							<td>Progress</td>
-							<td>
-								<div class="progress">
-									<div class="progress-bar progress-bar-info" role="progressbar"
-										aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"
-										id="progress" style="width: 50%">0% Complete</div>
-								</div>
-							</td>
-						</tr>
 					</table>
+
+					<div id="missed" hidden="true">
+						<table class="table table-striped table-bordered center">
+							<thead>
+								<tr>
+									<th colspan="2" class="center">Missed Installment</th>
+								<tr>
+							</thead>
+							<tr>
+								<td>Due date</td>
+								<td id="missedDueDate"></td>
+							</tr>
+							<tr>
+								<td>Amount</td>
+								<td id="missedAmount"></td>
+							</tr>
+						</table>
+					</div>
+
+					<div id="next" hidden="true">
+						<table class="table table-striped table-bordered center">
+							<thead>
+								<tr>
+									<th colspan="2" class="center">Next Installment</th>
+								<tr>
+							</thead>
+							<tr>
+								<td>Due date</td>
+								<td id="nextDueDate"></td>
+							</tr>
+							<tr>
+								<td>Amount</td>
+								<td id="nextAmount"></td>
+							</tr>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>

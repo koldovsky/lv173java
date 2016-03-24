@@ -52,7 +52,7 @@ public class PaymentRestController {
 	 */
 	@RequestMapping(value = "api/statistics/order/{id}/payments",
 			method = RequestMethod.GET)
-	public final PaymentsStatistics
+	public final ResponseEntity<PaymentsStatistics>
 			getPaymentsStatistics(@PathVariable final Long id) {
 		PaymentsStatistics statistics = orderService
 				.generatePaymentsStatistics(id, SecurityContextHolder
@@ -60,7 +60,8 @@ public class PaymentRestController {
 		if (statistics == null) {
 			throw new ResourceNotFoundException();
 		}
-		return statistics;
+		return new ResponseEntity<PaymentsStatistics>(statistics,
+				HttpStatus.OK);
 	}
 
 	/**
@@ -72,15 +73,15 @@ public class PaymentRestController {
 	 */
 	@RequestMapping(value = "api/order/{id}/payments",
 			method = RequestMethod.GET)
-	public final List<PaymentDTO> getPayments(@PathVariable final Long id) {
+	public final ResponseEntity<List<PaymentDTO>>
+			getPayments(@PathVariable final Long id) {
 		List<PaymentDTO> paymentDTOs =
 				paymentService.getPayments(id, SecurityContextHolder
 						.getContext().getAuthentication().getName());
 		if (paymentDTOs == null) {
 			throw new ResourceNotFoundException();
 		}
-		return paymentDTOs;
-
+		return new ResponseEntity<List<PaymentDTO>>(paymentDTOs, HttpStatus.OK);
 	}
 
     /**
