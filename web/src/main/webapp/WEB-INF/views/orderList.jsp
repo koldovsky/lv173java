@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,19 +24,21 @@
 <body>
 	<jsp:include page="utils/navbar.jsp"></jsp:include>
 	<div class="page">
-		<h2 class="text-center">List of orders</h2>
-		<table id="table" class="display" cellspacing="0" width="100%">
+		<h2 class="text-center">Order statistics</h2>
+		<table id="table" class="display">
 			<thead>
 				<tr>
-					<th>Created Date</th>
-					<th>First Name</th>
-					<th>Last Name</th>
-					<th>User e-mail</th>
-					<th>Country</th>
-					<th>City</th>
-					<th>Address</th>
-					<th>Status</th>
-					<th>Progress</th>
+					<th class="createdDate">Created Date</th>
+					<sec:authorize access="hasRole('ROLE_REDADMIN')">
+						<th class="firstName">First Name</th>
+						<th class="lastName">Last Name</th>
+						<th class="email">User e-mail</th>
+					</sec:authorize>
+					<th class="country">Country</th>
+					<th class="locality">City</th>
+					<th class="additional">Address</th>
+					<th class="status">Status</th>
+					<th class="progress">Progress</th>
 				</tr>
 			</thead>
 		</table>
