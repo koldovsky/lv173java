@@ -17,7 +17,8 @@
 		<intercept-url pattern="/currencies" access="hasAnyRole('ROLE_REDADMIN', 'ROLE_ADMIN')" />
 		<intercept-url pattern="/users" access="hasAnyRole('ROLE_REDADMIN', 'ROLE_ADMIN')" />
 		<intercept-url pattern="/customer/**" access="hasRole('ROLE_USER')" />
-		<intercept-url pattern="/order*" access="hasRole('ROLE_REDADMIN')" />
+		<intercept-url pattern="/order" access="hasRole('ROLE_REDADMIN')" />
+		<intercept-url pattern="/orders" access="hasAnyRole('ROLE_REDADMIN', 'ROLE_USER')" />
 		<intercept-url pattern="/statistics/order/{id}/payments" access="hasAnyRole('ROLE_REDADMIN','ROLE_USER')"/>
 		<intercept-url pattern="/cabinet*" access="isAuthenticated()" />
 		<intercept-url pattern="/payment*" access="hasRole('ROLE_USER')" />
