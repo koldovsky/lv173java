@@ -17,6 +17,7 @@ import com.softserveinc.ita.redplatform.common.mapper.PaymentMapper;
 import com.softserveinc.ita.redplatform.persistence.dao.PaymentDao;
 import com.softserveinc.ita.redplatform.persistence.dao.impl.JPAInstallmentDao;
 
+
 /**
  * Payment Service.
  * 
@@ -133,15 +134,14 @@ public class PaymentService {
     public void createPayment(final Long orderId, final double amount,
 	    final byte[] image, final String customerEmail) throws IOException {
 	Payment payment = new Payment();
-	Order order = orderService.getOrderById(orderId);
-	if (order.getCustomerUser().getId() != userService
-		.loadUserByEmail(customerEmail).getId()) {
+	Order order = orderService.getOrder(orderId, customerEmail);
+	if (order == null) {
 	    throw new SecurityException("Wrong user tries to create payment!");
 	}
 	payment.setOrder(order);
 	payment.setAmount(amount);
-	payment.setPicturePath(imageHandlingService.saveImage(image));
+	payment.setPicturePath(imageHandlingService.getNewFullPath(orderId));
 	paymentDao.save(payment);
-
+	imageHandlingService.saveImage(image, payment.getPicturePath());
     }
 }

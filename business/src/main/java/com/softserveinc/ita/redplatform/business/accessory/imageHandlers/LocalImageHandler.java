@@ -16,16 +16,30 @@ public class LocalImageHandler implements ImageHandler {
     public final void saveImage(final byte[] image, final String filePath)
 	    throws IOException {
 	File outputFile = new File(filePath);
-
+	createParentDirs(outputFile);
 	if (!outputFile.exists()) {
 	    outputFile.createNewFile();
 	} else {
 	    throw new FileAlreadyExistsException(filePath);
 	}
-
-	FileOutputStream fileOutputStream = new FileOutputStream(outputFile);
-	fileOutputStream.write(image);
-	fileOutputStream.close();
+	try (FileOutputStream fileOutputStream =
+		new FileOutputStream(outputFile)) {
+	    fileOutputStream.write(image);
+	}
     }
 
+    /**
+     * Creates the parent directories.
+     *
+     * @param outputFile
+     *            the output file
+     * @throws IOException
+     *             Signals that an I/O exception has occurred.
+     */
+    private void createParentDirs(final File outputFile) throws IOException {
+	File parent = outputFile.getParentFile();
+	if (!parent.exists() && !parent.mkdirs()) {
+	    throw new IOException("Couldn't create dir: " + parent);
+	}
+    }
 }
