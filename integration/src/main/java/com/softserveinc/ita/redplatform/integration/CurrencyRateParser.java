@@ -3,10 +3,6 @@ package com.softserveinc.ita.redplatform.integration;
 import org.apache.log4j.Logger;
 import java.io.IOException;
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -22,6 +18,7 @@ import com.softserveinc.ita.redplatform.common.entity.CurrencyRate;
  */
 @Service
 public class CurrencyRateParser {
+    
     /**
      * 
      */
@@ -39,22 +36,13 @@ public class CurrencyRateParser {
     private static String json = "&json";
 
     /**
-     *
+     * @param date date
      * @return nbu amount
      */
-    public final double getRate() {
+    public final double getRate(final String date) {
 	ObjectMapper mapper = new ObjectMapper();
 	mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 	double amount = 0;
-	DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
-	Calendar cal = Calendar.getInstance();
-	if (cal.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
-	    cal.add(Calendar.DATE, 1);
-	}
-	if (cal.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY) {
-	    cal.add(Calendar.DATE, 2);
-	}
-	String date = dateFormat.format(cal.getTime());
 	try {
 	    CurrencyAmountDTO[] currency = mapper.readValue(
 		    new URL(nbuCurrency + date + json), CurrencyAmountDTO[].class);

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.softserveinc.ita.redplatform.business.dateconverter.DateConverter;
 import com.softserveinc.ita.redplatform.common.dto.CurrencyRateDTO;
 import com.softserveinc.ita.redplatform.common.entity.CurrencyRate;
 import com.softserveinc.ita.redplatform.common.entity.RealEstateAdminUser;
@@ -28,10 +29,16 @@ import com.softserveinc.ita.redplatform.persistence.dao.RealEstateAdminUserDao;
 public class CurrencyRateService {
     
     /**
+     * DateConverter object.
+     */
+    @Autowired
+    private DateConverter dateConverter;
+    /**
      * RealEstateAdminUserDao object.
      */
     @Autowired
     private RealEstateAdminUserDao redAdminDao;
+    
     /**
      * currencyJson object.
      */
@@ -67,7 +74,8 @@ public class CurrencyRateService {
     public void create(final CurrencyRateDTO currencyRateDTO,
 	    	final String email) {
 	if (currencyRateDTO.isNbu()) {
-	    currencyRateDTO.setAmount(currencyRateParser.getRate());
+	    currencyRateDTO.setAmount(currencyRateParser.getRate(
+		    dateConverter.convertDate()));
 	}
 	CurrencyRate currencyRate = currencyRateMapper.toEntity(currencyRateDTO);
 	RealEstateAdminUser redAdmin = (RealEstateAdminUser) 
@@ -197,7 +205,7 @@ public class CurrencyRateService {
 		    && (currency.getToDate().getTime() 
 		    > currencyRate.getToDate().getTime()
 		    && (currency.getFromDate().getTime() 
-		    < currencyRate.getToDate().getTime()))) {
+		    <= currencyRate.getToDate().getTime()))) {
 		if ((currencyRate.getToDate().getTime() + ONEDAYINMILLIS) 
 			>= currency.getToDate().getTime()) {
 		    currencyRateDao.remove(currency);
@@ -212,7 +220,7 @@ public class CurrencyRateService {
 		    && (currency.getToDate().getTime() 
 		    <= currencyRate.getToDate().getTime())
 		    && (currency.getToDate().getTime() 
-		    > currencyRate.getFromDate().getTime())) {
+		    >= currencyRate.getFromDate().getTime())) {
 		if ((currencyRate.getFromDate().getTime() - ONEDAYINMILLIS) 
 			<= currency.getFromDate().getTime()) {
 		    currencyRateDao.remove(currency);
@@ -274,5 +282,23 @@ public class CurrencyRateService {
 		currencyRateDao.remove(currency);
 	    } 
 	}
+    }
+    
+    /**
+     * 
+     * @param email redadmin email
+     * @return current currency rate
+     */
+    public CurrencyRate findTodayCurrencyByCompany(final String email) {
+	for (CurrencyRate currency : currencyRateDao
+		.findAllCurrenciesByCompany(redAdminDao.findAgencyByEmail(email))) {
+	 if ((currency.getFromDate().getTime() 
+		 <= new Date().getTime())
+		 && (currency.getToDate().getTime()
+		 >= new Date().getTime())) {
+	     return currency;
+	 }   
+	}
+	return null;
     }
 }
