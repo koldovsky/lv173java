@@ -123,7 +123,7 @@ public class OrderService {
     @Transactional
     public List<OrderDTO> getOrders(final String userMail) {
 	List<Order> orders = orderDao.loadOrders(userMail);
-	ArrayList<OrderDTO> orderDTOs = new ArrayList<>();
+	List<OrderDTO> orderDTOs = new ArrayList<>();
 	OrderDTO orderDTO;
 	for (Order order : orders) {
 	    orderDTO = mapper.toDto(order);
