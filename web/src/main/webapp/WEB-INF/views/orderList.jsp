@@ -28,6 +28,7 @@
 		<table id="table" class="display">
 			<thead>
 				<tr>
+					<th class="id">Id</th>
 					<th class="createdDate">Created Date</th>
 					<sec:authorize access="hasRole('ROLE_REDADMIN')">
 						<th class="firstName">First Name</th>

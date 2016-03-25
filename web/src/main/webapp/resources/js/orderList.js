@@ -1,4 +1,5 @@
 $(function() {
+    var orderId;
     var table = $('#table')
 	    .DataTable(
 		    {
@@ -10,6 +11,15 @@ $(function() {
 			},
 
 			columnDefs : [
+				{
+				    'targets' : 'id',
+				    'data' : 'id',
+				    'render' : function(data, type, row) {
+					orderId = data;
+					return data;
+				    },
+				    'visible' : false
+				},
 				{
 				    'targets' : 'createdDate',
 				    'data' : 'createdDate',
@@ -87,41 +97,7 @@ $(function() {
 
 			]
 		    });
-    // Add event listener for opening and closing details
     $('#table tbody').on('click', 'tr', function() {
-	var row = table.row($(this));
-
-	if (row.child.isShown()) {
-	    // This row is already open - close it
-	    row.child.hide();
-	    $(this).removeClass('shown');
-	} else {
-	    // Open this row
-	    row.child(format(row.data())).show();
-	    $(this).addClass('shown');
-	}
+	document.location.href = 'statistics/order/' + orderId + '/payments';
     });
 });
-function format(data) {
-    // `d` is the original data object for the row
-    return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'
-	    + '<tr>'
-	    + '<td>Area:</td>'
-	    + '<td>'
-	    + data.area
-	    + '</td>'
-	    + '</tr>'
-	    + '<tr>'
-	    + '<td>Rooms Quantity:</td>'
-	    + '<td>'
-	    + data.roomsQuantity
-	    + '</td>'
-	    + '</tr>'
-	    + '<tr>'
-	    + '<td>Description:</td>'
-	    + '<td>'
-	    + data.description
-	    + '</td>'
-	    + '</tr>'
-    '</table>';
-}
