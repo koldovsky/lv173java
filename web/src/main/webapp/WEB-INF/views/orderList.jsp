@@ -42,7 +42,6 @@
 						<th class="agency">Company</th>
 					</sec:authorize>
 					<th class="status">Status</th>
-					<th class="progress">Progress</th>
 				</tr>
 			</thead>
 		</table>
