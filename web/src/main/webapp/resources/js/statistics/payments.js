@@ -13,8 +13,16 @@ $(document).ready(function() {
 			$('#totalPaidAmount').html(responseData.totalPaidAmount);
 			$('#leftPayAmount').html(responseData.leftPayAmount);
 			var progress = responseData.progress.toFixed(2);
+			if (progress >= 99.99) {
+				$('#progress').prop('class','progress-bar progress-bar-success');
+			}
+			if (progress < 0.01) {
+				$('#progress').prop('style','width: 100%;');
+				$('#progress').prop('class','progress-bar');
+			} else{ 
+				$('#progress').prop('style', 'width:' + progress + '%;');
+			}
 			$('#progress').html(progress + '%');
-			$('#progress').prop('style', 'width:' + progress + '%;');
 			if (responseData.nextInstallment){
 				$('#next').prop('hidden',false);
 				$('#nextDueDate').html(moment(responseData.nextInstallment.date).format('YYYY-MM-DD'));
@@ -24,6 +32,7 @@ $(document).ready(function() {
 				$('#missed').prop('hidden',false);
 				$('#missedDueDate').html(moment(responseData.missedInstallment.date).format('YYYY-MM-DD'));
 				$('#missedAmount').html(responseData.missedInstallment.amount);
+				$('#progress').prop('class','progress-bar progress-bar-danger');
 			}
 			
 			$('#table').DataTable({

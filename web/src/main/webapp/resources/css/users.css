@@ -15,3 +15,16 @@ body, html{
 #missed{
 	color:red;
 }
+
+#progressbar{
+	background: rgba(44, 62, 80, 1);
+	border: 0px solid rgba(44, 62, 80, 1);
+	border-radius: 4px;
+	height: 20px;
+	margin: 10px;
+	text-align: center;
+}
+
+#progress{
+	border-radius: 4px;
+}

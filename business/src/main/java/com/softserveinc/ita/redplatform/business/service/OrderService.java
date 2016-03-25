@@ -248,15 +248,22 @@ public class OrderService {
 	    PaymentsStatistics statistics = new PaymentsStatistics();
 	    double apartmentPrice = installmentDao.getOrderCost(id);
 	    double totalPaidAmount = paymentDao.getPaidAmount(id);
+		double leftPayAmount = apartmentPrice - totalPaidAmount;
+		double progress = totalPaidAmount / apartmentPrice * PERCENTAGE;
+		if (leftPayAmount < 0) {
+			leftPayAmount = 0;
+		}
+		if (progress > PERCENTAGE) {
+			progress = PERCENTAGE;
+		}
 	    statistics.setApartmentPrice(apartmentPrice);
 	    statistics.setTotalPaidAmount(totalPaidAmount);
-	    statistics.setLeftPayAmount(apartmentPrice - totalPaidAmount);
+	    statistics.setLeftPayAmount(leftPayAmount);
 	    statistics.setNextInstallment(installmentService
 		    .getNextInstallment(order, totalPaidAmount));
 	    statistics.setMissedInstallment(installmentService
 		    .getMissedInstallment(order, totalPaidAmount));
-	    statistics
-		    .setProgress(totalPaidAmount / apartmentPrice * PERCENTAGE);
+	    statistics.setProgress(progress);
 	    return statistics;
 	}
 	return null;
