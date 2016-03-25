@@ -78,10 +78,27 @@ $(function() {
 						+ labelClass + '">' + status
 						+ '</span>';
 				    }
+				},
+				{
+				    'targets' : 'paymentStatistics',
+				    'orderable' : false,
+				    'data' : function(data, type, row) {
+					return '<button type="button" class="toPayments btn btn-default btn-sm">Payment Statistics</button>';
+				    }
+				},
+				{
+				    'targets' : 'submitPayment',
+				    'orderable' : false,
+				    'data' : function(data, type, row) {
+					return '<button type="button" class="newPayment btn btn-default btn-sm">Submit Payment</button>';
+				    }
 				}
 			]
 		    });
-    $('#table tbody').on('click', 'tr', function() {
+    $('#table tbody').on('click', 'button.toPayments', function() {
 	document.location.href = 'statistics/order/' + orderId + '/payments';
+    });
+    $('#table tbody').on('click', 'button.newPayment', function() {
+	document.location.href = 'payment';
     });
 });

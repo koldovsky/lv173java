@@ -29,6 +29,7 @@
 			<thead>
 				<tr>
 					<th class="id">Id</th>
+					<th class="status">Status</th>
 					<th class="createdDate">Created Date</th>
 					<sec:authorize access="hasRole('ROLE_REDADMIN')">
 						<th class="firstName">First Name</th>
@@ -40,8 +41,9 @@
 					<th class="additional">Address</th>
 					<sec:authorize access="hasRole('ROLE_USER')">
 						<th class="agency">Company</th>
+						<th class="submitPayment">Submit Payments</th>
 					</sec:authorize>
-					<th class="status">Status</th>
+					<th class="paymentStatistics">Payment Statistics</th>
 				</tr>
 			</thead>
 		</table>
