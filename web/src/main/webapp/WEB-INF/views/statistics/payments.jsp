@@ -100,26 +100,15 @@
 							</tbody>
 						</table>
 					</div>
-					<div class="row">
-						<sec:authorize access="hasRole('ROLE_REDADMIN')">
+					<sec:authorize access="hasRole('ROLE_USER')">
+						<div class="row">
 							<div class="col-md-6 col-md-offset-3">
-								<a href="${pageContext.request.contextPath}/orders">
-									<button class="btn btn-primary col-md-12">View Orders</button>
-								</a>
-							</div>
-						</sec:authorize>
-						<sec:authorize access="hasRole('ROLE_USER')">
-							<div class="col-md-6">
 								<a href="${pageContext.request.contextPath}/payment">
 									<button class="btn btn-primary col-md-12">Add Payment</button>
 								</a>
 							</div>
-							<div class="col-md-6">
-								<a href="${pageContext.request.contextPath}/orders"><button
-										class="btn btn-primary col-md-12">View Orders</button></a>
-							</div>
-						</sec:authorize>
-					</div>
+						</div>
+					</sec:authorize>
 				</div>
 			</div>
 		</div>

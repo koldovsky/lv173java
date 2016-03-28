@@ -164,7 +164,7 @@ public class OrderService {
 	return installmentDao.getOrderCost(order.getId())
 		- paymentDao.getPaidAmount(order.getId()) > 0;
     }
-    
+
     /**
      * Checks if order is missed fulfillment.
      *
@@ -182,9 +182,9 @@ public class OrderService {
      */
     private enum OrderStatus {
 	/** The in progress status. */
-	IN_PROGRESS, 
+	IN_PROGRESS,
 	/** The finished status. */
-	FINISHED, 
+	FINISHED,
 	/** The missed fulfillment status. */
 	MISSED_FULFILLMENT;
     }
@@ -248,25 +248,55 @@ public class OrderService {
 	    PaymentsStatistics statistics = new PaymentsStatistics();
 	    double apartmentPrice = installmentDao.getOrderCost(id);
 	    double totalPaidAmount = paymentDao.getPaidAmount(id);
-		double leftPayAmount = apartmentPrice - totalPaidAmount;
-		double progress = totalPaidAmount / apartmentPrice * PERCENTAGE;
-		if (leftPayAmount < 0) {
-			leftPayAmount = 0;
-		}
-		if (progress > PERCENTAGE) {
-			progress = PERCENTAGE;
-		}
 	    statistics.setApartmentPrice(apartmentPrice);
 	    statistics.setTotalPaidAmount(totalPaidAmount);
-	    statistics.setLeftPayAmount(leftPayAmount);
+	    statistics.setLeftPayAmount(
+		    getLeftPayAmount(apartmentPrice, totalPaidAmount));
+	    statistics
+		    .setProgress(getProgress(apartmentPrice, totalPaidAmount));
 	    statistics.setNextInstallment(installmentService
 		    .getNextInstallment(order, totalPaidAmount));
 	    statistics.setMissedInstallment(installmentService
 		    .getMissedInstallment(order, totalPaidAmount));
-	    statistics.setProgress(progress);
 	    return statistics;
 	}
 	return null;
+    }
+
+    /**
+     * Method return amount left to pay.
+     * 
+     * @param apartmentPrice
+     *            apartment price
+     * @param totalPaidAmount
+     *            total paid Amount
+     * @return amount
+     */
+    private double getLeftPayAmount(final double apartmentPrice,
+	    final double totalPaidAmount) {
+	double left = apartmentPrice - totalPaidAmount;
+	if (left < 0) {
+	    return 0;
+	}
+	return left;
+    }
+
+    /**
+     * Method return progress.
+     * 
+     * @param apartmentPrice
+     *            apartment price
+     * @param totalPaidAmount
+     *            total paid Amount
+     * @return amount
+     */
+    private double getProgress(final double apartmentPrice,
+	    final double totalPaidAmount) {
+	double progress = totalPaidAmount / apartmentPrice * PERCENTAGE;
+	if (progress > PERCENTAGE) {
+	    return PERCENTAGE;
+	}
+	return progress;
     }
 
 }

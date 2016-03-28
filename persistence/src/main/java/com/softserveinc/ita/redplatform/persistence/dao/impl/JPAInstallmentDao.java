@@ -1,5 +1,7 @@
 package com.softserveinc.ita.redplatform.persistence.dao.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.softserveinc.ita.redplatform.common.entity.Installment;
@@ -34,4 +36,16 @@ public class JPAInstallmentDao extends JPAGenericDao<Installment, Long>
 	}
 	return (double) result;
     }
+
+    @Override
+    public final Installment getLastInstallmentTillNow(final Long id) {
+	List<Installment> list = (List<Installment>) getEntityManager()
+		.createQuery("from " + Installment.class.getName()
+			+ " as installment where installment.order.id=:id"
+			+ " and installment.date < current_date"
+			+ " order by installment.date desc")
+		.setParameter("id", id).getResultList();
+	return getSingleResult(list);
+    }
+
 }
