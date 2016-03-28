@@ -20,7 +20,7 @@ import com.softserveinc.ita.redplatform.business.service.PaymentService;
 import com.softserveinc.ita.redplatform.business.statistics.PaymentsStatistics;
 import com.softserveinc.ita.redplatform.common.dto.PaymentDTO;
 import com.softserveinc.ita.redplatform.web.controller
-.ResourceNotFoundException;
+	.ResourceNotFoundException;
 
 /**
  * Rest Controller for payments.
@@ -31,58 +31,58 @@ import com.softserveinc.ita.redplatform.web.controller
 @RestController
 public class PaymentRestController {
 
-	/**
-	 * Payment service.
-	 */
-	@Autowired
-	private PaymentService paymentService;
+    /**
+     * Payment service.
+     */
+    @Autowired
+    private PaymentService paymentService;
 
-	/**
-	 * Order service.
-	 */
-	@Autowired
-	private OrderService orderService;
+    /**
+     * Order service.
+     */
+    @Autowired
+    private OrderService orderService;
 
-	/**
-	 * Method return payments statistic by order id.
-	 * 
-	 * @param id
-	 *            order id
-	 * @return payments statistic
-	 */
-	@RequestMapping(value = "api/statistics/order/{id}/payments",
-			method = RequestMethod.GET)
-	public final ResponseEntity<PaymentsStatistics>
-			getPaymentsStatistics(@PathVariable final Long id) {
-		PaymentsStatistics statistics = orderService
-				.generatePaymentsStatistics(id, SecurityContextHolder
-						.getContext().getAuthentication().getName());
-		if (statistics == null) {
-			throw new ResourceNotFoundException();
-		}
-		return new ResponseEntity<PaymentsStatistics>(statistics,
-				HttpStatus.OK);
+    /**
+     * Method return payments statistic by order id.
+     * 
+     * @param id
+     *            order id
+     * @return payments statistic
+     */
+    @RequestMapping(value = "api/statistics/order/{id}/payments",
+	    method = RequestMethod.GET)
+    public final ResponseEntity<PaymentsStatistics>
+	    getPaymentsStatistics(@PathVariable final Long id) {
+	PaymentsStatistics statistics = orderService
+		.generatePaymentsStatistics(id, SecurityContextHolder
+			.getContext().getAuthentication().getName());
+	if (statistics == null) {
+	    throw new ResourceNotFoundException();
 	}
+	return new ResponseEntity<PaymentsStatistics>(statistics,
+		HttpStatus.OK);
+    }
 
-	/**
-	 * Method return payments by order id.
-	 * 
-	 * @param id
-	 *            order id
-	 * @return list of payments
-	 */
-	@RequestMapping(value = "api/order/{id}/payments",
-			method = RequestMethod.GET)
-	public final ResponseEntity<List<PaymentDTO>>
-			getPayments(@PathVariable final Long id) {
-		List<PaymentDTO> paymentDTOs =
-				paymentService.getPayments(id, SecurityContextHolder
-						.getContext().getAuthentication().getName());
-		if (paymentDTOs == null) {
-			throw new ResourceNotFoundException();
-		}
-		return new ResponseEntity<List<PaymentDTO>>(paymentDTOs, HttpStatus.OK);
+    /**
+     * Method return payments by order id.
+     * 
+     * @param id
+     *            order id
+     * @return list of payments
+     */
+    @RequestMapping(value = "api/order/{id}/payments",
+	    method = RequestMethod.GET)
+    public final ResponseEntity<List<PaymentDTO>>
+	    getPayments(@PathVariable final Long id) {
+	List<PaymentDTO> paymentDTOs =
+		paymentService.getPayments(id, SecurityContextHolder
+			.getContext().getAuthentication().getName());
+	if (paymentDTOs == null) {
+	    throw new ResourceNotFoundException();
 	}
+	return new ResponseEntity<List<PaymentDTO>>(paymentDTOs, HttpStatus.OK);
+    }
 
     /**
      * Upload multiple file handler.
@@ -91,6 +91,8 @@ public class PaymentRestController {
      *            the order id
      * @param amount
      *            the amount
+     * @param date
+     *            the date
      * @param image
      *            the image
      * @return the response entity
@@ -99,13 +101,14 @@ public class PaymentRestController {
     public final ResponseEntity<String> uploadMultipleFileHandler(
 	    @RequestParam("orderId") final Long orderId,
 	    @RequestParam("amount") final double amount,
+	    @RequestParam("date") final long date,
 	    @RequestParam("image") final MultipartFile image) {
 	ResponseEntity<String> responseEntity =
 		new ResponseEntity<String>("OK", HttpStatus.OK);
 	try {
-	    paymentService.createPayment(orderId, amount, image.getBytes(),
-		    SecurityContextHolder.getContext().getAuthentication()
-			    .getName());
+	    paymentService.createPayment(orderId, amount, date,
+		    image.getBytes(), SecurityContextHolder.getContext()
+			    .getAuthentication().getName());
 	} catch (MaxUploadSizeExceededException e) {
 	    responseEntity =
 		    new ResponseEntity<String>("The file size is too big.",

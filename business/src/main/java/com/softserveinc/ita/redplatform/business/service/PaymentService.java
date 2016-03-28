@@ -1,6 +1,7 @@
 package com.softserveinc.ita.redplatform.business.service;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -16,7 +17,6 @@ import com.softserveinc.ita.redplatform.common.entity.Payment;
 import com.softserveinc.ita.redplatform.common.mapper.PaymentMapper;
 import com.softserveinc.ita.redplatform.persistence.dao.PaymentDao;
 import com.softserveinc.ita.redplatform.persistence.dao.impl.JPAInstallmentDao;
-
 
 /**
  * Payment Service.
@@ -72,8 +72,7 @@ public class PaymentService {
     public PaymentsStatistics generateStatistics(final Long id) {
 	PaymentsStatistics statistic = new PaymentsStatistics();
 	Order order = orderService.getOrderById(id);
-	statistic.setApartmentPrice(
-		installmentDao.getOrderCost(id));
+	statistic.setApartmentPrice(installmentDao.getOrderCost(id));
 	statistic.setTotalPaidAmount(getTotalPaidAmount(order.getPayments()));
 	return statistic;
     }
@@ -122,6 +121,8 @@ public class PaymentService {
      *            the order id
      * @param amount
      *            the amount
+     * @param date
+     *            the date
      * @param image
      *            the image
      * @param customerEmail
@@ -132,7 +133,8 @@ public class PaymentService {
     @Secured("ROLE_USER")
     @Transactional
     public void createPayment(final Long orderId, final double amount,
-	    final byte[] image, final String customerEmail) throws IOException {
+	    final long date, final byte[] image, final String customerEmail)
+		    throws IOException {
 	Payment payment = new Payment();
 	Order order = orderService.getOrder(orderId, customerEmail);
 	if (order == null) {
@@ -141,6 +143,8 @@ public class PaymentService {
 	payment.setOrder(order);
 	payment.setAmount(amount);
 	payment.setPicturePath(imageHandlingService.getNewFullPath(orderId));
+	Date paymentDate = new Date(date);
+	payment.setDate(paymentDate);
 	paymentDao.save(payment);
 	imageHandlingService.saveImage(image, payment.getPicturePath());
     }

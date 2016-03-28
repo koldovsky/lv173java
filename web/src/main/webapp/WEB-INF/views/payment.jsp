@@ -9,7 +9,7 @@
 	href="${pageContext.request.contextPath}/resources/css/payment.css">
 <script
 	src="${pageContext.request.contextPath}/resources/js/lib/jquery/jquery.validate.min.js">
-	
+    
 </script>
 <title>New payment</title>
 <script
@@ -17,8 +17,16 @@
 <script
 	src="${pageContext.request.contextPath}/resources/js/validationRules.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/payment.js"></script>
-
-
+<script
+	src="${pageContext.request.contextPath}/resources/js/order/calender.js"></script>
+<script
+	src="${pageContext.request.contextPath}/resources/js/lib/jquery-ui/jquery-ui.min.js"></script>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/lib/jquery-ui/jquery-ui.min.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/lib/jquery-ui/jquery-ui.structure.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/lib/jquery-ui/jquery-ui.theme.css">
 </head>
 <body>
 	<jsp:include page="utils/navbar.jsp"></jsp:include>
@@ -31,11 +39,21 @@
 			</b> <br /> <br />
 		</div>
 		<div id="error" class="alert alert-danger" role="alert">
-		<a href="#" class="close" aria-label="close">&times;</a>
-		<div id = "messDiv"></div>
+			<a href="#" class="close" aria-label="close">&times;</a>
+			<div id="messDiv"></div>
 		</div>
 		<form name="paymentform" id="paymentform" action="">
 			<div class="col-lg-6">
+				<div class="row">
+					<div class="form-group">
+						<label class="control-label" for="date"><span
+							class="glyphicon glyphicon-asterisk text-danger"
+							aria-hidden="true"></span>Input the date of a payment.</label> <input
+							type="text" class="form-control data date" name="date" id="date"
+							placeholder="YYYY-MM-DD">
+					</div>
+				</div>
+				<input type="hidden" id="dateSubmit">
 				<div class="row">
 					<!-- New payment amount-->
 					<div class="form-group">
