@@ -8,9 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.softserveinc.ita.redplatform.business.service.OrderService;
@@ -19,8 +19,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.softserveinc.ita.redplatform.business.service.PaymentService;
 import com.softserveinc.ita.redplatform.business.statistics.PaymentsStatistics;
 import com.softserveinc.ita.redplatform.common.dto.PaymentDTO;
-import com.softserveinc.ita.redplatform.web.controller
-	.ResourceNotFoundException;
+import com.softserveinc.ita.redplatform.web.controller.
+ResourceNotFoundException;
 
 /**
  * Rest Controller for payments.
@@ -97,12 +97,12 @@ public class PaymentRestController {
      *            the image
      * @return the response entity
      */
-    @RequestMapping(value = "/uploadPaymentImage", method = RequestMethod.POST)
+    @RequestMapping(value = "api/uploadPaymentImage/{orderId}/{amount}/{date}",
+	    method = RequestMethod.POST)
     public final ResponseEntity<String> uploadMultipleFileHandler(
-	    @RequestParam("orderId") final Long orderId,
-	    @RequestParam("amount") final double amount,
-	    @RequestParam("date") final long date,
-	    @RequestParam("image") final MultipartFile image) {
+	    @PathVariable final long orderId, @PathVariable final double amount,
+	    @PathVariable final long date,
+	    @RequestBody final MultipartFile image) {
 	ResponseEntity<String> responseEntity =
 		new ResponseEntity<String>("OK", HttpStatus.OK);
 	try {

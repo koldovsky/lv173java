@@ -30,6 +30,7 @@
 </head>
 <body>
 	<jsp:include page="utils/navbar.jsp"></jsp:include>
+	<input type="hidden" name="orderId" value="${orderId}" id="orderId">
 	<div class="container">
 		<h1>New Payment</h1>
 		<div class="text-danger">

@@ -41,12 +41,10 @@ $(document).ready(function() {
 			
 			var oMyForm = new FormData();
 			oMyForm.append("image", upload);
-			oMyForm.append("date", $("#dateSubmit").val());
-			oMyForm.append('amount', '123.34');
-			oMyForm.append('orderId','131');
 
 			$.ajax({
-				url : 'uploadPaymentImage',
+				url : context + '/'+ '/api/uploadPaymentImage/'+$('#orderId').val()+
+				'/'+$('#amount').val()+'/'+$("#dateSubmit").val(),
 				data : oMyForm,
 				dataType: 'text',
 				type : 'POST',
