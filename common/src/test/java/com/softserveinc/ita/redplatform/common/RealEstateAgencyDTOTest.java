@@ -67,7 +67,7 @@ public class RealEstateAgencyDTOTest {
 	Set<ConstraintViolation<RealEstateAgencyDTO>> constraintViolations =
 		validator.validate(agency);
 
-	assertEquals(5, constraintViolations.size());
+	assertEquals(3, constraintViolations.size());
     }
     
     @Test

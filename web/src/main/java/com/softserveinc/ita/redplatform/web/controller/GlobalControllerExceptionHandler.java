@@ -3,6 +3,9 @@ package com.softserveinc.ita.redplatform.web.controller;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -25,6 +28,10 @@ import com.softserveinc.ita.redplatform.web
 @ControllerAdvice
 public class GlobalControllerExceptionHandler {
 
+    /** The message source. */
+    @Autowired
+    private MessageSource messageSource;
+
     /**
      * Logger for Agency Controller class.
      */
@@ -44,7 +51,8 @@ public class GlobalControllerExceptionHandler {
     /**
      * Bad request exception.
      *
-     * @param exception the exception
+     * @param exception
+     *            the exception
      * @return ValidationErrorsDTO
      */
     @ExceptionHandler(ArgumentNotValidException.class)
@@ -62,7 +70,8 @@ public class GlobalControllerExceptionHandler {
     /**
      * Process field errors.
      *
-     * @param fieldErrors the field errors
+     * @param fieldErrors
+     *            the field errors
      * @return the validation errors dto
      */
     private ValidationErrorsDTO
@@ -70,8 +79,8 @@ public class GlobalControllerExceptionHandler {
 	ValidationErrorsDTO dto = new ValidationErrorsDTO();
 
 	for (FieldError fieldError : fieldErrors) {
-	    dto.addFieldError(fieldError.getField(),
-		    fieldError.getDefaultMessage());
+	    dto.addFieldError(fieldError.getField(), messageSource
+		    .getMessage(fieldError, LocaleContextHolder.getLocale()));
 	}
 
 	return dto;

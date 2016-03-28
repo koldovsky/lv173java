@@ -16,12 +16,12 @@ import org.hibernate.validator.constraints.URL;
 public class RealEstateAgencyDTO {
 
     /** The Constant NAME_REGEX. */
-    public static final String NAME_REGEX = "^(?=.*[a-zA-Z])[a-zA-Z0-9\\s]{1}"
-	    + "[a-zA-Z0-9!.@&$():,\\-\\s\\']+[a-zA-Z0-9.!)\\'\\s]$";
+    public static final String NAME_REGEX = "^$|(^(?=.*[a-zA-Z])[a-zA-Z0-9\\s]"
+	    + "[a-zA-Z0-9!.@&$():,\\-\\s\\']+[a-zA-Z0-9.!)\\'\\s]$)";
 
     /** The Constant DESCRIPTION_REGEX. */
     public static final String DESCRIPTION_REGEX =
-	    "^(?=.*[a-zA-Z])[a-zA-Z0-9\\s!.\\[\\]"
+	    "^$|^(?=.*[a-zA-Z])[a-zA-Z0-9\\s!.\\[\\]"
 		    + "@&#%+=;:?\\/,\\-\\'$%^\\*()<>№]+$";
 
     /** The Constant URL_REGEX. */
@@ -50,13 +50,13 @@ public class RealEstateAgencyDTO {
     /** The name. */
     @NotNull
     @Size(min = MIN_LENGTH_NAME, max = MAX_LENGTH_NAME)
-    @Pattern(regexp = NAME_REGEX, message = "Invalid name")
+    @Pattern(regexp = NAME_REGEX)
     private String name;
 
     /** The description. */
     @NotNull
     @Size(min = MIN_LENGTH_DESCRIPTION, max = MAX_LENGTH_DESCRIPTION)
-    @Pattern(regexp = DESCRIPTION_REGEX, message = "Invalid description")
+    @Pattern(regexp = DESCRIPTION_REGEX)
     private String description;
 
     /** The site. */
@@ -65,7 +65,7 @@ public class RealEstateAgencyDTO {
 
     /** The phone number. */
     @NotNull
-    @Pattern(regexp = PHONE_NUMBER_REGEX, message = "Invalid phone number")
+    @Pattern(regexp = PHONE_NUMBER_REGEX)
     private String phone;
 
     /** The address of the office. */

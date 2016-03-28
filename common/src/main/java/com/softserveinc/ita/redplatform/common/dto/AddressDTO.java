@@ -4,7 +4,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-
 /**
  * Data Transfer Object for Address class.
  * 
@@ -15,17 +14,18 @@ public class AddressDTO {
 
     /** The Constant COUNTRY_REGEX. */
     public static final String COUNTRY_REGEX =
-	    "^(?=.*[a-zA-Z])[a-zA-Z.\\-,\\' ]+$";
+	    "^$|^(?=.*[a-zA-Z])[a-zA-Z.\\-,\\' ]+$";
 
     /** The Constant POSTAL_REGEX. */
-    public static final String POSTAL_REGEX = "^(?=.*[0-9])[a-zA-Z0-9]{3,10}$";
+    public static final String POSTAL_REGEX =
+	    "^$|^(?=.*[0-9])[a-zA-Z0-9]{3,10}$";
 
     /** The Constant REGION_REGEX. */
     public static final String REGION_REGEX = "^$|[a-zA-Z.\\-,\\'\\s]+$";
 
     /** The Constant ADDITIONAL_REGEX. */
     public static final String ADDITIONAL_REGEX =
-	    "^(?=.*[a-zA-Z])[a-zA-Z0-9.:\\-',\\s\\[\\]\\/]+$";
+	    "^$|(^(?=.*[a-zA-Z])[a-zA-Z0-9.:\\-',\\s\\[\\]\\/]+$)";
 
     /** The Constant MAX_LENGTH. */
     public static final int MAX_LENGTH = 30;
@@ -34,10 +34,10 @@ public class AddressDTO {
     public static final int MIN_LENGTH = 2;
 
     /** The Constant MAX_LENGTH_POSTAL_CODE. */
-    public static final int MAX_LENGTH_POSTAL_CODE = 30;
+    public static final int MAX_LENGTH_POSTAL_CODE = 10;
 
     /** The Constant MIN_LENGTH_POSTAL_CODE. */
-    public static final int MIN_LENGTH_POSTAL_CODE = 2;
+    public static final int MIN_LENGTH_POSTAL_CODE = 3;
 
     /** The id. */
     private Long id;
@@ -45,30 +45,30 @@ public class AddressDTO {
     /** The country. */
     @NotNull
     @Size(min = MIN_LENGTH, max = MAX_LENGTH)
-    @Pattern(regexp = COUNTRY_REGEX, message = "Invalid country")
+    @Pattern(regexp = COUNTRY_REGEX)
     private String country;
 
     /** The region. */
     @Size(max = MAX_LENGTH)
-    @Pattern(regexp = REGION_REGEX, message = "Invalid region")
+    @Pattern(regexp = REGION_REGEX)
     private String region;
 
     /** The postal code. */
     @NotNull
     @Size(min = MIN_LENGTH_POSTAL_CODE, max = MAX_LENGTH_POSTAL_CODE)
-    @Pattern(regexp = POSTAL_REGEX, message = "Invalid postal code")
+    @Pattern(regexp = POSTAL_REGEX)
     private String postalCode;
 
     /** The locality. */
     @NotNull
     @Size(min = MIN_LENGTH, max = MAX_LENGTH)
-    @Pattern(regexp = COUNTRY_REGEX, message = "Invalid city")
+    @Pattern(regexp = COUNTRY_REGEX)
     private String locality;
 
     /** The additional info. */
     @NotNull
     @Size(min = MIN_LENGTH, max = MAX_LENGTH)
-    @Pattern(regexp = ADDITIONAL_REGEX, message = "Invalid address")
+    @Pattern(regexp = ADDITIONAL_REGEX)
     private String additional;
 
     /** default constructor. */

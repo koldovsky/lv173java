@@ -91,14 +91,16 @@ public class AgencyRestController {
     }
 
     /**
-     * check if company exists.
+     * check whether such name is available.
      * 
      * @return boolean value
      * @param agencyName
      *            agencyName
      */
     @RequestMapping(value = "/checkName", method = RequestMethod.GET)
-    public final boolean checkIfExist(@RequestParam final String agencyName) {
+    public final boolean isNameAvailable(
+	    @RequestParam final String agencyName) {
+	
 	return realEstateAgencyService.isNameAvailable(agencyName);
     }
 

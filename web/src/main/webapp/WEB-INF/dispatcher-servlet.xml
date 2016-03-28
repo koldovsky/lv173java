@@ -19,6 +19,11 @@
 		</property>
 	</bean>
 
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="classpath:messages/messages" />
+	</bean>
+
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix">
@@ -34,7 +39,7 @@
 		<property name="maxUploadSize" value="1000000" />
 	</bean>
 
-	<mvc:annotation-driven/>
+	<mvc:annotation-driven />
 
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 

@@ -52,7 +52,7 @@ public class AddressDTOTest {
 	Set<ConstraintViolation<AddressDTO>> constraintViolations =
 		validator.validate(address);
 
-	assertEquals(8, constraintViolations.size());
+	assertEquals(4, constraintViolations.size());
     }
 
     @Test
@@ -107,7 +107,7 @@ public class AddressDTOTest {
 	Set<ConstraintViolation<AddressDTO>> constraintViolations =
 		validator.validate(address);
 
-	assertEquals(1, constraintViolations.size());
+	assertEquals(2, constraintViolations.size());
     }
     
     

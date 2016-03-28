@@ -2,8 +2,8 @@ $(document).ready(
 		function() {
 			$('.alert .close').on('click', function(e) {
 			    $(this).parent().hide();
-			});
-						
+			});		
+		
 			$.validator.addMethod('agencyName', function(value, element) {
 				return /^(?=.*[a-zA-Z])[a-zA-Z0-9\s]{1}[a-zA-Z0-9!.@&$():,-\s\']+[a-zA-Z0-9.!)\'\s]$/
 				                 .test(value);
@@ -38,7 +38,7 @@ $(document).ready(
 					return ruleAdditional.regexp.test(value);
 			}, ruleAdditional.message);
 
-			
+
 			$('#register-form')
 					.validate(
 							{ 		
@@ -52,7 +52,7 @@ $(document).ready(
 										maxlength : 100,
 										agencyName : true,
 										remote: {
-											url: 'checkName',
+											url: context+'/checkName',
 											type: 'GET'
 										}										
 									},
@@ -129,7 +129,14 @@ $(document).ready(
 										required : 'Please enter address'
 									}
 								}
-							});
-			
+							});			
 
-		});
+	});
+
+function printErrors(jqXHR) {
+	var responseText = jQuery.parseJSON(jqXHR.responseText);
+	$("#error").html("Failed to add agency!<br/>");
+    $.each( responseText.fieldErrors, function( index, value ){
+    	$("#error").append("<br/>"+value.message);
+    });		 
+}

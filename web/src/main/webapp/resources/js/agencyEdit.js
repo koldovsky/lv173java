@@ -36,7 +36,9 @@ $(document).ready(
 								$('#error').hide();
 							},
 							error : function(jqXHR, textStatus, errorThrown) {
-								
+								if (jqXHR.status === 400) {
+									printErrors(jqXHR);      
+								}
 								$('#error').show();
 								$('#success').hide();
 							}
