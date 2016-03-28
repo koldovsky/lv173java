@@ -28,6 +28,9 @@
 					</tr>
 				</thead>
 			</table>
+			<div id="addCurrency" class="col-lg-3">
+				<a href="${pageContext.request.contextPath}/currency" class="btn btn-primary">Add currency rate</a>
+			</div>
 		</div>
 	<jsp:include page="utils/footer.jsp"></jsp:include>
 	<!-- jQuery dataTables -->
