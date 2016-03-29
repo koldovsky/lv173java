@@ -16,8 +16,11 @@
 		<div class="container">
 			<h1>Customer work place</h1>
 			<div class="indexrow">
-				<div class="col-lg-4">
+				<div class="col-lg-3">
 					<a id="edit-customer" class="btn btn-primary">Edit personal info</a>
+				</div>
+				<div class="col-lg-3">
+					<a href="${pageContext.request.contextPath}/orders" class="btn btn-primary">View the orders</a>
 				</div>
 			</div>
 
