@@ -39,4 +39,12 @@ public interface OrderDao extends GenericDao<Order, Long> {
      * @return the agency name
      */
     String getAgencyName(Long orderId);
+    
+    /**
+     * Gets the agency id.
+     *
+     * @param orderId the order id
+     * @return the agency id
+     */
+    Long getAgencyId(Long orderId);
 }
