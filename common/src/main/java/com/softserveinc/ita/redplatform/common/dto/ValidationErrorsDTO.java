@@ -12,7 +12,7 @@ import java.util.List;
 public class ValidationErrorsDTO {
     
     /** The field errors. */
-    private List<FieldDTO> fieldErrors = new ArrayList<>();
+    private List<String> errors = new ArrayList<>();
     
     /**
      * Instantiates a new validation errors dto.
@@ -23,13 +23,10 @@ public class ValidationErrorsDTO {
  
     /**
      * Adds the field error.
-     *
-     * @param path the path
      * @param message the message
      */
-    public final void addFieldError(final String path, final String message) {
-	FieldDTO error = new FieldDTO(path, message);
-        fieldErrors.add(error);
+    public final void addFieldError(final String message) {
+        errors.add(message);
     }
 
     /**
@@ -37,8 +34,8 @@ public class ValidationErrorsDTO {
      *
      * @return the field errors
      */
-    public final List<FieldDTO> getFieldErrors() {
-        return fieldErrors;
+    public final List<String> getFieldErrors() {
+        return errors;
     }
 
     /**
@@ -46,8 +43,8 @@ public class ValidationErrorsDTO {
      *
      * @param newFieldErrors the new field errors
      */
-    public final void setFieldErrors(final List<FieldDTO> newFieldErrors) {
-        this.fieldErrors = newFieldErrors;
+    public final void setFieldErrors(final List<String> newFieldErrors) {
+        this.errors = newFieldErrors;
     }      
  
 }

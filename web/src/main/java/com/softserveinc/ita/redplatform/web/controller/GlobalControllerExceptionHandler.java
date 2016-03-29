@@ -15,9 +15,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.softserveinc.ita.redplatform.common.dto.ValidationErrorsDTO;
-import com.softserveinc.ita.redplatform.web.api.AgencyRestController;
 import com.softserveinc.ita.redplatform.web
-			.exceptions.ArgumentNotValidException;
+				.exceptions.ArgumentNotValidException;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -36,7 +35,7 @@ public class GlobalControllerExceptionHandler {
      * Logger for Agency Controller class.
      */
     private static final Logger LOGGER =
-	    Logger.getLogger(AgencyRestController.class);
+	    Logger.getLogger(GlobalControllerExceptionHandler.class);
 
     /**
      * Not found exception.
@@ -79,8 +78,8 @@ public class GlobalControllerExceptionHandler {
 	ValidationErrorsDTO dto = new ValidationErrorsDTO();
 
 	for (FieldError fieldError : fieldErrors) {
-	    dto.addFieldError(fieldError.getField(), messageSource
-		    .getMessage(fieldError, LocaleContextHolder.getLocale()));
+	    dto.addFieldError(messageSource.getMessage(fieldError,
+		    LocaleContextHolder.getLocale()));
 	}
 
 	return dto;

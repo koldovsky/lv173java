@@ -137,6 +137,6 @@ function printErrors(jqXHR) {
 	var responseText = jQuery.parseJSON(jqXHR.responseText);
 	$("#error").html("Failed to add agency!<br/>");
     $.each( responseText.fieldErrors, function( index, value ){
-    	$("#error").append("<br/>"+value.message);
+    	$("#error").append("<br/>"+value);
     });		 
 }
