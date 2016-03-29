@@ -25,7 +25,7 @@
 		</div>
 		<div id="success" class="alert alert-success" role="alert">
 		<a href="#" class="close" aria-label="close">&times;</a>
-			Currency rate has been added successfully.</div>	
+			Currency rate has been added successfully.</div>
 			<div class="row">
 				<div>
 					<div class="form-group">
@@ -34,7 +34,7 @@
 						<input type="text" name="amount" id="amount" 
 						class="form-control" placeholder="Enter new currency rate">
 						</div>
-						 <input type="checkbox" name="nbu" value="" id="nbu">Set NBU cource<br>
+						 <input type="checkbox" name="nbu" value="" id="nbu">Set NBU currency rate<br>
 					</div>
 				</div>
 			</div>

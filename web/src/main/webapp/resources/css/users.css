@@ -28,3 +28,10 @@ body, html{
 #progress{
 	border-radius: 4px;
 }
+
+#addCurrency{
+	float:right;
+	padding-left:0px;
+	width:195px;
+	margin-top:15px;
+}

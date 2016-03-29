@@ -23,18 +23,28 @@ $(document).ready(function() {
 	
 	var upload = undefined;
 	
+	$(this).on('focus', '.date', function() {
+		var pattern = 'yy-mm-dd';
+		var minDateVal = evalMinDate($(this), pattern);
+		
+		$(this).datepicker({
+			dateFormat : pattern,
+			altFormat : '@',
+			altField : $('#dateSubmit'),
+			minDate : minDateVal
+		});
+	});
+	
 	$('#paymentform').submit(function(event) {
 		if ($('#paymentform').valid()) {
 
 			
 			var oMyForm = new FormData();
 			oMyForm.append("image", upload);
-			oMyForm.append('amount', '123.34');
-			oMyForm.append('orderId','4');
-			
 
 			$.ajax({
-				url : 'uploadPaymentImage',
+				url : context + '/'+ '/api/uploadPaymentImage/'+$('#orderId').val()+
+				'/'+$('#amount').val()+'/'+$("#dateSubmit").val(),
 				data : oMyForm,
 				dataType: 'text',
 				type : 'POST',

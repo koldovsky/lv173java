@@ -1,5 +1,7 @@
 package com.softserveinc.ita.redplatform.common.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -53,6 +55,27 @@ public class Payment extends BaseEntity {
      * Path or an URI of picture that has been attached. 
      */
     private String picturePath;
+    
+    /** The date. */
+    private Date date;
+
+    /**
+     * Gets the date.
+     *
+     * @return the date
+     */
+    public final Date getDate() {
+        return date;
+    }
+
+    /**
+     * Sets the date.
+     *
+     * @param newDate the new date
+     */
+    public final void setDate(final Date newDate) {
+        date = newDate;
+    }
 
     /**
      * Get amount.

@@ -123,7 +123,7 @@ public class CurrencyRateService {
      */
     public List<CurrencyRateDTO> loadAllCurrencies(
 	    	final DataTablePredicate predicate) {
-	ArrayList<CurrencyRateDTO> currencyListDto = 
+	List<CurrencyRateDTO> currencyListDto = 
 		new ArrayList<CurrencyRateDTO>();
 	for (CurrencyRate currency : currencyRateDao.findAll(predicate)) {
 	    currencyListDto.add(currencyRateMapper.toDto(currency));
@@ -140,7 +140,7 @@ public class CurrencyRateService {
 	    final String email, final DataTablePredicate predicate) {
 	RealEstateAdminUser redAdmin = (RealEstateAdminUser) 
 			userService.loadUserByEmail(email);
-	ArrayList<CurrencyRateDTO> currencyListDto = 
+	List<CurrencyRateDTO> currencyListDto = 
 		new ArrayList<CurrencyRateDTO>();
 	for (CurrencyRate currency : currencyRateDao
 		.findAllCurrenciesByCompany(redAdmin.getAgency(), predicate)) {
@@ -197,7 +197,7 @@ public class CurrencyRateService {
     public void updateCurrencyDatePeriods(final String email,
 	    final CurrencyRate currencyRate) {
 	RealEstateAgency agency = redAdminDao.findAgencyByEmail(email);
-	ArrayList<CurrencyRate> currencyList = (ArrayList<CurrencyRate>)
+	List<CurrencyRate> currencyList = (ArrayList<CurrencyRate>)
 		currencyRateDao.findAllCurrenciesByCompany(agency);
 	for (CurrencyRate currency : currencyList) {
 	    if ((currency.getFromDate().getTime() 
@@ -254,7 +254,7 @@ public class CurrencyRateService {
     public void deleteCurrencyDatePeriods(final String email,
 	    final CurrencyRate currencyRate) {
 	RealEstateAgency agency = redAdminDao.findAgencyByEmail(email);
-	ArrayList<CurrencyRate> currencyList = (ArrayList<CurrencyRate>)
+	List<CurrencyRate> currencyList = (ArrayList<CurrencyRate>)
 		currencyRateDao.findAllCurrenciesByCompany(agency);
 	for (CurrencyRate currency : currencyList) {
 	    if ((currency.getFromDate().getTime() 

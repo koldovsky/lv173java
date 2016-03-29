@@ -2,6 +2,8 @@ package com.softserveinc.ita.redplatform.common.mapper;
 
 
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -39,6 +41,7 @@ public class PaymentMapper
 	entity.setAmount(dto.getAmount());
 	entity.setCurrencyRate(currencyRateMapper.toEntity(dto.getCurrencyRate()));
 	entity.setOrder(dto.getOrder());
+	entity.setDate(new Date(dto.getDate()));
 	return entity;
     }
 }

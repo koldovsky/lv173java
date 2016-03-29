@@ -25,6 +25,27 @@ public class PaymentDTO {
     
     /** Date created.  */
     private Date createdDate;
+    
+    /** The date. */
+    private long date;
+
+    /**
+     * Gets the date.
+     *
+     * @return the date
+     */
+    public final long getDate() {
+        return date;
+    }
+
+    /**
+     * Sets the date.
+     *
+     * @param newDate the new date
+     */
+    public final void setDate(final long newDate) {
+        date = newDate;
+    }
 
     /**
      * Gets the amount.

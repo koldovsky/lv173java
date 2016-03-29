@@ -75,4 +75,14 @@ public class JPAOrderDao extends JPAGenericDao<Order, Long>
 		+ " as orders where id=" + orderId).getResultList();
 	return getSingleResult(agencyName);
     }
+    
+    @Override
+    public final Long getAgencyId(final Long orderId) {
+	@SuppressWarnings("unchecked")
+	List<String> agencyName = (List<String>) getEntityManager()
+		.createQuery("select orders.createdBy.agency.id from " 
+		+ Order.class.getName() 
+		+ " as orders where id=" + orderId).getResultList();
+	return getSingleResult(agencyName);
+    }
 }

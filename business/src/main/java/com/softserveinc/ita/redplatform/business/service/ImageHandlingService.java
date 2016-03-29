@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.softserveinc.ita.redplatform.business.accessory.imageHandlers
 .ImageHandler;
+import com.softserveinc.ita.redplatform.persistence.dao.OrderDao;
 
 /**
  * The Class ImageHandlingService.
@@ -18,6 +19,12 @@ public class ImageHandlingService {
     /** The image handler. */
     @Autowired
     private ImageHandler imageHandler;
+
+    /**
+     * The order Dao.
+     */
+    @Autowired
+    private OrderDao orderDao;
 
     /**
      * The path to save the images.
@@ -39,6 +46,7 @@ public class ImageHandlingService {
 	    throws IOException {
 	imageHandler.saveImage(image, path);
     }
+
     /**
      * Gets the new full path of a file to be saved.
      *
@@ -48,6 +56,17 @@ public class ImageHandlingService {
      */
     public String getNewFullPath(final Long orderId) {
 	String name = new Long(new Date().getTime()).toString();
-	return uploadPath + orderId + "/" + name;
+	return uploadPath + getCompanyId(orderId) + "/" + orderId + "/" + name;
+    }
+
+    /**
+     * Gets the company id.
+     *
+     * @param orderId
+     *            the order id
+     * @return the company id
+     */
+    private String getCompanyId(final Long orderId) {
+	return orderDao.getAgencyId(orderId).toString();
     }
 }
