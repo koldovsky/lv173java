@@ -103,12 +103,13 @@ public class PaymentRestController {
 	    @PathVariable final long orderId, @PathVariable final double amount,
 	    @PathVariable final long date,
 	    @RequestBody final MultipartFile image) {
-	ResponseEntity<String> responseEntity =
-		new ResponseEntity<String>("OK", HttpStatus.OK);
+	ResponseEntity<String> responseEntity;
 	try {
 	    paymentService.createPayment(orderId, amount, date,
 		    image.getBytes(), SecurityContextHolder.getContext()
 			    .getAuthentication().getName());
+	    responseEntity =
+			new ResponseEntity<String>("OK", HttpStatus.OK);
 	} catch (MaxUploadSizeExceededException e) {
 	    responseEntity =
 		    new ResponseEntity<String>("The file size is too big.",
