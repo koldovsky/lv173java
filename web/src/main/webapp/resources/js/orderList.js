@@ -99,6 +99,6 @@ $(function() {
 	document.location.href = 'statistics/order/' + orderId + '/payments';
     });
     $('#table tbody').on('click', 'button.newPayment', function() {
-	document.location.href = 'payment';
+	document.location.href = 'payment' + orderId;
     });
 });
