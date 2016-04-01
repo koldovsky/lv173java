@@ -12,7 +12,7 @@ import com.softserveinc.ita.redplatform.common.entity.RealEstateAgency;
  * @author Oleh Khimka.
  * 
  */
-@Component(value = "realEstateAgencyMapper")
+@Component
 public class RealEstateAgencyMapper 
 	implements GenericMapper<RealEstateAgency, RealEstateAgencyDTO> {
 
@@ -32,7 +32,6 @@ public class RealEstateAgencyMapper
 	realEstateAgencyDTO.setDescription(realEstateAgency.getDescription());
 	realEstateAgencyDTO.setPhone(realEstateAgency.getPhone());
 	realEstateAgencyDTO.setSite(realEstateAgency.getSite());
-
 	realEstateAgencyDTO.setAddress(
 			addressMapper.toDto(realEstateAgency.getAddress())
 		);
@@ -49,6 +48,7 @@ public class RealEstateAgencyMapper
      */
     public final RealEstateAgencyDTO toIdNameDto(
 	    			final RealEstateAgency realEstateAgency) {
+	
 	RealEstateAgencyDTO realEstateAgencyDTO = new RealEstateAgencyDTO();
 	realEstateAgencyDTO.setId(realEstateAgency.getId());
 	realEstateAgencyDTO.setName(realEstateAgency.getName());
@@ -66,7 +66,6 @@ public class RealEstateAgencyMapper
 	realEstateAgency.setDescription(realEstateAgencyDTO.getDescription());
 	realEstateAgency.setPhone(realEstateAgencyDTO.getPhone());
 	realEstateAgency.setSite(realEstateAgencyDTO.getSite());
-
 	realEstateAgency.setAddress(
 		addressMapper.toEntity(realEstateAgencyDTO.getAddress())
 	);

@@ -40,7 +40,7 @@ public class RealEstateAgencyService {
      * create realEstateAgency.
      * @param realEstateAgencyDTO realEstateAgencyDTO
      */
-    @Secured({"ROLE_ADMIN", "ROLE_REDADMIN"})
+    @Secured("ROLE_ADMIN")
     public void create(final RealEstateAgencyDTO realEstateAgencyDTO) {
 		
 	RealEstateAgency realEstateAgency = realEstateAgencyMapper

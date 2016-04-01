@@ -2,7 +2,6 @@ package com.softserveinc.ita.redplatform.web.controller;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -18,7 +17,6 @@ import com.softserveinc.ita.redplatform.common.dto.ValidationErrorsDTO;
 import com.softserveinc.ita.redplatform.web
 				.exceptions.ArgumentNotValidException;
 
-// TODO: Auto-generated Javadoc
 /**
  * Controller for handling exceptions.
  * 
@@ -30,12 +28,6 @@ public class GlobalControllerExceptionHandler {
     /** The message source. */
     @Autowired
     private MessageSource messageSource;
-
-    /**
-     * Logger for Agency Controller class.
-     */
-    private static final Logger LOGGER =
-	    Logger.getLogger(GlobalControllerExceptionHandler.class);
 
     /**
      * Not found exception.

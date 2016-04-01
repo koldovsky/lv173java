@@ -24,10 +24,6 @@ public class RealEstateAgencyDTO {
 	    "^$|^(?=.*[a-zA-Z])[a-zA-Z0-9\\s!.\\[\\]"
 		    + "@&#%+=;:?\\/,\\-\\'$%^\\*()<>№]+$";
 
-    /** The Constant URL_REGEX. */
-    public static final String URL_REGEX = "^(https?:\\/\\/)?([\\da-z\\.-]+)"
-	    + "\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$";
-
     /** The Constant PHONE_NUMBER_REGEX. */
     public static final String PHONE_NUMBER_REGEX =
 	    "^(?:\\+38)?(?:0\\d\\d)\\d{7}$";
