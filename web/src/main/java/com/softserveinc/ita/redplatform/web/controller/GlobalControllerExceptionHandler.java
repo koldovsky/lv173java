@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -14,8 +15,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.softserveinc.ita.redplatform.common.dto.ValidationErrorsDTO;
-import com.softserveinc.ita.redplatform.web
-				.exceptions.ArgumentNotValidException;
+import com.softserveinc.ita.redplatform.web.exceptions.AlreadyExistsException;
+import com.softserveinc.ita.redplatform.web.exceptions
+						.ArgumentNotValidException;
 
 /**
  * Controller for handling exceptions.
@@ -35,8 +37,23 @@ public class GlobalControllerExceptionHandler {
      * @return 404 page
      */
     @ExceptionHandler(ResourceNotFoundException.class)
-    public final ModelAndView handleConflict() {
+    public final ModelAndView handleNotFound() {
 	return new ModelAndView("errors/404");
+    }
+
+    
+    /**
+     * Handle conflict.
+     *
+     * @param exception the exception
+     * @return the response entity with message
+     */
+    @ExceptionHandler(AlreadyExistsException.class)
+    @ResponseBody
+    public final ResponseEntity<String>
+	    handleConflict(final AlreadyExistsException exception) {
+	return new ResponseEntity<String>(exception.getMessage(),
+		HttpStatus.CONFLICT);
     }
 
     /**
@@ -73,7 +90,6 @@ public class GlobalControllerExceptionHandler {
 	    dto.addFieldError(messageSource.getMessage(fieldError,
 		    LocaleContextHolder.getLocale()));
 	}
-
 	return dto;
     }
 

@@ -43,6 +43,10 @@ function createAgency() {
 			if (jqXHR.status === 400) {
 				printErrors(jqXHR);      
 			}
+			if (jqXHR.status === 409) {
+				$("#error").html("Failed to add agency!<br/>");
+			    	$("#error").append("<br/>" + jqXHR.responseText);   
+			}
 			$("#error").show();
 			$("#success").hide();
 		}

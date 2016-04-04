@@ -15,10 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.softserveinc.ita.redplatform.business
-			.service.RealEstateAgencyService;
+				.service.RealEstateAgencyService;
 import com.softserveinc.ita.redplatform.common.dto.RealEstateAgencyDTO;
-import com.softserveinc.ita.redplatform.web
-			.exceptions.ArgumentNotValidException;
+import com.softserveinc.ita.redplatform.web.exceptions.AlreadyExistsException;
+import com.softserveinc.ita.redplatform.web.exceptions
+					.ArgumentNotValidException;
 
 /**
  * Rest Controller for registration new Real Estate Agency.
@@ -34,7 +35,7 @@ public class AgencyRestController {
      */
     private static final Logger LOGGER =
 	    Logger.getLogger(AgencyRestController.class);
-    
+
     /**
      * realEstateAgencyService.
      */
@@ -42,26 +43,30 @@ public class AgencyRestController {
     private RealEstateAgencyService realEstateAgencyService;
 
     /**
-     * Get agency by id to edit.
+     * register Agency.
      * 
-     * @param id
-     *            id
-     * @return ResponseEntity ResponseEntity
+     * @return status.
+     * @param realEstateAgencyDTO
+     *            realEstateAgencyDTO
+     * @param result
+     *            the result
      */
-    @RequestMapping(value = "/api/agency/{id}", method = RequestMethod.GET)
-    public final ResponseEntity<RealEstateAgencyDTO>
-	    getAgency(@PathVariable("id") final long id) {
+    @RequestMapping(value = "agency", method = RequestMethod.POST)
+    public final ResponseEntity<RealEstateAgencyDTO> registerAgency(
+	    @Valid @RequestBody final RealEstateAgencyDTO realEstateAgencyDTO,
+	    final BindingResult result) {
 
-	RealEstateAgencyDTO realEstateAgencyDTO =
-		realEstateAgencyService.getById(id);
-	if (realEstateAgencyDTO == null) {
-	    LOGGER.info("agency not found");
-	    return new ResponseEntity<RealEstateAgencyDTO>(
-		    HttpStatus.NOT_FOUND);
+	if (result.hasErrors()) {
+	    LOGGER.error("Not valid agency");
+	    throw new ArgumentNotValidException(result);
 	}
+	if (!realEstateAgencyService
+		.isNameAvailable(realEstateAgencyDTO.getName())) {
+	    throw new AlreadyExistsException("Such agency already exists!");
+	}
+	realEstateAgencyService.create(realEstateAgencyDTO);
 	return new ResponseEntity<RealEstateAgencyDTO>(realEstateAgencyDTO,
-		HttpStatus.OK);
-
+		HttpStatus.CREATED);
     }
 
     /**
@@ -80,7 +85,7 @@ public class AgencyRestController {
 	    @PathVariable("id") final long id,
 	    @Valid @RequestBody final RealEstateAgencyDTO realEstateAgencyDTO,
 	    final BindingResult result) {
-	
+
 	if (result.hasErrors()) {
 	    throw new ArgumentNotValidException(result);
 	}
@@ -98,33 +103,31 @@ public class AgencyRestController {
      *            agencyName
      */
     @RequestMapping(value = "/checkName", method = RequestMethod.GET)
-    public final boolean isNameAvailable(
-	    @RequestParam final String agencyName) {
-	
+    public final boolean
+	    isNameAvailable(@RequestParam final String agencyName) {
+
 	return realEstateAgencyService.isNameAvailable(agencyName);
     }
 
     /**
-     * register Agency.
+     * Get agency by id to edit.
      * 
-     * @return status.
-     * @param realEstateAgencyDTO
-     *            realEstateAgencyDTO
-     * @param result
-     *            the result
+     * @param id
+     *            id
+     * @return ResponseEntity ResponseEntity
      */
-    @RequestMapping(value = "agency", method = RequestMethod.POST)
-    public final ResponseEntity<RealEstateAgencyDTO> registerAgency(
-	    @Valid @RequestBody final RealEstateAgencyDTO realEstateAgencyDTO,
-	    final BindingResult result) {
-	
-	if (result.hasErrors()) {
-	    throw new ArgumentNotValidException(result);
+    @RequestMapping(value = "/api/agency/{id}", method = RequestMethod.GET)
+    public final ResponseEntity<RealEstateAgencyDTO>
+	    getAgency(@PathVariable("id") final long id) {
+
+	RealEstateAgencyDTO realEstateAgencyDTO =
+		realEstateAgencyService.getById(id);
+	if (realEstateAgencyDTO == null) {
+	    return new ResponseEntity<RealEstateAgencyDTO>(
+		    HttpStatus.NOT_FOUND);
 	}
-	
-	realEstateAgencyService.create(realEstateAgencyDTO);
-	
 	return new ResponseEntity<RealEstateAgencyDTO>(realEstateAgencyDTO,
 		HttpStatus.OK);
+
     }
 }
